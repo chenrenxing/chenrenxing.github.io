@@ -13,19 +13,19 @@
   
   
   
-  <title>hexo常用命令笔记 | CHEN.星~博客</title>
+  <title>JqueryFileUpload遇到angulrjs | CHEN.星~博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="#hexo#npm install hexo -g #安装   npm update hexo -g #升级   hexo init #初始化 #简写#hexo n &amp;quot;我的博客&amp;quot; == hexo new &amp;quot;我的博客&amp;quot; #新建文章   hexo p == hexo publish    hexo g == hexo generate#生成   hexo s =">
+  <meta name="description" content="input上传单个文件的时候，点击多次替换文件，文件会缓存起来，clone,replaceWith这个input会解决此问题，但是angularjs替换input元素后不会认识这个dom元素，事件不会执行，需要用到$compile指令来封装一次元素。   var input=$(&amp;quot;#imgFile&amp;quot;);  var template = angular.element(inpu">
 <meta property="og:type" content="article">
-<meta property="og:title" content="hexo常用命令笔记">
-<meta property="og:url" content="http://yoursite.com/2015/09/07/hexo常用命令笔记/index.html">
+<meta property="og:title" content="JqueryFileUpload遇到angulrjs">
+<meta property="og:url" content="http://yoursite.com/2015/10/10/JqueryFileUpload遇到angulrjs/index.html">
 <meta property="og:site_name" content="CHEN.星~博客">
-<meta property="og:description" content="#hexo#npm install hexo -g #安装   npm update hexo -g #升级   hexo init #初始化 #简写#hexo n &amp;quot;我的博客&amp;quot; == hexo new &amp;quot;我的博客&amp;quot; #新建文章   hexo p == hexo publish    hexo g == hexo generate#生成   hexo s =">
+<meta property="og:description" content="input上传单个文件的时候，点击多次替换文件，文件会缓存起来，clone,replaceWith这个input会解决此问题，但是angularjs替换input元素后不会认识这个dom元素，事件不会执行，需要用到$compile指令来封装一次元素。   var input=$(&amp;quot;#imgFile&amp;quot;);  var template = angular.element(inpu">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-09-13T07:39:02.124Z">
+<meta property="og:updated_time" content="2017-09-13T08:58:32.024Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="hexo常用命令笔记">
-<meta name="twitter:description" content="#hexo#npm install hexo -g #安装   npm update hexo -g #升级   hexo init #初始化 #简写#hexo n &amp;quot;我的博客&amp;quot; == hexo new &amp;quot;我的博客&amp;quot; #新建文章   hexo p == hexo publish    hexo g == hexo generate#生成   hexo s =">
+<meta name="twitter:title" content="JqueryFileUpload遇到angulrjs">
+<meta name="twitter:description" content="input上传单个文件的时候，点击多次替换文件，文件会缓存起来，clone,replaceWith这个input会解决此问题，但是angularjs替换input元素后不会认识这个dom元素，事件不会执行，需要用到$compile指令来封装一次元素。   var input=$(&amp;quot;#imgFile&amp;quot;);  var template = angular.element(inpu">
   
   
     <link rel="icon" href="/css/images/favicon.ico">
@@ -66,7 +66,7 @@
     </nav>
 </header>
       <div id="main" class="wrapper">
-        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-hexo常用命令笔记" class="post-hexo常用命令笔记 post type-post status-publish format-standard hentry">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-JqueryFileUpload遇到angulrjs" class="post-JqueryFileUpload遇到angulrjs post type-post status-publish format-standard hentry">
     <!---->
 
       <header class="entry-header">
@@ -74,50 +74,35 @@
         
   
     <h1 class="entry-title article-title">
-      hexo常用命令笔记
+      JqueryFileUpload遇到angulrjs
     </h1>
   
 
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://yoursite.com/2015/09/07/hexo常用命令笔记/" data-id="cj7ispijk00055otzo21yjo86" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2015/10/10/JqueryFileUpload遇到angulrjs/" data-id="cj7ispijd00025otzcwqobixm" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
     <div class="entry-content">
       
-        <h2 id="hexo"><a href="#hexo" class="headerlink" title="#hexo#"></a>#hexo#</h2><pre><code>npm install hexo -g #安装  
-npm update hexo -g #升级  
-hexo init #初始化
-</code></pre><h2 id="简写"><a href="#简写" class="headerlink" title="#简写#"></a>#简写#</h2><pre><code>hexo n &quot;我的博客&quot; == hexo new &quot;我的博客&quot; #新建文章  
-hexo p == hexo publish   
-hexo g == hexo generate#生成  
-hexo s == hexo server #启动服务预览  
-hexo d == hexo deploy#部署  
-</code></pre><h2 id="服务器"><a href="#服务器" class="headerlink" title="#服务器#"></a>#服务器#</h2><pre><code>hexo server #Hexo 会监视文件变动并自动更新，您无须重启服务器。  
-hexo server -s #静态模式  
-hexo server -p 5000 #更改端口  
-hexo server -i 192.168.1.1 #自定义 IP  
-
-hexo clean #清除缓存 网页正常情况下可以忽略此条命令  
-hexo g #生成静态网页  
-hexo d #开始部署  
-</code></pre><h2 id="监视文件变动"><a href="#监视文件变动" class="headerlink" title="#监视文件变动#"></a>#监视文件变动#</h2><pre><code>hexo generate #使用 Hexo 生成静态文件快速而且简单  
-hexo generate --watch #监视文件变动
-</code></pre><h2 id="模版"><a href="#模版" class="headerlink" title="#模版#"></a>#模版#</h2><pre><code>hexo new &quot;postName&quot; #新建文章  
-hexo new page &quot;pageName&quot; #新建页面  
-hexo generate #生成静态页面至public目录  
-hexo server #开启预览访问端口（默认端口4000，&apos;ctrl + c&apos;关闭server）  
-hexo deploy #将.deploy目录部署到GitHub  
+        <ul>
+<li>input上传单个文件的时候，点击多次替换文件，文件会缓存起来，clone,replaceWith这个input会解决此问题，但是angularjs替换input元素后不会认识这个dom元素，事件不会执行，需要用到$compile指令来封装一次元素。</li>
+</ul>
+<hr>
+<pre><code>var input=$(&quot;#imgFile&quot;);
+ var template = angular.element(input.clone());//复制一个input
+ var content = $compile(template)(scope);用angularjs 封装好
+ input.replaceWith(content); 替换
 </code></pre>
       
     </div><!-- .entry-content -->
 
     <footer class="entry-meta">
-    <a href="/2015/09/07/hexo常用命令笔记/">
-    <time datetime="2015-09-07T11:19:07.000Z" class="entry-date">
-        2015-09-07
+    <a href="/2015/10/10/JqueryFileUpload遇到angulrjs/">
+    <time datetime="2015-10-10T12:11:00.000Z" class="entry-date">
+        2015-10-10
     </time>
 </a>
     
@@ -130,10 +115,8 @@ hexo deploy #将.deploy目录部署到GitHub
 <nav class="nav-single">
     <h3 class="assistive-text">文章导航</h3>
     
-        <span class="nav-previous"><a href="/2015/09/17/cookie/" rel="prev"><span class="meta-nav">←</span> cookie换肤功能</a></span>
     
-    
-        <span class="nav-next"><a href="/2015/09/07/文章标题/" rel="next">生命在于折腾 <span class="meta-nav">→</span></a></span>
+        <span class="nav-next"><a href="/2015/10/04/angulrjs$http/" rel="next">angularjs$http <span class="meta-nav">→</span></a></span>
     
 </nav><!-- .nav-single -->
 
