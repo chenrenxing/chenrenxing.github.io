@@ -13,18 +13,19 @@
   
   
   
-  <title>Archives: 2015 | CHEN.星~博客</title>
+  <title>angularjs$http | CHEN.星~博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="start from zero">
-<meta property="og:type" content="website">
-<meta property="og:title" content="CHEN.星~博客">
-<meta property="og:url" content="http://yoursite.com/archives/2015/index.html">
+  <meta name="description" content="get和post$http.get(contextPath+&amp;quot;/api/cmsSceModel/getResume&amp;quot;+&amp;quot;?tiananCode=&amp;quot;+tiananCode+&amp;quot;&amp;amp;tenantId=&amp;quot;+tenantId).then(function(result){         $scope.list = result.data.l">
+<meta property="og:type" content="article">
+<meta property="og:title" content="angularjs$http">
+<meta property="og:url" content="http://yoursite.com/2015/10/04/angulrjs$http/index.html">
 <meta property="og:site_name" content="CHEN.星~博客">
-<meta property="og:description" content="start from zero">
+<meta property="og:description" content="get和post$http.get(contextPath+&amp;quot;/api/cmsSceModel/getResume&amp;quot;+&amp;quot;?tiananCode=&amp;quot;+tiananCode+&amp;quot;&amp;amp;tenantId=&amp;quot;+tenantId).then(function(result){         $scope.list = result.data.l">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-09-13T08:38:21.250Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CHEN.星~博客">
-<meta name="twitter:description" content="start from zero">
+<meta name="twitter:title" content="angularjs$http">
+<meta name="twitter:description" content="get和post$http.get(contextPath+&amp;quot;/api/cmsSceModel/getResume&amp;quot;+&amp;quot;?tiananCode=&amp;quot;+tiananCode+&amp;quot;&amp;amp;tenantId=&amp;quot;+tenantId).then(function(result){         $scope.list = result.data.l">
   
   
     <link rel="icon" href="/css/images/favicon.ico">
@@ -65,30 +66,48 @@
     </nav>
 </header>
       <div id="main" class="wrapper">
-        <div id="primary" class="site-content"><div id="content" role="main">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-angulrjs$http" class="post-angulrjs$http post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2015" class="archive-year">2015</a>
-        </div>
-        <div class="archives">
-    
-    <article class="post type-post status-publish format-standard hentry archive-type-post">
-  <header class="entry-header">
-      
-  
-    <h1 class="entry-title">
-      <a class="archive-article-title" href="/2015/10/04/angulrjs$http/">angularjs$http</a>
+    <h1 class="entry-title article-title">
+      angularjs$http
     </h1>
   
 
-  </header>
-  <footer class="entry-meta">
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2015/10/04/angulrjs$http/" data-id="cj7iry3ty0000f8tznf8811g6" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <h3 id="get和post"><a href="#get和post" class="headerlink" title="get和post"></a>get和post</h3><pre><code>$http.get(contextPath+&quot;/api/cmsSceModel/getResume&quot;+&quot;?tiananCode=&quot;+tiananCode+&quot;&amp;tenantId=&quot;+tenantId).then(function(result){
+        $scope.list = result.data.list;
+    })
+-
+$http.post(contextPath+&apos;/cpUrl/deleteRelation&apos;,null, {params:{urlId:urlId,pdctId:pdctId}}).then(function(resp){
+加上params可以参数就可以转换成key1=value1&amp;key2=value2格式，
+-
+$http.post(contextPath + &apos;/cmsSceMenuModelEx/save&apos;,data2save) .then(function(resp){
+</code></pre><h3 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h3><ul>
+<li><p>默认情况下，$http服务不会对请求进行本地缓存。在发送单独的请求时，我们可以通过向$http请求传入一个布尔值或者一个缓存实例来启用缓存。</p>
+<pre><code>$http.get(&apos;/api/users.json&apos;,{ cache: true })
+.success(function(data) {})
+.error(function(data) {});
+</code></pre></li>
+</ul>
+<p>-then()方法与其他两种方法的主要区别是，它会接收到完整的响应对象，而success()和error()则会对响应对象进行析构。</p>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
     <a href="/2015/10/04/angulrjs$http/">
     <time datetime="2015-10-04T13:19:07.000Z" class="entry-date">
         2015-10-04
@@ -98,125 +117,22 @@
     
     </footer>
 </article>
-  
-    
-    
-    <article class="post type-post status-publish format-standard hentry archive-type-post">
-  <header class="entry-header">
-      
-  
-    <h1 class="entry-title">
-      <a class="archive-article-title" href="/2015/10/04/base64字符数据图片转Blob/">base64字符数据图片转Blob以及上传遇到问题</a>
-    </h1>
-  
 
-  </header>
-  <footer class="entry-meta">
-    <a href="/2015/10/04/base64字符数据图片转Blob/">
-    <time datetime="2015-10-04T12:19:07.000Z" class="entry-date">
-        2015-10-04
-    </time>
-</a>
-    
-    
-    </footer>
-</article>
-  
-    
-    
-    <article class="post type-post status-publish format-standard hentry archive-type-post">
-  <header class="entry-header">
-      
-  
-    <h1 class="entry-title">
-      <a class="archive-article-title" href="/2015/09/24/JS转换英文星期几/">“JS转换英文星期几”</a>
-    </h1>
-  
 
-  </header>
-  <footer class="entry-meta">
-    <a href="/2015/09/24/JS转换英文星期几/">
-    <time datetime="2015-09-24T12:19:07.000Z" class="entry-date">
-        2015-09-24
-    </time>
-</a>
+    
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
     
     
-    </footer>
-</article>
-  
+        <span class="nav-next"><a href="/2015/10/04/base64字符数据图片转Blob/" rel="next">base64字符数据图片转Blob以及上传遇到问题 <span class="meta-nav">→</span></a></span>
     
-    
-    <article class="post type-post status-publish format-standard hentry archive-type-post">
-  <header class="entry-header">
-      
-  
-    <h1 class="entry-title">
-      <a class="archive-article-title" href="/2015/09/17/cookie/">cookie换肤功能</a>
-    </h1>
-  
+</nav><!-- .nav-single -->
 
-  </header>
-  <footer class="entry-meta">
-    <a href="/2015/09/17/cookie/">
-    <time datetime="2015-09-17T11:19:07.000Z" class="entry-date">
-        2015-09-17
-    </time>
-</a>
-    
-    
-    </footer>
-</article>
-  
-    
-    
-    <article class="post type-post status-publish format-standard hentry archive-type-post">
-  <header class="entry-header">
-      
-  
-    <h1 class="entry-title">
-      <a class="archive-article-title" href="/2015/09/07/hexo常用命令笔记/">hexo常用命令笔记</a>
-    </h1>
-  
 
-  </header>
-  <footer class="entry-meta">
-    <a href="/2015/09/07/hexo常用命令笔记/">
-    <time datetime="2015-09-07T11:19:07.000Z" class="entry-date">
-        2015-09-07
-    </time>
-</a>
-    
-    
-    </footer>
-</article>
-  
-    
-    
-    <article class="post type-post status-publish format-standard hentry archive-type-post">
-  <header class="entry-header">
-      
-  
-    <h1 class="entry-title">
-      <a class="archive-article-title" href="/2015/09/07/文章标题/">生命在于折腾</a>
-    </h1>
-  
 
-  </header>
-  <footer class="entry-meta">
-    <a href="/2015/09/07/文章标题/">
-    <time datetime="2015-09-07T07:19:07.000Z" class="entry-date">
-        2015-09-07
-    </time>
-</a>
-    
-    
-    </footer>
-</article>
-  
-  
-    </div></section>
-  
+
+
+
 
 </div></div>
         <div id="secondary" class="widget-area" role="complementary">
