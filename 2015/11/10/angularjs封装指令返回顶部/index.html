@@ -94,17 +94,17 @@
 
 
 
-<meta name="description" content="js.filter(&amp;apos;odditems&amp;apos;,function(){//奇数 return function(inputArray){     var array = [];     if(inputArray){         for(var i=0;i&amp;lt;inputArray.length;i++){             if(i%2!==0){">
+<meta name="description" content="angularjs封装指令返回顶部JS**************  directive(&amp;quot;backToTop&amp;quot;, function () {       return {           restrict: &amp;quot;E&amp;quot;,           link: function (scope, element, attr) {               var">
 <meta property="og:type" content="article">
-<meta property="og:title" content="angulrjs基数偶数过滤">
-<meta property="og:url" content="http://yoursite.com/2015/10/18/angulrjs基数偶数过滤/index.html">
+<meta property="og:title" content="angularjs封装指令返回顶部">
+<meta property="og:url" content="http://yoursite.com/2015/11/10/angularjs封装指令返回顶部/index.html">
 <meta property="og:site_name" content="CHEN.星~博客">
-<meta property="og:description" content="js.filter(&amp;apos;odditems&amp;apos;,function(){//奇数 return function(inputArray){     var array = [];     if(inputArray){         for(var i=0;i&amp;lt;inputArray.length;i++){             if(i%2!==0){">
+<meta property="og:description" content="angularjs封装指令返回顶部JS**************  directive(&amp;quot;backToTop&amp;quot;, function () {       return {           restrict: &amp;quot;E&amp;quot;,           link: function (scope, element, attr) {               var">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-09-15T02:01:28.488Z">
+<meta property="og:updated_time" content="2017-09-19T08:34:41.022Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="angulrjs基数偶数过滤">
-<meta name="twitter:description" content="js.filter(&amp;apos;odditems&amp;apos;,function(){//奇数 return function(inputArray){     var array = [];     if(inputArray){         for(var i=0;i&amp;lt;inputArray.length;i++){             if(i%2!==0){">
+<meta name="twitter:title" content="angularjs封装指令返回顶部">
+<meta name="twitter:description" content="angularjs封装指令返回顶部JS**************  directive(&amp;quot;backToTop&amp;quot;, function () {       return {           restrict: &amp;quot;E&amp;quot;,           link: function (scope, element, attr) {               var">
 
 
 
@@ -133,13 +133,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2015/10/18/angulrjs基数偶数过滤/"/>
+  <link rel="canonical" href="http://yoursite.com/2015/11/10/angularjs封装指令返回顶部/"/>
 
 
 
 
 
-  <title>angulrjs基数偶数过滤 | CHEN.星~博客</title>
+  <title>angularjs封装指令返回顶部 | CHEN.星~博客</title>
   
 
 
@@ -262,7 +262,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/10/18/angulrjs基数偶数过滤/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/11/10/angularjs封装指令返回顶部/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="CHEN.星">
@@ -279,7 +279,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">angulrjs基数偶数过滤</h1>
+          <h1 class="post-title" itemprop="name headline">angularjs封装指令返回顶部</h1>
         
 
         <div class="post-meta">
@@ -291,8 +291,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-10-18T13:30:02+08:00">
-                2015-10-18
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-11-10T21:29:41+08:00">
+                2015-11-10
               </time>
             
 
@@ -329,35 +329,40 @@
       
 
       
-        <h3 id="js"><a href="#js" class="headerlink" title="js"></a>js</h3><pre><code>.filter(&apos;odditems&apos;,function(){//奇数
-return function(inputArray){
-    var array = [];
-    if(inputArray){
-        for(var i=0;i&lt;inputArray.length;i++){
-            if(i%2!==0){
-                array.push(inputArray[i]);
-            }
-        }
-    }
-    return array;
-}})
--
-.filter(&apos;evenitems&apos;,function(){//偶数
-return function(inputArray){
-    var array = [];
-    if(inputArray){
-        for(var i=0;i&lt;inputArray.length;i++){
-            if(i%2==0){
-                array.push(inputArray[i]);
-            }
-        }
-    }
-    return array;
-}})
-</code></pre><h3 id="html"><a href="#html" class="headerlink" title="html"></a>html</h3><ul>
-<li><div ng-repeat="item in firstSlide |odditems"></div></li>
-</ul>
+        <h3 id="angularjs封装指令返回顶部"><a href="#angularjs封装指令返回顶部" class="headerlink" title="angularjs封装指令返回顶部"></a>angularjs封装指令返回顶部</h3><pre><code>JS**************
+ directive(&quot;backToTop&quot;, function () {  
+    return {  
+        restrict: &quot;E&quot;,  
+        link: function (scope, element, attr) {  
+            var e = $(element);  
+            $(window).scroll(function () {                 //滚动时触发  
+                if ($(document).scrollTop() &gt; 300)         //获取滚动条到顶部的垂直高度,到相对顶部300px高度显示  
+                    e.fadeIn(300)  
+                else  
+                    e.fadeOut(200);  
+            });  
+            /*点击回到顶部*/  
+            e.click(function () {  
+                $(&apos;html, body&apos;).animate({                 //添加animate动画效果  
+                    scrollTop: 0  
+                }, 500);  
+            });  
+        }  
+    };  
+});  
+}); 
+————————————————————————————————
+html***************    
+&lt;back-to-top class=&quot;back_top&quot; title=&quot;返回顶部&quot;&gt;&lt;i class=&quot;fa fa-angle-up&quot;&gt;&lt;/i&gt;&lt;/back-to-top&gt;  
+</code></pre><h3 id="js平滑滚动到顶部-底部-指定地方"><a href="#js平滑滚动到顶部-底部-指定地方" class="headerlink" title="js平滑滚动到顶部,底部,指定地方"></a>js平滑滚动到顶部,底部,指定地方</h3><pre><code>滚动到顶部：
+$(&apos;.scroll_top&apos;).click(function(){$(&apos;html,body&apos;).animate({scrollTop: &apos;0px&apos;}, 800);});
 
+滚动到指定位置：
+$(&apos;.scroll_a&apos;).click(function(){$(&apos;html,body&apos;).animate({scrollTop:$(&apos;.a&apos;).offset().top}, 800);});
+
+滚动到底部：
+ $(&apos;.scroll_bottom&apos;).click(function(){$(&apos;html,body&apos;).animate({scrollTop:$(&apos;.bottom&apos;).offset().top}, 800);});
+</code></pre>
       
     </div>
     
@@ -381,8 +386,8 @@ return function(inputArray){
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/10/10/JqueryFileUpload遇到angulrjs/" rel="next" title="JqueryFileUpload遇到angulrjs">
-                <i class="fa fa-chevron-left"></i> JqueryFileUpload遇到angulrjs
+              <a href="/2015/11/04/AngularJS$anchorScroll用法/" rel="next" title="AngularJS$anchorScroll用法">
+                <i class="fa fa-chevron-left"></i> AngularJS$anchorScroll用法
               </a>
             
           </div>
@@ -390,10 +395,6 @@ return function(inputArray){
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/10/20/倒计时/" rel="prev" title="按钮倒计时">
-                按钮倒计时 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -509,7 +510,7 @@ return function(inputArray){
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#js"><span class="nav-number">1.</span> <span class="nav-text">js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#html"><span class="nav-number">2.</span> <span class="nav-text">html</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#angularjs封装指令返回顶部"><span class="nav-number">1.</span> <span class="nav-text">angularjs封装指令返回顶部</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#js平滑滚动到顶部-底部-指定地方"><span class="nav-number">2.</span> <span class="nav-text">js平滑滚动到顶部,底部,指定地方</span></a></li></ol></div>
             
 
           </div>

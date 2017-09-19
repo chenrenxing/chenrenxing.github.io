@@ -94,17 +94,17 @@
 
 
 
-<meta name="description" content="js.filter(&amp;apos;odditems&amp;apos;,function(){//奇数 return function(inputArray){     var array = [];     if(inputArray){         for(var i=0;i&amp;lt;inputArray.length;i++){             if(i%2!==0){">
+<meta name="description" content="JQ时间倒计时   function timer(time) {  var btn = $(“#sendButton”);  btn.attr(“disabled”, true);  //按钮禁止点击  btn.val(time &amp;lt;= 0 ? “发送动态密码” : (“” + (time) + “秒后可发送”));  var hander = setInterval(function()">
 <meta property="og:type" content="article">
-<meta property="og:title" content="angulrjs基数偶数过滤">
-<meta property="og:url" content="http://yoursite.com/2015/10/18/angulrjs基数偶数过滤/index.html">
+<meta property="og:title" content="按钮倒计时">
+<meta property="og:url" content="http://yoursite.com/2015/10/20/倒计时/index.html">
 <meta property="og:site_name" content="CHEN.星~博客">
-<meta property="og:description" content="js.filter(&amp;apos;odditems&amp;apos;,function(){//奇数 return function(inputArray){     var array = [];     if(inputArray){         for(var i=0;i&amp;lt;inputArray.length;i++){             if(i%2!==0){">
+<meta property="og:description" content="JQ时间倒计时   function timer(time) {  var btn = $(“#sendButton”);  btn.attr(“disabled”, true);  //按钮禁止点击  btn.val(time &amp;lt;= 0 ? “发送动态密码” : (“” + (time) + “秒后可发送”));  var hander = setInterval(function()">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-09-15T02:01:28.488Z">
+<meta property="og:updated_time" content="2017-09-19T07:07:09.288Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="angulrjs基数偶数过滤">
-<meta name="twitter:description" content="js.filter(&amp;apos;odditems&amp;apos;,function(){//奇数 return function(inputArray){     var array = [];     if(inputArray){         for(var i=0;i&amp;lt;inputArray.length;i++){             if(i%2!==0){">
+<meta name="twitter:title" content="按钮倒计时">
+<meta name="twitter:description" content="JQ时间倒计时   function timer(time) {  var btn = $(“#sendButton”);  btn.attr(“disabled”, true);  //按钮禁止点击  btn.val(time &amp;lt;= 0 ? “发送动态密码” : (“” + (time) + “秒后可发送”));  var hander = setInterval(function()">
 
 
 
@@ -133,13 +133,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2015/10/18/angulrjs基数偶数过滤/"/>
+  <link rel="canonical" href="http://yoursite.com/2015/10/20/倒计时/"/>
 
 
 
 
 
-  <title>angulrjs基数偶数过滤 | CHEN.星~博客</title>
+  <title>按钮倒计时 | CHEN.星~博客</title>
   
 
 
@@ -262,7 +262,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/10/18/angulrjs基数偶数过滤/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/10/20/倒计时/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="CHEN.星">
@@ -279,7 +279,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">angulrjs基数偶数过滤</h1>
+          <h1 class="post-title" itemprop="name headline">按钮倒计时</h1>
         
 
         <div class="post-meta">
@@ -291,8 +291,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-10-18T13:30:02+08:00">
-                2015-10-18
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-10-20T11:20:00+08:00">
+                2015-10-20
               </time>
             
 
@@ -329,34 +329,22 @@
       
 
       
-        <h3 id="js"><a href="#js" class="headerlink" title="js"></a>js</h3><pre><code>.filter(&apos;odditems&apos;,function(){//奇数
-return function(inputArray){
-    var array = [];
-    if(inputArray){
-        for(var i=0;i&lt;inputArray.length;i++){
-            if(i%2!==0){
-                array.push(inputArray[i]);
-            }
-        }
-    }
-    return array;
-}})
--
-.filter(&apos;evenitems&apos;,function(){//偶数
-return function(inputArray){
-    var array = [];
-    if(inputArray){
-        for(var i=0;i&lt;inputArray.length;i++){
-            if(i%2==0){
-                array.push(inputArray[i]);
-            }
-        }
-    }
-    return array;
-}})
-</code></pre><h3 id="html"><a href="#html" class="headerlink" title="html"></a>html</h3><ul>
-<li><div ng-repeat="item in firstSlide |odditems"></div></li>
+        <ul>
+<li>JQ时间倒计时</li>
+<li>  function timer(time) {<br>  var btn = $(“#sendButton”);<br>  btn.attr(“disabled”, true);  //按钮禁止点击<br>  btn.val(time &lt;= 0 ? “发送动态密码” : (“” + (time) + “秒后可发送”));<br>  var hander = setInterval(function() {<pre><code>if (time &lt;= 0) {
+    clearInterval(hander); //清除倒计时
+    btn.val(&quot;发送动态密码&quot;);
+    btn.attr(&quot;disabled&quot;, false);
+    return false;
+}else {
+    btn.val(&quot;&quot; + (time--) + &quot;秒后可发送&quot;);
+}
+</code></pre>  }, 1000);<pre><code>}
+    //调用方法
+    timer(30);
+</code></pre></li>
 </ul>
+<p>-angrulrjs 时间到计时<br>-<br>    angular.module(‘controllers’, []).controller(‘registerCtrl’, function($scope,$interval){<br>    $scope.paracont = “获取验证码”;<br>    $scope.paraclass = “but_null”;<br>    $scope.paraevent = true;<br>    var second = 60,<br>      timePromise = undefined;<br>    timePromise = $interval(function(){<br>     if(second&lt;=0){<br>      $interval.cancel(timePromise);<br>      timePromise = undefined;<br>      second = 60;<br>      $scope.paracont = “重发验证码”;<br>      $scope.paraclass = “but_null”;<br>      $scope.paraevent = true;<br>     }else{<br>      $scope.paracont = second + “秒后可重发”;<br>      $scope.paraclass = “not but_null”;<br>      second–;<br>     }<br>    },1000,100);<br>});</p>
 
       
     </div>
@@ -381,8 +369,8 @@ return function(inputArray){
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/10/10/JqueryFileUpload遇到angulrjs/" rel="next" title="JqueryFileUpload遇到angulrjs">
-                <i class="fa fa-chevron-left"></i> JqueryFileUpload遇到angulrjs
+              <a href="/2015/10/18/angulrjs基数偶数过滤/" rel="next" title="angulrjs基数偶数过滤">
+                <i class="fa fa-chevron-left"></i> angulrjs基数偶数过滤
               </a>
             
           </div>
@@ -391,8 +379,8 @@ return function(inputArray){
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/10/20/倒计时/" rel="prev" title="按钮倒计时">
-                按钮倒计时 <i class="fa fa-chevron-right"></i>
+              <a href="/2015/10/25/angularjs$directive$compile/" rel="prev" title="angularjs$directive$compile渲染html">
+                angularjs$directive$compile渲染html <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -445,17 +433,8 @@ return function(inputArray){
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            Overview
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -499,22 +478,6 @@ return function(inputArray){
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#js"><span class="nav-number">1.</span> <span class="nav-text">js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#html"><span class="nav-number">2.</span> <span class="nav-text">html</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       

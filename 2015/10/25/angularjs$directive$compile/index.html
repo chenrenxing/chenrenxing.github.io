@@ -94,17 +94,17 @@
 
 
 
-<meta name="description" content="js.filter(&amp;apos;odditems&amp;apos;,function(){//奇数 return function(inputArray){     var array = [];     if(inputArray){         for(var i=0;i&amp;lt;inputArray.length;i++){             if(i%2!==0){">
+<meta name="description" content="例子一# HTML #  &amp;lt;body ng-controller=&amp;quot;MyController&amp;quot;&amp;gt;     &amp;lt;p compile&amp;gt;&amp;lt;/p&amp;gt; &amp;lt;/body&amp;gt;  # js #   angular.module(&amp;apos;myApp&amp;apos;, [])             .controller(&amp;apos;MyControlle">
 <meta property="og:type" content="article">
-<meta property="og:title" content="angulrjs基数偶数过滤">
-<meta property="og:url" content="http://yoursite.com/2015/10/18/angulrjs基数偶数过滤/index.html">
+<meta property="og:title" content="angularjs$directive$compile渲染html">
+<meta property="og:url" content="http://yoursite.com/2015/10/25/angularjs$directive$compile/index.html">
 <meta property="og:site_name" content="CHEN.星~博客">
-<meta property="og:description" content="js.filter(&amp;apos;odditems&amp;apos;,function(){//奇数 return function(inputArray){     var array = [];     if(inputArray){         for(var i=0;i&amp;lt;inputArray.length;i++){             if(i%2!==0){">
+<meta property="og:description" content="例子一# HTML #  &amp;lt;body ng-controller=&amp;quot;MyController&amp;quot;&amp;gt;     &amp;lt;p compile&amp;gt;&amp;lt;/p&amp;gt; &amp;lt;/body&amp;gt;  # js #   angular.module(&amp;apos;myApp&amp;apos;, [])             .controller(&amp;apos;MyControlle">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-09-15T02:01:28.488Z">
+<meta property="og:updated_time" content="2017-09-19T07:07:22.955Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="angulrjs基数偶数过滤">
-<meta name="twitter:description" content="js.filter(&amp;apos;odditems&amp;apos;,function(){//奇数 return function(inputArray){     var array = [];     if(inputArray){         for(var i=0;i&amp;lt;inputArray.length;i++){             if(i%2!==0){">
+<meta name="twitter:title" content="angularjs$directive$compile渲染html">
+<meta name="twitter:description" content="例子一# HTML #  &amp;lt;body ng-controller=&amp;quot;MyController&amp;quot;&amp;gt;     &amp;lt;p compile&amp;gt;&amp;lt;/p&amp;gt; &amp;lt;/body&amp;gt;  # js #   angular.module(&amp;apos;myApp&amp;apos;, [])             .controller(&amp;apos;MyControlle">
 
 
 
@@ -133,13 +133,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2015/10/18/angulrjs基数偶数过滤/"/>
+  <link rel="canonical" href="http://yoursite.com/2015/10/25/angularjs$directive$compile/"/>
 
 
 
 
 
-  <title>angulrjs基数偶数过滤 | CHEN.星~博客</title>
+  <title>angularjs$directive$compile渲染html | CHEN.星~博客</title>
   
 
 
@@ -262,7 +262,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/10/18/angulrjs基数偶数过滤/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/10/25/angularjs$directive$compile/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="CHEN.星">
@@ -279,7 +279,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">angulrjs基数偶数过滤</h1>
+          <h1 class="post-title" itemprop="name headline">angularjs$directive$compile渲染html</h1>
         
 
         <div class="post-meta">
@@ -291,8 +291,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-10-18T13:30:02+08:00">
-                2015-10-18
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-10-25T17:30:21+08:00">
+                2015-10-25
               </time>
             
 
@@ -329,35 +329,61 @@
       
 
       
-        <h3 id="js"><a href="#js" class="headerlink" title="js"></a>js</h3><pre><code>.filter(&apos;odditems&apos;,function(){//奇数
-return function(inputArray){
-    var array = [];
-    if(inputArray){
-        for(var i=0;i&lt;inputArray.length;i++){
-            if(i%2!==0){
-                array.push(inputArray[i]);
-            }
-        }
-    }
-    return array;
-}})
--
-.filter(&apos;evenitems&apos;,function(){//偶数
-return function(inputArray){
-    var array = [];
-    if(inputArray){
-        for(var i=0;i&lt;inputArray.length;i++){
-            if(i%2==0){
-                array.push(inputArray[i]);
-            }
-        }
-    }
-    return array;
-}})
-</code></pre><h3 id="html"><a href="#html" class="headerlink" title="html"></a>html</h3><ul>
-<li><div ng-repeat="item in firstSlide |odditems"></div></li>
-</ul>
+        <h3 id="例子一"><a href="#例子一" class="headerlink" title="例子一"></a>例子一</h3><pre><code># HTML #
 
+&lt;body ng-controller=&quot;MyController&quot;&gt;
+    &lt;p compile&gt;&lt;/p&gt;
+&lt;/body&gt;
+
+# js #
+  angular.module(&apos;myApp&apos;, [])
+            .controller(&apos;MyController&apos;, function ($scope, $compile, $timeout) {
+            })
+            .directive(&apos;compile&apos;, function($compile) {
+                return {
+                    scope: {
+
+                    },
+                    link: function(scope, elem, attrs) {
+                        scope.title = &apos;list&apos;;
+                        scope.items = [&apos;list1&apos;, &apos;list2&apos;, &apos;list3&apos;];
+                        var html = &apos;&lt;h1&gt;{{title}}&lt;/h1&gt;\
+                        &lt;ul&gt;\
+                            &lt;li ng-repeat=&quot;item in items&quot;&gt;{{item}}&lt;/li&gt;\
+                        &lt;/ul&gt;&apos;;
+                        elem.html($compile(html)(scope))
+                    }
+                }
+            })
+</code></pre><h3 id="例子二"><a href="#例子二" class="headerlink" title="例子二"></a>例子二</h3><pre><code>#HTML#
+
+&lt;body ng-controller=&quot;MyController&quot;&gt;
+&lt;p compile=&quot;html&quot;&gt;&lt;/p&gt;
+&lt;/body&gt;
+
+# JS #
+
+   angular.module(&apos;myApp&apos;, [])
+            .controller(&apos;MyController&apos;, function ($scope) {
+                $scope.html = &apos;&lt;h1&gt;{{title}}&lt;/h1&gt;\
+                        &lt;ul&gt;\
+                            &lt;li ng-repeat=&quot;item in items&quot;&gt;{{item}}&lt;/li&gt;\
+                        &lt;/ul&gt;&apos;
+
+            })
+            .directive(&apos;compile&apos;, function($compile) {
+                return {
+                    scope: {
+                        compile: &apos;=&apos;
+                    },
+                    link: function(scope, elem, attrs) {
+                        scope.title = &apos;list&apos;;
+                        scope.items = [&apos;list1&apos;, &apos;list2&apos;, &apos;list3&apos;];
+                        elem.html($compile(scope.compile)(scope))
+                    }
+                }
+            })
+</code></pre>
       
     </div>
     
@@ -381,8 +407,8 @@ return function(inputArray){
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/10/10/JqueryFileUpload遇到angulrjs/" rel="next" title="JqueryFileUpload遇到angulrjs">
-                <i class="fa fa-chevron-left"></i> JqueryFileUpload遇到angulrjs
+              <a href="/2015/10/20/倒计时/" rel="next" title="按钮倒计时">
+                <i class="fa fa-chevron-left"></i> 按钮倒计时
               </a>
             
           </div>
@@ -391,8 +417,8 @@ return function(inputArray){
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/10/20/倒计时/" rel="prev" title="按钮倒计时">
-                按钮倒计时 <i class="fa fa-chevron-right"></i>
+              <a href="/2015/10/26/AngularJS中的指令全面解析/" rel="prev" title="AngularJS中习惯用法指令scope解析记录">
+                AngularJS中习惯用法指令scope解析记录 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -509,7 +535,7 @@ return function(inputArray){
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#js"><span class="nav-number">1.</span> <span class="nav-text">js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#html"><span class="nav-number">2.</span> <span class="nav-text">html</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#例子一"><span class="nav-number">1.</span> <span class="nav-text">例子一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子二"><span class="nav-number">2.</span> <span class="nav-text">例子二</span></a></li></ol></div>
             
 
           </div>
