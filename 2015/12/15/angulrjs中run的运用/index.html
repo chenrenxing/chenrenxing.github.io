@@ -94,17 +94,17 @@
 
 
 
-<meta name="description" content="例子一# HTML #  &amp;lt;body ng-controller=&amp;quot;MyController&amp;quot;&amp;gt;     &amp;lt;p compile&amp;gt;&amp;lt;/p&amp;gt; &amp;lt;/body&amp;gt;  # js #   angular.module(&amp;apos;myApp&amp;apos;, [])             .controller(&amp;apos;MyControlle">
+<meta name="description" content="run方法用于初始化全局的数据，仅对全局作用域起作用。浏览器判断.run([&amp;apos;$rootScope&amp;apos;, &amp;apos;$route&amp;apos;, &amp;apos;$window&amp;apos;, &amp;apos;$location&amp;apos;, &amp;apos;Position&amp;apos;, &amp;apos;$cookies&amp;apos;, &amp;apos;Request&amp;apos;, &amp;apos;$co">
 <meta property="og:type" content="article">
-<meta property="og:title" content="angularjs$directive$compile渲染html">
-<meta property="og:url" content="http://yoursite.com/2015/10/25/angularjs$directive$compile/index.html">
+<meta property="og:title" content="angulrjs中run的运用">
+<meta property="og:url" content="http://yoursite.com/2015/12/15/angulrjs中run的运用/index.html">
 <meta property="og:site_name" content="CHEN.星~博客">
-<meta property="og:description" content="例子一# HTML #  &amp;lt;body ng-controller=&amp;quot;MyController&amp;quot;&amp;gt;     &amp;lt;p compile&amp;gt;&amp;lt;/p&amp;gt; &amp;lt;/body&amp;gt;  # js #   angular.module(&amp;apos;myApp&amp;apos;, [])             .controller(&amp;apos;MyControlle">
+<meta property="og:description" content="run方法用于初始化全局的数据，仅对全局作用域起作用。浏览器判断.run([&amp;apos;$rootScope&amp;apos;, &amp;apos;$route&amp;apos;, &amp;apos;$window&amp;apos;, &amp;apos;$location&amp;apos;, &amp;apos;Position&amp;apos;, &amp;apos;$cookies&amp;apos;, &amp;apos;Request&amp;apos;, &amp;apos;$co">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-09-19T07:07:22.955Z">
+<meta property="og:updated_time" content="2017-09-20T07:51:01.184Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="angularjs$directive$compile渲染html">
-<meta name="twitter:description" content="例子一# HTML #  &amp;lt;body ng-controller=&amp;quot;MyController&amp;quot;&amp;gt;     &amp;lt;p compile&amp;gt;&amp;lt;/p&amp;gt; &amp;lt;/body&amp;gt;  # js #   angular.module(&amp;apos;myApp&amp;apos;, [])             .controller(&amp;apos;MyControlle">
+<meta name="twitter:title" content="angulrjs中run的运用">
+<meta name="twitter:description" content="run方法用于初始化全局的数据，仅对全局作用域起作用。浏览器判断.run([&amp;apos;$rootScope&amp;apos;, &amp;apos;$route&amp;apos;, &amp;apos;$window&amp;apos;, &amp;apos;$location&amp;apos;, &amp;apos;Position&amp;apos;, &amp;apos;$cookies&amp;apos;, &amp;apos;Request&amp;apos;, &amp;apos;$co">
 
 
 
@@ -133,13 +133,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2015/10/25/angularjs$directive$compile/"/>
+  <link rel="canonical" href="http://yoursite.com/2015/12/15/angulrjs中run的运用/"/>
 
 
 
 
 
-  <title>angularjs$directive$compile渲染html | CHEN.星~博客</title>
+  <title>angulrjs中run的运用 | CHEN.星~博客</title>
   
 
 
@@ -262,7 +262,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/10/25/angularjs$directive$compile/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/12/15/angulrjs中run的运用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="CHEN.星">
@@ -279,7 +279,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">angularjs$directive$compile渲染html</h1>
+          <h1 class="post-title" itemprop="name headline">angulrjs中run的运用</h1>
         
 
         <div class="post-meta">
@@ -291,8 +291,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-10-25T17:30:21+08:00">
-                2015-10-25
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-12-15T19:59:35+08:00">
+                2015-12-15
               </time>
             
 
@@ -329,61 +329,50 @@
       
 
       
-        <h3 id="例子一"><a href="#例子一" class="headerlink" title="例子一"></a>例子一</h3><pre><code># HTML #
+        <h1 id="run方法用于初始化全局的数据，仅对全局作用域起作用。"><a href="#run方法用于初始化全局的数据，仅对全局作用域起作用。" class="headerlink" title="run方法用于初始化全局的数据，仅对全局作用域起作用。"></a>run方法用于初始化全局的数据，仅对全局作用域起作用。</h1><h3 id="浏览器判断"><a href="#浏览器判断" class="headerlink" title="浏览器判断"></a>浏览器判断</h3><pre><code>.run([&apos;$rootScope&apos;, &apos;$route&apos;, &apos;$window&apos;, &apos;$location&apos;, &apos;Position&apos;, &apos;$cookies&apos;, &apos;Request&apos;, &apos;$cookieStore&apos;,
+  function($rootScope, $route, $window, $location, position, $cookies, request, $cookieStore) {
+   //非微信的登陆
+   $rootScope.isWeiXinLogin = function() {
+//判断是否微信登陆
+var ua = window.navigator.userAgent.toLowerCase();
+//console.log(ua); //mozilla/5.0 (iphone; cpu iphone os 9_1 like mac os x) applewebkit/601.1.46 (khtml, like gecko) version/9.0 mobile/13b143 safari/601.1
+if (ua.match(/MicroMessenger/i) == &apos;micromessenger&apos;) {
+ console.log(&quot; 是来自微信内置浏览器&quot;);
+ return true;
+} else {
+ console.log(&quot;不是来自微信内置浏览器&quot;);
+ return false;
+}
+   };
+]);
+--------------
+控制层处理
+angular.module(&apos;autumnswind&apos;).controller(&apos;OrderCtrl&apos;, [&apos;$rootScope&apos;, &apos;$scope&apos;, &apos;Request&apos;, &apos;$cookies&apos;, &apos;$window&apos;, &apos;$routeParams&apos;, &apos;$location&apos;, &apos;Tool&apos;,
+ function($rootScope, $scope, request, $cookies, $window, $routeParams, $location, tool) { 
+if ($rootScope.isWeiXinLogin()) {
+     ...
+    }
+   }
+]);
+</code></pre><h4 id="项目中run-http和ajax请求头全局"><a href="#项目中run-http和ajax请求头全局" class="headerlink" title="项目中run$http和ajax请求头全局"></a>项目中run$http和ajax请求头全局</h4><pre><code>.run([&apos;$http&apos;, &apos;$cookies&apos;,&apos;$rootScope&apos;,&apos;$location&apos;, function($http, $cookies,$rootScope,$location) {
+        $http.defaults.headers.common[&apos;X-Requested-With&apos;] = &apos;XMLHttpRequest&apos;;
+        $http.defaults.headers.common[&apos;X-Auth-Token&apos;] = $cookies.get(&apos;X-Auth-Token&apos;);
+        $.ajaxSetup({
+            headers: {
+                &apos;X-Auth-Token&apos;: $cookies.get(&apos;X-Auth-Token&apos;)
+            }
+        });
 
-&lt;body ng-controller=&quot;MyController&quot;&gt;
-    &lt;p compile&gt;&lt;/p&gt;
-&lt;/body&gt;
+    }]);
+    //x-requested-with XMLHttpRequest是Ajax 异步请求方式
+    //直接用于全局环境每次$http头信息
+</code></pre><h3 id="什么是-XMLHttpRequest-对象？"><a href="#什么是-XMLHttpRequest-对象？" class="headerlink" title="什么是 XMLHttpRequest 对象？"></a>什么是 XMLHttpRequest 对象？</h3><ul>
+<li>XMLHttpRequest 对象用于在后台与服务器交换数据。</li>
+<li>XMLHttpRequest 对象是开发者的梦想，因为您能够：</li>
+<li>在不重新加载页面的情况下更新网页<br>在页面已加载后从服务器请求数据<br>在页面已加载后从服务器接收数据<br>在后台向服务器发送数据</li>
+<li>所有现代的浏览……</li>
+</ul>
 
-# js #
-  angular.module(&apos;myApp&apos;, [])
-            .controller(&apos;MyController&apos;, function ($scope, $compile, $timeout) {
-            })
-            .directive(&apos;compile&apos;, function($compile) {
-                return {
-                    scope: {
-
-                    },
-                    link: function(scope, elem, attrs) {
-                        scope.title = &apos;list&apos;;
-                        scope.items = [&apos;list1&apos;, &apos;list2&apos;, &apos;list3&apos;];
-                        var html = &apos;&lt;h1&gt;{{title}}&lt;/h1&gt;\
-                        &lt;ul&gt;\
-                            &lt;li ng-repeat=&quot;item in items&quot;&gt;{{item}}&lt;/li&gt;\
-                        &lt;/ul&gt;&apos;;
-                        elem.html($compile(html)(scope))
-                    }
-                }
-            })
-</code></pre><h3 id="例子二"><a href="#例子二" class="headerlink" title="例子二"></a>例子二</h3><pre><code>#HTML#
-
-&lt;body ng-controller=&quot;MyController&quot;&gt;
-&lt;p compile=&quot;html&quot;&gt;&lt;/p&gt;
-&lt;/body&gt;
-
-# JS #
-
-   angular.module(&apos;myApp&apos;, [])
-            .controller(&apos;MyController&apos;, function ($scope) {
-                $scope.html = &apos;&lt;h1&gt;{{title}}&lt;/h1&gt;\
-                        &lt;ul&gt;\
-                            &lt;li ng-repeat=&quot;item in items&quot;&gt;{{item}}&lt;/li&gt;\
-                        &lt;/ul&gt;&apos;
-
-            })
-            .directive(&apos;compile&apos;, function($compile) {
-                return {
-                    scope: {
-                        compile: &apos;=&apos;
-                    },
-                    link: function(scope, elem, attrs) {
-                        scope.title = &apos;list&apos;;
-                        scope.items = [&apos;list1&apos;, &apos;list2&apos;, &apos;list3&apos;];
-                        elem.html($compile(scope.compile)(scope))
-                    }
-                }
-            })
-</code></pre>
       
     </div>
     
@@ -407,8 +396,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/10/20/倒计时/" rel="next" title="按钮倒计时">
-                <i class="fa fa-chevron-left"></i> 按钮倒计时
+              <a href="/2015/12/10/获取URL上的参数/" rel="next" title="获取URL上的参数">
+                <i class="fa fa-chevron-left"></i> 获取URL上的参数
               </a>
             
           </div>
@@ -417,8 +406,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/10/26/AngularJS中的指令全面解析/" rel="prev" title="AngularJS中习惯用法指令scope解析记录">
-                AngularJS中习惯用法指令scope解析记录 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/01/03/angulrjs项目拦截器/" rel="prev" title="angulrjs项目拦截器">
+                angulrjs项目拦截器 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -535,7 +524,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#例子一"><span class="nav-number">1.</span> <span class="nav-text">例子一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子二"><span class="nav-number">2.</span> <span class="nav-text">例子二</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#run方法用于初始化全局的数据，仅对全局作用域起作用。"><span class="nav-number">1.</span> <span class="nav-text">run方法用于初始化全局的数据，仅对全局作用域起作用。</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器判断"><span class="nav-number">1.0.1.</span> <span class="nav-text">浏览器判断</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#项目中run-http和ajax请求头全局"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">项目中run$http和ajax请求头全局</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是-XMLHttpRequest-对象？"><span class="nav-number">1.0.2.</span> <span class="nav-text">什么是 XMLHttpRequest 对象？</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

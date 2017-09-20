@@ -94,17 +94,17 @@
 
 
 
-<meta name="description" content="例子一# HTML #  &amp;lt;body ng-controller=&amp;quot;MyController&amp;quot;&amp;gt;     &amp;lt;p compile&amp;gt;&amp;lt;/p&amp;gt; &amp;lt;/body&amp;gt;  # js #   angular.module(&amp;apos;myApp&amp;apos;, [])             .controller(&amp;apos;MyControlle">
+<meta name="description" content="项目中拦截器(function(angular){ &amp;apos;use strict&amp;apos;; angular.module(&amp;quot;platform.main.interceptor&amp;quot;,[])     /**      * 服务端消息状态码处理         */     .factory(&amp;apos;messageHttpInterceptor&amp;apos;,[&amp;apos;$">
 <meta property="og:type" content="article">
-<meta property="og:title" content="angularjs$directive$compile渲染html">
-<meta property="og:url" content="http://yoursite.com/2015/10/25/angularjs$directive$compile/index.html">
+<meta property="og:title" content="angulrjs项目拦截器">
+<meta property="og:url" content="http://yoursite.com/2016/01/03/angulrjs项目拦截器/index.html">
 <meta property="og:site_name" content="CHEN.星~博客">
-<meta property="og:description" content="例子一# HTML #  &amp;lt;body ng-controller=&amp;quot;MyController&amp;quot;&amp;gt;     &amp;lt;p compile&amp;gt;&amp;lt;/p&amp;gt; &amp;lt;/body&amp;gt;  # js #   angular.module(&amp;apos;myApp&amp;apos;, [])             .controller(&amp;apos;MyControlle">
+<meta property="og:description" content="项目中拦截器(function(angular){ &amp;apos;use strict&amp;apos;; angular.module(&amp;quot;platform.main.interceptor&amp;quot;,[])     /**      * 服务端消息状态码处理         */     .factory(&amp;apos;messageHttpInterceptor&amp;apos;,[&amp;apos;$">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-09-19T07:07:22.955Z">
+<meta property="og:updated_time" content="2017-09-20T06:35:34.292Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="angularjs$directive$compile渲染html">
-<meta name="twitter:description" content="例子一# HTML #  &amp;lt;body ng-controller=&amp;quot;MyController&amp;quot;&amp;gt;     &amp;lt;p compile&amp;gt;&amp;lt;/p&amp;gt; &amp;lt;/body&amp;gt;  # js #   angular.module(&amp;apos;myApp&amp;apos;, [])             .controller(&amp;apos;MyControlle">
+<meta name="twitter:title" content="angulrjs项目拦截器">
+<meta name="twitter:description" content="项目中拦截器(function(angular){ &amp;apos;use strict&amp;apos;; angular.module(&amp;quot;platform.main.interceptor&amp;quot;,[])     /**      * 服务端消息状态码处理         */     .factory(&amp;apos;messageHttpInterceptor&amp;apos;,[&amp;apos;$">
 
 
 
@@ -133,13 +133,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2015/10/25/angularjs$directive$compile/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/01/03/angulrjs项目拦截器/"/>
 
 
 
 
 
-  <title>angularjs$directive$compile渲染html | CHEN.星~博客</title>
+  <title>angulrjs项目拦截器 | CHEN.星~博客</title>
   
 
 
@@ -262,7 +262,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/10/25/angularjs$directive$compile/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/01/03/angulrjs项目拦截器/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="CHEN.星">
@@ -279,7 +279,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">angularjs$directive$compile渲染html</h1>
+          <h1 class="post-title" itemprop="name headline">angulrjs项目拦截器</h1>
         
 
         <div class="post-meta">
@@ -291,8 +291,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-10-25T17:30:21+08:00">
-                2015-10-25
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-01-03T10:59:24+08:00">
+                2016-01-03
               </time>
             
 
@@ -329,60 +329,88 @@
       
 
       
-        <h3 id="例子一"><a href="#例子一" class="headerlink" title="例子一"></a>例子一</h3><pre><code># HTML #
+        <h3 id="项目中拦截器"><a href="#项目中拦截器" class="headerlink" title="项目中拦截器"></a>项目中拦截器</h3><pre><code>(function(angular){
+&apos;use strict&apos;;
+angular.module(&quot;platform.main.interceptor&quot;,[])
+    /**
+     * 服务端消息状态码处理   
+     */
+    .factory(&apos;messageHttpInterceptor&apos;,[&apos;$q&apos;,function($q){
+        return {
+            &apos;response&apos;: function(response) {
+                var result = response.data;
+                if(result.text &amp;&amp; result.text!=&quot;&quot;){
+                    if(result.code&gt;=0){
+                        toastr.success(result.text);
+                    }else{
+                        if(result.code==14013){
+                            window.location.href =&quot;index.html&quot;;
+                        }else {
+                            toastr.error(result.text);
+                        }
 
-&lt;body ng-controller=&quot;MyController&quot;&gt;
-    &lt;p compile&gt;&lt;/p&gt;
-&lt;/body&gt;
-
-# js #
-  angular.module(&apos;myApp&apos;, [])
-            .controller(&apos;MyController&apos;, function ($scope, $compile, $timeout) {
-            })
-            .directive(&apos;compile&apos;, function($compile) {
-                return {
-                    scope: {
-
-                    },
-                    link: function(scope, elem, attrs) {
-                        scope.title = &apos;list&apos;;
-                        scope.items = [&apos;list1&apos;, &apos;list2&apos;, &apos;list3&apos;];
-                        var html = &apos;&lt;h1&gt;{{title}}&lt;/h1&gt;\
-                        &lt;ul&gt;\
-                            &lt;li ng-repeat=&quot;item in items&quot;&gt;{{item}}&lt;/li&gt;\
-                        &lt;/ul&gt;&apos;;
-                        elem.html($compile(html)(scope))
                     }
                 }
-            })
-</code></pre><h3 id="例子二"><a href="#例子二" class="headerlink" title="例子二"></a>例子二</h3><pre><code>#HTML#
+                return response;
+            }
+        }
+    }])
+    .config([&apos;$httpProvider&apos;,function($httpProvider){
+        $httpProvider.interceptors.push(&apos;messageHttpInterceptor&apos;);
+    }])
+})(angular);
+——————————
 
-&lt;body ng-controller=&quot;MyController&quot;&gt;
-&lt;p compile=&quot;html&quot;&gt;&lt;/p&gt;
-&lt;/body&gt;
+(function(angular){
+&apos;use strict&apos;;
+angular.module(&quot;platform.main.interceptor&quot;,[])
+    /**
+     * 服务端消息状态码处理
+     */
+    .factory(&apos;messageHttpInterceptor&apos;,[&apos;$q&apos;,function($q){
+        return {
+             request:function(config){
+                  config.headers[&quot;TOKEN&quot;] = $rootScope.user.token;
+                  return config;
 
-# JS #
+                },
+            &apos;response&apos;: function(response) {
+                var result = response.data;
+                if(result.text &amp;&amp; result.text!=&quot;&quot;){
+                    if(result.code&gt;=0){
+                        toastr.success(result.text);
+                    }else{
+                        if(result.code==14013){
+                            window.location.href =&quot;index.html&quot;;
+                        }else {
+                            toastr.error(result.text);
+                        }
 
-   angular.module(&apos;myApp&apos;, [])
-            .controller(&apos;MyController&apos;, function ($scope) {
-                $scope.html = &apos;&lt;h1&gt;{{title}}&lt;/h1&gt;\
-                        &lt;ul&gt;\
-                            &lt;li ng-repeat=&quot;item in items&quot;&gt;{{item}}&lt;/li&gt;\
-                        &lt;/ul&gt;&apos;
-
-            })
-            .directive(&apos;compile&apos;, function($compile) {
-                return {
-                    scope: {
-                        compile: &apos;=&apos;
-                    },
-                    link: function(scope, elem, attrs) {
-                        scope.title = &apos;list&apos;;
-                        scope.items = [&apos;list1&apos;, &apos;list2&apos;, &apos;list3&apos;];
-                        elem.html($compile(scope.compile)(scope))
                     }
                 }
-            })
+                return response;
+            }，
+             responseError: function (response) {
+                  var data = response.data;
+                  // 判断错误码，如果是未登录
+                  if(data[&quot;errorCode&quot;] == &quot;500999&quot;){
+                    // 清空用户本地token存储的信息，如果
+                    $rootScope.user = {token:&quot;&quot;};
+                    // 全局事件，方便其他view获取该事件，并给以相应的提示或处理
+                    $rootScope.$emit(&quot;userIntercepted&quot;,&quot;notLogin&quot;,response);
+                  }
+                  // 如果是登录超时
+                  if(data[&quot;errorCode&quot;] == &quot;500998&quot;){
+                    $rootScope.$emit(&quot;userIntercepted&quot;,&quot;sessionOut&quot;,response);
+                  }
+                  return $q.reject(response);
+                }
+        }
+    }])
+    .config([&apos;$httpProvider&apos;,function($httpProvider){
+        $httpProvider.interceptors.push(&apos;messageHttpInterceptor&apos;);
+    }])
+})(angular);
 </code></pre>
       
     </div>
@@ -407,8 +435,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/10/20/倒计时/" rel="next" title="按钮倒计时">
-                <i class="fa fa-chevron-left"></i> 按钮倒计时
+              <a href="/2015/12/15/angulrjs中run的运用/" rel="next" title="angulrjs中run的运用">
+                <i class="fa fa-chevron-left"></i> angulrjs中run的运用
               </a>
             
           </div>
@@ -416,10 +444,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/10/26/AngularJS中的指令全面解析/" rel="prev" title="AngularJS中习惯用法指令scope解析记录">
-                AngularJS中习惯用法指令scope解析记录 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -535,7 +559,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#例子一"><span class="nav-number">1.</span> <span class="nav-text">例子一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子二"><span class="nav-number">2.</span> <span class="nav-text">例子二</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#项目中拦截器"><span class="nav-number">1.</span> <span class="nav-text">项目中拦截器</span></a></li></ol></div>
             
 
           </div>
