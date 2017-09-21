@@ -206,7 +206,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Home
+            Startseite
           </a>
         </li>
       
@@ -216,7 +216,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archives
+            Archiv
           </a>
         </li>
       
@@ -263,6 +263,493 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/10/26/AngularJS中的指令全面解析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/10/26/AngularJS中的指令全面解析/" itemprop="url">AngularJS中习惯用法指令scope解析记录</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-10-26T21:30:45+08:00">
+                2015-10-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ul>
+<li>记录的是个人习惯用法省略多余</li>
+</ul>
+<hr>
+<pre><code>1、作为一个新的HTML元素来使用。
+&lt;hello&gt;&lt;/hello&gt;或者&lt;hello/&gt;
+2、作为一个元素的属性来使用
+&lt;div hello&gt;&lt;/div&gt;
+3、作为一个元素的类来使用
+&lt;div class=&quot;hello&quot;&gt;&lt;/div&gt;
+
+个人习惯也常用元素标签来使用
+</code></pre><h3 id="（1）指令的定义，app-js："><a href="#（1）指令的定义，app-js：" class="headerlink" title="（1）指令的定义，app.js："></a>（1）指令的定义，app.js：</h3><pre><code>app.directive(&apos;myDirective&apos;, function() {
+    return {
+        restrict: &apos;E&apos;, E表示元素标签
+        replace: true,
+        templateUrl: &apos;index.html&apos;,
+        scope: false,   // 默认值 true就开启控制层隔离
+        transclude：true，
+        link：function(scope,element,attrs){}
+    }
+});
+</code></pre><h3 id="自定义指令HTML"><a href="#自定义指令HTML" class="headerlink" title="自定义指令HTML"></a>自定义指令HTML</h3><pre><code>&lt;my-directive&gt;自定义指令&lt;/my-directive&gt;
+</code></pre><h3 id="（2）指令模板index-html"><a href="#（2）指令模板index-html" class="headerlink" title="（2）指令模板index.html"></a>（2）指令模板index.html</h3><pre><code>&lt;div&gt;
+
+&lt;p&gt;自定义指令scope：
+&lt;span ng-transclude&gt;
+&lt;span&gt;
+&lt;/p&gt;
+
+
+&lt;/div&gt;
+</code></pre><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><ul>
+<li>restrict为E 表示元素标签替换 <my-directive><my-directive></my-directive></my-directive></li>
+<li>replace为true替换元素后不保留<my-directive></my-directive></li>
+<li>templateUrl替换URL地址</li>
+<li>scope为true 开启隔离父子级，独立控制层</li>
+<li>transclude保留指令内内容ng-transclude放在templateUrl中元素标签内，就可以保留<h3 id="重点介绍scope"><a href="#重点介绍scope" class="headerlink" title="重点介绍scope"></a>重点介绍scope</h3></li>
+<li>@：单向绑定，外部scope能够影响内部scope，但反过来不成立</li>
+<li>=：双向绑定，外部scope和内部scope的model能够相互改变</li>
+<li><p>&amp;：把内部scope的函数的返回值和外部scope的任何属性绑定起来</p>
+<pre><code>记录
+scope:{
+        select:&quot;&amp;&quot;,
+    },
+
+templateUrl元素中事件传id
+ng-click=&quot;select({id:position})&quot; &gt;&apos;
+
+link中
+ scope.position=attrs.id;
+
+html元素中
+select=&quot;selectTpl(id)&quot;
+
+html 元素JS中写法
+$scope.selectTpl=function(id){
+    }
+</code></pre></li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/10/25/angularjs$directive$compile/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/10/25/angularjs$directive$compile/" itemprop="url">angularjs$directive$compile渲染html</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-10-25T17:30:21+08:00">
+                2015-10-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="例子一"><a href="#例子一" class="headerlink" title="例子一"></a>例子一</h3><pre><code># HTML #
+
+&lt;body ng-controller=&quot;MyController&quot;&gt;
+    &lt;p compile&gt;&lt;/p&gt;
+&lt;/body&gt;
+
+# js #
+  angular.module(&apos;myApp&apos;, [])
+            .controller(&apos;MyController&apos;, function ($scope, $compile, $timeout) {
+            })
+            .directive(&apos;compile&apos;, function($compile) {
+                return {
+                    scope: {
+
+                    },
+                    link: function(scope, elem, attrs) {
+                        scope.title = &apos;list&apos;;
+                        scope.items = [&apos;list1&apos;, &apos;list2&apos;, &apos;list3&apos;];
+                        var html = &apos;&lt;h1&gt;{{title}}&lt;/h1&gt;\
+                        &lt;ul&gt;\
+                            &lt;li ng-repeat=&quot;item in items&quot;&gt;{{item}}&lt;/li&gt;\
+                        &lt;/ul&gt;&apos;;
+                        elem.html($compile(html)(scope))
+                    }
+                }
+            })
+</code></pre><h3 id="例子二"><a href="#例子二" class="headerlink" title="例子二"></a>例子二</h3><pre><code>#HTML#
+
+&lt;body ng-controller=&quot;MyController&quot;&gt;
+&lt;p compile=&quot;html&quot;&gt;&lt;/p&gt;
+&lt;/body&gt;
+
+# JS #
+
+   angular.module(&apos;myApp&apos;, [])
+            .controller(&apos;MyController&apos;, function ($scope) {
+                $scope.html = &apos;&lt;h1&gt;{{title}}&lt;/h1&gt;\
+                        &lt;ul&gt;\
+                            &lt;li ng-repeat=&quot;item in items&quot;&gt;{{item}}&lt;/li&gt;\
+                        &lt;/ul&gt;&apos;
+
+            })
+            .directive(&apos;compile&apos;, function($compile) {
+                return {
+                    scope: {
+                        compile: &apos;=&apos;
+                    },
+                    link: function(scope, elem, attrs) {
+                        scope.title = &apos;list&apos;;
+                        scope.items = [&apos;list1&apos;, &apos;list2&apos;, &apos;list3&apos;];
+                        elem.html($compile(scope.compile)(scope))
+                    }
+                }
+            })
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/10/20/倒计时/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/10/20/倒计时/" itemprop="url">按钮倒计时</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-10-20T11:20:00+08:00">
+                2015-10-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ul>
+<li>JQ时间倒计时</li>
+<li>  function timer(time) {<br>  var btn = $(“#sendButton”);<br>  btn.attr(“disabled”, true);  //按钮禁止点击<br>  btn.val(time &lt;= 0 ? “发送动态密码” : (“” + (time) + “秒后可发送”));<br>  var hander = setInterval(function() {<pre><code>if (time &lt;= 0) {
+    clearInterval(hander); //清除倒计时
+    btn.val(&quot;发送动态密码&quot;);
+    btn.attr(&quot;disabled&quot;, false);
+    return false;
+}else {
+    btn.val(&quot;&quot; + (time--) + &quot;秒后可发送&quot;);
+}
+</code></pre>  }, 1000);<pre><code>}
+    //调用方法
+    timer(30);
+</code></pre></li>
+</ul>
+<p>-angrulrjs 时间到计时<br>-<br>    angular.module(‘controllers’, []).controller(‘registerCtrl’, function($scope,$interval){<br>    $scope.paracont = “获取验证码”;<br>    $scope.paraclass = “but_null”;<br>    $scope.paraevent = true;<br>    var second = 60,<br>      timePromise = undefined;<br>    timePromise = $interval(function(){<br>     if(second&lt;=0){<br>      $interval.cancel(timePromise);<br>      timePromise = undefined;<br>      second = 60;<br>      $scope.paracont = “重发验证码”;<br>      $scope.paraclass = “but_null”;<br>      $scope.paraevent = true;<br>     }else{<br>      $scope.paracont = second + “秒后可重发”;<br>      $scope.paraclass = “not but_null”;<br>      second–;<br>     }<br>    },1000,100);<br>});</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/10/18/angulrjs基数偶数过滤/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -292,7 +779,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-10-18T13:30:02+08:00">
                 2015-10-18
@@ -439,7 +926,7 @@ return function(inputArray){
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-10-10T20:11:00+08:00">
                 2015-10-10
@@ -566,7 +1053,7 @@ return function(inputArray){
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-10-04T21:19:07+08:00">
                 2015-10-04
@@ -701,7 +1188,7 @@ $http.post(contextPath + &apos;/cmsSceMenuModelEx/save&apos;,data2save) .then(fu
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-10-04T20:19:07+08:00">
                 2015-10-04
@@ -1040,7 +1527,7 @@ img.append(&quot;files&quot;, eachFile,eachFile.name);
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-09-24T20:19:07+08:00">
                 2015-09-24
@@ -1167,7 +1654,7 @@ img.append(&quot;files&quot;, eachFile,eachFile.name);
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-09-17T19:19:07+08:00">
                 2015-09-17
@@ -1306,7 +1793,7 @@ return;
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-09-07T19:19:07+08:00">
                 2015-09-07
@@ -1406,131 +1893,11 @@ hexo deploy #将.deploy目录部署到GitHub
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/09/07/文章标题/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="CHEN.星">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CHEN.星~博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/09/07/文章标题/" itemprop="url">生命在于折腾</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-09-07T15:19:07+08:00">
-                2015-09-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>你好，欢迎来到我的个人技术博客。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1576,8 +1943,8 @@ hexo deploy #将.deploy目录部署到GitHub
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">18</span>
-                <span class="site-state-item-name">posts</span>
+                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-name">Artikel</span>
               </a>
             </div>
           
@@ -1631,7 +1998,7 @@ hexo deploy #将.deploy目录部署到GitHub
 
 
 <div class="powered-by">
-  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">

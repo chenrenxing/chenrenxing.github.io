@@ -94,17 +94,17 @@
 
 
 
-<meta name="description" content=".controller(&amp;apos;ScrollController&amp;apos;, [&amp;apos;$scope&amp;apos;, &amp;apos;$location&amp;apos;, &amp;apos;$anchorScroll&amp;apos;, function ($scope, $location, $anchorScroll) { $scope.gotoBottom = function() {   // 将lo">
+<meta name="description" content="一直在angulrjs项目，查阅资料grunt配置环境里面，没有找到相关的热替换，然后找了一个简单的vue项目，做了一个热替换 package.json文件  { &amp;quot;name&amp;quot;: &amp;quot;vue-project&amp;quot;, &amp;quot;version&amp;quot;: &amp;quot;1.0.0&amp;quot;, &amp;quot;description&amp;quot;: &amp;quot;che">
 <meta property="og:type" content="article">
-<meta property="og:title" content="AngularJS$anchorScroll用法">
-<meta property="og:url" content="http://yoursite.com/2015/11/04/AngularJS$anchorScroll用法/index.html">
+<meta property="og:title" content="webpack-dev-server">
+<meta property="og:url" content="http://yoursite.com/2016/01/10/webpack-dev-server/index.html">
 <meta property="og:site_name" content="CHEN.星~博客">
-<meta property="og:description" content=".controller(&amp;apos;ScrollController&amp;apos;, [&amp;apos;$scope&amp;apos;, &amp;apos;$location&amp;apos;, &amp;apos;$anchorScroll&amp;apos;, function ($scope, $location, $anchorScroll) { $scope.gotoBottom = function() {   // 将lo">
+<meta property="og:description" content="一直在angulrjs项目，查阅资料grunt配置环境里面，没有找到相关的热替换，然后找了一个简单的vue项目，做了一个热替换 package.json文件  { &amp;quot;name&amp;quot;: &amp;quot;vue-project&amp;quot;, &amp;quot;version&amp;quot;: &amp;quot;1.0.0&amp;quot;, &amp;quot;description&amp;quot;: &amp;quot;che">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-09-19T08:23:49.860Z">
+<meta property="og:updated_time" content="2017-09-21T09:14:21.727Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="AngularJS$anchorScroll用法">
-<meta name="twitter:description" content=".controller(&amp;apos;ScrollController&amp;apos;, [&amp;apos;$scope&amp;apos;, &amp;apos;$location&amp;apos;, &amp;apos;$anchorScroll&amp;apos;, function ($scope, $location, $anchorScroll) { $scope.gotoBottom = function() {   // 将lo">
+<meta name="twitter:title" content="webpack-dev-server">
+<meta name="twitter:description" content="一直在angulrjs项目，查阅资料grunt配置环境里面，没有找到相关的热替换，然后找了一个简单的vue项目，做了一个热替换 package.json文件  { &amp;quot;name&amp;quot;: &amp;quot;vue-project&amp;quot;, &amp;quot;version&amp;quot;: &amp;quot;1.0.0&amp;quot;, &amp;quot;description&amp;quot;: &amp;quot;che">
 
 
 
@@ -133,13 +133,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2015/11/04/AngularJS$anchorScroll用法/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/01/10/webpack-dev-server/"/>
 
 
 
 
 
-  <title>AngularJS$anchorScroll用法 | CHEN.星~博客</title>
+  <title>webpack-dev-server | CHEN.星~博客</title>
   
 
 
@@ -262,7 +262,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/11/04/AngularJS$anchorScroll用法/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/01/10/webpack-dev-server/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="CHEN.星">
@@ -279,7 +279,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">AngularJS$anchorScroll用法</h1>
+          <h1 class="post-title" itemprop="name headline">webpack-dev-server</h1>
         
 
         <div class="post-meta">
@@ -291,8 +291,8 @@
               
                 <span class="post-meta-item-text">Veröffentlicht am</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-11-04T10:30:45+08:00">
-                2015-11-04
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-01-10T09:38:15+08:00">
+                2016-01-10
               </time>
             
 
@@ -329,54 +329,115 @@
       
 
       
-        <pre><code>.controller(&apos;ScrollController&apos;, [&apos;$scope&apos;, &apos;$location&apos;, &apos;$anchorScroll&apos;,
-function ($scope, $location, $anchorScroll) {
-$scope.gotoBottom = function() {
-  // 将location.hash的值设置为
-  // 你想要滚动到的元素的id
-  $location.hash(&apos;bottom&apos;);
+        <ul>
+<li><p>一直在angulrjs项目，查阅资料grunt配置环境里面，没有找到相关的热替换，然后找了一个简单的vue项目，做了一个热替换</p>
+<h3 id="package-json文件"><a href="#package-json文件" class="headerlink" title="package.json文件"></a>package.json文件</h3><p>  {</p>
+<pre><code>&quot;name&quot;: &quot;vue-project&quot;,
+&quot;version&quot;: &quot;1.0.0&quot;,
+&quot;description&quot;: &quot;chenxq&quot;,
+&quot;main&quot;: &quot;index.js&quot;,
+&quot;scripts&quot;: {
+  &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;,
+  &quot;dev&quot;: &quot;webpack-dev-server  --progress --inline&quot;
+},
+&quot;author&quot;: &quot;&quot;,
+&quot;license&quot;: &quot;ISC&quot;,
+&quot;devDependencies&quot;: {
+  &quot;babel-core&quot;: &quot;^6.3.17&quot;,
+  &quot;babel-loader&quot;: &quot;^6.2.0&quot;,
+  &quot;babel-plugin-transform-runtime&quot;: &quot;^6.3.13&quot;,
+  &quot;babel-preset-es2015&quot;: &quot;^6.3.13&quot;,
+  &quot;babel-runtime&quot;: &quot;^5.8.34&quot;,
+  &quot;css-loader&quot;: &quot;^0.23.0&quot;,
+  &quot;file-loader&quot;: &quot;^0.10.1&quot;,
+  &quot;html-webpack-plugin&quot;: &quot;^2.30.1&quot;,
+  &quot;jquery&quot;: &quot;^3.2.1&quot;,
+  &quot;style-loader&quot;: &quot;^0.15.0&quot;,
+  &quot;url-loader&quot;: &quot;^0.5.8&quot;,
+  &quot;vue&quot;: &quot;^2.2.5&quot;,
+  &quot;vue-cli&quot;: &quot;^2.8.1&quot;,
+  &quot;vue-hot-reload-api&quot;: &quot;^1.2.2&quot;,
+  &quot;vue-html-loader&quot;: &quot;^1.0.0&quot;,
+  &quot;vue-loader&quot;: &quot;^7.2.0&quot;,
+  &quot;vue-resource&quot;: &quot;^1.2.1&quot;,
+  &quot;vue-router&quot;: &quot;^2.3.0&quot;,
+  &quot;vue-style-loader&quot;: &quot;^1.0.0&quot;,
+  &quot;webpack&quot;: &quot;^1.12.9&quot;,
+  &quot;webpack-dev-server&quot;: &quot;^1.16.5&quot;
+    },
+&quot;dependencies&quot;: {
+  &quot;vue&quot;: &quot;^2.2.5&quot;
+}
+</code></pre><p>  }</p>
+<h3 id="webpack-config-js"><a href="#webpack-config-js" class="headerlink" title="webpack.config.js"></a>webpack.config.js</h3><p>  // nodejs 中的path模块<br>  var path = require(‘path’);<br>  var webpack = require(‘webpack’);<br>  //var HtmlWebpackPlugin = require(‘html-webpack-plugin’);<br>  var HtmlWebpackPlugin = require(‘html-webpack-plugin’);//生成新的html<br>  module.exports = {<br>  // 入口文件，path.resolve()方法，可以结合我们给定的两个参数最后生成绝对路径，最终指向的就是我们的index.js文件<br>  entry: {</p>
+<pre><code>index:&quot;./main.js&quot;},
+</code></pre><p>  //entry:[‘“./main.js”‘,”./main.js”]多文件打包入口，同样对象也可以多文件<br>  output: {</p>
+<pre><code>path: &apos;./dist/js/&apos;,  //路径
+publicPath: &apos;&apos;,  //网站运行时访问的路径
+filename: &apos;[name]-[hash].js&apos; // 生成文件名  name为entry下的属性名
+</code></pre><p>  },<br>  devServer:{</p>
+<pre><code>//contentBase: &apos;&apos;,
+historyApiFallback:true,
+//hot:true,//webpack2 不支持了
+inline:true
+//progress:true,
+//port:8080,//端口你可以自定义
+//quiet:true,//显示打包的hash值
+//stats: &quot;errors-only&quot;
+</code></pre><p>  },<br>  module: {</p>
+<pre><code>loaders: [
+    // 使用vue-loader 加载 .vue 结尾的文件
+    {
+        test: /\.vue$/,
+        loader: &apos;vue&apos;//装载机loader
+    },
+    {
+        test: /\.js$/,
+        loader: &apos;babel?presets=es2015&apos;,
+        exclude: /node_modules///排除
+    },
+    {
+        test: /\.(jpg|png|gif|jpeg)?$/,
+        loader: &apos;url?limit=20480&amp;name=dist/images/[name].[hash:8].[ext]&apos;
+    }
+]
+</code></pre><p>  },<br>  resolve: {//决定</p>
+<pre><code>extensions: [&apos;&apos;, &apos;.js&apos;, &apos;.vue&apos;],//扩展
+alias: {//别名
+    &apos;vue$&apos;: &apos;vue/dist/vue.common.js&apos;
+}
+</code></pre><p>  },<br>  plugins:[//热响应插件</p>
+<pre><code>new webpack.HotModuleReplacementPlugin(),
+new HtmlWebpackPlugin({
+    title: &apos;My App&apos;,
+    path:&quot;&quot;,
+    template:&quot;./index.html&quot;,
+    filename: &apos;./home.html&apos;
+})
+</code></pre><p>  ]<br>  };</p>
+</li>
+</ul>
+<h3 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h3><pre><code>webpack.js output.path:指定输出文件的路径。
+webpack输出真实的文件，而webpack-dev-server输出的文件只存在于内存中,不输出真实的文件！
+output: {
+    path: &apos;./dist/js/&apos;,  //路径
+    publicPath: &apos;&apos;,  //网站运行时访问的路径
+    filename: &apos;[name]-[hash].js&apos; // 生成文件名  name为entry下的属性名
 
-  // 调用 $anchorScroll()
-  $anchorScroll();
+},
+webpack-dev-server生成的文件在内存中也是存在dist/js 这个文件内。
 
-};
-</code></pre><p>  }]);</p>
-<h3 id="如何使用一个垂直滚动偏移（指定了一个固定值）关于-anchorScroll-yOffset"><a href="#如何使用一个垂直滚动偏移（指定了一个固定值）关于-anchorScroll-yOffset" class="headerlink" title="如何使用一个垂直滚动偏移（指定了一个固定值）关于 $anchorScroll.yOffset"></a>如何使用一个垂直滚动偏移（指定了一个固定值）关于 $anchorScroll.yOffset</h3><h2 id="html"><a href="#html" class="headerlink" title="html"></a>html</h2><pre><code>&lt;div class=&quot;fixed-header&quot; ng-controller=&quot;headerCtrl&quot;&gt;
-  &lt;a href=&quot;&quot; ng-click=&quot;gotoAnchor(x)&quot; ng-repeat=&quot;x in [1,2,3,4,5]&quot;&gt;
-Go to anchor {{x}}
-  &lt;/a&gt;
-&lt;/div&gt;
-&lt;div id=&quot;anchor{{x}}&quot; class=&quot;anchor&quot; ng-repeat=&quot;x in [1,2,3,4,5]&quot;&gt;
-  Anchor {{x}} of 5
-&lt;/div&gt;
-</code></pre><h2 id="js"><a href="#js" class="headerlink" title="js"></a>js</h2><pre><code>angular.module(&apos;anchorScrollOffsetExample&apos;, [])
-.run([&apos;$anchorScroll&apos;, function($anchorScroll) {
-
-      $anchorScroll.yOffset = 50;   // 总是滚动额外的50像素
-
-}])
-.controller(&apos;headerCtrl&apos;, [&apos;$anchorScroll&apos;, &apos;$location&apos;, &apos;$scope&apos;,
-  function ($anchorScroll, $location, $scope) {
-$scope.gotoAnchor = function(x) {
-
-  var newHash = &apos;anchor&apos; + x;
-  if ($location.hash() !== newHash) {
-
-    // 将$location.hash设置为`newHash` and
-    // $anchorScroll也将自动滚到该处
-
-    $location.hash(&apos;anchor&apos; + x);
-
-  } else {
-
-    // 显式地调用 $anchorScroll()方法 ,
-    // 因为 $location.hash 并没有改变
-    $anchorScroll();
-
-  }
-};
-</code></pre><p>  }<br>]);</p>
-
+ &quot;scripts&quot;: {
+    &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;,
+    &quot;dev&quot;: &quot;webpack-dev-server  --progress --inline&quot;
+  },
+### 启动 ###
+npm run dev 
+dev 手动配置的
+启动后浏览器http://localhost:8080/home.html
+</code></pre><h3 id="坑过重要的点"><a href="#坑过重要的点" class="headerlink" title="坑过重要的点"></a>坑过重要的点</h3><pre><code>webpack配置生成的合并js到dist/js 下面跟 热替换是没有关系的。    
+webpack-dev-server生成的文件在内存中也是存在dist/js 这个文件内。
+</code></pre>
       
     </div>
     
@@ -400,8 +461,8 @@ $scope.gotoAnchor = function(x) {
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/10/26/AngularJS中的指令全面解析/" rel="next" title="AngularJS中习惯用法指令scope解析记录">
-                <i class="fa fa-chevron-left"></i> AngularJS中习惯用法指令scope解析记录
+              <a href="/2016/01/03/angulrjs项目拦截器/" rel="next" title="angulrjs项目拦截器">
+                <i class="fa fa-chevron-left"></i> angulrjs项目拦截器
               </a>
             
           </div>
@@ -410,8 +471,8 @@ $scope.gotoAnchor = function(x) {
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/11/10/angularjs封装指令返回顶部/" rel="prev" title="angularjs封装指令返回顶部">
-                angularjs封装指令返回顶部 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/03/10/grunt环境配置rem单位/" rel="prev" title="grunt环境配置rem单位">
+                grunt环境配置rem单位 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -528,7 +589,7 @@ $scope.gotoAnchor = function(x) {
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#如何使用一个垂直滚动偏移（指定了一个固定值）关于-anchorScroll-yOffset"><span class="nav-number">1.</span> <span class="nav-text">如何使用一个垂直滚动偏移（指定了一个固定值）关于 $anchorScroll.yOffset</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#html"><span class="nav-number"></span> <span class="nav-text">html</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#js"><span class="nav-number"></span> <span class="nav-text">js</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#package-json文件"><span class="nav-number">1.</span> <span class="nav-text">package.json文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#webpack-config-js"><span class="nav-number">2.</span> <span class="nav-text">webpack.config.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#流程"><span class="nav-number">3.</span> <span class="nav-text">流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#坑过重要的点"><span class="nav-number">4.</span> <span class="nav-text">坑过重要的点</span></a></li></ol></div>
             
 
           </div>

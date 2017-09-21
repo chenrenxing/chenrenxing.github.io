@@ -94,17 +94,17 @@
 
 
 
-<meta name="description" content=".controller(&amp;apos;ScrollController&amp;apos;, [&amp;apos;$scope&amp;apos;, &amp;apos;$location&amp;apos;, &amp;apos;$anchorScroll&amp;apos;, function ($scope, $location, $anchorScroll) { $scope.gotoBottom = function() {   // 将lo">
+<meta name="description" content="很多时候是被这2个属性搞混淆，长的太像了。 transition过渡效果 transform，2D/3D转换效果   transition过渡效果transition属性是一个简写属性，用于设置四个过渡属性： transition-property    规定设置过渡效果的 CSS 属性的名称。 transition-duration    规定完成过渡效果需要多少秒或毫秒。 transitio">
 <meta property="og:type" content="article">
-<meta property="og:title" content="AngularJS$anchorScroll用法">
-<meta property="og:url" content="http://yoursite.com/2015/11/04/AngularJS$anchorScroll用法/index.html">
+<meta property="og:title" content="CSS3中transform和transition">
+<meta property="og:url" content="http://yoursite.com/2015/12/20/CSS3中transform和transition/index.html">
 <meta property="og:site_name" content="CHEN.星~博客">
-<meta property="og:description" content=".controller(&amp;apos;ScrollController&amp;apos;, [&amp;apos;$scope&amp;apos;, &amp;apos;$location&amp;apos;, &amp;apos;$anchorScroll&amp;apos;, function ($scope, $location, $anchorScroll) { $scope.gotoBottom = function() {   // 将lo">
+<meta property="og:description" content="很多时候是被这2个属性搞混淆，长的太像了。 transition过渡效果 transform，2D/3D转换效果   transition过渡效果transition属性是一个简写属性，用于设置四个过渡属性： transition-property    规定设置过渡效果的 CSS 属性的名称。 transition-duration    规定完成过渡效果需要多少秒或毫秒。 transitio">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-09-19T08:23:49.860Z">
+<meta property="og:updated_time" content="2017-09-21T05:48:26.975Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="AngularJS$anchorScroll用法">
-<meta name="twitter:description" content=".controller(&amp;apos;ScrollController&amp;apos;, [&amp;apos;$scope&amp;apos;, &amp;apos;$location&amp;apos;, &amp;apos;$anchorScroll&amp;apos;, function ($scope, $location, $anchorScroll) { $scope.gotoBottom = function() {   // 将lo">
+<meta name="twitter:title" content="CSS3中transform和transition">
+<meta name="twitter:description" content="很多时候是被这2个属性搞混淆，长的太像了。 transition过渡效果 transform，2D/3D转换效果   transition过渡效果transition属性是一个简写属性，用于设置四个过渡属性： transition-property    规定设置过渡效果的 CSS 属性的名称。 transition-duration    规定完成过渡效果需要多少秒或毫秒。 transitio">
 
 
 
@@ -133,13 +133,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2015/11/04/AngularJS$anchorScroll用法/"/>
+  <link rel="canonical" href="http://yoursite.com/2015/12/20/CSS3中transform和transition/"/>
 
 
 
 
 
-  <title>AngularJS$anchorScroll用法 | CHEN.星~博客</title>
+  <title>CSS3中transform和transition | CHEN.星~博客</title>
   
 
 
@@ -262,7 +262,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/11/04/AngularJS$anchorScroll用法/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/12/20/CSS3中transform和transition/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="CHEN.星">
@@ -279,7 +279,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">AngularJS$anchorScroll用法</h1>
+          <h1 class="post-title" itemprop="name headline">CSS3中transform和transition</h1>
         
 
         <div class="post-meta">
@@ -291,8 +291,8 @@
               
                 <span class="post-meta-item-text">Veröffentlicht am</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-11-04T10:30:45+08:00">
-                2015-11-04
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-12-20T21:34:12+08:00">
+                2015-12-20
               </time>
             
 
@@ -329,54 +329,48 @@
       
 
       
-        <pre><code>.controller(&apos;ScrollController&apos;, [&apos;$scope&apos;, &apos;$location&apos;, &apos;$anchorScroll&apos;,
-function ($scope, $location, $anchorScroll) {
-$scope.gotoBottom = function() {
-  // 将location.hash的值设置为
-  // 你想要滚动到的元素的id
-  $location.hash(&apos;bottom&apos;);
-
-  // 调用 $anchorScroll()
-  $anchorScroll();
-
-};
-</code></pre><p>  }]);</p>
-<h3 id="如何使用一个垂直滚动偏移（指定了一个固定值）关于-anchorScroll-yOffset"><a href="#如何使用一个垂直滚动偏移（指定了一个固定值）关于-anchorScroll-yOffset" class="headerlink" title="如何使用一个垂直滚动偏移（指定了一个固定值）关于 $anchorScroll.yOffset"></a>如何使用一个垂直滚动偏移（指定了一个固定值）关于 $anchorScroll.yOffset</h3><h2 id="html"><a href="#html" class="headerlink" title="html"></a>html</h2><pre><code>&lt;div class=&quot;fixed-header&quot; ng-controller=&quot;headerCtrl&quot;&gt;
-  &lt;a href=&quot;&quot; ng-click=&quot;gotoAnchor(x)&quot; ng-repeat=&quot;x in [1,2,3,4,5]&quot;&gt;
-Go to anchor {{x}}
-  &lt;/a&gt;
-&lt;/div&gt;
-&lt;div id=&quot;anchor{{x}}&quot; class=&quot;anchor&quot; ng-repeat=&quot;x in [1,2,3,4,5]&quot;&gt;
-  Anchor {{x}} of 5
-&lt;/div&gt;
-</code></pre><h2 id="js"><a href="#js" class="headerlink" title="js"></a>js</h2><pre><code>angular.module(&apos;anchorScrollOffsetExample&apos;, [])
-.run([&apos;$anchorScroll&apos;, function($anchorScroll) {
-
-      $anchorScroll.yOffset = 50;   // 总是滚动额外的50像素
-
-}])
-.controller(&apos;headerCtrl&apos;, [&apos;$anchorScroll&apos;, &apos;$location&apos;, &apos;$scope&apos;,
-  function ($anchorScroll, $location, $scope) {
-$scope.gotoAnchor = function(x) {
-
-  var newHash = &apos;anchor&apos; + x;
-  if ($location.hash() !== newHash) {
-
-    // 将$location.hash设置为`newHash` and
-    // $anchorScroll也将自动滚到该处
-
-    $location.hash(&apos;anchor&apos; + x);
-
-  } else {
-
-    // 显式地调用 $anchorScroll()方法 ,
-    // 因为 $location.hash 并没有改变
-    $anchorScroll();
-
-  }
-};
-</code></pre><p>  }<br>]);</p>
-
+        <ul>
+<li>很多时候是被这2个属性搞混淆，长的太像了。</li>
+<li>transition过渡效果</li>
+<li>transform，2D/3D转换效果</li>
+</ul>
+<hr>
+<h3 id="transition过渡效果"><a href="#transition过渡效果" class="headerlink" title="transition过渡效果"></a>transition过渡效果</h3><p>transition属性是一个简写属性，用于设置四个过渡属性：</p>
+<pre><code>transition-property    规定设置过渡效果的 CSS 属性的名称。
+transition-duration    规定完成过渡效果需要多少秒或毫秒。
+transition-timing-function    规定速度效果的速度曲线。
+transition-delay    定义过渡效果何时开始。
+简写transition：left 0.5s ease-out 0.1S;
+</code></pre><h3 id="Transform"><a href="#Transform" class="headerlink" title="Transform"></a>Transform</h3><p>transform的属性包括：rotate() / skew() / scale() / translate(,) ，分别还有x、y之分，比如：rotatex() 和 rotatey() ，以此类推<br>transform为静态属性。</p>
+<h3 id="Animation"><a href="#Animation" class="headerlink" title="Animation"></a>Animation</h3><pre><code>animation-name    规定需要绑定到选择器的 keyframe 名称。。
+animation-duration    规定完成动画所花费的时间，以秒或毫秒计。
+animation-timing-function    规定动画的速度曲线。
+animation-delay    规定在动画开始之前的延迟。
+animation-iteration-count    规定动画应该播放的次数。
+animation-direction    规定是否应该轮流反向播放动画。
+语法：name duration timing-function delay iteration-count direction
+</code></pre><h3 id="Transform和Animation"><a href="#Transform和Animation" class="headerlink" title="Transform和Animation"></a>Transform和Animation</h3><p>@-moz-keyframes start {</p>
+<pre><code>  @-moz-keyframes start {
+    0%,30% {opacity: 0;-moz-transform: translate(0,10px);}
+    60% {opacity: 1;-moz-transform: translate(0,0);}
+    100% {opacity: 0;-moz-transform: translate(0,-8px);}
+}
+@keyframes start {
+    0%,30% {opacity: 0;transform: translate(0,10px);}
+    60% {opacity: 1;transform: translate(0,0);}
+    100% {opacity: 0;transform: translate(0,-8px);}
+}
+.ani{
+    position:absolute;
+}
+.txt{
+    position:absolute;
+}
+#array{
+    position:absolute;z-index:10;;
+    -webkit-animation: start 1.5s infinite ease-in-out
+}
+</code></pre>
       
     </div>
     
@@ -400,8 +394,8 @@ $scope.gotoAnchor = function(x) {
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/10/26/AngularJS中的指令全面解析/" rel="next" title="AngularJS中习惯用法指令scope解析记录">
-                <i class="fa fa-chevron-left"></i> AngularJS中习惯用法指令scope解析记录
+              <a href="/2015/12/15/angulrjs中run的运用/" rel="next" title="angulrjs中run的运用">
+                <i class="fa fa-chevron-left"></i> angulrjs中run的运用
               </a>
             
           </div>
@@ -410,8 +404,8 @@ $scope.gotoAnchor = function(x) {
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/11/10/angularjs封装指令返回顶部/" rel="prev" title="angularjs封装指令返回顶部">
-                angularjs封装指令返回顶部 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/01/03/angulrjs项目拦截器/" rel="prev" title="angulrjs项目拦截器">
+                angulrjs项目拦截器 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -528,7 +522,7 @@ $scope.gotoAnchor = function(x) {
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#如何使用一个垂直滚动偏移（指定了一个固定值）关于-anchorScroll-yOffset"><span class="nav-number">1.</span> <span class="nav-text">如何使用一个垂直滚动偏移（指定了一个固定值）关于 $anchorScroll.yOffset</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#html"><span class="nav-number"></span> <span class="nav-text">html</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#js"><span class="nav-number"></span> <span class="nav-text">js</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#transition过渡效果"><span class="nav-number">1.</span> <span class="nav-text">transition过渡效果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Transform"><span class="nav-number">2.</span> <span class="nav-text">Transform</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Animation"><span class="nav-number">3.</span> <span class="nav-text">Animation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Transform和Animation"><span class="nav-number">4.</span> <span class="nav-text">Transform和Animation</span></a></li></ol></div>
             
 
           </div>
