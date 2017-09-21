@@ -101,7 +101,7 @@
 <meta property="og:site_name" content="CHEN.星~博客">
 <meta property="og:description" content="一直在angulrjs项目，查阅资料grunt配置环境里面，没有找到相关的热替换，然后找了一个简单的vue项目，做了一个热替换 package.json文件  { &amp;quot;name&amp;quot;: &amp;quot;vue-project&amp;quot;, &amp;quot;version&amp;quot;: &amp;quot;1.0.0&amp;quot;, &amp;quot;description&amp;quot;: &amp;quot;che">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-09-21T09:14:21.727Z">
+<meta property="og:updated_time" content="2017-09-21T09:22:29.005Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="webpack-dev-server">
 <meta name="twitter:description" content="一直在angulrjs项目，查阅资料grunt配置环境里面，没有找到相关的热替换，然后找了一个简单的vue项目，做了一个热替换 package.json文件  { &amp;quot;name&amp;quot;: &amp;quot;vue-project&amp;quot;, &amp;quot;version&amp;quot;: &amp;quot;1.0.0&amp;quot;, &amp;quot;description&amp;quot;: &amp;quot;che">
@@ -205,7 +205,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Startseite
+            Home
           </a>
         </li>
       
@@ -215,7 +215,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archiv
+            Archives
           </a>
         </li>
       
@@ -289,7 +289,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-01-10T09:38:15+08:00">
                 2016-01-10
@@ -369,53 +369,67 @@
   &quot;vue&quot;: &quot;^2.2.5&quot;
 }
 </code></pre><p>  }</p>
-<h3 id="webpack-config-js"><a href="#webpack-config-js" class="headerlink" title="webpack.config.js"></a>webpack.config.js</h3><p>  // nodejs 中的path模块<br>  var path = require(‘path’);<br>  var webpack = require(‘webpack’);<br>  //var HtmlWebpackPlugin = require(‘html-webpack-plugin’);<br>  var HtmlWebpackPlugin = require(‘html-webpack-plugin’);//生成新的html<br>  module.exports = {<br>  // 入口文件，path.resolve()方法，可以结合我们给定的两个参数最后生成绝对路径，最终指向的就是我们的index.js文件<br>  entry: {</p>
-<pre><code>index:&quot;./main.js&quot;},
-</code></pre><p>  //entry:[‘“./main.js”‘,”./main.js”]多文件打包入口，同样对象也可以多文件<br>  output: {</p>
-<pre><code>path: &apos;./dist/js/&apos;,  //路径
-publicPath: &apos;&apos;,  //网站运行时访问的路径
-filename: &apos;[name]-[hash].js&apos; // 生成文件名  name为entry下的属性名
-</code></pre><p>  },<br>  devServer:{</p>
-<pre><code>//contentBase: &apos;&apos;,
-historyApiFallback:true,
-//hot:true,//webpack2 不支持了
-inline:true
-//progress:true,
-//port:8080,//端口你可以自定义
-//quiet:true,//显示打包的hash值
-//stats: &quot;errors-only&quot;
-</code></pre><p>  },<br>  module: {</p>
-<pre><code>loaders: [
-    // 使用vue-loader 加载 .vue 结尾的文件
-    {
-        test: /\.vue$/,
-        loader: &apos;vue&apos;//装载机loader
-    },
-    {
-        test: /\.js$/,
-        loader: &apos;babel?presets=es2015&apos;,
-        exclude: /node_modules///排除
-    },
-    {
-        test: /\.(jpg|png|gif|jpeg)?$/,
-        loader: &apos;url?limit=20480&amp;name=dist/images/[name].[hash:8].[ext]&apos;
+<h3 id="webpack-config-js"><a href="#webpack-config-js" class="headerlink" title="webpack.config.js"></a>webpack.config.js</h3><pre><code>// nodejs 中的path模块
+var path = require(&apos;path&apos;);
+var webpack = require(&apos;webpack&apos;);
+//var HtmlWebpackPlugin = require(&apos;html-webpack-plugin&apos;);
+var HtmlWebpackPlugin = require(&apos;html-webpack-plugin&apos;);//生成新的html
+module.exports = {
+// 入口文件，path.resolve()方法，可以结合我们给定的两个参数最后生成绝对路径，最终指向的就是我们的index.js文件
+entry: {
+    index:&quot;./main.js&quot;},
+//entry:[&apos;&quot;./main.js&quot;&apos;,&quot;./main.js&quot;]多文件打包入口，同样对象也可以多文件
+output: {
+    path: &apos;./dist/js/&apos;,  //路径
+    publicPath: &apos;&apos;,  //网站运行时访问的路径
+    filename: &apos;[name]-[hash].js&apos; // 生成文件名  name为entry下的属性名
+
+},
+devServer:{
+    //contentBase: &apos;&apos;,
+    historyApiFallback:true,
+    //hot:true,//webpack2 不支持了
+    inline:true
+    //progress:true,
+    //port:8080,//端口你可以自定义
+    //quiet:true,//显示打包的hash值
+    //stats: &quot;errors-only&quot;
+},
+module: {
+    loaders: [
+        // 使用vue-loader 加载 .vue 结尾的文件
+        {
+            test: /\.vue$/,
+            loader: &apos;vue&apos;//装载机loader
+        },
+        {
+            test: /\.js$/,
+            loader: &apos;babel?presets=es2015&apos;,
+            exclude: /node_modules///排除
+        },
+        {
+            test: /\.(jpg|png|gif|jpeg)?$/,
+            loader: &apos;url?limit=20480&amp;name=dist/images/[name].[hash:8].[ext]&apos;
+        }
+    ]
+},
+resolve: {//决定
+    extensions: [&apos;&apos;, &apos;.js&apos;, &apos;.vue&apos;],//扩展
+    alias: {//别名
+        &apos;vue$&apos;: &apos;vue/dist/vue.common.js&apos;
     }
+},
+plugins:[//热响应插件
+    new webpack.HotModuleReplacementPlugin(),
+    new HtmlWebpackPlugin({
+        title: &apos;My App&apos;,
+        path:&quot;&quot;,
+        template:&quot;./index.html&quot;,
+        filename: &apos;./home.html&apos;
+    })
 ]
-</code></pre><p>  },<br>  resolve: {//决定</p>
-<pre><code>extensions: [&apos;&apos;, &apos;.js&apos;, &apos;.vue&apos;],//扩展
-alias: {//别名
-    &apos;vue$&apos;: &apos;vue/dist/vue.common.js&apos;
-}
-</code></pre><p>  },<br>  plugins:[//热响应插件</p>
-<pre><code>new webpack.HotModuleReplacementPlugin(),
-new HtmlWebpackPlugin({
-    title: &apos;My App&apos;,
-    path:&quot;&quot;,
-    template:&quot;./index.html&quot;,
-    filename: &apos;./home.html&apos;
-})
-</code></pre><p>  ]<br>  };</p>
-</li>
+};
+</code></pre></li>
 </ul>
 <h3 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h3><pre><code>webpack.js output.path:指定输出文件的路径。
 webpack输出真实的文件，而webpack-dev-server输出的文件只存在于内存中,不输出真实的文件！
@@ -527,10 +541,10 @@ webpack-dev-server生成的文件在内存中也是存在dist/js 这个文件内
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            Inhaltsverzeichnis
+            Table of Contents
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
-            Übersicht
+            Overview
           </li>
         </ul>
       
@@ -551,7 +565,7 @@ webpack-dev-server生成的文件在内存中也是存在dist/js 这个文件内
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
                 <span class="site-state-item-count">21</span>
-                <span class="site-state-item-name">Artikel</span>
+                <span class="site-state-item-name">posts</span>
               </a>
             </div>
           
@@ -621,7 +635,7 @@ webpack-dev-server生成的文件在内存中也是存在dist/js 这个文件内
 
 
 <div class="powered-by">
-  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">

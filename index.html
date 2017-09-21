@@ -206,7 +206,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Startseite
+            Home
           </a>
         </li>
       
@@ -216,7 +216,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archiv
+            Archives
           </a>
         </li>
       
@@ -292,7 +292,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-03-10T21:30:56+08:00">
                 2016-03-10
@@ -412,7 +412,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-01-10T09:38:15+08:00">
                 2016-01-10
@@ -494,53 +494,67 @@
   &quot;vue&quot;: &quot;^2.2.5&quot;
 }
 </code></pre><p>  }</p>
-<h3 id="webpack-config-js"><a href="#webpack-config-js" class="headerlink" title="webpack.config.js"></a>webpack.config.js</h3><p>  // nodejs 中的path模块<br>  var path = require(‘path’);<br>  var webpack = require(‘webpack’);<br>  //var HtmlWebpackPlugin = require(‘html-webpack-plugin’);<br>  var HtmlWebpackPlugin = require(‘html-webpack-plugin’);//生成新的html<br>  module.exports = {<br>  // 入口文件，path.resolve()方法，可以结合我们给定的两个参数最后生成绝对路径，最终指向的就是我们的index.js文件<br>  entry: {</p>
-<pre><code>index:&quot;./main.js&quot;},
-</code></pre><p>  //entry:[‘“./main.js”‘,”./main.js”]多文件打包入口，同样对象也可以多文件<br>  output: {</p>
-<pre><code>path: &apos;./dist/js/&apos;,  //路径
-publicPath: &apos;&apos;,  //网站运行时访问的路径
-filename: &apos;[name]-[hash].js&apos; // 生成文件名  name为entry下的属性名
-</code></pre><p>  },<br>  devServer:{</p>
-<pre><code>//contentBase: &apos;&apos;,
-historyApiFallback:true,
-//hot:true,//webpack2 不支持了
-inline:true
-//progress:true,
-//port:8080,//端口你可以自定义
-//quiet:true,//显示打包的hash值
-//stats: &quot;errors-only&quot;
-</code></pre><p>  },<br>  module: {</p>
-<pre><code>loaders: [
-    // 使用vue-loader 加载 .vue 结尾的文件
-    {
-        test: /\.vue$/,
-        loader: &apos;vue&apos;//装载机loader
-    },
-    {
-        test: /\.js$/,
-        loader: &apos;babel?presets=es2015&apos;,
-        exclude: /node_modules///排除
-    },
-    {
-        test: /\.(jpg|png|gif|jpeg)?$/,
-        loader: &apos;url?limit=20480&amp;name=dist/images/[name].[hash:8].[ext]&apos;
+<h3 id="webpack-config-js"><a href="#webpack-config-js" class="headerlink" title="webpack.config.js"></a>webpack.config.js</h3><pre><code>// nodejs 中的path模块
+var path = require(&apos;path&apos;);
+var webpack = require(&apos;webpack&apos;);
+//var HtmlWebpackPlugin = require(&apos;html-webpack-plugin&apos;);
+var HtmlWebpackPlugin = require(&apos;html-webpack-plugin&apos;);//生成新的html
+module.exports = {
+// 入口文件，path.resolve()方法，可以结合我们给定的两个参数最后生成绝对路径，最终指向的就是我们的index.js文件
+entry: {
+    index:&quot;./main.js&quot;},
+//entry:[&apos;&quot;./main.js&quot;&apos;,&quot;./main.js&quot;]多文件打包入口，同样对象也可以多文件
+output: {
+    path: &apos;./dist/js/&apos;,  //路径
+    publicPath: &apos;&apos;,  //网站运行时访问的路径
+    filename: &apos;[name]-[hash].js&apos; // 生成文件名  name为entry下的属性名
+
+},
+devServer:{
+    //contentBase: &apos;&apos;,
+    historyApiFallback:true,
+    //hot:true,//webpack2 不支持了
+    inline:true
+    //progress:true,
+    //port:8080,//端口你可以自定义
+    //quiet:true,//显示打包的hash值
+    //stats: &quot;errors-only&quot;
+},
+module: {
+    loaders: [
+        // 使用vue-loader 加载 .vue 结尾的文件
+        {
+            test: /\.vue$/,
+            loader: &apos;vue&apos;//装载机loader
+        },
+        {
+            test: /\.js$/,
+            loader: &apos;babel?presets=es2015&apos;,
+            exclude: /node_modules///排除
+        },
+        {
+            test: /\.(jpg|png|gif|jpeg)?$/,
+            loader: &apos;url?limit=20480&amp;name=dist/images/[name].[hash:8].[ext]&apos;
+        }
+    ]
+},
+resolve: {//决定
+    extensions: [&apos;&apos;, &apos;.js&apos;, &apos;.vue&apos;],//扩展
+    alias: {//别名
+        &apos;vue$&apos;: &apos;vue/dist/vue.common.js&apos;
     }
+},
+plugins:[//热响应插件
+    new webpack.HotModuleReplacementPlugin(),
+    new HtmlWebpackPlugin({
+        title: &apos;My App&apos;,
+        path:&quot;&quot;,
+        template:&quot;./index.html&quot;,
+        filename: &apos;./home.html&apos;
+    })
 ]
-</code></pre><p>  },<br>  resolve: {//决定</p>
-<pre><code>extensions: [&apos;&apos;, &apos;.js&apos;, &apos;.vue&apos;],//扩展
-alias: {//别名
-    &apos;vue$&apos;: &apos;vue/dist/vue.common.js&apos;
-}
-</code></pre><p>  },<br>  plugins:[//热响应插件</p>
-<pre><code>new webpack.HotModuleReplacementPlugin(),
-new HtmlWebpackPlugin({
-    title: &apos;My App&apos;,
-    path:&quot;&quot;,
-    template:&quot;./index.html&quot;,
-    filename: &apos;./home.html&apos;
-})
-</code></pre><p>  ]<br>  };</p>
-</li>
+};
+</code></pre></li>
 </ul>
 <h3 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h3><pre><code>webpack.js output.path:指定输出文件的路径。
 webpack输出真实的文件，而webpack-dev-server输出的文件只存在于内存中,不输出真实的文件！
@@ -639,7 +653,7 @@ webpack-dev-server生成的文件在内存中也是存在dist/js 这个文件内
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-01-03T10:59:24+08:00">
                 2016-01-03
@@ -840,7 +854,7 @@ angular.module(&quot;platform.main.interceptor&quot;,[])
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-12-20T21:34:12+08:00">
                 2015-12-20
@@ -1000,7 +1014,7 @@ animation-direction    规定是否应该轮流反向播放动画。
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-12-15T19:59:35+08:00">
                 2015-12-15
@@ -1162,7 +1176,7 @@ if ($rootScope.isWeiXinLogin()) {
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-12-10T16:12:36+08:00">
                 2015-12-10
@@ -1301,7 +1315,7 @@ code为键传入tiananCode为值
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-12-02T17:33:22+08:00">
                 2015-12-02
@@ -1448,7 +1462,7 @@ $scope.$on(&apos;ngRepeatFinished&apos;, function () {
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-11-15T15:33:22+08:00">
                 2015-11-15
@@ -1584,7 +1598,7 @@ $(bgImg).css(&quot;height&quot;,imgHeight);
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-11-10T21:29:41+08:00">
                 2015-11-10
@@ -1736,7 +1750,7 @@ $(&apos;.scroll_a&apos;).click(function(){$(&apos;html,body&apos;).animate({scro
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-11-04T10:30:45+08:00">
                 2015-11-04
@@ -1911,7 +1925,7 @@ $scope.gotoAnchor = function(x) {
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
                 <span class="site-state-item-count">21</span>
-                <span class="site-state-item-name">Artikel</span>
+                <span class="site-state-item-name">posts</span>
               </a>
             </div>
           
@@ -1965,7 +1979,7 @@ $scope.gotoAnchor = function(x) {
 
 
 <div class="powered-by">
-  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">
