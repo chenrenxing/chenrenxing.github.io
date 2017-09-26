@@ -94,17 +94,17 @@
 
 
 
-<meta name="description" content="公司项目一直都是用的后端打包工具gradle，这段时间项目相对空隙，就把项        目中前端打包重构了，采用grunt插件。    压缩工具grunt-contrib-compress   上传工具grunt-nexus-deployer 最后记录Gruntfile.js压缩配置grunt-contrib-compress  compress: {   main: {options: {">
+<meta name="description" content="公司项目一直都是用的后端打包工具gradle，这段时间项目相对空隙，就把项        目中前端打包重构了，采用grunt插件。    压缩工具grunt-contrib-compress   上传工具grunt-nexus-deployer 最后记录Gruntfile.js压缩配置grunt-contrib-compress compress: {   main: {     options">
 <meta property="og:type" content="article">
 <meta property="og:title" content="grunt前端打包">
 <meta property="og:url" content="http://yoursite.com/2016/04/06/grunt前端打包/index.html">
 <meta property="og:site_name" content="CHEN.星~博客">
-<meta property="og:description" content="公司项目一直都是用的后端打包工具gradle，这段时间项目相对空隙，就把项        目中前端打包重构了，采用grunt插件。    压缩工具grunt-contrib-compress   上传工具grunt-nexus-deployer 最后记录Gruntfile.js压缩配置grunt-contrib-compress  compress: {   main: {options: {">
+<meta property="og:description" content="公司项目一直都是用的后端打包工具gradle，这段时间项目相对空隙，就把项        目中前端打包重构了，采用grunt插件。    压缩工具grunt-contrib-compress   上传工具grunt-nexus-deployer 最后记录Gruntfile.js压缩配置grunt-contrib-compress compress: {   main: {     options">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-09-26T09:21:02.511Z">
+<meta property="og:updated_time" content="2017-09-26T09:48:33.235Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="grunt前端打包">
-<meta name="twitter:description" content="公司项目一直都是用的后端打包工具gradle，这段时间项目相对空隙，就把项        目中前端打包重构了，采用grunt插件。    压缩工具grunt-contrib-compress   上传工具grunt-nexus-deployer 最后记录Gruntfile.js压缩配置grunt-contrib-compress  compress: {   main: {options: {">
+<meta name="twitter:description" content="公司项目一直都是用的后端打包工具gradle，这段时间项目相对空隙，就把项        目中前端打包重构了，采用grunt插件。    压缩工具grunt-contrib-compress   上传工具grunt-nexus-deployer 最后记录Gruntfile.js压缩配置grunt-contrib-compress compress: {   main: {     options">
 
 
 
@@ -205,7 +205,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Home
+            Startseite
           </a>
         </li>
       
@@ -215,7 +215,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archives
+            Archiv
           </a>
         </li>
       
@@ -289,7 +289,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-04-06T20:56:47+08:00">
                 2016-04-06
@@ -333,18 +333,23 @@
 <li>公司项目一直都是用的后端打包工具gradle，这段时间项目相对空隙，就把项        目中前端打包重构了，采用grunt插件。   </li>
 <li>压缩工具grunt-contrib-compress  </li>
 <li>上传工具grunt-nexus-deployer</li>
-<li>最后记录Gruntfile.js<h3 id="压缩配置grunt-contrib-compress"><a href="#压缩配置grunt-contrib-compress" class="headerlink" title="压缩配置grunt-contrib-compress"></a>压缩配置grunt-contrib-compress</h3>  compress: {<br>   main: {<pre><code>options: {
-  archive: &apos;nexus/ocps-web-all.zip&apos;
-//生成压缩包到nexus/ocps-web-all.zip
+<li>最后记录Gruntfile.js<h3 id="压缩配置grunt-contrib-compress"><a href="#压缩配置grunt-contrib-compress" class="headerlink" title="压缩配置grunt-contrib-compress"></a>压缩配置grunt-contrib-compress</h3><pre><code> compress: {
+  main: {
+    options: {
+      archive: &apos;nexus/ocps-web-all.zip&apos;
+    //生成压缩包到nexus/ocps-web-all.zip
+    },
+    files: [{
+      expand: true,
+      cwd: &apos;&apos;,
+      src: [zipList],//压缩的文件
+      dest:&apos;ocps-web-all/&apos;//生成的文件包名
+        //这里dest是ocps-web-all.zip压缩包内的文件包名，也可以不要。
+    }]
+  }
 },
-files: [{
-  expand: true,
-  cwd: &apos;&apos;,
-  src: [zipList],//压缩的文件
-  dest:&apos;ocps-web-all/&apos;//生成的文件包名
-    //这里dest是ocps-web-all.zip压缩包内的文件包名，也可以不要。
-}]
-</code></pre>   }<br> },<h3 id="zipList配置"><a href="#zipList配置" class="headerlink" title="zipList配置"></a>zipList配置</h3>   //压缩zip排除文件<pre><code>  var zipList = [
+</code></pre><h3 id="zipList配置"><a href="#zipList配置" class="headerlink" title="zipList配置"></a>zipList配置</h3><pre><code>  //压缩zip排除文件
+  var zipList = [
 &apos;**/*&apos;,//所有文件,下面！排除不需要文件
 &apos;!nexus/**&apos;,
 &apos;!build/**&apos;,//
@@ -392,93 +397,176 @@ nexusDeployer: {
     }
   }
 },
-</code></pre><h3 id="clean清除"><a href="#clean清除" class="headerlink" title="clean清除"></a>clean清除</h3><ul>
-<li><p>项目打包前清除下上次包</p>
-<ul>
-<li><p>clean: {</p>
-<pre><code>pre: [&apos;nexus/**.zip&apos;] //删除掉先前的开发文件
-</code></pre><p>  },</p>
-<h3 id="GruntFile-js"><a href="#GruntFile-js" class="headerlink" title="GruntFile.js"></a>GruntFile.js</h3><p>// AdminLTE Gruntfile<br>module.exports = function (grunt) {</p>
-<p>‘use strict’;<br>//压缩zip排除文件<br>var zipList = [<br>  ‘<strong>/*’,<br>  ‘!nexus/</strong>‘,<br>  ‘!build/<strong>‘,//<br>  ‘!node_modules/</strong>‘,<br>  ‘!bower.json’,<br>  ‘!build.gradle’,<br>  ‘!package-lock.json’,<br>  ‘!Gruntfile.js’,<br>  ‘!package.json’,<br>  ‘!less/<strong>‘,<br>  ‘!cbp-less/</strong>‘,<br>  ‘!cmss-less/<strong>‘,<br>  ‘!data/</strong>‘<br>];<br>grunt.initConfig({<br>watch: {<br>files: [<br>  “less/platform-less/<em>.less”,”eipts/**/</em>.js”],<br>tasks: [“less”,”jshint”,”concat”,”uglify”]<br>},<br>less: {<br>development: {<br>  options: {</p>
-<pre><code>compress: false
-</code></pre><p>  },<br>  files: {</p>
-<pre><code>&quot;framework/validation/validationEngine.jquery.css&quot;:&quot;less/less/validationEngine.jquery.less&quot;,
-&quot;dist/css/cbp-main.css&quot;: &quot;cbp-less/cbp-main.less&quot;,
-&quot;dist/css/cbp-login.css&quot;: &quot;cbp-less/cbp-login.less&quot;,
-&quot;dist/css/cbp-cbp.css&quot;: &quot;cbp-less/cbp-cbp.less&quot;,
-&quot;dist/css/cbp-qrcode.css&quot;: &quot;cbp-less/cbp-qrcode.less&quot;,
-&quot;dist/css/dic-form.css&quot;: &quot;less/platform-less/dic-form.less&quot;,
-&quot;css/main.css&quot;:&quot;less/platform-less/main.less&quot; ,
-&quot;css/urlComponent.css&quot;:&quot;less/platform-less/urlComponent.less&quot;,
-&quot;css/scan-trace.css&quot;:&quot;less/platform-less/scan-trace.less&quot;,
-&quot;dist/css/cmss-main.css&quot;:&quot;cmss-less/cmss-main.less&quot;,
-&quot;dist/css/main.css&quot;:&quot;less/platform-less/main.less&quot;,
-&quot;dist/css/public.css&quot;:&quot;less/platform-less/public.less&quot;,
-&quot;css/codeconfig.css&quot;: &quot;less/platform-less/codeconfig.less&quot;
-</code></pre><p>  }<br>},<br>production: {<br>  options: {</p>
-<pre><code>compress: true
-</code></pre><p>  },<br>  files: {</p>
-<pre><code>&quot;dist/css/cbp-main.min.css&quot;: &quot;cbp-less/cbp-main.less&quot;,
-&quot;dist/css/cbp-login.min.css&quot;: &quot;cbp-less/cbp-login.less&quot;,
-&quot;dist/css/cbp-cbp.min.css&quot;: &quot;cbp-less/cbp-cbp.less&quot;,
-&quot;dist/css/cbp-qrcode.min.css&quot;: &quot;cbp-less/cbp-qrcode.less&quot;,
-&quot;dist/css/cmss-main.min.css&quot;: &quot;cmss-less/cmss-main.less&quot;,
-&quot;dist/css/dic-form.min.css&quot;: &quot;less/platform-less/dic-form.less&quot;,
-&quot;css/urlComponent.min.css&quot;:&quot;less/platform-less/urlComponent.less&quot;,
-&quot;css/main.css&quot;:&quot;less/platform-less/main.less&quot;,
-&quot;css/codeconfig.min.css&quot;: &quot;less/platform-less/codeconfig.less&quot;
-</code></pre><p>  }<br>}<br>},<br> //发布 nexus插件<br>nexusDeployer: {<br>snapshot: {<br>  options: {</p>
-<pre><code>groupId: &quot;com.cyberkey&quot;,
-artifactId: &quot;ocps-web-all&quot;,//前端统一zip包名
-version: &quot;1.10.8.1-SNAPSHOT&quot;,//版本
-packaging: &apos;zip&apos;,//zip包
-auth: {
-  username:&apos;nexus用户名&apos;,
-  password:&apos;nexus密码&apos;
-},
-url: &apos;nexus仓库快照版的URL&apos;,
-artifact:&quot;nexus/ocps-web-all.zip&quot;//生成压缩包的路径和包名
-</code></pre><p>  }<br>},<br>release: {<br>  options: {</p>
-<pre><code>groupId: &quot;com.cyberkey&quot;,
-artifactId: &quot;ocps-web-all&quot;,//前端统一zip包名
-version: &quot;1.10.8.1-RELEASE&quot;,//版本
-packaging: &apos;zip&apos;,//zip包
-auth: {
-  username:&apos;nexus用户名&apos;,
-  password:&apos;nexus密码&apos;
-},
-url: &apos;nexus仓库发布版的URL&apos;,
-artifact:&quot;nexus/ocps-web-all.zip&quot;//生成压缩包的路径和包名
-</code></pre><p>  }<br>}<br>},<br>compress: {<br>main: {<br>  options: {</p>
-<pre><code>archive: &apos;nexus/ocps-web-all.zip&apos;
-</code></pre><p>  //生成压缩包到nexus/ocps-web-all.zip<br>  },<br>  files: [{</p>
-<pre><code>expand: true,
-cwd: &apos;&apos;,
-src: [zipList],//压缩的文件
-dest:&apos;ocps-web-all/&apos;//生成的文件包名
-  //这里dest是ocps-web-all.zip压缩包内的文件包名，也可以不要。
-</code></pre><p>  }]<br>}<br>},<br>clean: {<br>pre: [‘nexus/<strong>.zip’] //删除掉先前的开发文件<br>},<br>concat:{<br>options: {<br>  separator: ‘;’<br>},<br>eipts: {<br>  src: [‘eipts/</strong>/*.js’],<br>  dest: ‘dist/js/eipts-all.js’<br>}<br>},<br>uglify: {<br>options: {<br>  mangle: true,<br>  preserveComments: ‘some’<br>},<br>my_target: {<br>  files: {</p>
-<pre><code>&apos;dist/js/eipts-all.min.js&apos;:[&apos;eipts/**/*.js&apos;]
-</code></pre><p>  }<br>}<br>},<br>jshint: {<br>options: {<br>  jshintrc: ‘.jshintrc’<br>},<br>eipts:{<br>  src:[‘eipts/<em>*/</em>.js’]<br>}<br>},<br>csslint: {<br>options: {<br>  csslintrc: ‘less/less/.csslintrc’<br>},<br>dist: [<br>  ‘css/AdminLTE.css’,’css/main.css’<br>]<br>}<br>});</p>
-<pre><code>grunt.loadNpmTasks(&apos;grunt-nexus-deployer&apos;);
-grunt.loadNpmTasks(&apos;grunt-contrib-compress&apos;);
-grunt.loadNpmTasks(&apos;grunt-contrib-less&apos;);
-grunt.loadNpmTasks(&apos;grunt-contrib-watch&apos;);
-grunt.loadNpmTasks(&apos;grunt-contrib-concat&apos;);
-grunt.loadNpmTasks(&apos;grunt-contrib-uglify&apos;);
-grunt.loadNpmTasks(&apos;grunt-contrib-jshint&apos;);
-grunt.loadNpmTasks(&apos;grunt-contrib-csslint&apos;);
-grunt.loadNpmTasks(&apos;grunt-contrib-clean&apos;);
-grunt.registerTask(&apos;lint&apos;, [&apos;jshint&apos;, &apos;csslint&apos;]);
-grunt.registerTask(&apos;default&apos;, [&apos;watch&apos;]);
-grunt.registerTask(&apos;snapshot&apos;,[&apos;clean&apos;,&apos;compress&apos;,&apos;nexusDeployer:snapshot&apos;]);//1:清除历史zip。2:压缩.3:上传nexus快照版本
-grunt.registerTask(&apos;release&apos;,[&apos;clean&apos;,&apos;compress&apos;,&apos;nexusDeployer:release&apos;]);//1:清除历史zip。2:压缩.3:上传nexus发布版本
-</code></pre><p>  };</p>
-</li>
-</ul>
-</li>
-</ul>
+</code></pre><h3 id="clean清除"><a href="#clean清除" class="headerlink" title="clean清除"></a>clean清除</h3><pre><code>- 项目打包前清除下上次包
+- 
+  clean: {
+      pre: [&apos;nexus/**.zip&apos;] //删除掉先前的开发文件
+    },
+</code></pre><h3 id="GruntFile-js"><a href="#GruntFile-js" class="headerlink" title="GruntFile.js"></a>GruntFile.js</h3><pre><code>// AdminLTE Gruntfile
+module.exports = function (grunt) {
 
+  &apos;use strict&apos;;
+  //压缩zip排除文件
+  var zipList = [
+    &apos;**/*&apos;,
+    &apos;!nexus/**&apos;,
+    &apos;!build/**&apos;,//
+    &apos;!node_modules/**&apos;,
+    &apos;!bower.json&apos;,
+    &apos;!build.gradle&apos;,
+    &apos;!package-lock.json&apos;,
+    &apos;!Gruntfile.js&apos;,
+    &apos;!package.json&apos;,
+    &apos;!less/**&apos;,
+    &apos;!cbp-less/**&apos;,
+    &apos;!cmss-less/**&apos;,
+    &apos;!data/**&apos;
+  ];
+      grunt.initConfig({
+    watch: {
+      files: [
+        &quot;less/platform-less/*.less&quot;,&quot;eipts/**/*.js&quot;],
+      tasks: [&quot;less&quot;,&quot;jshint&quot;,&quot;concat&quot;,&quot;uglify&quot;]
+    },
+    less: {
+      development: {
+        options: {
+          compress: false
+    },
+    files: {
+      &quot;framework/validation/validationEngine.jquery.css&quot;:&quot;less/less/validationEngine.jquery.less&quot;,
+      &quot;dist/css/cbp-main.css&quot;: &quot;cbp-less/cbp-main.less&quot;,
+      &quot;dist/css/cbp-login.css&quot;: &quot;cbp-less/cbp-login.less&quot;,
+      &quot;dist/css/cbp-cbp.css&quot;: &quot;cbp-less/cbp-cbp.less&quot;,
+      &quot;dist/css/cbp-qrcode.css&quot;: &quot;cbp-less/cbp-qrcode.less&quot;,
+      &quot;dist/css/dic-form.css&quot;: &quot;less/platform-less/dic-form.less&quot;,
+      &quot;css/main.css&quot;:&quot;less/platform-less/main.less&quot; ,
+      &quot;css/urlComponent.css&quot;:&quot;less/platform-less/urlComponent.less&quot;,
+      &quot;css/scan-trace.css&quot;:&quot;less/platform-less/scan-trace.less&quot;,
+      &quot;dist/css/cmss-main.css&quot;:&quot;cmss-less/cmss-main.less&quot;,
+      &quot;dist/css/main.css&quot;:&quot;less/platform-less/main.less&quot;,
+      &quot;dist/css/public.css&quot;:&quot;less/platform-less/public.less&quot;,
+      &quot;css/codeconfig.css&quot;: &quot;less/platform-less/codeconfig.less&quot;
+    }
+  },
+  production: {
+    options: {
+      compress: true
+    },
+    files: {
+      &quot;dist/css/cbp-main.min.css&quot;: &quot;cbp-less/cbp-main.less&quot;,
+      &quot;dist/css/cbp-login.min.css&quot;: &quot;cbp-less/cbp-login.less&quot;,
+      &quot;dist/css/cbp-cbp.min.css&quot;: &quot;cbp-less/cbp-cbp.less&quot;,
+      &quot;dist/css/cbp-qrcode.min.css&quot;: &quot;cbp-less/cbp-qrcode.less&quot;,
+      &quot;dist/css/cmss-main.min.css&quot;: &quot;cmss-less/cmss-main.less&quot;,
+      &quot;dist/css/dic-form.min.css&quot;: &quot;less/platform-less/dic-form.less&quot;,
+      &quot;css/urlComponent.min.css&quot;:&quot;less/platform-less/urlComponent.less&quot;,
+      &quot;css/main.css&quot;:&quot;less/platform-less/main.less&quot;,
+      &quot;css/codeconfig.min.css&quot;: &quot;less/platform-less/codeconfig.less&quot;
+    }
+  }
+},
+   //发布 nexus插件
+nexusDeployer: {
+  snapshot: {
+    options: {
+      groupId: &quot;com.cyberkey&quot;,
+      artifactId: &quot;ocps-web-all&quot;,//前端统一zip包名
+      version: &quot;1.10.8.1-SNAPSHOT&quot;,//版本
+      packaging: &apos;zip&apos;,//zip包
+      auth: {
+        username:&apos;nexus用户名&apos;,
+        password:&apos;nexus密码&apos;
+      },
+      url: &apos;nexus仓库快照版的URL&apos;,
+      artifact:&quot;nexus/ocps-web-all.zip&quot;//生成压缩包的路径和包名
+    }
+  },
+  release: {
+    options: {
+      groupId: &quot;com.cyberkey&quot;,
+      artifactId: &quot;ocps-web-all&quot;,//前端统一zip包名
+      version: &quot;1.10.8.1-RELEASE&quot;,//版本
+      packaging: &apos;zip&apos;,//zip包
+      auth: {
+        username:&apos;nexus用户名&apos;,
+        password:&apos;nexus密码&apos;
+      },
+      url: &apos;nexus仓库发布版的URL&apos;,
+      artifact:&quot;nexus/ocps-web-all.zip&quot;//生成压缩包的路径和包名
+    }
+  }
+},
+ compress: {
+  main: {
+    options: {
+      archive: &apos;nexus/ocps-web-all.zip&apos;
+    //生成压缩包到nexus/ocps-web-all.zip
+    },
+    files: [{
+      expand: true,
+      cwd: &apos;&apos;,
+      src: [zipList],//压缩的文件
+      dest:&apos;ocps-web-all/&apos;//生成的文件包名
+        //这里dest是ocps-web-all.zip压缩包内的文件包名，也可以不要。
+    }]
+  }
+},
+clean: {
+  pre: [&apos;nexus/**.zip&apos;] //删除掉先前的开发文件
+},
+concat:{
+  options: {
+    separator: &apos;;&apos;
+  },
+  eipts: {
+    src: [&apos;eipts/**/*.js&apos;],
+    dest: &apos;dist/js/eipts-all.js&apos;
+  }
+},
+uglify: {
+  options: {
+    mangle: true,
+    preserveComments: &apos;some&apos;
+  },
+  my_target: {
+    files: {
+      &apos;dist/js/eipts-all.min.js&apos;:[&apos;eipts/**/*.js&apos;]
+    }
+  }
+},
+jshint: {
+  options: {
+    jshintrc: &apos;.jshintrc&apos;
+  },
+  eipts:{
+    src:[&apos;eipts/**/*.js&apos;]
+  }
+},
+csslint: {
+  options: {
+    csslintrc: &apos;less/less/.csslintrc&apos;
+  },
+  dist: [
+    &apos;css/AdminLTE.css&apos;,&apos;css/main.css&apos;
+  ]
+}
+  });
+  grunt.loadNpmTasks(&apos;grunt-nexus-deployer&apos;);
+  grunt.loadNpmTasks(&apos;grunt-contrib-compress&apos;);
+  grunt.loadNpmTasks(&apos;grunt-contrib-less&apos;);
+  grunt.loadNpmTasks(&apos;grunt-contrib-watch&apos;);
+  grunt.loadNpmTasks(&apos;grunt-contrib-concat&apos;);
+  grunt.loadNpmTasks(&apos;grunt-contrib-uglify&apos;);
+  grunt.loadNpmTasks(&apos;grunt-contrib-jshint&apos;);
+  grunt.loadNpmTasks(&apos;grunt-contrib-csslint&apos;);
+  grunt.loadNpmTasks(&apos;grunt-contrib-clean&apos;);
+  grunt.registerTask(&apos;lint&apos;, [&apos;jshint&apos;, &apos;csslint&apos;]);
+  grunt.registerTask(&apos;default&apos;, [&apos;watch&apos;]);
+  grunt.registerTask(&apos;snapshot&apos;,[&apos;clean&apos;,&apos;compress&apos;,&apos;nexusDeployer:snapshot&apos;]);//1:清除历史zip。2:压缩.3:上传nexus快照版本
+  grunt.registerTask(&apos;release&apos;,[&apos;clean&apos;,&apos;compress&apos;,&apos;nexusDeployer:release&apos;]);//1:清除历史zip。2:压缩.3:上传nexus发布版本
+};
+</code></pre>
       
     </div>
     
@@ -564,10 +652,10 @@ grunt.registerTask(&apos;release&apos;,[&apos;clean&apos;,&apos;compress&apos;,&
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            Table of Contents
+            Inhaltsverzeichnis
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
-            Overview
+            Übersicht
           </li>
         </ul>
       
@@ -588,7 +676,7 @@ grunt.registerTask(&apos;release&apos;,[&apos;clean&apos;,&apos;compress&apos;,&
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
                 <span class="site-state-item-count">22</span>
-                <span class="site-state-item-name">posts</span>
+                <span class="site-state-item-name">Artikel</span>
               </a>
             </div>
           
@@ -658,7 +746,7 @@ grunt.registerTask(&apos;release&apos;,[&apos;clean&apos;,&apos;compress&apos;,&
 
 
 <div class="powered-by">
-  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">
