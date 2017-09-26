@@ -101,7 +101,7 @@
 <meta property="og:site_name" content="CHEN.星~博客">
 <meta property="og:description" content="run方法用于初始化全局的数据，仅对全局作用域起作用。浏览器判断.run([&amp;apos;$rootScope&amp;apos;, &amp;apos;$route&amp;apos;, &amp;apos;$window&amp;apos;, &amp;apos;$location&amp;apos;, &amp;apos;Position&amp;apos;, &amp;apos;$cookies&amp;apos;, &amp;apos;Request&amp;apos;, &amp;apos;$co">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-09-20T07:51:01.184Z">
+<meta property="og:updated_time" content="2017-09-21T09:45:10.230Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="angulrjs中run的运用">
 <meta name="twitter:description" content="run方法用于初始化全局的数据，仅对全局作用域起作用。浏览器判断.run([&amp;apos;$rootScope&amp;apos;, &amp;apos;$route&amp;apos;, &amp;apos;$window&amp;apos;, &amp;apos;$location&amp;apos;, &amp;apos;Position&amp;apos;, &amp;apos;$cookies&amp;apos;, &amp;apos;Request&amp;apos;, &amp;apos;$co">
@@ -354,7 +354,7 @@ if ($rootScope.isWeiXinLogin()) {
     }
    }
 ]);
-</code></pre><h4 id="项目中run-http和ajax请求头全局"><a href="#项目中run-http和ajax请求头全局" class="headerlink" title="项目中run$http和ajax请求头全局"></a>项目中run$http和ajax请求头全局</h4><pre><code>.run([&apos;$http&apos;, &apos;$cookies&apos;,&apos;$rootScope&apos;,&apos;$location&apos;, function($http, $cookies,$rootScope,$location) {
+</code></pre><h3 id="登陆判断"><a href="#登陆判断" class="headerlink" title="登陆判断"></a>登陆判断</h3><h4 id="项目中run-http和ajax请求头全局"><a href="#项目中run-http和ajax请求头全局" class="headerlink" title="项目中run$http和ajax请求头全局"></a>项目中run$http和ajax请求头全局</h4><pre><code>.run([&apos;$http&apos;, &apos;$cookies&apos;,&apos;$rootScope&apos;,&apos;$location&apos;, function($http, $cookies,$rootScope,$location) {
         $http.defaults.headers.common[&apos;X-Requested-With&apos;] = &apos;XMLHttpRequest&apos;;
         $http.defaults.headers.common[&apos;X-Auth-Token&apos;] = $cookies.get(&apos;X-Auth-Token&apos;);
         $.ajaxSetup({
@@ -485,7 +485,7 @@ if ($rootScope.isWeiXinLogin()) {
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-count">22</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -524,7 +524,7 @@ if ($rootScope.isWeiXinLogin()) {
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#run方法用于初始化全局的数据，仅对全局作用域起作用。"><span class="nav-number">1.</span> <span class="nav-text">run方法用于初始化全局的数据，仅对全局作用域起作用。</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器判断"><span class="nav-number">1.0.1.</span> <span class="nav-text">浏览器判断</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#项目中run-http和ajax请求头全局"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">项目中run$http和ajax请求头全局</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是-XMLHttpRequest-对象？"><span class="nav-number">1.0.2.</span> <span class="nav-text">什么是 XMLHttpRequest 对象？</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#run方法用于初始化全局的数据，仅对全局作用域起作用。"><span class="nav-number">1.</span> <span class="nav-text">run方法用于初始化全局的数据，仅对全局作用域起作用。</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器判断"><span class="nav-number">1.0.1.</span> <span class="nav-text">浏览器判断</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#登陆判断"><span class="nav-number">1.0.2.</span> <span class="nav-text">登陆判断</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#项目中run-http和ajax请求头全局"><span class="nav-number">1.0.2.1.</span> <span class="nav-text">项目中run$http和ajax请求头全局</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是-XMLHttpRequest-对象？"><span class="nav-number">1.0.3.</span> <span class="nav-text">什么是 XMLHttpRequest 对象？</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

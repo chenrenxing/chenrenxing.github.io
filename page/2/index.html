@@ -263,6 +263,172 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/11/04/AngularJS$anchorScroll用法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/11/04/AngularJS$anchorScroll用法/" itemprop="url">AngularJS$anchorScroll用法</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-11-04T10:30:45+08:00">
+                2015-11-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <pre><code>.controller(&apos;ScrollController&apos;, [&apos;$scope&apos;, &apos;$location&apos;, &apos;$anchorScroll&apos;,
+function ($scope, $location, $anchorScroll) {
+$scope.gotoBottom = function() {
+  // 将location.hash的值设置为
+  // 你想要滚动到的元素的id
+  $location.hash(&apos;bottom&apos;);
+
+  // 调用 $anchorScroll()
+  $anchorScroll();
+
+};
+</code></pre><p>  }]);</p>
+<h3 id="如何使用一个垂直滚动偏移（指定了一个固定值）关于-anchorScroll-yOffset"><a href="#如何使用一个垂直滚动偏移（指定了一个固定值）关于-anchorScroll-yOffset" class="headerlink" title="如何使用一个垂直滚动偏移（指定了一个固定值）关于 $anchorScroll.yOffset"></a>如何使用一个垂直滚动偏移（指定了一个固定值）关于 $anchorScroll.yOffset</h3><h2 id="html"><a href="#html" class="headerlink" title="html"></a>html</h2><pre><code>&lt;div class=&quot;fixed-header&quot; ng-controller=&quot;headerCtrl&quot;&gt;
+  &lt;a href=&quot;&quot; ng-click=&quot;gotoAnchor(x)&quot; ng-repeat=&quot;x in [1,2,3,4,5]&quot;&gt;
+Go to anchor {{x}}
+  &lt;/a&gt;
+&lt;/div&gt;
+&lt;div id=&quot;anchor{{x}}&quot; class=&quot;anchor&quot; ng-repeat=&quot;x in [1,2,3,4,5]&quot;&gt;
+  Anchor {{x}} of 5
+&lt;/div&gt;
+</code></pre><h2 id="js"><a href="#js" class="headerlink" title="js"></a>js</h2><pre><code>angular.module(&apos;anchorScrollOffsetExample&apos;, [])
+.run([&apos;$anchorScroll&apos;, function($anchorScroll) {
+
+      $anchorScroll.yOffset = 50;   // 总是滚动额外的50像素
+
+}])
+.controller(&apos;headerCtrl&apos;, [&apos;$anchorScroll&apos;, &apos;$location&apos;, &apos;$scope&apos;,
+  function ($anchorScroll, $location, $scope) {
+$scope.gotoAnchor = function(x) {
+
+  var newHash = &apos;anchor&apos; + x;
+  if ($location.hash() !== newHash) {
+
+    // 将$location.hash设置为`newHash` and
+    // $anchorScroll也将自动滚到该处
+
+    $location.hash(&apos;anchor&apos; + x);
+
+  } else {
+
+    // 显式地调用 $anchorScroll()方法 ,
+    // 因为 $location.hash 并没有改变
+    $anchorScroll();
+
+  }
+};
+</code></pre><p>  }<br>]);</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/10/26/AngularJS中的指令全面解析/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1751,148 +1917,6 @@ return;
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/09/07/hexo常用命令笔记/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="CHEN.星">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CHEN.星~博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/09/07/hexo常用命令笔记/" itemprop="url">hexo常用命令笔记</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-09-07T19:19:07+08:00">
-                2015-09-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="hexo"><a href="#hexo" class="headerlink" title="#hexo#"></a>#hexo#</h2><pre><code>npm install hexo -g #安装  
-npm update hexo -g #升级  
-hexo init #初始化
-</code></pre><h2 id="简写"><a href="#简写" class="headerlink" title="#简写#"></a>#简写#</h2><pre><code>hexo n &quot;我的博客&quot; == hexo new &quot;我的博客&quot; #新建文章  
-hexo p == hexo publish   
-hexo g == hexo generate#生成  
-hexo s == hexo server #启动服务预览  
-hexo d == hexo deploy#部署  
-</code></pre><h2 id="服务器"><a href="#服务器" class="headerlink" title="#服务器#"></a>#服务器#</h2><pre><code>hexo server #Hexo 会监视文件变动并自动更新，您无须重启服务器。  
-hexo server -s #静态模式  
-hexo server -p 5000 #更改端口  
-hexo server -i 192.168.1.1 #自定义 IP  
-
-hexo clean #清除缓存 网页正常情况下可以忽略此条命令  
-hexo g #生成静态网页  
-hexo d #开始部署  
-</code></pre><h2 id="监视文件变动"><a href="#监视文件变动" class="headerlink" title="#监视文件变动#"></a>#监视文件变动#</h2><pre><code>hexo generate #使用 Hexo 生成静态文件快速而且简单  
-hexo generate --watch #监视文件变动
-</code></pre><h2 id="模版"><a href="#模版" class="headerlink" title="#模版#"></a>#模版#</h2><pre><code>hexo new &quot;postName&quot; #新建文章  
-hexo new page &quot;pageName&quot; #新建页面  
-hexo generate #生成静态页面至public目录  
-hexo server #开启预览访问端口（默认端口4000，&apos;ctrl + c&apos;关闭server）  
-hexo deploy #将.deploy目录部署到GitHub  
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1943,7 +1967,7 @@ hexo deploy #将.deploy目录部署到GitHub
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-count">22</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>

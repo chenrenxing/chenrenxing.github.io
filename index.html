@@ -263,6 +263,274 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/04/06/grunt前端打包/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/04/06/grunt前端打包/" itemprop="url">grunt前端打包</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-04-06T20:56:47+08:00">
+                2016-04-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ul>
+<li>公司项目一直都是用的后端打包工具gradle，这段时间项目相对空隙，就把项        目中前端打包重构了，采用grunt插件。   </li>
+<li>压缩工具grunt-contrib-compress  </li>
+<li>上传工具grunt-nexus-deployer</li>
+<li>最后记录Gruntfile.js<h3 id="压缩配置grunt-contrib-compress"><a href="#压缩配置grunt-contrib-compress" class="headerlink" title="压缩配置grunt-contrib-compress"></a>压缩配置grunt-contrib-compress</h3>  compress: {<br>   main: {<pre><code>options: {
+  archive: &apos;nexus/ocps-web-all.zip&apos;
+//生成压缩包到nexus/ocps-web-all.zip
+},
+files: [{
+  expand: true,
+  cwd: &apos;&apos;,
+  src: [zipList],//压缩的文件
+  dest:&apos;ocps-web-all/&apos;//生成的文件包名
+    //这里dest是ocps-web-all.zip压缩包内的文件包名，也可以不要。
+}]
+</code></pre>   }<br> },<h3 id="zipList配置"><a href="#zipList配置" class="headerlink" title="zipList配置"></a>zipList配置</h3>   //压缩zip排除文件<pre><code>  var zipList = [
+&apos;**/*&apos;,//所有文件,下面！排除不需要文件
+&apos;!nexus/**&apos;,
+&apos;!build/**&apos;,//
+&apos;!node_modules/**&apos;,
+&apos;!bower.json&apos;,
+&apos;!build.gradle&apos;,
+&apos;!package-lock.json&apos;,
+&apos;!Gruntfile.js&apos;,
+&apos;!package.json&apos;,
+&apos;!less/**&apos;,
+&apos;!cbp-less/**&apos;,
+&apos;!cmss-less/**&apos;,
+&apos;!data/**&apos;
+  ];
+</code></pre></li>
+</ul>
+<h3 id="发布grunt-nexus-deployer"><a href="#发布grunt-nexus-deployer" class="headerlink" title="发布grunt-nexus-deployer"></a>发布grunt-nexus-deployer</h3><pre><code>//发布 nexus插件
+nexusDeployer: {
+  snapshot: {
+    options: {
+      groupId: &quot;com.cyberkey&quot;,
+      artifactId: &quot;ocps-web-all&quot;,//前端统一zip包名
+      version: &quot;1.10.8.1-SNAPSHOT&quot;,//版本
+      packaging: &apos;zip&apos;,//zip包
+      auth: {
+        username:&apos;nexus用户名&apos;,
+        password:&apos;nexus密码&apos;
+      },
+      url: &apos;nexus仓库快照版的URL&apos;,
+      artifact:&quot;nexus/ocps-web-all.zip&quot;//生成压缩包的路径和包名
+    }
+  },
+  release: {
+    options: {
+      groupId: &quot;com.cyberkey&quot;,
+      artifactId: &quot;ocps-web-all&quot;,//前端统一zip包名
+      version: &quot;1.10.8.1-RELEASE&quot;,//版本
+      packaging: &apos;zip&apos;,//zip包
+      auth: {
+        username:&apos;nexus用户名&apos;,
+        password:&apos;nexus密码&apos;
+      },
+      url: &apos;nexus仓库发布版的URL&apos;,
+      artifact:&quot;nexus/ocps-web-all.zip&quot;//生成压缩包的路径和包名
+    }
+  }
+},
+</code></pre><h3 id="clean清除"><a href="#clean清除" class="headerlink" title="clean清除"></a>clean清除</h3><ul>
+<li><p>项目打包前清除下上次包</p>
+<ul>
+<li><p>clean: {</p>
+<pre><code>pre: [&apos;nexus/**.zip&apos;] //删除掉先前的开发文件
+</code></pre><p>  },</p>
+<h3 id="GruntFile-js"><a href="#GruntFile-js" class="headerlink" title="GruntFile.js"></a>GruntFile.js</h3><p>// AdminLTE Gruntfile<br>module.exports = function (grunt) {</p>
+<p>‘use strict’;<br>//压缩zip排除文件<br>var zipList = [<br>  ‘<strong>/*’,<br>  ‘!nexus/</strong>‘,<br>  ‘!build/<strong>‘,//<br>  ‘!node_modules/</strong>‘,<br>  ‘!bower.json’,<br>  ‘!build.gradle’,<br>  ‘!package-lock.json’,<br>  ‘!Gruntfile.js’,<br>  ‘!package.json’,<br>  ‘!less/<strong>‘,<br>  ‘!cbp-less/</strong>‘,<br>  ‘!cmss-less/<strong>‘,<br>  ‘!data/</strong>‘<br>];<br>grunt.initConfig({<br>watch: {<br>files: [<br>  “less/platform-less/<em>.less”,”eipts/**/</em>.js”],<br>tasks: [“less”,”jshint”,”concat”,”uglify”]<br>},<br>less: {<br>development: {<br>  options: {</p>
+<pre><code>compress: false
+</code></pre><p>  },<br>  files: {</p>
+<pre><code>&quot;framework/validation/validationEngine.jquery.css&quot;:&quot;less/less/validationEngine.jquery.less&quot;,
+&quot;dist/css/cbp-main.css&quot;: &quot;cbp-less/cbp-main.less&quot;,
+&quot;dist/css/cbp-login.css&quot;: &quot;cbp-less/cbp-login.less&quot;,
+&quot;dist/css/cbp-cbp.css&quot;: &quot;cbp-less/cbp-cbp.less&quot;,
+&quot;dist/css/cbp-qrcode.css&quot;: &quot;cbp-less/cbp-qrcode.less&quot;,
+&quot;dist/css/dic-form.css&quot;: &quot;less/platform-less/dic-form.less&quot;,
+&quot;css/main.css&quot;:&quot;less/platform-less/main.less&quot; ,
+&quot;css/urlComponent.css&quot;:&quot;less/platform-less/urlComponent.less&quot;,
+&quot;css/scan-trace.css&quot;:&quot;less/platform-less/scan-trace.less&quot;,
+&quot;dist/css/cmss-main.css&quot;:&quot;cmss-less/cmss-main.less&quot;,
+&quot;dist/css/main.css&quot;:&quot;less/platform-less/main.less&quot;,
+&quot;dist/css/public.css&quot;:&quot;less/platform-less/public.less&quot;,
+&quot;css/codeconfig.css&quot;: &quot;less/platform-less/codeconfig.less&quot;
+</code></pre><p>  }<br>},<br>production: {<br>  options: {</p>
+<pre><code>compress: true
+</code></pre><p>  },<br>  files: {</p>
+<pre><code>&quot;dist/css/cbp-main.min.css&quot;: &quot;cbp-less/cbp-main.less&quot;,
+&quot;dist/css/cbp-login.min.css&quot;: &quot;cbp-less/cbp-login.less&quot;,
+&quot;dist/css/cbp-cbp.min.css&quot;: &quot;cbp-less/cbp-cbp.less&quot;,
+&quot;dist/css/cbp-qrcode.min.css&quot;: &quot;cbp-less/cbp-qrcode.less&quot;,
+&quot;dist/css/cmss-main.min.css&quot;: &quot;cmss-less/cmss-main.less&quot;,
+&quot;dist/css/dic-form.min.css&quot;: &quot;less/platform-less/dic-form.less&quot;,
+&quot;css/urlComponent.min.css&quot;:&quot;less/platform-less/urlComponent.less&quot;,
+&quot;css/main.css&quot;:&quot;less/platform-less/main.less&quot;,
+&quot;css/codeconfig.min.css&quot;: &quot;less/platform-less/codeconfig.less&quot;
+</code></pre><p>  }<br>}<br>},<br> //发布 nexus插件<br>nexusDeployer: {<br>snapshot: {<br>  options: {</p>
+<pre><code>groupId: &quot;com.cyberkey&quot;,
+artifactId: &quot;ocps-web-all&quot;,//前端统一zip包名
+version: &quot;1.10.8.1-SNAPSHOT&quot;,//版本
+packaging: &apos;zip&apos;,//zip包
+auth: {
+  username:&apos;nexus用户名&apos;,
+  password:&apos;nexus密码&apos;
+},
+url: &apos;nexus仓库快照版的URL&apos;,
+artifact:&quot;nexus/ocps-web-all.zip&quot;//生成压缩包的路径和包名
+</code></pre><p>  }<br>},<br>release: {<br>  options: {</p>
+<pre><code>groupId: &quot;com.cyberkey&quot;,
+artifactId: &quot;ocps-web-all&quot;,//前端统一zip包名
+version: &quot;1.10.8.1-RELEASE&quot;,//版本
+packaging: &apos;zip&apos;,//zip包
+auth: {
+  username:&apos;nexus用户名&apos;,
+  password:&apos;nexus密码&apos;
+},
+url: &apos;nexus仓库发布版的URL&apos;,
+artifact:&quot;nexus/ocps-web-all.zip&quot;//生成压缩包的路径和包名
+</code></pre><p>  }<br>}<br>},<br>compress: {<br>main: {<br>  options: {</p>
+<pre><code>archive: &apos;nexus/ocps-web-all.zip&apos;
+</code></pre><p>  //生成压缩包到nexus/ocps-web-all.zip<br>  },<br>  files: [{</p>
+<pre><code>expand: true,
+cwd: &apos;&apos;,
+src: [zipList],//压缩的文件
+dest:&apos;ocps-web-all/&apos;//生成的文件包名
+  //这里dest是ocps-web-all.zip压缩包内的文件包名，也可以不要。
+</code></pre><p>  }]<br>}<br>},<br>clean: {<br>pre: [‘nexus/<strong>.zip’] //删除掉先前的开发文件<br>},<br>concat:{<br>options: {<br>  separator: ‘;’<br>},<br>eipts: {<br>  src: [‘eipts/</strong>/*.js’],<br>  dest: ‘dist/js/eipts-all.js’<br>}<br>},<br>uglify: {<br>options: {<br>  mangle: true,<br>  preserveComments: ‘some’<br>},<br>my_target: {<br>  files: {</p>
+<pre><code>&apos;dist/js/eipts-all.min.js&apos;:[&apos;eipts/**/*.js&apos;]
+</code></pre><p>  }<br>}<br>},<br>jshint: {<br>options: {<br>  jshintrc: ‘.jshintrc’<br>},<br>eipts:{<br>  src:[‘eipts/<em>*/</em>.js’]<br>}<br>},<br>csslint: {<br>options: {<br>  csslintrc: ‘less/less/.csslintrc’<br>},<br>dist: [<br>  ‘css/AdminLTE.css’,’css/main.css’<br>]<br>}<br>});</p>
+<pre><code>grunt.loadNpmTasks(&apos;grunt-nexus-deployer&apos;);
+grunt.loadNpmTasks(&apos;grunt-contrib-compress&apos;);
+grunt.loadNpmTasks(&apos;grunt-contrib-less&apos;);
+grunt.loadNpmTasks(&apos;grunt-contrib-watch&apos;);
+grunt.loadNpmTasks(&apos;grunt-contrib-concat&apos;);
+grunt.loadNpmTasks(&apos;grunt-contrib-uglify&apos;);
+grunt.loadNpmTasks(&apos;grunt-contrib-jshint&apos;);
+grunt.loadNpmTasks(&apos;grunt-contrib-csslint&apos;);
+grunt.loadNpmTasks(&apos;grunt-contrib-clean&apos;);
+grunt.registerTask(&apos;lint&apos;, [&apos;jshint&apos;, &apos;csslint&apos;]);
+grunt.registerTask(&apos;default&apos;, [&apos;watch&apos;]);
+grunt.registerTask(&apos;snapshot&apos;,[&apos;clean&apos;,&apos;compress&apos;,&apos;nexusDeployer:snapshot&apos;]);//1:清除历史zip。2:压缩.3:上传nexus快照版本
+grunt.registerTask(&apos;release&apos;,[&apos;clean&apos;,&apos;compress&apos;,&apos;nexusDeployer:release&apos;]);//1:清除历史zip。2:压缩.3:上传nexus发布版本
+</code></pre><p>  };</p>
+</li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/03/10/grunt环境配置rem单位/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1081,7 +1349,7 @@ if ($rootScope.isWeiXinLogin()) {
     }
    }
 ]);
-</code></pre><h4 id="项目中run-http和ajax请求头全局"><a href="#项目中run-http和ajax请求头全局" class="headerlink" title="项目中run$http和ajax请求头全局"></a>项目中run$http和ajax请求头全局</h4><pre><code>.run([&apos;$http&apos;, &apos;$cookies&apos;,&apos;$rootScope&apos;,&apos;$location&apos;, function($http, $cookies,$rootScope,$location) {
+</code></pre><h3 id="登陆判断"><a href="#登陆判断" class="headerlink" title="登陆判断"></a>登陆判断</h3><h4 id="项目中run-http和ajax请求头全局"><a href="#项目中run-http和ajax请求头全局" class="headerlink" title="项目中run$http和ajax请求头全局"></a>项目中run$http和ajax请求头全局</h4><pre><code>.run([&apos;$http&apos;, &apos;$cookies&apos;,&apos;$rootScope&apos;,&apos;$location&apos;, function($http, $cookies,$rootScope,$location) {
         $http.defaults.headers.common[&apos;X-Requested-With&apos;] = &apos;XMLHttpRequest&apos;;
         $http.defaults.headers.common[&apos;X-Auth-Token&apos;] = $cookies.get(&apos;X-Auth-Token&apos;);
         $.ajaxSetup({
@@ -1708,172 +1976,6 @@ $(&apos;.scroll_a&apos;).click(function(){$(&apos;html,body&apos;).animate({scro
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/11/04/AngularJS$anchorScroll用法/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="CHEN.星">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CHEN.星~博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/11/04/AngularJS$anchorScroll用法/" itemprop="url">AngularJS$anchorScroll用法</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-11-04T10:30:45+08:00">
-                2015-11-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <pre><code>.controller(&apos;ScrollController&apos;, [&apos;$scope&apos;, &apos;$location&apos;, &apos;$anchorScroll&apos;,
-function ($scope, $location, $anchorScroll) {
-$scope.gotoBottom = function() {
-  // 将location.hash的值设置为
-  // 你想要滚动到的元素的id
-  $location.hash(&apos;bottom&apos;);
-
-  // 调用 $anchorScroll()
-  $anchorScroll();
-
-};
-</code></pre><p>  }]);</p>
-<h3 id="如何使用一个垂直滚动偏移（指定了一个固定值）关于-anchorScroll-yOffset"><a href="#如何使用一个垂直滚动偏移（指定了一个固定值）关于-anchorScroll-yOffset" class="headerlink" title="如何使用一个垂直滚动偏移（指定了一个固定值）关于 $anchorScroll.yOffset"></a>如何使用一个垂直滚动偏移（指定了一个固定值）关于 $anchorScroll.yOffset</h3><h2 id="html"><a href="#html" class="headerlink" title="html"></a>html</h2><pre><code>&lt;div class=&quot;fixed-header&quot; ng-controller=&quot;headerCtrl&quot;&gt;
-  &lt;a href=&quot;&quot; ng-click=&quot;gotoAnchor(x)&quot; ng-repeat=&quot;x in [1,2,3,4,5]&quot;&gt;
-Go to anchor {{x}}
-  &lt;/a&gt;
-&lt;/div&gt;
-&lt;div id=&quot;anchor{{x}}&quot; class=&quot;anchor&quot; ng-repeat=&quot;x in [1,2,3,4,5]&quot;&gt;
-  Anchor {{x}} of 5
-&lt;/div&gt;
-</code></pre><h2 id="js"><a href="#js" class="headerlink" title="js"></a>js</h2><pre><code>angular.module(&apos;anchorScrollOffsetExample&apos;, [])
-.run([&apos;$anchorScroll&apos;, function($anchorScroll) {
-
-      $anchorScroll.yOffset = 50;   // 总是滚动额外的50像素
-
-}])
-.controller(&apos;headerCtrl&apos;, [&apos;$anchorScroll&apos;, &apos;$location&apos;, &apos;$scope&apos;,
-  function ($anchorScroll, $location, $scope) {
-$scope.gotoAnchor = function(x) {
-
-  var newHash = &apos;anchor&apos; + x;
-  if ($location.hash() !== newHash) {
-
-    // 将$location.hash设置为`newHash` and
-    // $anchorScroll也将自动滚到该处
-
-    $location.hash(&apos;anchor&apos; + x);
-
-  } else {
-
-    // 显式地调用 $anchorScroll()方法 ,
-    // 因为 $location.hash 并没有改变
-    $anchorScroll();
-
-  }
-};
-</code></pre><p>  }<br>]);</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1924,7 +2026,7 @@ $scope.gotoAnchor = function(x) {
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-count">22</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
