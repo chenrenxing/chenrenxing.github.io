@@ -263,6 +263,158 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/11/10/angularjs封装指令返回顶部/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/11/10/angularjs封装指令返回顶部/" itemprop="url">angularjs封装指令返回顶部</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-11-10T21:29:41+08:00">
+                2015-11-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="angularjs封装指令返回顶部"><a href="#angularjs封装指令返回顶部" class="headerlink" title="angularjs封装指令返回顶部"></a>angularjs封装指令返回顶部</h3><pre><code>JS**************
+ directive(&quot;backToTop&quot;, function () {  
+    return {  
+        restrict: &quot;E&quot;,  
+        link: function (scope, element, attr) {  
+            var e = $(element);  
+            $(window).scroll(function () {                 //滚动时触发  
+                if ($(document).scrollTop() &gt; 300)         //获取滚动条到顶部的垂直高度,到相对顶部300px高度显示  
+                    e.fadeIn(300)  
+                else  
+                    e.fadeOut(200);  
+            });  
+            /*点击回到顶部*/  
+            e.click(function () {  
+                $(&apos;html, body&apos;).animate({                 //添加animate动画效果  
+                    scrollTop: 0  
+                }, 500);  
+            });  
+        }  
+    };  
+});  
+}); 
+————————————————————————————————
+html***************    
+&lt;back-to-top class=&quot;back_top&quot; title=&quot;返回顶部&quot;&gt;&lt;i class=&quot;fa fa-angle-up&quot;&gt;&lt;/i&gt;&lt;/back-to-top&gt;  
+</code></pre><h3 id="js平滑滚动到顶部-底部-指定地方"><a href="#js平滑滚动到顶部-底部-指定地方" class="headerlink" title="js平滑滚动到顶部,底部,指定地方"></a>js平滑滚动到顶部,底部,指定地方</h3><pre><code>滚动到顶部：
+$(&apos;.scroll_top&apos;).click(function(){$(&apos;html,body&apos;).animate({scrollTop: &apos;0px&apos;}, 800);});
+
+滚动到指定位置：
+$(&apos;.scroll_a&apos;).click(function(){$(&apos;html,body&apos;).animate({scrollTop:$(&apos;.a&apos;).offset().top}, 800);});
+
+滚动到底部：
+ $(&apos;.scroll_bottom&apos;).click(function(){$(&apos;html,body&apos;).animate({scrollTop:$(&apos;.bottom&apos;).offset().top}, 800);});
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/11/04/AngularJS$anchorScroll用法/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1778,145 +1930,6 @@ img.append(&quot;files&quot;, eachFile,eachFile.name);
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/09/17/cookie换肤功能/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="CHEN.星">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CHEN.星~博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/09/17/cookie换肤功能/" itemprop="url">cookie换肤功能</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-09-17T19:19:07+08:00">
-                2015-09-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ul>
-<li>javaScript是运行在客户端的脚本，因此一般是不能够设置Session的，因为Session是运行在服务器端的。</li>
-<li>而cookie是运行在客户端的，所以可以用JS来设置cookie.</li>
-</ul>
-<p>#设置cookie#</p>
-<ul>
-<li>document.cookie=”skin=”+skin;</li>
-</ul>
-<p>#获取cookie#</p>
-<ul>
-<li>getCooKie(“cookie)  </li>
-<li>function getCooKie(name){<br>  var arr;reg=new RegExp(“(^| )”+name+”=([^;]*)(;|$)”);<br>  if(arr=document.cookie.match(reg)){  <pre><code>$scope.current_skin=arr[2];      
- return;  
-</code></pre>  } else{  <pre><code> $scope.current_skin = &quot;skin-blue&quot;;  
-return;  
-</code></pre>  }<br>  }<br>#换肤#</li>
-</ul>
-<blockquote>
-<p>$(‘#change_skin [data-skin]’).unbind(“click”).click<br>(function(e) {<br>    e.preventDefault();<br>    var skinName = $(this).data(‘skin’);//点击this获取data-shin data    属性<br>    $(‘body’).removeClass($scope.current_skin);<br>    $(‘body’).addClass(skinName);<br>    $scope.current_skin = skinName;<br>    $scope.$apply(function(){<br>        $scope.current_skin=skinName;<br>    });<br>    document.cookie=”skin=”+ $scope.current_skin;//皮肤写入    cookie<br>});</p>
-</blockquote>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1967,7 +1980,7 @@ return;
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-count">23</span>
                 <span class="site-state-item-name">Artikel</span>
               </a>
             </div>
