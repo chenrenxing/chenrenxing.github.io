@@ -94,17 +94,17 @@
 
 
 
-<meta name="description" content="w">
+<meta name="description" content="GruntFile.js   module.exports = function (grunt) {    &amp;apos;use strict&amp;apos;;    grunt.initConfig({ // Before generating any new files, remove any previously-created files. clean: {   tests: [&amp;apos;cs">
 <meta property="og:type" content="article">
 <meta property="og:title" content="grunt环境配置rem单位">
 <meta property="og:url" content="http://yoursite.com/2016/05/10/grunt环境配置rem单位/index.html">
 <meta property="og:site_name" content="CHEN.星~博客">
-<meta property="og:description" content="w">
+<meta property="og:description" content="GruntFile.js   module.exports = function (grunt) {    &amp;apos;use strict&amp;apos;;    grunt.initConfig({ // Before generating any new files, remove any previously-created files. clean: {   tests: [&amp;apos;cs">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-10-16T08:28:52.187Z">
+<meta property="og:updated_time" content="2017-10-16T09:54:28.014Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="grunt环境配置rem单位">
-<meta name="twitter:description" content="w">
+<meta name="twitter:description" content="GruntFile.js   module.exports = function (grunt) {    &amp;apos;use strict&amp;apos;;    grunt.initConfig({ // Before generating any new files, remove any previously-created files. clean: {   tests: [&amp;apos;cs">
 
 
 
@@ -329,8 +329,264 @@
       
 
       
-        <p>w</p>
+        <h3 id="GruntFile-js"><a href="#GruntFile-js" class="headerlink" title="GruntFile.js"></a>GruntFile.js</h3><hr>
+<pre><code>  module.exports = function (grunt) {
 
+  &apos;use strict&apos;;
+
+  grunt.initConfig({
+// Before generating any new files, remove any previously-created files.
+clean: {
+  tests: [&apos;css/rem/*-rem.css&apos;]
+},
+px2rem: {
+  default: {
+    options: {
+      designWidth : 640,//设计稿宽度
+      baseFont    : 64,//基础字体
+      border      : 0,//1不处理border，0处理
+      ie8         : 0,//1生成ie8代码，0不生成
+      mode        : 0,//0px转rem，1rem转px
+      media       : 0,//1生成meadia query代码，0不生成
+      dest        : &apos;css/rem/&apos;//rem css输出目录
+    },
+    files: [{
+      src : [&apos;css/css/myindex.css&apos;]//要监听的css目录
+    }]
+  }
+},
+watch: {
+  files: [
+    &quot;less/*.less&quot;,&quot;css/css/.css&quot;],
+  tasks: [&quot;less&quot;,&quot;cssmin&quot;]
+},
+less: {
+  development: {
+    options: {
+      compress: false
+    },
+    files: {
+      &quot;css/css/myindex.css&quot;: &quot;less/myindex.less&quot;
+    }
+  }
+},
+cssmin: {
+  css: {
+    src:&apos;css/css/myindex.css&apos;,
+    dest:&apos;css/mincss/myindex.min.css&apos;
+
+  }
+
+},
+concat:{
+  options: {
+    separator: &apos;;&apos;
+  },
+  eipts: {
+    src: [&apos;eipts/**/*.js&apos;],
+    dest: &apos;dist/js/eipts-all.js&apos;
+  },
+  css : {
+    src: [&apos;src/asset/*.css&apos;],
+    dest:&apos;dest/asset/all.css&apos;
+  }
+},
+uglify: {
+  options: {
+    mangle: true,
+    preserveComments: &apos;some&apos;
+  },
+  my_target: {
+    files: {
+      &apos;dist/js/eipts-all.min.js&apos;:[&apos;eipts/**/*.js&apos;]
+    }
+  }
+},
+jshint: {
+  options: {
+    jshintrc: &apos;.jshintrc&apos;
+  },
+  eipts:{
+    src:[&apos;eipts/**/*.js&apos;]
+  }
+},
+csslint: {
+  options: {
+    csslintrc: &apos;less/less/.csslintrc&apos;
+  },
+  dist: [
+    &apos;css/AdminLTE.css&apos;,&apos;css/main.css&apos;
+  ]
+}
+  });
+  grunt.loadTasks(&apos;task&apos;);
+  grunt.loadNpmTasks(&apos;grunt-contrib-less&apos;);
+  grunt.loadNpmTasks(&apos;grunt-hash&apos;);
+  grunt.loadNpmTasks(&apos;grunt-css&apos;);
+  grunt.loadNpmTasks(&apos;grunt-contrib-watch&apos;);
+  grunt.loadNpmTasks(&apos;grunt-contrib-concat&apos;);
+  grunt.loadNpmTasks(&apos;grunt-contrib-uglify&apos;);
+  grunt.loadNpmTasks(&apos;grunt-contrib-jshint&apos;);
+  grunt.loadNpmTasks(&apos;grunt-contrib-csslint&apos;);
+  grunt.loadNpmTasks(&apos;grunt-contrib-clean&apos;);
+  grunt.registerTask(&apos;lint&apos;, [&apos;jshint&apos;, &apos;csslint&apos;]);
+  grunt.registerTask(&apos;default&apos;, [&apos;watch&apos;]);
+  grunt.registerTask(&apos;rem&apos;, [&apos;clean&apos;,&apos;px2rem&apos;]);
+};
+</code></pre><p>注意事项：</p>
+<ul>
+<li>width:calc(~”50% - 4px”);</li>
+<li><p>loadTasks查找的guilpfile同级文件下task下的js。</p>
+<h3 id="px2rem-js"><a href="#px2rem-js" class="headerlink" title="px2rem.js"></a>px2rem.js</h3><pre><code>    /**
+ * Created by DELL on 2017/3/21.
+ */
+/*
+ * px2rem
+ * https://github.com/leon776/px2rem
+ *
+ * Copyright (c) 2015 xiaoweili
+ * Licensed under the MIT license.
+ */
+
+&apos;use strict&apos;;
+var path = require(&apos;path&apos;);
+
+var RemTransform = function(option) {
+var baseFont = option.baseFont, designWidth = option.designWidth;
+//创建media query
+function _createMedia() {
+    var tmp = &apos;&apos;;
+    var tpl = &apos;@media only screen and (max-width: &lt;%=screenWidth%&gt;px), only screen and (max-device-width:&lt;%=screenWidth%&gt;px) {\n&apos; +
+        &apos;html,body {\n&apos; +
+        &apos;font-size:&lt;%=fontSize%&gt;px;\n&apos; +
+        &apos;}\n&apos; +
+        &apos;}\n&apos;;
+    var screens = [1080, 960, 800, 720, 640, 600, 540, 480, 414, 400, 375, 360, 320, 240];
+    for (var i = 0; i &lt; screens.length; i++) {
+        tmp += (tpl.replace(/\&lt;%\=screenWidth%\&gt;/g, screens[i]).replace(&apos;&lt;%=fontSize%&gt;&apos;, (screens[i] / designWidth)*baseFont));
+    }
+    return tmp;
+}
+//获取rem值
+function _getRem(px) {
+    var reg = new RegExp(&quot;[0-9]+([.]{1}[0-9]+){0,1}&quot;,&quot;g&quot;), rem = px;
+    var tmp = px.match(reg);
+    for (var i = 0; i &lt; tmp.length; i++) {
+        if(Number(tmp[i]) === 0 || px.indexOf( tmp[i] + &apos;px&apos; ) &lt; 0) {
+            continue;//0不做处理,数字后面不是px不做处理
+        }
+        rem = rem.replace(tmp[i] + &apos;px&apos;, (Number(tmp[i]) / baseFont) + &apos;rem&apos;);
+    }
+    return rem;
+}
+//获取px值
+function _getPx(rem) {
+    var reg = new RegExp(&quot;[0-9]+([.][0-9]+)?&quot;,&quot;g&quot;), px = rem;
+    var tmp = rem.match(reg);
+    for (var i = 0; i &lt; tmp.length; i++) {
+        px = px.replace(tmp[i] + &apos;rem&apos;, (Number(tmp[i]) * baseFont) + &apos;px&apos;);
+    }
+    return px;
+}
+//末尾自动添加分号
+function _addSemicolon (str) {
+    var reg = new RegExp(/([0-9]+)([^;{}])?}/g);
+    return str.replace(reg, &quot;$1$2;}&quot;);
+}
+function _filterBorder(str) {
+    if(str.substr(-6) === &apos;border&apos;
+        || str.substr(-12) === &apos;border-width&apos;
+        || str.substr(-10) === &apos;border-top&apos;
+        || str.substr(-11) === &apos;border-left&apos;
+        || str.substr(-12) === &apos;border-right&apos;
+        || str.substr(-13) === &apos;border-bottom&apos;
+        || str.substr(-13) === &apos;border-radius&apos;
+    ) {
+        return true;
+    }
+    return false;
+}
+//将px转换成rem
+function changeToRem (input) {
+    var after = &apos;&apos;, tmp = [],
+        reg = new RegExp(&quot;:[^:]*px([^;/])*;&quot;,&quot;g&quot;),
+        before = _addSemicolon(input);
+    var pxArray = before.match(reg);
+    if(!pxArray) { return; }
+    for (var i = 0; i &lt; pxArray.length; i++) {
+        tmp = before.split(pxArray[i]);
+        if(option.border &amp;&amp; _filterBorder(tmp[0])) {
+            continue;
+        }
+        after += tmp[0];
+        if(option.ie8) {
+            after += pxArray[i];
+            after += tmp[0].substr(Math.max( tmp[0].lastIndexOf(&apos;;&apos;), tmp[0].lastIndexOf(&apos;{&apos;) ) + 1);
+        }
+        after += _getRem(pxArray[i], baseFont);
+        before = before.replace(tmp[0], &apos;&apos;).replace(pxArray[i], &apos;&apos;);
+    }
+    if(option.media) {
+        return _createMedia() + after + before;
+    } else {
+        return after + before;
+    }
+}
+//rem转px
+function changeToPx (input) {
+    var after = &apos;&apos;, tmp = [], reg = new RegExp(&quot;:.*rem&quot;,&quot;g&quot;), before = input;
+    var pxArray = before.match(reg);
+    if(!pxArray) { return; }
+    for (var i = 0; i &lt; pxArray.length; i++) {
+        tmp = before.split(pxArray[i]);
+        after += tmp[0]  + _getPx(pxArray[i], baseFont);
+        before = before.replace(tmp[0], &apos;&apos;).replace(pxArray[i], &apos;&apos;);
+    }
+    return after + before;
+}
+return {
+    px2rem: changeToRem,
+    rem2px: changeToPx
+};
+</code></pre></li>
+</ul>
+<pre><code>    module.exports = function(grunt) {
+
+    // Please see the Grunt documentation for more information regarding task
+    // creation: http://gruntjs.com/creating-tasks
+
+    grunt.registerMultiTask(&apos;px2rem&apos;, function() {
+    var options = this.options({});
+    var rem = new RemTransform(options);
+    //console.log(JSON.stringify(this.files));
+    grunt.file.defaultEncoding = &apos;utf8&apos;;
+    this.files.forEach(function(file) {
+
+        file.src.forEach(function(src) {
+            var input = &apos;&apos;, output = &apos;&apos;, filepath = options.dest;
+            if(src.indexOf(&apos;-rem&apos;) &gt; 0) {
+                return false;
+            }
+            if (!grunt.file.exists(src)) {
+                grunt.log.warn(&apos;Source file &quot;&apos; + src + &apos;&quot; not found.&apos;);
+                return false;
+            }
+            input = grunt.file.read(src);
+            if(!options.mode) {
+                output = rem.px2rem(input);
+            } else{
+                output = rem.rem2px(input);
+            }
+            filepath += path.basename(src, &apos;.css&apos;) + &apos;-rem.css&apos;;
+            grunt.file.write(filepath, output);
+            var fd = new FormData();
+            fd.append(&apos;file&apos;, file);//图片file
+            fd.append(&apos;键&apos;, 值);//你想要传的参数
+        });
+    });
+});
+};
+</code></pre>
       
     </div>
     
@@ -418,8 +674,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Übersicht
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -463,6 +728,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#GruntFile-js"><span class="nav-number">1.</span> <span class="nav-text">GruntFile.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#px2rem-js"><span class="nav-number">2.</span> <span class="nav-text">px2rem.js</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
