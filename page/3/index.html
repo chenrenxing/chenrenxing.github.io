@@ -206,7 +206,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Startseite
+            Home
           </a>
         </li>
       
@@ -216,7 +216,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archiv
+            Archives
           </a>
         </li>
       
@@ -263,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/09/17/cookie换肤功能/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/10/15/小代码随笔/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="CHEN.星">
@@ -282,7 +282,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/09/17/cookie换肤功能/" itemprop="url">cookie换肤功能</a></h1>
+                <a class="post-title-link" href="/2015/10/15/小代码随笔/" itemprop="url">小代码随笔</a></h1>
         
 
         <div class="post-meta">
@@ -292,10 +292,10 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-09-17T19:19:07+08:00">
-                2015-09-17
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-10-15T15:33:22+08:00">
+                2015-10-15
               </time>
             
 
@@ -334,26 +334,150 @@
       
         
           
-            <ul>
-<li>javaScript是运行在客户端的脚本，因此一般是不能够设置Session的，因为Session是运行在服务器端的。</li>
-<li>而cookie是运行在客户端的，所以可以用JS来设置cookie.</li>
-</ul>
-<p>#设置cookie#</p>
+            <h3 id="获取随机字母和数字的随机数"><a href="#获取随机字母和数字的随机数" class="headerlink" title="获取随机字母和数字的随机数"></a>获取随机字母和数字的随机数</h3><pre><code>function guid() {
+    return s4() + s4() + &apos;-&apos; + s4() + &apos;-&apos; + s4() + &apos;-&apos; +
+            s4() + &apos;-&apos; + s4() + s4() + s4();
+}
+function s4() {
+    return Math.floor((1 + Math.random()) * 0x10000)
+            .toString(16)
+            .substring(1);
+}
+打印guid()：b0a16884-8587-ae66-f71e-cce7d62a3fed
+</code></pre><h3 id="js定位背景响应居中"><a href="#js定位背景响应居中" class="headerlink" title="js定位背景响应居中"></a>js定位背景响应居中</h3><pre><code>var  height=$(window).height();
+var width = document.body.clientWidth;
+var imgHeight=height*0.35;
+var bgImg = $(&quot;.login-bg&quot;);
+var leftWidth = (width - 1920) / 2;
+$(bgImg).css(&quot;background-position-x&quot;, leftWidth);
+$(bgImg).css(&quot;height&quot;,imgHeight);
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/09/24/JS转换英文星期几/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/09/24/JS转换英文星期几/" itemprop="url">“JS转换英文星期几”</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-09-24T20:19:07+08:00">
+                2015-09-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>   根据下标获取  </p>
 <ul>
-<li>document.cookie=”skin=”+skin;</li>
+<li>new Date().getDay()获取到数字星期几。  </li>
+<li>var dayNames=[‘Sunday’,’Monday ‘,’Tuesday’,’Wednesday’,<br>‘Thursday’,’Friday’,’Saturday’];<h4 id="获取今天星期几"><a href="#获取今天星期几" class="headerlink" title="获取今天星期几"></a>获取今天星期几</h4></li>
+<li>$scope.day=dayNames[new Date().getDay()];<h3 id="获取明天星期几"><a href="#获取明天星期几" class="headerlink" title="获取明天星期几"></a>获取明天星期几</h3></li>
+<li>$scope.day=dayNames[(new Date().getDay()+1)%7];  </li>
 </ul>
-<p>#获取cookie#</p>
-<ul>
-<li>getCooKie(“cookie)  </li>
-<li>function getCooKie(name){<br>  var arr;reg=new RegExp(“(^| )”+name+”=([^;]*)(;|$)”);<br>  if(arr=document.cookie.match(reg)){  <pre><code>$scope.current_skin=arr[2];      
- return;  
-</code></pre>  } else{  <pre><code> $scope.current_skin = &quot;skin-blue&quot;;  
-return;  
-</code></pre>  }<br>  }<br>#换肤#</li>
-</ul>
-<blockquote>
-<p>$(‘#change_skin [data-skin]’).unbind(“click”).click<br>(function(e) {<br>    e.preventDefault();<br>    var skinName = $(this).data(‘skin’);//点击this获取data-shin data    属性<br>    $(‘body’).removeClass($scope.current_skin);<br>    $(‘body’).addClass(skinName);<br>    $scope.current_skin = skinName;<br>    $scope.$apply(function(){<br>        $scope.current_skin=skinName;<br>    });<br>    document.cookie=”skin=”+ $scope.current_skin;//皮肤写入    cookie<br>});</p>
-</blockquote>
+<hr>
 
           
         
@@ -431,7 +555,7 @@ return;
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-09-07T19:19:07+08:00">
                 2015-09-07
@@ -573,7 +697,7 @@ hexo deploy #将.deploy目录部署到GitHub
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-09-07T15:19:07+08:00">
                 2015-09-07
@@ -701,8 +825,8 @@ hexo deploy #将.deploy目录部署到GitHub
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">23</span>
-                <span class="site-state-item-name">Artikel</span>
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">posts</span>
               </a>
             </div>
           
@@ -756,7 +880,7 @@ hexo deploy #将.deploy目录部署到GitHub
 
 
 <div class="powered-by">
-  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">

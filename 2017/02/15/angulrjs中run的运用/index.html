@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="run方法用于初始化全局的数据，仅对全局作用域起作用。浏览器判断.run([&amp;apos;$rootScope&amp;apos;, &amp;apos;$route&amp;apos;, &amp;apos;$window&amp;apos;, &amp;apos;$location&amp;apos;, &amp;apos;Position&amp;apos;, &amp;apos;$cookies&amp;apos;, &amp;apos;Request&amp;apos;, &amp;apos;$co">
+<meta property="og:type" content="article">
+<meta property="og:title" content="angulrjs中run的运用">
+<meta property="og:url" content="http://yoursite.com/2017/02/15/angulrjs中run的运用/index.html">
+<meta property="og:site_name" content="CHEN.星~博客">
+<meta property="og:description" content="run方法用于初始化全局的数据，仅对全局作用域起作用。浏览器判断.run([&amp;apos;$rootScope&amp;apos;, &amp;apos;$route&amp;apos;, &amp;apos;$window&amp;apos;, &amp;apos;$location&amp;apos;, &amp;apos;Position&amp;apos;, &amp;apos;$cookies&amp;apos;, &amp;apos;Request&amp;apos;, &amp;apos;$co">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-10-16T08:35:50.636Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="angulrjs中run的运用">
+<meta name="twitter:description" content="run方法用于初始化全局的数据，仅对全局作用域起作用。浏览器判断.run([&amp;apos;$rootScope&amp;apos;, &amp;apos;$route&amp;apos;, &amp;apos;$window&amp;apos;, &amp;apos;$location&amp;apos;, &amp;apos;Position&amp;apos;, &amp;apos;$cookies&amp;apos;, &amp;apos;Request&amp;apos;, &amp;apos;$co">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/02/15/angulrjs中run的运用/"/>
+
+
+
+
+
+  <title>angulrjs中run的运用 | CHEN.星~博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CHEN.星~博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生命在于折腾</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/15/angulrjs中run的运用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">angulrjs中run的运用</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-15T19:59:35+08:00">
+                2017-02-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="run方法用于初始化全局的数据，仅对全局作用域起作用。"><a href="#run方法用于初始化全局的数据，仅对全局作用域起作用。" class="headerlink" title="run方法用于初始化全局的数据，仅对全局作用域起作用。"></a>run方法用于初始化全局的数据，仅对全局作用域起作用。</h1><h3 id="浏览器判断"><a href="#浏览器判断" class="headerlink" title="浏览器判断"></a>浏览器判断</h3><pre><code>.run([&apos;$rootScope&apos;, &apos;$route&apos;, &apos;$window&apos;, &apos;$location&apos;, &apos;Position&apos;, &apos;$cookies&apos;, &apos;Request&apos;, &apos;$cookieStore&apos;,
+  function($rootScope, $route, $window, $location, position, $cookies, request, $cookieStore) {
+   //非微信的登陆
+   $rootScope.isWeiXinLogin = function() {
+//判断是否微信登陆
+var ua = window.navigator.userAgent.toLowerCase();
+//console.log(ua); //mozilla/5.0 (iphone; cpu iphone os 9_1 like mac os x) applewebkit/601.1.46 (khtml, like gecko) version/9.0 mobile/13b143 safari/601.1
+if (ua.match(/MicroMessenger/i) == &apos;micromessenger&apos;) {
+ console.log(&quot; 是来自微信内置浏览器&quot;);
+ return true;
+} else {
+ console.log(&quot;不是来自微信内置浏览器&quot;);
+ return false;
+}
+   };
+]);
+--------------
+控制层处理
+angular.module(&apos;autumnswind&apos;).controller(&apos;OrderCtrl&apos;, [&apos;$rootScope&apos;, &apos;$scope&apos;, &apos;Request&apos;, &apos;$cookies&apos;, &apos;$window&apos;, &apos;$routeParams&apos;, &apos;$location&apos;, &apos;Tool&apos;,
+ function($rootScope, $scope, request, $cookies, $window, $routeParams, $location, tool) { 
+if ($rootScope.isWeiXinLogin()) {
+     ...
+    }
+   }
+]);
+</code></pre><h3 id="登陆判断"><a href="#登陆判断" class="headerlink" title="登陆判断"></a>登陆判断</h3><h4 id="项目中run-http和ajax请求头全局"><a href="#项目中run-http和ajax请求头全局" class="headerlink" title="项目中run$http和ajax请求头全局"></a>项目中run$http和ajax请求头全局</h4><pre><code>.run([&apos;$http&apos;, &apos;$cookies&apos;,&apos;$rootScope&apos;,&apos;$location&apos;, function($http, $cookies,$rootScope,$location) {
+        $http.defaults.headers.common[&apos;X-Requested-With&apos;] = &apos;XMLHttpRequest&apos;;
+        $http.defaults.headers.common[&apos;X-Auth-Token&apos;] = $cookies.get(&apos;X-Auth-Token&apos;);
+        $.ajaxSetup({
+            headers: {
+                &apos;X-Auth-Token&apos;: $cookies.get(&apos;X-Auth-Token&apos;)
+            }
+        });
+
+    }]);
+    //x-requested-with XMLHttpRequest是Ajax 异步请求方式
+    //直接用于全局环境每次$http头信息
+</code></pre><h3 id="什么是-XMLHttpRequest-对象？"><a href="#什么是-XMLHttpRequest-对象？" class="headerlink" title="什么是 XMLHttpRequest 对象？"></a>什么是 XMLHttpRequest 对象？</h3><ul>
+<li>XMLHttpRequest 对象用于在后台与服务器交换数据。</li>
+<li>XMLHttpRequest 对象是开发者的梦想，因为您能够：</li>
+<li>在不重新加载页面的情况下更新网页<br>在页面已加载后从服务器请求数据<br>在页面已加载后从服务器接收数据<br>在后台向服务器发送数据</li>
+<li>所有现代的浏览……</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/01/10/webpack-dev-server/" rel="next" title="webpack-dev-server">
+                <i class="fa fa-chevron-left"></i> webpack-dev-server
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/15/angulrjs项目拦截器/" rel="prev" title="angulrjs项目拦截器">
+                angulrjs项目拦截器 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="CHEN.星" />
+          <p class="site-author-name" itemprop="name">CHEN.星</p>
+           
+              <p class="site-description motion-element" itemprop="description">个人技术博客</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#run方法用于初始化全局的数据，仅对全局作用域起作用。"><span class="nav-number">1.</span> <span class="nav-text">run方法用于初始化全局的数据，仅对全局作用域起作用。</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器判断"><span class="nav-number">1.0.1.</span> <span class="nav-text">浏览器判断</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#登陆判断"><span class="nav-number">1.0.2.</span> <span class="nav-text">登陆判断</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#项目中run-http和ajax请求头全局"><span class="nav-number">1.0.2.1.</span> <span class="nav-text">项目中run$http和ajax请求头全局</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是-XMLHttpRequest-对象？"><span class="nav-number">1.0.3.</span> <span class="nav-text">什么是 XMLHttpRequest 对象？</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CHEN.星</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
