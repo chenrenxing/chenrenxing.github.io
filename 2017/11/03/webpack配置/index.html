@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="步骤一//npm init -y 初始化 创建package.json //npm install jquery --save //npm install webpack --save-dev 步骤二 创建入口js路径：webpack-your-bags/src/index.js var $ = require(&amp;apos;jquery&amp;apos;); $(&amp;apos;body&amp;apos;).ht">
+<meta property="og:type" content="article">
+<meta property="og:title" content="webpack配置">
+<meta property="og:url" content="http://yoursite.com/2017/11/03/webpack配置/index.html">
+<meta property="og:site_name" content="CHEN.星~博客">
+<meta property="og:description" content="步骤一//npm init -y 初始化 创建package.json //npm install jquery --save //npm install webpack --save-dev 步骤二 创建入口js路径：webpack-your-bags/src/index.js var $ = require(&amp;apos;jquery&amp;apos;); $(&amp;apos;body&amp;apos;).ht">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-11-03T07:21:19.280Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="webpack配置">
+<meta name="twitter:description" content="步骤一//npm init -y 初始化 创建package.json //npm install jquery --save //npm install webpack --save-dev 步骤二 创建入口js路径：webpack-your-bags/src/index.js var $ = require(&amp;apos;jquery&amp;apos;); $(&amp;apos;body&amp;apos;).ht">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/11/03/webpack配置/"/>
+
+
+
+
+
+  <title>webpack配置 | CHEN.星~博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CHEN.星~博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生命在于折腾</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/03/webpack配置/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">webpack配置</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-03T10:29:43+08:00">
+                2017-11-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="步骤一"><a href="#步骤一" class="headerlink" title="步骤一"></a>步骤一</h3><pre><code>//npm init -y 初始化 创建package.json
+//npm install jquery --save
+//npm install webpack --save-dev
+</code></pre><h3 id="步骤二-创建入口js"><a href="#步骤二-创建入口js" class="headerlink" title="步骤二 创建入口js"></a>步骤二 创建入口js</h3><pre><code>路径：webpack-your-bags/src/index.js
+var $ = require(&apos;jquery&apos;);
+$(&apos;body&apos;).html(&apos;Hello&apos;);
+</code></pre><h3 id="步骤三-创建webpack-config-js"><a href="#步骤三-创建webpack-config-js" class="headerlink" title="步骤三  创建webpack.config.js"></a>步骤三  创建webpack.config.js</h3><pre><code>var path = require(&quot;path&quot;);//用于处理目录的对象，提高开发效率（__dirname需要引入path后才可以使用）
+var ROOT_PATH = path.resolve(__dirname);//获取当前整个模块文件所在目录的完整绝对路径
+var BUILDS_PATH = path.resolve(ROOT_PATH, &quot;builds&quot;);//获取我们的builds目录完整绝对路径
+module.exports = {
+    entry: &apos;./src&apos;,
+    output: {
+        path: BUILDS_PATH,
+        filename: &apos;bundle.js&apos;,
+    },
+};
+</code></pre><h3 id="步骤四-创建index-html"><a href="#步骤四-创建index-html" class="headerlink" title="步骤四  创建index.html"></a>步骤四  创建index.html</h3><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;webpack&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;script src=&quot;builds/bundle.js&quot;&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h3 id="步骤五-执行webpack"><a href="#步骤五-执行webpack" class="headerlink" title="步骤五  执行webpack"></a>步骤五  执行webpack</h3><pre><code>Hash: 911040ab8380b2e9bb62
+Version: webpack 3.8.1
+Time: 365ms
+    Asset    Size  Chunks                    Chunk Names
+bundle.js  271 kB       0  [emitted]  [big]  main
+   [0] ./src/index.js 105 bytes {0} [built]
+    + 1 hidden module
+    +
+//看到生成./src/index.js
+
+这里webpack会告诉你bundle.js包含了我们的入口点(index.js)和一个隐藏的模块，这个隐藏的模块就是jquery，默认情况下webpack会把第三方模块给隐藏掉，如果想要看见webpack编译的所有的模块 ，我们可以加 --display-modules 参数
+//webpack --display-modules
+E:\webpack-your-bags&gt;webpack --display-modules
+Hash: 911040ab8380b2e9bb62
+Version: webpack 3.8.1
+Time: 315ms
+    Asset    Size  Chunks                    Chunk Names
+bundle.js  271 kB       0  [emitted]  [big]  main
+   [0] ./src/index.js 105 bytes {0} [built]
+   [1] ./node_modules/jquery/dist/jquery.js 268 kB {0} [built]
+
+~~如果你觉得每次修改都要重新执行webpack太麻烦，你也可以运行 webpack --watch 来自动监视文件的变化，如果文件有发生变化，便会自动重新编译。
+</code></pre><h3 id="loader配置"><a href="#loader配置" class="headerlink" title="loader配置"></a>loader配置</h3><blockquote>
+<ul>
+<li>$ npm install babel-loader –save-dev<br> //babel-core这个包和它的预设 es2015</li>
+<li>$ npm install babel-core babel-preset-es2015 –save-dev</li>
+<li>创建 .babelrc 文件,路径：webpack-your-bags/.babelrc//{“presets”: [“es2015”] }</li>
+<li>index.jsES6写法import $ from ‘jquery’;$(‘body’).html(‘Hello’);</li>
+</ul>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/02/angulrjs3级联动/" rel="next" title="angulrjs3级联动">
+                <i class="fa fa-chevron-left"></i> angulrjs3级联动
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/03/jqgrid查询条件/" rel="prev" title="jqgrid查询条件">
+                jqgrid查询条件 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="CHEN.星" />
+          <p class="site-author-name" itemprop="name">CHEN.星</p>
+           
+              <p class="site-description motion-element" itemprop="description">个人技术博客</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#步骤一"><span class="nav-number">1.</span> <span class="nav-text">步骤一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#步骤二-创建入口js"><span class="nav-number">2.</span> <span class="nav-text">步骤二 创建入口js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#步骤三-创建webpack-config-js"><span class="nav-number">3.</span> <span class="nav-text">步骤三  创建webpack.config.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#步骤四-创建index-html"><span class="nav-number">4.</span> <span class="nav-text">步骤四  创建index.html</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#步骤五-执行webpack"><span class="nav-number">5.</span> <span class="nav-text">步骤五  执行webpack</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#loader配置"><span class="nav-number">6.</span> <span class="nav-text">loader配置</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CHEN.星</span>
+</div>
+
+
+<div class="powered-by">
+   个人专属
+</div>
+
+<div class="theme-info">
+  博客 -CHEN.星
+  
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
