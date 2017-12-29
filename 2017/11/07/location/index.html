@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="【一】获取 (不修改URL)  1.获取当前完整的url路径var absurl = $location.absUrl();//http://172.16.0.88:8100/#/homePage?id=10&amp;amp;a=100#helloworld    2.获取当前url路径(当前url#后面的内容,包括参数和哈希值):var url = $location.url();// 结果：/home">
+<meta property="og:type" content="article">
+<meta property="og:title" content="$location">
+<meta property="og:url" content="http://yoursite.com/2017/11/07/location/index.html">
+<meta property="og:site_name" content="CHEN.星~博客">
+<meta property="og:description" content="【一】获取 (不修改URL)  1.获取当前完整的url路径var absurl = $location.absUrl();//http://172.16.0.88:8100/#/homePage?id=10&amp;amp;a=100#helloworld    2.获取当前url路径(当前url#后面的内容,包括参数和哈希值):var url = $location.url();// 结果：/home">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-11-07T02:42:44.913Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="$location">
+<meta name="twitter:description" content="【一】获取 (不修改URL)  1.获取当前完整的url路径var absurl = $location.absUrl();//http://172.16.0.88:8100/#/homePage?id=10&amp;amp;a=100#helloworld    2.获取当前url路径(当前url#后面的内容,包括参数和哈希值):var url = $location.url();// 结果：/home">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/11/07/location/"/>
+
+
+
+
+
+  <title>$location | CHEN.星~博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CHEN.星~博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生命在于折腾</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/07/location/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">$location</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-07T10:32:03+08:00">
+                2017-11-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="【一】获取-不修改URL"><a href="#【一】获取-不修改URL" class="headerlink" title="【一】获取 (不修改URL)"></a>【一】获取 (不修改URL)</h3><blockquote>
+<ul>
+<li><p>1.获取当前完整的url路径<br>var absurl = $location.absUrl();<br>//<a href="http://172.16.0.88:8100/#/homePage?id=10&amp;a=100#helloworld" target="_blank" rel="external">http://172.16.0.88:8100/#/homePage?id=10&amp;a=100#helloworld</a>  </p>
+</li>
+<li><p>2.获取当前url路径(当前url#后面的内容,包括参数和哈希值):<br>var url = $location.url();<br>// 结果：/homePage?id=10&amp;a=100  </p>
+</li>
+<li><p>3.获取当前url的子路径(也就是当前url#后面的内容,不包括参数)<br>var pathUrl = $location.path()<br>//结果：/homePage  </p>
+</li>
+</ul>
+<ul>
+<li>4.获取当前url的协议(比如http,https)<br>var protocol = $location.protocol();<br>//结果：http  </li>
+</ul>
+<ul>
+<li>5.获取主机名<br>var localhost = $location.host();<br>//结果：172.16.0.88  </li>
+</ul>
+<ul>
+<li>6.获取当前url的端口<br>var port = $location.port();<br>//结果：8100  </li>
+</ul>
+<ul>
+<li>7.获取当前url的哈希值<br>var hash = $location.hash()<br>//结果：helloworld</li>
+</ul>
+<ul>
+<li>8.获取当前url的参数的序列化json对象<br>var search = $location.search();<br>//结果：{id: “10”, a: “100”} </li>
+</ul>
+</blockquote>
+<h4 id="【二】修改-改变URL相关内容"><a href="#【二】修改-改变URL相关内容" class="headerlink" title="【二】修改 (改变URL相关内容)"></a>【二】修改 (改变URL相关内容)</h4><blockquote>
+<ul>
+<li><p>1 修改url的子路径部分(也就是当前url#后面的内容,不包括参数):<br>$location.url(‘/validation’);<br>//结果：<a href="http://172.16.0.88:8100/#/validation" target="_blank" rel="external">http://172.16.0.88:8100/#/validation</a>  </p>
+</li>
+<li><p>2 修改url的哈希值部分<br>$location.hash(‘myhash3’);<br>//结果:<a href="http://172.16.0.88:8100/#/homePage?id=10&amp;a=100#myhash3" target="_blank" rel="external">http://172.16.0.88:8100/#/homePage?id=10&amp;a=100#myhash3</a>  </p>
+</li>
+<li><p>3 修改url的参数部分(第一个参数表示url参数的属性名,第二个参数是该属性名的属性值,如果是已有属性名,则修改,如果不是已有属性,则新增)  $location.search(‘id’,’111’)<br>// 结果(修改参数值)：<a href="http://172.16.0.88:8100/#/homePage?id=111&amp;a=100" target="_blank" rel="external">http://172.16.0.88:8100/#/homePage?id=111&amp;a=100</a><br>$location.search(‘ids’,’111’)<br>// 结果（新增ids参数): <a href="http://172.16.0.88:8100/#/homePage?id=111&amp;a=100&amp;ids=111" target="_blank" rel="external">http://172.16.0.88:8100/#/homePage?id=111&amp;a=100&amp;ids=111</a>  </p>
+</li>
+<li><p>4.一次性修改多个参数<br>$location.search({id:’55’,’a’:’66’})<br>//结果：<a href="http://172.16.0.88:8100/#/homePage?id=55&amp;a=66#myhash3" target="_blank" rel="external">http://172.16.0.88:8100/#/homePage?id=55&amp;a=66#myhash3</a>  </p>
+</li>
+<li><p>5.第一个值表示url参数的属性名,如果是已有属性名,则删除该属性,如果不是已有属性,那就等于没改过<br>$location.search(‘age’,null)  </p>
+</li>
+</ul>
+</blockquote>
+<h3 id="【三】修改URL但不存入历史记录"><a href="#【三】修改URL但不存入历史记录" class="headerlink" title="【三】修改URL但不存入历史记录"></a>【三】修改URL但不存入历史记录</h3><blockquote>
+<ul>
+<li>在上面的修改url的方法的时候,每修改一次,url都会被存入历史记录,可以使用后退按钮回到修改前的url,如果不想要这种效果,而仅仅是替换当前的记录,可以使用  $location.path(‘/validation’).replace();</li>
+</ul>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/06/移动端，弹出层，禁止父级容器滚动/" rel="next" title="移动端，弹出层，禁止父级容器滚动">
+                <i class="fa fa-chevron-left"></i> 移动端，弹出层，禁止父级容器滚动
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/16/前端性能优化之meta缓存/" rel="prev" title="前端性能优化之meta做缓存">
+                前端性能优化之meta做缓存 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="CHEN.星" />
+          <p class="site-author-name" itemprop="name">CHEN.星</p>
+           
+              <p class="site-description motion-element" itemprop="description">个人技术博客</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">40</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#【一】获取-不修改URL"><span class="nav-number">1.</span> <span class="nav-text">【一】获取 (不修改URL)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#【二】修改-改变URL相关内容"><span class="nav-number">1.1.</span> <span class="nav-text">【二】修改 (改变URL相关内容)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#【三】修改URL但不存入历史记录"><span class="nav-number">2.</span> <span class="nav-text">【三】修改URL但不存入历史记录</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CHEN.星</span>
+</div>
+
+
+<div class="powered-by">
+   个人专属
+</div>
+
+<div class="theme-info">
+  博客 -CHEN.星
+  
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

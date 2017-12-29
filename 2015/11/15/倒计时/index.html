@@ -94,17 +94,17 @@
 
 
 
-<meta name="description" content="JQ时间倒计时   function timer(time) {  var btn = $(“#sendButton”);  btn.attr(“disabled”, true);  //按钮禁止点击  btn.val(time &amp;lt;= 0 ? “发送动态密码” : (“” + (time) + “秒后可发送”));  var hander = setInterval(function()">
+<meta name="description" content="JQ时间倒计时 function timer(time) { var btn = $(&amp;quot;#sendButton&amp;quot;); btn.attr(&amp;quot;disabled&amp;quot;, true);  //按钮禁止点击 btn.val(time &amp;lt;= 0 ? &amp;quot;发送动态密码&amp;quot; : (&amp;quot;&amp;quot; + (time) + &amp;quot;秒后可发送&amp;q">
 <meta property="og:type" content="article">
 <meta property="og:title" content="按钮倒计时">
 <meta property="og:url" content="http://yoursite.com/2015/11/15/倒计时/index.html">
 <meta property="og:site_name" content="CHEN.星~博客">
-<meta property="og:description" content="JQ时间倒计时   function timer(time) {  var btn = $(“#sendButton”);  btn.attr(“disabled”, true);  //按钮禁止点击  btn.val(time &amp;lt;= 0 ? “发送动态密码” : (“” + (time) + “秒后可发送”));  var hander = setInterval(function()">
+<meta property="og:description" content="JQ时间倒计时 function timer(time) { var btn = $(&amp;quot;#sendButton&amp;quot;); btn.attr(&amp;quot;disabled&amp;quot;, true);  //按钮禁止点击 btn.val(time &amp;lt;= 0 ? &amp;quot;发送动态密码&amp;quot; : (&amp;quot;&amp;quot; + (time) + &amp;quot;秒后可发送&amp;q">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-10-16T08:23:30.892Z">
+<meta property="og:updated_time" content="2017-11-16T06:46:58.624Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="按钮倒计时">
-<meta name="twitter:description" content="JQ时间倒计时   function timer(time) {  var btn = $(“#sendButton”);  btn.attr(“disabled”, true);  //按钮禁止点击  btn.val(time &amp;lt;= 0 ? “发送动态密码” : (“” + (time) + “秒后可发送”));  var hander = setInterval(function()">
+<meta name="twitter:description" content="JQ时间倒计时 function timer(time) { var btn = $(&amp;quot;#sendButton&amp;quot;); btn.attr(&amp;quot;disabled&amp;quot;, true);  //按钮禁止点击 btn.val(time &amp;lt;= 0 ? &amp;quot;发送动态密码&amp;quot; : (&amp;quot;&amp;quot; + (time) + &amp;quot;秒后可发送&amp;q">
 
 
 
@@ -331,20 +331,58 @@
       
         <ul>
 <li>JQ时间倒计时</li>
-<li>  function timer(time) {<br>  var btn = $(“#sendButton”);<br>  btn.attr(“disabled”, true);  //按钮禁止点击<br>  btn.val(time &lt;= 0 ? “发送动态密码” : (“” + (time) + “秒后可发送”));<br>  var hander = setInterval(function() {<pre><code>if (time &lt;= 0) {
-    clearInterval(hander); //清除倒计时
-    btn.val(&quot;发送动态密码&quot;);
-    btn.attr(&quot;disabled&quot;, false);
-    return false;
-}else {
-    btn.val(&quot;&quot; + (time--) + &quot;秒后可发送&quot;);
-}
-</code></pre>  }, 1000);<pre><code>}
-    //调用方法
-    timer(30);
+<li><pre><code>function timer(time) {
+var btn = $(&quot;#sendButton&quot;);
+btn.attr(&quot;disabled&quot;, true);  //按钮禁止点击
+btn.val(time &lt;= 0 ? &quot;发送动态密码&quot; : (&quot;&quot; + (time) + &quot;秒后可发送&quot;));
+var hander = setInterval(function() {
+    if (time &lt;= 0) {
+        clearInterval(hander); //清除倒计时
+        btn.val(&quot;发送动态密码&quot;);
+        btn.attr(&quot;disabled&quot;, false);
+        return false;
+    }else {
+        btn.val(&quot;&quot; + (time--) + &quot;秒后可发送&quot;);
+    }
+}, 1000);
+    }
+        //调用方法
+        timer(30);
+
+-angrulrjs 时间到计时
+-
+angular.module(&apos;controllers&apos;, []).controller(&apos;registerCtrl&apos;, function($scope,    $interval){ 
+    $scope.paracont = &quot;获取验证码&quot;; 
+    $scope.paraclass = &quot;but_null&quot;; 
+    $scope.paraevent = true; 
+    var second = 60, 
+      timePromise = undefined; 
+    timePromise = $interval(function(){ 
+         if(second&lt;=0){ 
+              $interval.cancel(timePromise); 
+              timePromise = undefined; 
+              second = 60; 
+              $scope.paracont = &quot;重发验证码&quot;; 
+              $scope.paraclass = &quot;but_null&quot;; 
+              $scope.paraevent = true; 
+         }else{ 
+              $scope.paracont = second + &quot;秒后可重发&quot;; 
+              $scope.paraclass = &quot;not but_null&quot;; 
+              second--; 
+         } 
+    },1000,100); 
+});
+
+$scope.$watch(&apos;filterOptions&apos;, function (newVal, oldVal) {
+ if (newVal !== oldVal) {
+  if (timeout) $timeout.cancel(timeout);
+  timeout = $timeout(function() {
+  $scope.getPagedDataAsync(&apos;admin/bill/&apos;+$stateParams.page+&apos;?pageCount=&apos;+$scope.paginationConf.itemsPerPage,$scope.filterOptions);
+  }, 800);
+ }
+ }, true);
 </code></pre></li>
 </ul>
-<p>-angrulrjs 时间到计时<br>-<br>    angular.module(‘controllers’, []).controller(‘registerCtrl’, function($scope,$interval){<br>    $scope.paracont = “获取验证码”;<br>    $scope.paraclass = “but_null”;<br>    $scope.paraevent = true;<br>    var second = 60,<br>      timePromise = undefined;<br>    timePromise = $interval(function(){<br>     if(second&lt;=0){<br>      $interval.cancel(timePromise);<br>      timePromise = undefined;<br>      second = 60;<br>      $scope.paracont = “重发验证码”;<br>      $scope.paraclass = “but_null”;<br>      $scope.paraevent = true;<br>     }else{<br>      $scope.paracont = second + “秒后可重发”;<br>      $scope.paraclass = “not but_null”;<br>      second–;<br>     }<br>    },1000,100);<br>});</p>
 
       
     </div>
@@ -449,7 +487,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-count">40</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
