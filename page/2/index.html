@@ -263,6 +263,544 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/06/移动端，弹出层，禁止父级容器滚动/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/06/移动端，弹出层，禁止父级容器滚动/" itemprop="url">移动端，弹出层，禁止父级容器滚动</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-06T11:51:42+08:00">
+                2017-11-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <pre><code>CSS代码：
+.noscroll,
+.noscroll body {
+    overflow: hidden;
+}
+.noscroll body {
+    position: relative;
+}
+JS代码：
+var elButton = $(&apos;#button&apos;), elButtonWith = $(&apos;#buttonWith&apos;);
+var elAside = $(&apos;#aside&apos;);
+elButton.on(&apos;click&apos;, function () {
+    elAside.addClass(&apos;active&apos;);
+    $(&apos;html&apos;).addClass(&apos;noscroll&apos;);
+});
+elButtonWith.on(&apos;click&apos;, function() {
+    elAside.addClass(&apos;active&apos;);
+    $.smartScroll(elAside, &apos;.scrollable&apos;);
+    elButton.html(elButton.html().replace(&apos;没有&apos;, &apos;已经&apos;));
+    $(&apos;html&apos;).addClass(&apos;noscroll&apos;);
+});
+
+$(&apos;.hideAside&apos;).on(&apos;click&apos;, function () {
+    $(&apos;html&apos;).removeClass(&apos;noscroll&apos;);
+    elAside.removeClass(&apos;active&apos;);
+});
+//方法
+$.smartScroll = function(container, selectorScrollable) {
+// 如果没有滚动容器选择器，或者已经绑定了滚动时间，忽略
+if (!selectorScrollable || container.data(&apos;isBindScroll&apos;)) {
+    return;
+}
+
+// 是否是搓浏览器
+// 自己在这里添加判断和筛选
+var isSBBrowser;
+
+var data = {
+    posY: 0,
+    maxscroll: 0
+};
+
+// 事件处理
+container.on({
+    touchstart: function (event) {
+        var events = event.touches[0] || event;
+
+        // 先求得是不是滚动元素或者滚动元素的子元素
+        var elTarget = $(event.target);
+
+        if (!elTarget.length) {
+            return;    
+        }
+
+        var elScroll;
+
+        // 获取标记的滚动元素，自身或子元素皆可
+        if (elTarget.is(selectorScrollable)) {
+            elScroll = elTarget;
+        } else if ((elScroll = elTarget.parents(selectorScrollable)).length == 0) {
+            elScroll = null;
+        }
+
+        if (!elScroll) {
+            return;
+        }
+
+        // 当前滚动元素标记
+        data.elScroll = elScroll;
+
+        // 垂直位置标记
+        data.posY = events.pageY;
+        data.scrollY = elScroll.scrollTop();
+        // 是否可以滚动
+        data.maxscroll = elScroll[0].scrollHeight - elScroll[0].clientHeight;
+    },
+    touchmove: function () {
+        // 如果不足于滚动，则禁止触发整个窗体元素的滚动
+        if (data.maxscroll &lt;= 0 || isSBBrowser) {
+            // 禁止滚动
+            event.preventDefault();
+        }
+        // 滚动元素
+        var elScroll = data.elScroll;
+        // 当前的滚动高度
+        var scrollTop = elScroll.scrollTop();
+
+        // 现在移动的垂直位置，用来判断是往上移动还是往下
+        var events = event.touches[0] || event;
+        // 移动距离
+        var distanceY = events.pageY - data.posY;
+
+        if (isSBBrowser) {
+            elScroll.scrollTop(data.scrollY - distanceY);
+            elScroll.trigger(&apos;scroll&apos;);
+            return;
+        }
+
+        // 上下边缘检测
+        if (distanceY &gt; 0 &amp;&amp; scrollTop == 0) {
+            // 往上滑，并且到头
+            // 禁止滚动的默认行为
+            event.preventDefault();
+            return;
+        }
+
+        // 下边缘检测
+        if (distanceY &lt; 0 &amp;&amp; (scrollTop + 1 &gt;= data.maxscroll)) {
+            // 往下滑，并且到头
+            // 禁止滚动的默认行为
+            event.preventDefault();
+            return;
+        }
+    },
+    touchend: function () {
+        data.maxscroll = 0;
+    }    
+});
+
+// 防止多次重复绑定
+container.data(&apos;isBindScroll&apos;, true);
+</code></pre><p>};</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/03/new Map-遍历/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/03/new Map-遍历/" itemprop="url">new Map 遍历</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-03T13:33:35+08:00">
+                2017-11-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<ul>
+<li>需求为数组对象中存在一个相同对象的值得时候，把相同对象合并，对应的值相加<pre><code>var map = new Map();
+  for(var i in data){
+      var a=[]
+      var each=data[i];
+      if(!map.has(each.productName)){
+          map.set(each.productName,each)
+      }else{
+          map.get(each.productName).turnover= map.get(each.productName).turnover+each.turnover
+      }
+  }
+</code></pre>  //这里of 就是遍历map循环的语句<br>   for(var each of map){<pre><code>    legendDataArr.push(each[1].activeName);
+    seriesDataArr[0].data.push({value:each[1].turnover,name:each[1].productName});//循环加入
+}
+</code></pre><h3 id="Maps-set-get-hash"><a href="#Maps-set-get-hash" class="headerlink" title="Maps set get hash"></a>Maps set get hash</h3>   map.set(each.productName,each)<br>  //缓存数据到map中<br>  map.get(each.productName)<br>  //获取数据<br>  map.has(each.productName)<br>  //Boolean值<h3 id="Maps-with-for-of"><a href="#Maps-with-for-of" class="headerlink" title="Maps with for..of"></a>Maps with for..of</h3>  var myMap = new Map();<br>  myMap.set(0, ‘zero’);<br>  myMap.set(1, ‘one’);<br>  for (var [key, value] of myMap) {<pre><code>console.log(key + &apos; = &apos; + value);
+</code></pre>  }<br>  // 0 = zero<br>  // 1 = one</li>
+</ul>
+</blockquote>
+<pre><code>for (var key of myMap.keys()) {
+  console.log(key);
+}
+// 0
+// 1
+
+for (var value of myMap.values()) {
+  console.log(value);
+}
+// zero
+// one
+
+for (var [key, value] of myMap.entries()) {
+  console.log(key + &apos; = &apos; + value);
+}
+// 0 = zero
+// 1 = one
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/03/jqgrid查询条件/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/03/jqgrid查询条件/" itemprop="url">jqgrid查询条件</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-03T13:25:53+08:00">
+                2017-11-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="jqgrid"><a href="#jqgrid" class="headerlink" title="jqgrid"></a>jqgrid</h3><pre><code>cts/scanCodeUrlModal/js/scan.code.url.controller.js
+遇到一次查询条件出问题的情况，
+//首次查询
+ postData: {
+        filters: angular.toJson({
+            groupOp: &apos;or&apos;,
+            rules: [{field: &apos;type&apos;, op: &apos;eq&apos;, data: 1},{field: &apos;type&apos;, op: &apos;eq&apos;, data: 3}]
+        })
+    },
+//根据条件查询的时候
+都是同样的type，查询data为 1or3的情况。
+bug出现在groupOp写的and
+这个位置查询是1或3的都查询出来。
+filters = {
+                groupOp: &apos;or&apos;
+                , rules: [{field: &apos;type&apos;, op: &apos;eq&apos;, data: 1},{field: &apos;type&apos;, op: &apos;eq&apos;, data: 3}]
+                }
+ $(urlTable).setGridParam({
+                postData: {
+                    filters: angular.toJson(filters)
+                }
+        });
+        $(urlTable).trigger(&apos;reloadGrid&apos;);
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/03/webpack配置/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1722,501 +2260,11 @@ img.append(&quot;files&quot;, eachFile,eachFile.name);
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/10/JqueryFileUpload遇到angulrjs/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="CHEN.星">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CHEN.星~博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/04/10/JqueryFileUpload遇到angulrjs/" itemprop="url">JqueryFileUpload遇到angulrjs</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-10T20:11:00+08:00">
-                2017-04-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ul>
-<li>input上传单个文件的时候，点击多次替换文件，文件会缓存起来，clone,replaceWith这个input会解决此问题，但是angularjs替换input元素后不会认识这个dom元素，事件不会执行，需要用到$compile指令来封装一次元素。</li>
-</ul>
-<hr>
-<pre><code>var input=$(&quot;#imgFile&quot;);
- var template = angular.element(input.clone());//复制一个input
- var content = $compile(template)(scope);用angularjs 封装好
- input.replaceWith(content); 替换
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/15/angulrjs项目拦截器/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="CHEN.星">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CHEN.星~博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/03/15/angulrjs项目拦截器/" itemprop="url">angulrjs项目拦截器</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-15T10:59:24+08:00">
-                2017-03-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="项目中拦截器"><a href="#项目中拦截器" class="headerlink" title="项目中拦截器"></a>项目中拦截器</h3><pre><code>(function(angular){
-&apos;use strict&apos;;
-angular.module(&quot;platform.main.interceptor&quot;,[])
-    /**
-     * 服务端消息状态码处理   
-     */
-    .factory(&apos;messageHttpInterceptor&apos;,[&apos;$q&apos;,function($q){
-        return {
-            &apos;response&apos;: function(response) {
-                var result = response.data;
-                if(result.text &amp;&amp; result.text!=&quot;&quot;){
-                    if(result.code&gt;=0){
-                        toastr.success(result.text);
-                    }else{
-                        if(result.code==14013){
-                            window.location.href =&quot;index.html&quot;;
-                        }else {
-                            toastr.error(result.text);
-                        }
-
-                    }
-                }
-                return response;
-            }
-        }
-    }])
-    .config([&apos;$httpProvider&apos;,function($httpProvider){
-        $httpProvider.interceptors.push(&apos;messageHttpInterceptor&apos;);
-    }])
-})(angular);
-——————————
-
-(function(angular){
-&apos;use strict&apos;;
-angular.module(&quot;platform.main.interceptor&quot;,[])
-    /**
-     * 服务端消息状态码处理
-     */
-    .factory(&apos;messageHttpInterceptor&apos;,[&apos;$q&apos;,function($q){
-        return {
-             request:function(config){
-                  config.headers[&quot;TOKEN&quot;] = $rootScope.user.token;
-                  return config;
-
-                },
-            &apos;response&apos;: function(response) {
-                var result = response.data;
-                if(result.text &amp;&amp; result.text!=&quot;&quot;){
-                    if(result.code&gt;=0){
-                        toastr.success(result.text);
-                    }else{
-                        if(result.code==14013){
-                            window.location.href =&quot;index.html&quot;;
-                        }else {
-                            toastr.error(result.text);
-                        }
-
-                    }
-                }
-                return response;
-            }，
-             responseError: function (response) {
-                  var data = response.data;
-                  // 判断错误码，如果是未登录
-                  if(data[&quot;errorCode&quot;] == &quot;500999&quot;){
-                    // 清空用户本地token存储的信息，如果
-                    $rootScope.user = {token:&quot;&quot;};
-                    // 全局事件，方便其他view获取该事件，并给以相应的提示或处理
-                    $rootScope.$emit(&quot;userIntercepted&quot;,&quot;notLogin&quot;,response);
-                  }
-                  // 如果是登录超时
-                  if(data[&quot;errorCode&quot;] == &quot;500998&quot;){
-                    $rootScope.$emit(&quot;userIntercepted&quot;,&quot;sessionOut&quot;,response);
-                  }
-                  return $q.reject(response);
-                }
-        }
-    }])
-    .config([&apos;$httpProvider&apos;,function($httpProvider){
-        $httpProvider.interceptors.push(&apos;messageHttpInterceptor&apos;);
-    }])
-})(angular);
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/15/angulrjs中run的运用/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="CHEN.星">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CHEN.星~博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/02/15/angulrjs中run的运用/" itemprop="url">angulrjs中run的运用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-15T19:59:35+08:00">
-                2017-02-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="run方法用于初始化全局的数据，仅对全局作用域起作用。"><a href="#run方法用于初始化全局的数据，仅对全局作用域起作用。" class="headerlink" title="run方法用于初始化全局的数据，仅对全局作用域起作用。"></a>run方法用于初始化全局的数据，仅对全局作用域起作用。</h1><h3 id="浏览器判断"><a href="#浏览器判断" class="headerlink" title="浏览器判断"></a>浏览器判断</h3><pre><code>.run([&apos;$rootScope&apos;, &apos;$route&apos;, &apos;$window&apos;, &apos;$location&apos;, &apos;Position&apos;, &apos;$cookies&apos;, &apos;Request&apos;, &apos;$cookieStore&apos;,
-  function($rootScope, $route, $window, $location, position, $cookies, request, $cookieStore) {
-   //非微信的登陆
-   $rootScope.isWeiXinLogin = function() {
-//判断是否微信登陆
-var ua = window.navigator.userAgent.toLowerCase();
-//console.log(ua); //mozilla/5.0 (iphone; cpu iphone os 9_1 like mac os x) applewebkit/601.1.46 (khtml, like gecko) version/9.0 mobile/13b143 safari/601.1
-if (ua.match(/MicroMessenger/i) == &apos;micromessenger&apos;) {
- console.log(&quot; 是来自微信内置浏览器&quot;);
- return true;
-} else {
- console.log(&quot;不是来自微信内置浏览器&quot;);
- return false;
-}
-   };
-]);
---------------
-控制层处理
-angular.module(&apos;autumnswind&apos;).controller(&apos;OrderCtrl&apos;, [&apos;$rootScope&apos;, &apos;$scope&apos;, &apos;Request&apos;, &apos;$cookies&apos;, &apos;$window&apos;, &apos;$routeParams&apos;, &apos;$location&apos;, &apos;Tool&apos;,
- function($rootScope, $scope, request, $cookies, $window, $routeParams, $location, tool) { 
-if ($rootScope.isWeiXinLogin()) {
-     ...
-    }
-   }
-]);
-</code></pre><h3 id="登陆判断"><a href="#登陆判断" class="headerlink" title="登陆判断"></a>登陆判断</h3><h4 id="项目中run-http和ajax请求头全局"><a href="#项目中run-http和ajax请求头全局" class="headerlink" title="项目中run$http和ajax请求头全局"></a>项目中run$http和ajax请求头全局</h4><pre><code>.run([&apos;$http&apos;, &apos;$cookies&apos;,&apos;$rootScope&apos;,&apos;$location&apos;, function($http, $cookies,$rootScope,$location) {
-        $http.defaults.headers.common[&apos;X-Requested-With&apos;] = &apos;XMLHttpRequest&apos;;
-        $http.defaults.headers.common[&apos;X-Auth-Token&apos;] = $cookies.get(&apos;X-Auth-Token&apos;);
-        $.ajaxSetup({
-            headers: {
-                &apos;X-Auth-Token&apos;: $cookies.get(&apos;X-Auth-Token&apos;)
-            }
-        });
-
-    }]);
-    //x-requested-with XMLHttpRequest是Ajax 异步请求方式
-    //直接用于全局环境每次$http头信息
-</code></pre><h3 id="什么是-XMLHttpRequest-对象？"><a href="#什么是-XMLHttpRequest-对象？" class="headerlink" title="什么是 XMLHttpRequest 对象？"></a>什么是 XMLHttpRequest 对象？</h3><ul>
-<li>XMLHttpRequest 对象用于在后台与服务器交换数据。</li>
-<li>XMLHttpRequest 对象是开发者的梦想，因为您能够：</li>
-<li>在不重新加载页面的情况下更新网页<br>在页面已加载后从服务器请求数据<br>在页面已加载后从服务器接收数据<br>在后台向服务器发送数据</li>
-<li>所有现代的浏览……</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2262,7 +2310,7 @@ if ($rootScope.isWeiXinLogin()) {
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">40</span>
+                <span class="site-state-item-count">43</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2308,7 +2356,7 @@ if ($rootScope.isWeiXinLogin()) {
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

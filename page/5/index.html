@@ -94,17 +94,16 @@
 
 
 
-<meta name="description" content="layout: wtitle: fromData封装多个图片一起上传date: 2017-12-29 11:02:31 tags:var formData = new FormData();  $.each($scope.tssContingencyPlan, function (i, v) {         formData.append(i, v);     });     //图片封装">
-<meta property="og:type" content="article">
+<meta name="description" content="个人技术博客">
+<meta property="og:type" content="website">
 <meta property="og:title" content="CHEN.星~博客">
-<meta property="og:url" content="http://yoursite.com/2017/12/29/fromData封装多个图片一起上传/index.html">
+<meta property="og:url" content="http://yoursite.com/page/5/index.html">
 <meta property="og:site_name" content="CHEN.星~博客">
-<meta property="og:description" content="layout: wtitle: fromData封装多个图片一起上传date: 2017-12-29 11:02:31 tags:var formData = new FormData();  $.each($scope.tssContingencyPlan, function (i, v) {         formData.append(i, v);     });     //图片封装">
+<meta property="og:description" content="个人技术博客">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-29T03:03:20.129Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CHEN.星~博客">
-<meta name="twitter:description" content="layout: wtitle: fromData封装多个图片一起上传date: 2017-12-29 11:02:31 tags:var formData = new FormData();  $.each($scope.tssContingencyPlan, function (i, v) {         formData.append(i, v);     });     //图片封装">
+<meta name="twitter:description" content="个人技术博客">
 
 
 
@@ -133,13 +132,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/12/29/fromData封装多个图片一起上传/"/>
+  <link rel="canonical" href="http://yoursite.com/page/5/"/>
 
 
 
 
 
-  <title> | CHEN.星~博客</title>
+  <title>CHEN.星~博客</title>
   
 
 
@@ -164,7 +163,9 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail ">
+  <div class="container sidebar-position-left 
+   page-home 
+ ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -247,9 +248,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-
-  <div id="posts" class="posts-expand">
+  <section id="posts" class="posts-expand">
     
+      
 
   
 
@@ -262,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/29/fromData封装多个图片一起上传/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/09/24/JS转换英文星期几/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="CHEN.星">
@@ -279,7 +280,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline"></h1>
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/09/24/JS转换英文星期几/" itemprop="url">“JS转换英文星期几”</a></h1>
         
 
         <div class="post-meta">
@@ -291,8 +294,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-29T11:02:31+08:00">
-                2017-12-29
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-09-24T20:19:07+08:00">
+                2015-09-24
               </time>
             
 
@@ -329,33 +332,19 @@
       
 
       
-        <hr>
-<p>layout: w<br>title: fromData封装多个图片一起上传<br>date: 2017-12-29 11:02:31</p>
-<h2 id="tags"><a href="#tags" class="headerlink" title="tags:"></a>tags:</h2><pre><code>var formData = new FormData();
+        
+          
+            <p>   根据下标获取  </p>
+<ul>
+<li>new Date().getDay()获取到数字星期几。  </li>
+<li>var dayNames=[‘Sunday’,’Monday ‘,’Tuesday’,’Wednesday’,<br>‘Thursday’,’Friday’,’Saturday’];<h4 id="获取今天星期几"><a href="#获取今天星期几" class="headerlink" title="获取今天星期几"></a>获取今天星期几</h4></li>
+<li>$scope.day=dayNames[new Date().getDay()];<h3 id="获取明天星期几"><a href="#获取明天星期几" class="headerlink" title="获取明天星期几"></a>获取明天星期几</h3></li>
+<li>$scope.day=dayNames[(new Date().getDay()+1)%7];  </li>
+</ul>
+<hr>
 
-$.each($scope.tssContingencyPlan, function (i, v) {
-        formData.append(i, v);
-    });
-    //图片封装
-    $.each($scope.certificateImgs, function (i, v) {
-        formData.append(&quot;files&quot;, v.files, v.orderIdx + &quot;_&quot; + v.id + &quot;_&quot; + v.name);
-    });
-    $.ajax({
-        url: contextPath + &quot;/tssContingencyPlan/save&quot;,
-        type: &apos;POST&apos;,
-        data: formData,
-        processData: false,
-        contentType: false,
-        async: false,
-        success: function (result) {
-            if (result.code &gt;= 0) {
-                $(&apos;#tss_emergencyPlanManagement_create_view&apos;).modal(&apos;hide&apos;);
-                $scope.tableRefresh();
-                toastr.success(result.text);
-            }
-        }
-});
-</code></pre>
+          
+        
       
     </div>
     
@@ -372,32 +361,12 @@ $.each($scope.tssContingencyPlan, function (i, v) {
       
 
       
-      
+
       
 
       
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2017/12/29/事件绑定图片上传以及验证格式/" rel="next" title="事件绑定图片上传以及验证格式">
-                <i class="fa fa-chevron-left"></i> 事件绑定图片上传以及验证格式
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/12/29/echart封装组件/" rel="prev" title="echart封装组件">
-                echart封装组件 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
       
-
-      
+        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -407,11 +376,276 @@ $.each($scope.tssContingencyPlan, function (i, v) {
   </article>
 
 
+    
+      
 
-    <div class="post-spread">
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/09/07/hexo常用命令笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/09/07/hexo常用命令笔记/" itemprop="url">hexo常用命令笔记</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-09-07T19:19:07+08:00">
+                2015-09-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="hexo"><a href="#hexo" class="headerlink" title="#hexo#"></a>#hexo#</h2><pre><code>npm install hexo -g #安装  
+npm update hexo -g #升级  
+hexo init #初始化
+</code></pre><h2 id="简写"><a href="#简写" class="headerlink" title="#简写#"></a>#简写#</h2><pre><code>hexo n &quot;我的博客&quot; == hexo new &quot;我的博客&quot; #新建文章  
+hexo p == hexo publish   
+hexo g == hexo generate#生成  
+hexo s == hexo server #启动服务预览  
+hexo d == hexo deploy#部署  
+</code></pre><h2 id="服务器"><a href="#服务器" class="headerlink" title="#服务器#"></a>#服务器#</h2><pre><code>hexo server #Hexo 会监视文件变动并自动更新，您无须重启服务器。  
+hexo server -s #静态模式  
+hexo server -p 5000 #更改端口  
+hexo server -i 192.168.1.1 #自定义 IP  
+
+hexo clean #清除缓存 网页正常情况下可以忽略此条命令  
+hexo g #生成静态网页  
+hexo d #开始部署  
+</code></pre><h2 id="监视文件变动"><a href="#监视文件变动" class="headerlink" title="#监视文件变动#"></a>#监视文件变动#</h2><pre><code>hexo generate #使用 Hexo 生成静态文件快速而且简单  
+hexo generate --watch #监视文件变动
+</code></pre><h2 id="模版"><a href="#模版" class="headerlink" title="#模版#"></a>#模版#</h2><pre><code>hexo new &quot;postName&quot; #新建文章  
+hexo new page &quot;pageName&quot; #新建页面  
+hexo generate #生成静态页面至public目录  
+hexo server #开启预览访问端口（默认端口4000，&apos;ctrl + c&apos;关闭server）  
+hexo deploy #将.deploy目录部署到GitHub  
+</code></pre>
+          
+        
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
   </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/09/07/生命在于折腾/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/09/07/生命在于折腾/" itemprop="url">生命在于折腾</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-09-07T15:19:07+08:00">
+                2015-09-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>你好，欢迎来到我的个人技术博客。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span>
+  </nav>
+
 
 
           </div>
@@ -419,10 +653,6 @@ $.each($scope.tssContingencyPlan, function (i, v) {
 
 
           
-  <div class="comments" id="comments">
-    
-  </div>
-
 
         </div>
         
@@ -443,17 +673,8 @@ $.each($scope.tssContingencyPlan, function (i, v) {
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -468,7 +689,7 @@ $.each($scope.tssContingencyPlan, function (i, v) {
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">40</span>
+                <span class="site-state-item-count">43</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -498,22 +719,6 @@ $.each($scope.tssContingencyPlan, function (i, v) {
       </section>
 
       
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#tags"><span class="nav-number">1.</span> <span class="nav-text">tags:</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
 
       
 
@@ -530,7 +735,7 @@ $.each($scope.tssContingencyPlan, function (i, v) {
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -624,10 +829,10 @@ $.each($scope.tssContingencyPlan, function (i, v) {
   
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
 <script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
 
-
+  
 
   
 
