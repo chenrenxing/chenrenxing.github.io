@@ -263,6 +263,607 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/29/事件绑定图片上传以及验证格式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/12/29/事件绑定图片上传以及验证格式/" itemprop="url">事件绑定图片上传以及验证格式</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-29T10:57:54+08:00">
+                2017-12-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <pre><code>    //选择图片触发事件，传入选中ID
+  $scope.upload = function (id) {
+      $scope.inputCode = id;//ID赋值
+      $(&quot;#fileBtn&quot; + id).trigger(&apos;click&apos;);//模拟对应ID的input点击事件
+      bindFileUpload();//调用文件上传方法
+  };
+function bindFileUpload() {//input
+          var input = $(&quot;#fileBtn&quot; + $scope.inputCode);//找到相应INPUT
+          if (input.fileupload) {
+              input.fileupload({
+                  dataType: &apos;json&apos;,
+                  autoUpload: false,
+                  acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
+                  maxFileSize: 999000,
+                  disableImageResize: /Android(?!.*Chrome)|Opera/
+                      .test(window.navigator.userAgent)
+              }).on(&apos;fileuploadadd&apos;, function (e, data) {
+                  if (data.files &amp;&amp; data.files[0]) {//是否有数据
+                      var fileName = data.files[0].name;
+                      var reg = /(\.|\/)(gif|jpe?g|png)$/i;
+                      if (reg.exec(fileName) === null) {
+                          swal({
+                                  title: &quot;提示&quot;,
+                                  text: &quot;图片格式不正确&quot;,
+                                  type: &quot;info&quot;,
+                                  showCancelButton: false,
+                                  closeOnConfirm: true,
+                                  showLoaderOnConfirm: false
+                              },
+                              function () {
+                                  swal.close();
+                              });
+                          return;
+                      }
+                      var reader = new FileReader();//新建FILE流
+                      reader.readAsDataURL(data.files[0]);//获取URL
+                      reader.onload = function (e) {//成功后返回
+                          addUrl(e.target.result, data.files[0]);//图片显示方法（参数：URL，文件流）
+                      };
+                  }
+              });
+          }
+      }
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/28/常用正则/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/12/28/常用正则/" itemprop="url">‘常用正则</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-28T10:35:59+08:00">
+                2017-12-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<ul>
+<li>拆分中英文冒号正则(：:) split(/\:|\：/);</li>
+<li>拆分文本域换行符替换BR replace(/\n|\r\n/g, “<br>“）</li>
+<li>拆分BR转换成回车replace(/<br\>/g,”\r\n”)</br\></li>
+</ul>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/16/前端性能优化之meta缓存/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/16/前端性能优化之meta缓存/" itemprop="url">前端性能优化之meta做缓存</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-16T14:55:45+08:00">
+                2017-11-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <pre><code>&lt;meta http-equiv=&quot;Cache-Control&quot; content=&quot;no-cache, no-store, must-revalidate&quot; /&gt;
+&lt;meta http-equiv=&quot;Pragma&quot; content=&quot;no-cache&quot; /&gt;
+&lt;meta http-equiv=&quot;Expires&quot; content=&quot;0&quot; /&gt;
+//Cache-Control（缓存控制） HTTP头信息
+//Expires期限（过期时间
+//实际上在微信环境中并没有用
+ &lt;meta http-equiv=&quot;Cache-Control&quot; content=&quot;max-age=31536000&quot;&gt;
+给个时间期限
+在每个页面的html,js，css文件URL后加上版本号，如http://xxx/index.js?t=版本号
+</code></pre><h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><blockquote>
+<ul>
+<li>meat标签的http-equiv属性语法格式是：＜meta http-equiv=”参数” content=”参数变量值”＞ <h3 id="Http头介绍-Expires-Cache-Control-Last-Modified-ETag"><a href="#Http头介绍-Expires-Cache-Control-Last-Modified-ETag" class="headerlink" title="Http头介绍:Expires,Cache-Control,Last-Modified,ETag"></a>Http头介绍:Expires,Cache-Control,Last-Modified,ETag</h3> 这里就只记录下Expires和Cache-Control,下文解释采用的是网络上抓取。</li>
+</ul>
+</blockquote>
+<h3 id="Expires"><a href="#Expires" class="headerlink" title="Expires"></a>Expires</h3><pre><code>-属性是HTTP控制缓存的基本手段。
+这个属性告诉缓存器：相关副本在多长时间内是新鲜的。
+过了这个时间，缓存器就会向源服务器发送请求，检查文档是否被修改。
+几乎所有的缓存服务器都支持Expires（过期时间）属性
+&lt;meta http-equiv=&quot;Expires&quot; content=&quot;Fri, 30 Oct 1998 14:19:41&quot; /&gt;
+</code></pre><h3 id="Cache-Control"><a href="#Cache-Control" class="headerlink" title="Cache-Control"></a>Cache-Control</h3><pre><code>Cache-Control响应头信息，
+让网站的发布者可以更全面的控制他们的内容,并定位过期时间的限制.
+
+public — 标记认证内容也可以被缓存，一般来说： 经过HTTP认证才能访问的内容，输出是自动不可以缓存的；
+
+no-cache — 强制每次请求直接发送给源服务器，而不经过本地缓存版本的校验。这对于需要确认认证应用很有用（可以和public结合使用），或者严格要求使用最新数据 的应用（不惜牺牲使用缓存的所有好处）；
+
+no-store — 强制缓存在任何情况下都不要保留任何副本
+
+must-revalidate — 告诉缓存必须遵循所有你给予副本的新鲜度的，HTTP允许缓存在某些特定情况下返回过期数据，指定了这个属性，你高速缓存，你希望严格的遵循你的规则。
+
+max-age=[秒] — 执行缓存被认为是最新的最长时间。类似于过期时间，这个参数是基于请求时间的相对时间间隔，而不是绝对过期时间，[秒]是一个数字，单位是秒：从请求时间 开始到过期时间之间的秒数。
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/07/location/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/07/location/" itemprop="url">$location</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-07T10:32:03+08:00">
+                2017-11-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="【一】获取-不修改URL"><a href="#【一】获取-不修改URL" class="headerlink" title="【一】获取 (不修改URL)"></a>【一】获取 (不修改URL)</h3><blockquote>
+<ul>
+<li><p>1.获取当前完整的url路径<br>var absurl = $location.absUrl();<br>//<a href="http://172.16.0.88:8100/#/homePage?id=10&amp;a=100#helloworld" target="_blank" rel="external">http://172.16.0.88:8100/#/homePage?id=10&amp;a=100#helloworld</a>  </p>
+</li>
+<li><p>2.获取当前url路径(当前url#后面的内容,包括参数和哈希值):<br>var url = $location.url();<br>// 结果：/homePage?id=10&amp;a=100  </p>
+</li>
+<li><p>3.获取当前url的子路径(也就是当前url#后面的内容,不包括参数)<br>var pathUrl = $location.path()<br>//结果：/homePage  </p>
+</li>
+</ul>
+<ul>
+<li>4.获取当前url的协议(比如http,https)<br>var protocol = $location.protocol();<br>//结果：http  </li>
+</ul>
+<ul>
+<li>5.获取主机名<br>var localhost = $location.host();<br>//结果：172.16.0.88  </li>
+</ul>
+<ul>
+<li>6.获取当前url的端口<br>var port = $location.port();<br>//结果：8100  </li>
+</ul>
+<ul>
+<li>7.获取当前url的哈希值<br>var hash = $location.hash()<br>//结果：helloworld</li>
+</ul>
+<ul>
+<li>8.获取当前url的参数的序列化json对象<br>var search = $location.search();<br>//结果：{id: “10”, a: “100”} </li>
+</ul>
+</blockquote>
+<h4 id="【二】修改-改变URL相关内容"><a href="#【二】修改-改变URL相关内容" class="headerlink" title="【二】修改 (改变URL相关内容)"></a>【二】修改 (改变URL相关内容)</h4><blockquote>
+<ul>
+<li><p>1 修改url的子路径部分(也就是当前url#后面的内容,不包括参数):<br>$location.url(‘/validation’);<br>//结果：<a href="http://172.16.0.88:8100/#/validation" target="_blank" rel="external">http://172.16.0.88:8100/#/validation</a>  </p>
+</li>
+<li><p>2 修改url的哈希值部分<br>$location.hash(‘myhash3’);<br>//结果:<a href="http://172.16.0.88:8100/#/homePage?id=10&amp;a=100#myhash3" target="_blank" rel="external">http://172.16.0.88:8100/#/homePage?id=10&amp;a=100#myhash3</a>  </p>
+</li>
+<li><p>3 修改url的参数部分(第一个参数表示url参数的属性名,第二个参数是该属性名的属性值,如果是已有属性名,则修改,如果不是已有属性,则新增)  $location.search(‘id’,’111’)<br>// 结果(修改参数值)：<a href="http://172.16.0.88:8100/#/homePage?id=111&amp;a=100" target="_blank" rel="external">http://172.16.0.88:8100/#/homePage?id=111&amp;a=100</a><br>$location.search(‘ids’,’111’)<br>// 结果（新增ids参数): <a href="http://172.16.0.88:8100/#/homePage?id=111&amp;a=100&amp;ids=111" target="_blank" rel="external">http://172.16.0.88:8100/#/homePage?id=111&amp;a=100&amp;ids=111</a>  </p>
+</li>
+<li><p>4.一次性修改多个参数<br>$location.search({id:’55’,’a’:’66’})<br>//结果：<a href="http://172.16.0.88:8100/#/homePage?id=55&amp;a=66#myhash3" target="_blank" rel="external">http://172.16.0.88:8100/#/homePage?id=55&amp;a=66#myhash3</a>  </p>
+</li>
+<li><p>5.第一个值表示url参数的属性名,如果是已有属性名,则删除该属性,如果不是已有属性,那就等于没改过<br>$location.search(‘age’,null)  </p>
+</li>
+</ul>
+</blockquote>
+<h3 id="【三】修改URL但不存入历史记录"><a href="#【三】修改URL但不存入历史记录" class="headerlink" title="【三】修改URL但不存入历史记录"></a>【三】修改URL但不存入历史记录</h3><blockquote>
+<ul>
+<li>在上面的修改url的方法的时候,每修改一次,url都会被存入历史记录,可以使用后退按钮回到修改前的url,如果不想要这种效果,而仅仅是替换当前的记录,可以使用  $location.path(‘/validation’).replace();</li>
+</ul>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/06/移动端，弹出层，禁止父级容器滚动/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1473,793 +2074,6 @@ $scope.levelThree = function () {
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/25/百度地图获取地理信息/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="CHEN.星">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CHEN.星~博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/25/百度地图获取地理信息/" itemprop="url">百度地图获取地理信息</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-25T15:53:35+08:00">
-                2017-10-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <pre><code>&lt;script type=&quot;text/javascript&quot; src=&quot;http://api.map.baidu.com/api?v=2.0&amp;ak=vxGvQW5jBqiuaZmVEaZtFkSeyTP9MzPw&quot;&gt;&lt;/script&gt;
-
-// 百度地图获取地理信息
-        var longitude, latitude, province, city, district, street, streetNumber, address;
-        // 创建地理编码实例
-        var myGeo = new BMap.Geocoder();
-        var geolocation = new BMap.Geolocation();
-        geolocation.getCurrentPosition(function (r) {
-            if (geolocation.getStatus() == BMAP_STATUS_SUCCESS) {
-                longitude = r.point.lng;
-                latitude = r.point.lat;
-                // 根据坐标得到地址描述
-                myGeo.getLocation(r.point, function (result) {
-                    if (result) {
-                        var addComp = result.addressComponents;
-                        province = addComp.province;
-                        city = addComp.city;
-                        district = addComp.district;
-                        street = addComp.street;
-                        streetNumber = addComp.streetNumber;
-                        address = province + city + district + street + streetNumber;
-                    }
-                });
-            }
-            else {
-                alert(&apos;failed&apos; + this.getStatus());
-            }
-        }, {enableHighAccuracy: true});
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/25/css3背景旋转/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="CHEN.星">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CHEN.星~博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/25/css3背景旋转/" itemprop="url">css3背景旋转</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-25T14:25:00+08:00">
-                2017-10-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>很久没写css3效果了，生疏了，放一段css3背景旋转</p>
-<pre><code> css---
-  #audio_btn {
-         width: 30px;
-         height: 30px;
-         background-image: url(img/audio.png);
-         background-size: contain;
-     }
-
-.rotate {
-        -webkit-animation: rotating 1.2s linear infinite;
-         -moz-animation: rotating 1.2s linear infinite;
-         -o-animation: rotating 1.2s linear infinite;
-          animation: rotating 1.2s linear infinite
-      }
-
-  @-webkit-keyframes rotating {
-     from { -webkit-transform: rotate(0deg) }
-    to { -webkit-transform: rotate(360deg) }
- }
-
-@keyframes rotating {
-    from { transform: rotate(0deg) }
-     to { transform: rotate(360deg) }
-  }
- @-moz-keyframes rotating {
-   from { -moz-transform: rotate(0deg) }
-   to { -moz-transform: rotate(360deg) }
-}
-</code></pre><hr>
-<pre><code>js--
- $(function(){
- var x = document.getElementById(&quot;media&quot;);
- $(&quot;#audio_btn&quot;).click(function(){
-        $(this).toggleClass(&quot;rotate&quot;); //控制音乐图标 自转或暂停
-
-          //控制背景音乐 播放或暂停
-        if($(this).hasClass(&quot;rotate&quot;)){
-                 x.play();
-               }else{
-                x.pause();
-              }
-       })
-   });
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/23/消息推送notification/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="CHEN.星">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CHEN.星~博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/23/消息推送notification/" itemprop="url">消息推送</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-23T10:51:23+08:00">
-                2017-10-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h3><pre><code>//Notification API
-// 先检查浏览器是否支持
-    if (!(&quot;Notification&quot; in window)) {
-        alert(&quot;This browser does not support desktop notification&quot;);
-    }
-    // 检查用户是否同意接受通知
-    else if (Notification.permission === &quot;granted&quot;) {
-        // If it&apos;s okay let&apos;s create a notification
-        var notification = new Notification(&quot;Hi there!&quot;);
-    }
-    // 否则我们需要向用户获取权限
-    else if (Notification.permission !== &apos;denied&apos;) {
-        Notification.requestPermission(function (permission) {
-            // 如果用户同意，就可以向他们发送通知
-            if (permission === &quot;granted&quot;) {
-                var notification = new Notification(&quot;Hi there!&quot;);
-            }
-        });
-    }    
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/04/base64字符数据图片转Blob/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="CHEN.星">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CHEN.星~博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/05/04/base64字符数据图片转Blob/" itemprop="url">base64字符数据图片转Blob以及上传遇到问题</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-04T20:19:07+08:00">
-                2017-05-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ul>
-<li>项目存在一个图片过大做压缩的功能，而遇到blob字符转换遇到的一些问题记录，以及上传出现的问题。</li>
-</ul>
-<hr>
-<h3 id="base64转换blob"><a href="#base64转换blob" class="headerlink" title="base64转换blob"></a>base64转换blob</h3><pre><code>/**
- * 将以base64的图片url数据转换为Blob
- * @param urlData
- *  用url方式表示的base64图片数据
- */
-function convertBase64UrlToBlob(urlData){
-        var bytes=window.atob(urlData.split(&apos;,&apos;)[1]);        //去掉url的头，并转换为byte
-        //处理异常,将ascii码小于0的转换为大于0
-        var arr = urlData.split(&apos;,&apos;);
-        var mime = arr[0].match(/:(.*?);/)[1];//获取到图片类型
-        console.log(mime);
-        var ab = new ArrayBuffer(bytes.length);
-        var ia = new Uint8Array(ab);
-        for (var i = 0; i &lt; bytes.length; i++) {
-            ia[i] = bytes.charCodeAt(i);
-        }
-        return new Blob( [ab] , {type : mime});}
-</code></pre><hr>
-<h3 id="压缩图片JS"><a href="#压缩图片JS" class="headerlink" title="压缩图片JS"></a>压缩图片JS</h3><pre><code>  * 这是基于html5的前端图片工具，压缩工具。
-
- function ImageResizer(opts,returnObject){  
- var settings={
-    resizeMode:&quot;auto&quot;//压缩模式，总共有三种  auto,width,height auto表示自动根据最大的宽度及高度等比压缩，width表示只根据宽度来判断是否需要等比例压缩，height类似。
-    ,dataSource:&quot;&quot; //数据源。数据源是指需要压缩的数据源，有三种类型，image图片元素，base64字符串，canvas对象，还有选择文件时候的file对象。。。
-    ,dataSourceType:&quot;image&quot; //image  base64 canvas
-    //,maxWidth:150 //允许的最大宽度
-    //,maxHeight:200 //允许的最大高度。
-    ,onTmpImgGenerate:function(img){} //当中间图片生成时候的执行方法。。这个时候请不要乱修改这图片，否则会打乱压缩后的结果。
-    ,success:function(resizeImgBase64,canvas){
-
-    }//压缩成功后图片的base64字符串数据。
-    ,debug:false //是否开启调试模式。
-};
-var appData={};
-$.extend(settings,opts);
-
-var _debug=function(str,styles){
-    if(settings.debug==true){
-        if(styles){
-            console.log(str,styles);
-        }
-        else{
-            console.log(str);
-        }
-    }
-};
-var innerTools={
-    getBase4FromImgFile:function(file,callBack){
-
-        var reader = new FileReader();
-        reader.onload = function(e) {
-            var base64Img= e.target.result;
-            //var $img = $(&apos;&lt;img&gt;&apos;).attr(&quot;src&quot;, e.target.result)
-            //$(&apos;#preview&apos;).empty().append($img)
-            if(callBack){
-                callBack(base64Img);
-            }
-        };
-        reader.readAsDataURL(file);
-    }
-
-    //--处理数据源。。。。将所有数据源都处理成为图片图片对象，方便处理。
-    ,getImgFromDataSource:function(datasource,dataSourceType,callback){
-        var _me=this;
-        var img1=new Image();
-        if(dataSourceType==&quot;img&quot;||dataSourceType==&quot;image&quot;){
-            img1.src=$(datasource).attr(&quot;src&quot;);
-            if(callback){
-                callback(img1);
-            }
-        }
-        else if(dataSourceType==&quot;base64&quot;){
-            img1.src=datasource;
-            if(callback){
-                callback(img1);
-            }            }
-        else if(dataSourceType==&quot;canvas&quot;){
-            img1.src = datasource.toDataURL(&quot;image/jpeg&quot;);
-            if(callback){
-                callback(img1);
-            }
-        }
-        else if(dataSourceType==&quot;file&quot;){
-            _me.getBase4FromImgFile(function(base64str){
-                img1.src=base64str;
-                if(callback){
-                    callback(img1);
-                }
-            });
-        }
-
-    }
-    //计算图片的需要压缩的尺寸。当然，压缩模式，压缩限制直接从setting里面取出来。
-    ,getResizeSizeFromImg:function(img){
-        var _img_info={
-            w:$(img)[0].naturalWidth,
-            h:$(img)[0].naturalHeight
-        };
-        console.log(&quot;真实尺寸：&quot;);
-        console.log(_img_info);
-        var _resize_info={
-            w:0
-            ,h:0
-        };
-        if(_img_info.w&lt;=settings.maxWidth&amp;&amp;_img_info.h&lt;=settings.maxHeight){
-            return _img_info;
-        }
-        if(settings.resizeMode==&quot;auto&quot;){
-            var _percent_scale=parseFloat(_img_info.w/_img_info.h);
-            var _size1={
-                w:0
-                ,h:0
-            };
-            var _size_by_mw={
-                w:settings.maxWidth
-                ,h:parseInt(settings.maxWidth/_percent_scale)
-            };
-            var _size_by_mh={
-                w:parseInt(settings.maxHeight*_percent_scale)
-                ,h:settings.maxHeight
-            };
-            if(_size_by_mw.h&lt;=settings.maxHeight){
-                return _size_by_mw;
-            }
-            if(_size_by_mh.w&lt;=settings.maxWidth){
-                return _size_by_mh;
-            }
-
-            return {
-                w:settings.maxWidth
-                ,h:settings.maxHeight
-            };
-
-        }
-        if(settings.resizeMode==&quot;width&quot;){
-            if(_img_info.w&lt;=settings.maxWidth){
-                return _img_info;
-            }
-            var _size_by_mw={
-                w:settings.maxWidth
-                ,h:parseInt(settings.maxWidth/_percent_scale)
-            };
-            return _size_by_mw;
-        }
-
-        if(settings.resizeMode==&quot;height&quot;){
-            if(_img_info.h&lt;=settings.maxHeight){
-                return _img_info;
-            }
-            var _size_by_mh={
-                w:parseInt(settings.maxHeight*_percent_scale)
-                ,h:settings.maxHeight
-            };
-            return _size_by_mh;
-        }
-
-    }
-    //--将相关图片对象画到canvas里面去。
-    ,drawToCanvas:function(img,theW,theH,realW,realH,callback){
-
-        var canvas = document.createElement(&quot;canvas&quot;);
-        canvas.width=theW;
-        canvas.height=theH;
-        var ctx = canvas.getContext(&apos;2d&apos;);
-        ctx.drawImage(img,
-            0,//sourceX,
-            0,//sourceY,
-            realW,//sourceWidth,
-            realH,//sourceHeight,
-            0,//destX,
-            0,//destY,
-            theW,//destWidth,
-            theH//destHeight
-        );
-
-        //--获取base64字符串及canvas对象传给success函数。
-        var base64str=canvas.toDataURL(&quot;image/png&quot;);
-        if(callback){
-            callback(base64str,canvas);
-        }
-    }
-};
-
-//--开始处理。
-(function(){
-    innerTools.getImgFromDataSource(settings.dataSource,settings.dataSourceType,function(_tmp_img){
-        var __tmpImg=_tmp_img;
-        settings.onTmpImgGenerate(_tmp_img);
-        //--计算尺寸。
-        var _limitSizeInfo=innerTools.getResizeSizeFromImg(__tmpImg);
-        console.log(_limitSizeInfo);
-        var _img_info={
-            w:$(__tmpImg)[0].naturalWidth,
-            h:$(__tmpImg)[0].naturalHeight
-        };
-        innerTools.drawToCanvas(__tmpImg,_limitSizeInfo.w,_limitSizeInfo.h,_img_info.w,_img_info.h,function(base64str,canvas){
-            settings.success(base64str,canvas);
-        });
-
-    });
-})();
-
-returnObject({
-    a:1
-});
-
-//return returnObject;
-</code></pre><p>};</p>
-<h3 id="blob上传遇到的问题"><a href="#blob上传遇到的问题" class="headerlink" title="blob上传遇到的问题"></a>blob上传遇到的问题</h3><pre><code>    /**
-    *File对象为base
-    /
-  var img = new FormData();
-img.append(&quot;files&quot;, eachFile,eachFile.name);
-</code></pre><ul>
-<li>项目后台代码反正我不清楚，平时上传的图片是存在图片名字的，base64在转为Blob后上传，获取不到文件名字，就需要eachFile.name作为参数一起append到文件流里面。</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2310,7 +2124,7 @@ img.append(&quot;files&quot;, eachFile,eachFile.name);
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">43</span>
+                <span class="site-state-item-count">46</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

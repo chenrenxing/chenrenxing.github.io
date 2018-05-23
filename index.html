@@ -263,6 +263,773 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/21/cookie工厂方法公用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/21/cookie工厂方法公用/" itemprop="url">cookie工厂方法公用</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-21T11:18:57+08:00">
+                2018-05-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><pre><code>(function (angular) {
+&quot;use strict&quot;;
+angular.module(&apos;login.cookie.Factory&apos;, [])
+    .factory(&apos;loginCookieFactory&apos;, [function () {
+        //记录账号
+        return {
+            setCookie: function (name, value, timeout) {
+                //如果需要加时间限制
+                if(timeout){
+                    var d = new Date();
+                    //设置小时
+                    d.setDate(d.getDate() + timeout);
+                    document.cookie = name + &apos;=&apos; + value + &apos;;expires=&apos; + d;
+                    //设置秒数写法
+                    date.setTime(date.getTime()+5*1000); //设置date为当前时间5秒
+                    document.cookie=&quot;companyTenantId=&quot;+$scope.companyTenantId+&quot;;expires=&quot;+date.toGMTString();  //将date赋值给expires
+                }else {
+                    document.cookie = name + &apos;=&apos; + value;
+                }
+
+            },
+            getCookie: function (name) {
+                var arr = document.cookie.split(&apos;; &apos;);
+                for (var i = 0; i &lt; arr.length; i++) {
+                    var arr2 = arr[i].split(&apos;=&apos;); //[&apos;abc&apos;,&apos;cba&apos;]
+                    if (arr2[0] == name) {
+                        return arr2[1];
+                        console.log(arr2[1]);
+                    }
+                }
+                return &apos;&apos;;
+            }
+        }
+    }]);
+})(angular);
+</code></pre><h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><pre><code>//写入
+loginCookieFactory.setCookie(name, value, timeout);
+//读取
+loginCookieFactory。getCookie(name);
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/21/less配置环境/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/21/less配置环境/" itemprop="url">less配置环境</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-21T11:04:11+08:00">
+                2018-05-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>#src/app/app.scss配置#<br>    // 页面适配<br>    // 根元素大小使用 vw 单位<br>    $vm_fontsize: 72; // 是$vm_design 值得十分之一<br>    $vm_design: 720; // 根据需要替换成设计稿的值,比如设计稿给你的宽度是360px,<br>    html {<br>      font-size: ($vm_fontsize / $vm_design) * 100vw; // 同时，通过Media Queries 限制根元素最大最小值<br>      @media screen and (max-width: 320px) {<br>        font-size: 32px;<br>      }<br>      @media screen and (min-width: 540px) {<br>        font-size: 54px;<br>      }<br>    }</p>
+<pre><code>// body 也增加最大最小宽度限制，避免默认100%宽度的 block 元素跟随 body 而过大过小
+body {
+  max-width: 540px;
+  min-width: 320px;
+  width: 100%;
+  height: 100%;
+  -webkit-overflow-scrolling: touch;
+  font-size: rem(14);
+}
+
+html {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  background: transparent;
+  box-sizing: border-box;
+}
+
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+code,
+form,
+fieldset,
+legend,
+input,
+textarea,
+p,
+blockquote,
+th,
+td,
+hr,
+button,
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section,
+sumary {
+  margin: 0;
+  padding: 0;
+}
+</code></pre><h3 id="src-theme-variables-scss配置"><a href="#src-theme-variables-scss配置" class="headerlink" title="src/theme/variables.scss配置"></a>src/theme/variables.scss配置</h3><pre><code>//页面适配
+// 项目的中的所有单位均采用需调用  rem(视觉图的像素值) 方法计算相应的虚拟像素值
+$vm_fontsize: 72;  // 是$vm_design 值得十分之一
+$vm_design: 720; // 根据需要替换成设计稿的值,比如设计稿给你的宽度是720px,
+@function rem($px) {
+  @return ($px / $vm_fontsize) * 1rem;
+}
+
+
+$action-sheet-ios-button-font-size: rem(40);
+$action-sheet-ios-title-font-size: rem(26);
+$action-sheet-md-button-font-size: rem(32);
+$action-sheet-md-icon-font-size: rem(48);
+$action-sheet-md-title-font-size: rem(32);
+$action-sheet-wp-button-font-size: rem(30);
+$action-sheet-wp-icon-font-size: rem(48);
+$action-sheet-wp-title-font-size: rem(40);
+$badge-font-size: rem(26);
+$button-ios-font-size: rem(32);
+$button-ios-large-font-size: rem(40);
+$button-ios-small-font-size: rem(26);
+$button-ios-small-icon-font-size: rem(26);
+$button-md-font-size: rem(28);
+$button-md-large-font-size: rem(40);
+$button-md-small-font-size: rem(26);
+$button-md-small-icon-font-size: rem(28);
+$button-wp-font-size: rem(28);
+$button-wp-large-font-size: rem(40);
+$button-wp-small-font-size: rem(26);
+$button-wp-small-icon-font-size: rem(26);
+$card-ios-font-size: rem(28);
+$card-ios-header-font-size: rem(32);
+$card-ios-title-font-size: rem(36);
+$card-md-font-size: rem(24);
+$card-md-header-font-size: rem(32);
+$card-md-title-font-size: rem(48);
+$card-wp-font-size: rem(24);
+$card-wp-header-font-size: rem(32);
+$card-wp-title-font-size: rem(48);
+$font-size-base: rem(28);
+$font-size-ios-base: $font-size-base;
+$font-size-ios-base: $font-size-base;
+$font-size-md-base: $font-size-base;
+$font-size-md-base: $font-size-base;
+$font-size-wp-base: $font-size-base;
+$font-size-wp-base: $font-size-base;
+$h1-font-size: rem(51);
+$h2-font-size: rem(48);
+$h3-font-size: rem(44);
+$h4-font-size: rem(40);
+$h5-font-size: rem(36);
+$h6-font-size: rem(32);
+$item-ios-body-text-font-size: rem(56);
+$item-ios-paragraph-font-size: rem(28);
+$item-md-body-text-font-size: rem(14);
+$item-md-divider-font-size: $item-md-body-text-font-size;
+$item-md-font-size: rem(32);
+$item-wp-body-text-font-size: rem(28);
+$item-wp-divider-font-size: rem(40);
+$item-wp-font-size: rem(32);
+$list-ios-header-font-size: rem(24);
+$list-md-header-font-size: rem(28);
+$list-wp-header-font-size: rem(40);
+$searchbar-wp-input-font-size: rem(28);
+$segment-button-ios-font-size: rem(26);
+$segment-button-ios-toolbar-font-size: rem(24);
+$segment-button-md-font-size: rem(24);
+$segment-button-wp-font-size: rem(26);
+$tabs-md-tab-font-size: rem(24);
+$tabs-md-tab-font-size-active: rem(28);
+$tabs-wp-tab-font-size: rem(24);
+$toast-ios-title-font-size: rem(28);
+$toast-md-title-font-size: rem(30);
+$toast-wp-title-font-size: rem(28);
+$toolbar-ios-button-font-size: rem(34);
+$toolbar-ios-title-font-size: rem(34);
+$toolbar-md-button-font-size: rem(28);
+$toolbar-md-title-font-size: rem(40);
+$toolbar-wp-button-font-size: rem(28);
+$toolbar-wp-title-font-size: rem(30);
+$action-sheet-ios-button-min-height: rem(96);
+$action-sheet-ios-title-padding: rem(30);
+$action-sheet-md-button-min-height: rem(96);
+$action-sheet-md-icon-width: rem(46);
+$action-sheet-wp-button-height: rem(96);
+$action-sheet-wp-icon-width:rem(46);
+$alert-wp-input-line-height:rem(60);
+$button-ios-margin-bottom: rem(8);
+$button-ios-margin-end: rem(4);
+$button-ios-margin-start:rem(4);
+$button-ios-margin-top: rem(8);
+$button-md-height: rem(72);
+$button-md-margin-bottom: rem(8);
+$button-md-margin-end: rem(4);
+$button-md-margin-start:rem(4);
+$button-md-margin-top: rem(8);
+$button-round-padding-end: rem(52);
+$button-wp-height: rem(72);
+$button-wp-margin-bottom :rem(8);
+$button-wp-margin-end: rem(4);
+$button-wp-margin-start: rem(4);
+$button-wp-margin-top:rem(8);
+$list-ios-header-letter-spacing:rem(2);
+$list-md-header-min-height:rem(90);
+$searchbar-ios-input-height:rem(60);
+$searchbar-md-input-line-height:rem(60);
+$searchbar-wp-input-line-height:rem(60);
+$segment-button-ios-height: rem(64);
+$segment-button-ios-icon-line-height: rem(56);
+$segment-button-ios-icon-size: rem(52);
+$segment-button-ios-line-height:rem(60);
+$segment-button-ios-toolbar-button-height: rem(52);
+$segment-button-ios-toolbar-icon-line-height: rem(48);
+$segment-button-ios-toolbar-icon-size:rem(44);
+$segment-button-ios-toolbar-line-height: rem(50);
+$segment-button-md-font-size: rem(24);
+$segment-button-md-height: rem(84);
+$segment-button-md-icon-size: rem(52);
+$segment-button-md-line-height: rem(80);
+$segment-button-wp-height: rem(80);
+$segment-button-wp-icon-size: rem(52);
+$segment-button-wp-line-height: rem(80);
+$tabs-md-tab-font-size-active:rem(24);
+$tabs-md-tab-icon-size:rem(48);
+$tabs-md-tab-min-height:rem(92);
+$tabs-wp-tab-icon-size:rem(48);
+$text-input-wp-line-height:rem(60);
+$toast-ios-border-radius:rem(13);
+$toast-ios-title-padding-top:rem(30);
+$toast-wp-title-padding-top:rem(30);
+$segment-button-ios-icon-line-height:rem(56);
+$menu-width:rem(400);
+$menu-small-width:rem(400);
+// Ionic Variables and Theming. For more info, please see:
+// http://ionicframework.com/docs/theming/
+// Font path is used to include ionicons,
+// roboto, and noto sans fonts
+$font-path: &quot;../assets/fonts&quot;;
+// The app direction is used to include
+// rtl styles in your app. For more info, please see:
+// http://ionicframework.com/docs/theming/rtl-support/
+$app-direction: ltr;
+@import &quot;ionic.globals&quot;;
+// Shared Variables
+// --------------------------------------------------
+// To customize the look and feel of this app, you can override
+// the Sass variables found in Ionic&apos;s source scss files.
+// To view all the possible Ionic variables, see:
+// http://ionicframework.com/docs/theming/overriding-ionic-variables/
+// Named Color Variables
+// --------------------------------------------------
+// Named colors makes it easy to reuse colors on various components.
+// It&apos;s highly recommended to change the default colors
+// to match your app&apos;s branding. Ionic uses a Sass map of
+// colors so you can add, rename and remove colors as needed.
+// The &quot;primary&quot; color is the only required color in the map.
+$colors: ( primary: #488aff, secondary: #32db64, danger: #f53d3d, light: #f4f4f4, dark: #222);
+// App iOS Variables
+// --------------------------------------------------
+// iOS only Sass variables can go here
+// App Material Design Variables
+// --------------------------------------------------
+// Material Design only Sass variables can go here
+// App Windows Variables
+// --------------------------------------------------
+// Windows only Sass variables can go here
+// App Theme
+// --------------------------------------------------
+// Ionic apps can have different themes applied, which can
+// then be future customized. This import comes last
+// so that the above variables are used and Ionic&apos;s
+// default are overridden.
+@import &quot;ionic.theme.default&quot;;
+// Ionicons
+// --------------------------------------------------
+// The premium icon font for Ionic. For more info, please see:
+// http://ionicframework.com/docs/ionicons/
+@import &quot;ionic.ionicons&quot;;
+// Fonts
+// --------------------------------------------------
+@import &quot;roboto&quot;;
+@import &quot;noto-sans&quot;;
+</code></pre><h3 id="学习来源"><a href="#学习来源" class="headerlink" title="学习来源"></a>学习来源</h3><pre><code>[https://github.com/JerryMissTom/Blog/issues](https://github.com/JerryMissTom/Blog/issues &quot;学习来源&quot;)
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/21/创建iframe/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/21/创建iframe/" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-21T10:54:16+08:00">
+                2018-05-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <hr>
+<p>title: 创建iframe<br>date: 2018-05-21 10:54:16</p>
+<h2 id="tags"><a href="#tags" class="headerlink" title="tags:"></a>tags:</h2><p>#iframe传参#<br>     let iframe = document.createElement(‘iframe’);<br>    iframe.className =’statistics-iframe’;<br>    iframe.style.width= “100%”;<br>    iframe.style.height= “100%”;<br>    iframe.src=CONTEXT_iframe_PATH+this.pageUrl+”?access_token=”+this.Token;<br>    document.getElementById(“preview-iframe”).appendChild(iframe);<br>    console.log(“路径=&gt;:”+CONTEXT_iframe_PATH+this.pageUrl+”?access_token=”+this.Token);</p>
+<p>#重新创建清空#<br>     $(‘#preview-iframe’).empty();</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/23/http请求头全局参数/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/23/http请求头全局参数/" itemprop="url">http请求头全局参数</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-23T09:39:01+08:00">
+                2018-04-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>###angulrjs和ajax接口设置参数###<br>    $http.defaults.headers.common[‘X-Requested-With’] = ‘XMLHttpRequest’;<br>    $http.defaults.headers.common[‘X-Auth-Token’] = $cookies.get(‘X-Auth-Token’);<br>    $.ajaxSetup({<br>        headers: {<br>            ‘X-Auth-Token’: $cookies.get(‘X-Auth-Token’),<br>            ‘X-Code’: $cookies.get(‘X-Code’)<br>        }<br>    });<br>    //<br>    $cookies.put(‘X-Auth-Token’, result.text);</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/15/vue-cli-less编译(三)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1220,606 +1987,6 @@ $.each($scope.tssContingencyPlan, function (i, v) {
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/29/事件绑定图片上传以及验证格式/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="CHEN.星">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CHEN.星~博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/12/29/事件绑定图片上传以及验证格式/" itemprop="url">事件绑定图片上传以及验证格式</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-29T10:57:54+08:00">
-                2017-12-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <pre><code>    //选择图片触发事件，传入选中ID
-  $scope.upload = function (id) {
-      $scope.inputCode = id;//ID赋值
-      $(&quot;#fileBtn&quot; + id).trigger(&apos;click&apos;);//模拟对应ID的input点击事件
-      bindFileUpload();//调用文件上传方法
-  };
-function bindFileUpload() {//input
-          var input = $(&quot;#fileBtn&quot; + $scope.inputCode);//找到相应INPUT
-          if (input.fileupload) {
-              input.fileupload({
-                  dataType: &apos;json&apos;,
-                  autoUpload: false,
-                  acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
-                  maxFileSize: 999000,
-                  disableImageResize: /Android(?!.*Chrome)|Opera/
-                      .test(window.navigator.userAgent)
-              }).on(&apos;fileuploadadd&apos;, function (e, data) {
-                  if (data.files &amp;&amp; data.files[0]) {//是否有数据
-                      var fileName = data.files[0].name;
-                      var reg = /(\.|\/)(gif|jpe?g|png)$/i;
-                      if (reg.exec(fileName) === null) {
-                          swal({
-                                  title: &quot;提示&quot;,
-                                  text: &quot;图片格式不正确&quot;,
-                                  type: &quot;info&quot;,
-                                  showCancelButton: false,
-                                  closeOnConfirm: true,
-                                  showLoaderOnConfirm: false
-                              },
-                              function () {
-                                  swal.close();
-                              });
-                          return;
-                      }
-                      var reader = new FileReader();//新建FILE流
-                      reader.readAsDataURL(data.files[0]);//获取URL
-                      reader.onload = function (e) {//成功后返回
-                          addUrl(e.target.result, data.files[0]);//图片显示方法（参数：URL，文件流）
-                      };
-                  }
-              });
-          }
-      }
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/28/常用正则/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="CHEN.星">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CHEN.星~博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/12/28/常用正则/" itemprop="url">‘常用正则</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-28T10:35:59+08:00">
-                2017-12-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<ul>
-<li>拆分中英文冒号正则(：:) split(/\:|\：/);</li>
-<li>拆分文本域换行符 split(“\n”);</li>
-</ul>
-</blockquote>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/16/前端性能优化之meta缓存/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="CHEN.星">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CHEN.星~博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/16/前端性能优化之meta缓存/" itemprop="url">前端性能优化之meta做缓存</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-16T14:55:45+08:00">
-                2017-11-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <pre><code>&lt;meta http-equiv=&quot;Cache-Control&quot; content=&quot;no-cache, no-store, must-revalidate&quot; /&gt;
-&lt;meta http-equiv=&quot;Pragma&quot; content=&quot;no-cache&quot; /&gt;
-&lt;meta http-equiv=&quot;Expires&quot; content=&quot;0&quot; /&gt;
-//Cache-Control（缓存控制） HTTP头信息
-//Expires期限（过期时间
-//实际上在微信环境中并没有用
- &lt;meta http-equiv=&quot;Cache-Control&quot; content=&quot;max-age=31536000&quot;&gt;
-给个时间期限
-在每个页面的html,js，css文件URL后加上版本号，如http://xxx/index.js?t=版本号
-</code></pre><h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><blockquote>
-<ul>
-<li>meat标签的http-equiv属性语法格式是：＜meta http-equiv=”参数” content=”参数变量值”＞ <h3 id="Http头介绍-Expires-Cache-Control-Last-Modified-ETag"><a href="#Http头介绍-Expires-Cache-Control-Last-Modified-ETag" class="headerlink" title="Http头介绍:Expires,Cache-Control,Last-Modified,ETag"></a>Http头介绍:Expires,Cache-Control,Last-Modified,ETag</h3> 这里就只记录下Expires和Cache-Control,下文解释采用的是网络上抓取。</li>
-</ul>
-</blockquote>
-<h3 id="Expires"><a href="#Expires" class="headerlink" title="Expires"></a>Expires</h3><pre><code>-属性是HTTP控制缓存的基本手段。
-这个属性告诉缓存器：相关副本在多长时间内是新鲜的。
-过了这个时间，缓存器就会向源服务器发送请求，检查文档是否被修改。
-几乎所有的缓存服务器都支持Expires（过期时间）属性
-&lt;meta http-equiv=&quot;Expires&quot; content=&quot;Fri, 30 Oct 1998 14:19:41&quot; /&gt;
-</code></pre><h3 id="Cache-Control"><a href="#Cache-Control" class="headerlink" title="Cache-Control"></a>Cache-Control</h3><pre><code>Cache-Control响应头信息，
-让网站的发布者可以更全面的控制他们的内容,并定位过期时间的限制.
-
-public — 标记认证内容也可以被缓存，一般来说： 经过HTTP认证才能访问的内容，输出是自动不可以缓存的；
-
-no-cache — 强制每次请求直接发送给源服务器，而不经过本地缓存版本的校验。这对于需要确认认证应用很有用（可以和public结合使用），或者严格要求使用最新数据 的应用（不惜牺牲使用缓存的所有好处）；
-
-no-store — 强制缓存在任何情况下都不要保留任何副本
-
-must-revalidate — 告诉缓存必须遵循所有你给予副本的新鲜度的，HTTP允许缓存在某些特定情况下返回过期数据，指定了这个属性，你高速缓存，你希望严格的遵循你的规则。
-
-max-age=[秒] — 执行缓存被认为是最新的最长时间。类似于过期时间，这个参数是基于请求时间的相对时间间隔，而不是绝对过期时间，[秒]是一个数字，单位是秒：从请求时间 开始到过期时间之间的秒数。
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/07/location/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="CHEN.星">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CHEN.星~博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/07/location/" itemprop="url">$location</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-07T10:32:03+08:00">
-                2017-11-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="【一】获取-不修改URL"><a href="#【一】获取-不修改URL" class="headerlink" title="【一】获取 (不修改URL)"></a>【一】获取 (不修改URL)</h3><blockquote>
-<ul>
-<li><p>1.获取当前完整的url路径<br>var absurl = $location.absUrl();<br>//<a href="http://172.16.0.88:8100/#/homePage?id=10&amp;a=100#helloworld" target="_blank" rel="external">http://172.16.0.88:8100/#/homePage?id=10&amp;a=100#helloworld</a>  </p>
-</li>
-<li><p>2.获取当前url路径(当前url#后面的内容,包括参数和哈希值):<br>var url = $location.url();<br>// 结果：/homePage?id=10&amp;a=100  </p>
-</li>
-<li><p>3.获取当前url的子路径(也就是当前url#后面的内容,不包括参数)<br>var pathUrl = $location.path()<br>//结果：/homePage  </p>
-</li>
-</ul>
-<ul>
-<li>4.获取当前url的协议(比如http,https)<br>var protocol = $location.protocol();<br>//结果：http  </li>
-</ul>
-<ul>
-<li>5.获取主机名<br>var localhost = $location.host();<br>//结果：172.16.0.88  </li>
-</ul>
-<ul>
-<li>6.获取当前url的端口<br>var port = $location.port();<br>//结果：8100  </li>
-</ul>
-<ul>
-<li>7.获取当前url的哈希值<br>var hash = $location.hash()<br>//结果：helloworld</li>
-</ul>
-<ul>
-<li>8.获取当前url的参数的序列化json对象<br>var search = $location.search();<br>//结果：{id: “10”, a: “100”} </li>
-</ul>
-</blockquote>
-<h4 id="【二】修改-改变URL相关内容"><a href="#【二】修改-改变URL相关内容" class="headerlink" title="【二】修改 (改变URL相关内容)"></a>【二】修改 (改变URL相关内容)</h4><blockquote>
-<ul>
-<li><p>1 修改url的子路径部分(也就是当前url#后面的内容,不包括参数):<br>$location.url(‘/validation’);<br>//结果：<a href="http://172.16.0.88:8100/#/validation" target="_blank" rel="external">http://172.16.0.88:8100/#/validation</a>  </p>
-</li>
-<li><p>2 修改url的哈希值部分<br>$location.hash(‘myhash3’);<br>//结果:<a href="http://172.16.0.88:8100/#/homePage?id=10&amp;a=100#myhash3" target="_blank" rel="external">http://172.16.0.88:8100/#/homePage?id=10&amp;a=100#myhash3</a>  </p>
-</li>
-<li><p>3 修改url的参数部分(第一个参数表示url参数的属性名,第二个参数是该属性名的属性值,如果是已有属性名,则修改,如果不是已有属性,则新增)  $location.search(‘id’,’111’)<br>// 结果(修改参数值)：<a href="http://172.16.0.88:8100/#/homePage?id=111&amp;a=100" target="_blank" rel="external">http://172.16.0.88:8100/#/homePage?id=111&amp;a=100</a><br>$location.search(‘ids’,’111’)<br>// 结果（新增ids参数): <a href="http://172.16.0.88:8100/#/homePage?id=111&amp;a=100&amp;ids=111" target="_blank" rel="external">http://172.16.0.88:8100/#/homePage?id=111&amp;a=100&amp;ids=111</a>  </p>
-</li>
-<li><p>4.一次性修改多个参数<br>$location.search({id:’55’,’a’:’66’})<br>//结果：<a href="http://172.16.0.88:8100/#/homePage?id=55&amp;a=66#myhash3" target="_blank" rel="external">http://172.16.0.88:8100/#/homePage?id=55&amp;a=66#myhash3</a>  </p>
-</li>
-<li><p>5.第一个值表示url参数的属性名,如果是已有属性名,则删除该属性,如果不是已有属性,那就等于没改过<br>$location.search(‘age’,null)  </p>
-</li>
-</ul>
-</blockquote>
-<h3 id="【三】修改URL但不存入历史记录"><a href="#【三】修改URL但不存入历史记录" class="headerlink" title="【三】修改URL但不存入历史记录"></a>【三】修改URL但不存入历史记录</h3><blockquote>
-<ul>
-<li>在上面的修改url的方法的时候,每修改一次,url都会被存入历史记录,可以使用后退按钮回到修改前的url,如果不想要这种效果,而仅仅是替换当前的记录,可以使用  $location.path(‘/validation’).replace();</li>
-</ul>
-</blockquote>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1870,7 +2037,7 @@ max-age=[秒] — 执行缓存被认为是最新的最长时间。类似于过�
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">43</span>
+                <span class="site-state-item-count">46</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

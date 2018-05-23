@@ -263,6 +263,793 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/25/百度地图获取地理信息/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/25/百度地图获取地理信息/" itemprop="url">百度地图获取地理信息</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-25T15:53:35+08:00">
+                2017-10-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <pre><code>&lt;script type=&quot;text/javascript&quot; src=&quot;http://api.map.baidu.com/api?v=2.0&amp;ak=vxGvQW5jBqiuaZmVEaZtFkSeyTP9MzPw&quot;&gt;&lt;/script&gt;
+
+// 百度地图获取地理信息
+        var longitude, latitude, province, city, district, street, streetNumber, address;
+        // 创建地理编码实例
+        var myGeo = new BMap.Geocoder();
+        var geolocation = new BMap.Geolocation();
+        geolocation.getCurrentPosition(function (r) {
+            if (geolocation.getStatus() == BMAP_STATUS_SUCCESS) {
+                longitude = r.point.lng;
+                latitude = r.point.lat;
+                // 根据坐标得到地址描述
+                myGeo.getLocation(r.point, function (result) {
+                    if (result) {
+                        var addComp = result.addressComponents;
+                        province = addComp.province;
+                        city = addComp.city;
+                        district = addComp.district;
+                        street = addComp.street;
+                        streetNumber = addComp.streetNumber;
+                        address = province + city + district + street + streetNumber;
+                    }
+                });
+            }
+            else {
+                alert(&apos;failed&apos; + this.getStatus());
+            }
+        }, {enableHighAccuracy: true});
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/25/css3背景旋转/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/25/css3背景旋转/" itemprop="url">css3背景旋转</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-25T14:25:00+08:00">
+                2017-10-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>很久没写css3效果了，生疏了，放一段css3背景旋转</p>
+<pre><code> css---
+  #audio_btn {
+         width: 30px;
+         height: 30px;
+         background-image: url(img/audio.png);
+         background-size: contain;
+     }
+
+.rotate {
+        -webkit-animation: rotating 1.2s linear infinite;
+         -moz-animation: rotating 1.2s linear infinite;
+         -o-animation: rotating 1.2s linear infinite;
+          animation: rotating 1.2s linear infinite
+      }
+
+  @-webkit-keyframes rotating {
+     from { -webkit-transform: rotate(0deg) }
+    to { -webkit-transform: rotate(360deg) }
+ }
+
+@keyframes rotating {
+    from { transform: rotate(0deg) }
+     to { transform: rotate(360deg) }
+  }
+ @-moz-keyframes rotating {
+   from { -moz-transform: rotate(0deg) }
+   to { -moz-transform: rotate(360deg) }
+}
+</code></pre><hr>
+<pre><code>js--
+ $(function(){
+ var x = document.getElementById(&quot;media&quot;);
+ $(&quot;#audio_btn&quot;).click(function(){
+        $(this).toggleClass(&quot;rotate&quot;); //控制音乐图标 自转或暂停
+
+          //控制背景音乐 播放或暂停
+        if($(this).hasClass(&quot;rotate&quot;)){
+                 x.play();
+               }else{
+                x.pause();
+              }
+       })
+   });
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/23/消息推送notification/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/23/消息推送notification/" itemprop="url">消息推送</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-23T10:51:23+08:00">
+                2017-10-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h3><pre><code>//Notification API
+// 先检查浏览器是否支持
+    if (!(&quot;Notification&quot; in window)) {
+        alert(&quot;This browser does not support desktop notification&quot;);
+    }
+    // 检查用户是否同意接受通知
+    else if (Notification.permission === &quot;granted&quot;) {
+        // If it&apos;s okay let&apos;s create a notification
+        var notification = new Notification(&quot;Hi there!&quot;);
+    }
+    // 否则我们需要向用户获取权限
+    else if (Notification.permission !== &apos;denied&apos;) {
+        Notification.requestPermission(function (permission) {
+            // 如果用户同意，就可以向他们发送通知
+            if (permission === &quot;granted&quot;) {
+                var notification = new Notification(&quot;Hi there!&quot;);
+            }
+        });
+    }    
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/04/base64字符数据图片转Blob/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/05/04/base64字符数据图片转Blob/" itemprop="url">base64字符数据图片转Blob以及上传遇到问题</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-04T20:19:07+08:00">
+                2017-05-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ul>
+<li>项目存在一个图片过大做压缩的功能，而遇到blob字符转换遇到的一些问题记录，以及上传出现的问题。</li>
+</ul>
+<hr>
+<h3 id="base64转换blob"><a href="#base64转换blob" class="headerlink" title="base64转换blob"></a>base64转换blob</h3><pre><code>/**
+ * 将以base64的图片url数据转换为Blob
+ * @param urlData
+ *  用url方式表示的base64图片数据
+ */
+function convertBase64UrlToBlob(urlData){
+        var bytes=window.atob(urlData.split(&apos;,&apos;)[1]);        //去掉url的头，并转换为byte
+        //处理异常,将ascii码小于0的转换为大于0
+        var arr = urlData.split(&apos;,&apos;);
+        var mime = arr[0].match(/:(.*?);/)[1];//获取到图片类型
+        console.log(mime);
+        var ab = new ArrayBuffer(bytes.length);
+        var ia = new Uint8Array(ab);
+        for (var i = 0; i &lt; bytes.length; i++) {
+            ia[i] = bytes.charCodeAt(i);
+        }
+        return new Blob( [ab] , {type : mime});}
+</code></pre><hr>
+<h3 id="压缩图片JS"><a href="#压缩图片JS" class="headerlink" title="压缩图片JS"></a>压缩图片JS</h3><pre><code>  * 这是基于html5的前端图片工具，压缩工具。
+
+ function ImageResizer(opts,returnObject){  
+ var settings={
+    resizeMode:&quot;auto&quot;//压缩模式，总共有三种  auto,width,height auto表示自动根据最大的宽度及高度等比压缩，width表示只根据宽度来判断是否需要等比例压缩，height类似。
+    ,dataSource:&quot;&quot; //数据源。数据源是指需要压缩的数据源，有三种类型，image图片元素，base64字符串，canvas对象，还有选择文件时候的file对象。。。
+    ,dataSourceType:&quot;image&quot; //image  base64 canvas
+    //,maxWidth:150 //允许的最大宽度
+    //,maxHeight:200 //允许的最大高度。
+    ,onTmpImgGenerate:function(img){} //当中间图片生成时候的执行方法。。这个时候请不要乱修改这图片，否则会打乱压缩后的结果。
+    ,success:function(resizeImgBase64,canvas){
+
+    }//压缩成功后图片的base64字符串数据。
+    ,debug:false //是否开启调试模式。
+};
+var appData={};
+$.extend(settings,opts);
+
+var _debug=function(str,styles){
+    if(settings.debug==true){
+        if(styles){
+            console.log(str,styles);
+        }
+        else{
+            console.log(str);
+        }
+    }
+};
+var innerTools={
+    getBase4FromImgFile:function(file,callBack){
+
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            var base64Img= e.target.result;
+            //var $img = $(&apos;&lt;img&gt;&apos;).attr(&quot;src&quot;, e.target.result)
+            //$(&apos;#preview&apos;).empty().append($img)
+            if(callBack){
+                callBack(base64Img);
+            }
+        };
+        reader.readAsDataURL(file);
+    }
+
+    //--处理数据源。。。。将所有数据源都处理成为图片图片对象，方便处理。
+    ,getImgFromDataSource:function(datasource,dataSourceType,callback){
+        var _me=this;
+        var img1=new Image();
+        if(dataSourceType==&quot;img&quot;||dataSourceType==&quot;image&quot;){
+            img1.src=$(datasource).attr(&quot;src&quot;);
+            if(callback){
+                callback(img1);
+            }
+        }
+        else if(dataSourceType==&quot;base64&quot;){
+            img1.src=datasource;
+            if(callback){
+                callback(img1);
+            }            }
+        else if(dataSourceType==&quot;canvas&quot;){
+            img1.src = datasource.toDataURL(&quot;image/jpeg&quot;);
+            if(callback){
+                callback(img1);
+            }
+        }
+        else if(dataSourceType==&quot;file&quot;){
+            _me.getBase4FromImgFile(function(base64str){
+                img1.src=base64str;
+                if(callback){
+                    callback(img1);
+                }
+            });
+        }
+
+    }
+    //计算图片的需要压缩的尺寸。当然，压缩模式，压缩限制直接从setting里面取出来。
+    ,getResizeSizeFromImg:function(img){
+        var _img_info={
+            w:$(img)[0].naturalWidth,
+            h:$(img)[0].naturalHeight
+        };
+        console.log(&quot;真实尺寸：&quot;);
+        console.log(_img_info);
+        var _resize_info={
+            w:0
+            ,h:0
+        };
+        if(_img_info.w&lt;=settings.maxWidth&amp;&amp;_img_info.h&lt;=settings.maxHeight){
+            return _img_info;
+        }
+        if(settings.resizeMode==&quot;auto&quot;){
+            var _percent_scale=parseFloat(_img_info.w/_img_info.h);
+            var _size1={
+                w:0
+                ,h:0
+            };
+            var _size_by_mw={
+                w:settings.maxWidth
+                ,h:parseInt(settings.maxWidth/_percent_scale)
+            };
+            var _size_by_mh={
+                w:parseInt(settings.maxHeight*_percent_scale)
+                ,h:settings.maxHeight
+            };
+            if(_size_by_mw.h&lt;=settings.maxHeight){
+                return _size_by_mw;
+            }
+            if(_size_by_mh.w&lt;=settings.maxWidth){
+                return _size_by_mh;
+            }
+
+            return {
+                w:settings.maxWidth
+                ,h:settings.maxHeight
+            };
+
+        }
+        if(settings.resizeMode==&quot;width&quot;){
+            if(_img_info.w&lt;=settings.maxWidth){
+                return _img_info;
+            }
+            var _size_by_mw={
+                w:settings.maxWidth
+                ,h:parseInt(settings.maxWidth/_percent_scale)
+            };
+            return _size_by_mw;
+        }
+
+        if(settings.resizeMode==&quot;height&quot;){
+            if(_img_info.h&lt;=settings.maxHeight){
+                return _img_info;
+            }
+            var _size_by_mh={
+                w:parseInt(settings.maxHeight*_percent_scale)
+                ,h:settings.maxHeight
+            };
+            return _size_by_mh;
+        }
+
+    }
+    //--将相关图片对象画到canvas里面去。
+    ,drawToCanvas:function(img,theW,theH,realW,realH,callback){
+
+        var canvas = document.createElement(&quot;canvas&quot;);
+        canvas.width=theW;
+        canvas.height=theH;
+        var ctx = canvas.getContext(&apos;2d&apos;);
+        ctx.drawImage(img,
+            0,//sourceX,
+            0,//sourceY,
+            realW,//sourceWidth,
+            realH,//sourceHeight,
+            0,//destX,
+            0,//destY,
+            theW,//destWidth,
+            theH//destHeight
+        );
+
+        //--获取base64字符串及canvas对象传给success函数。
+        var base64str=canvas.toDataURL(&quot;image/png&quot;);
+        if(callback){
+            callback(base64str,canvas);
+        }
+    }
+};
+
+//--开始处理。
+(function(){
+    innerTools.getImgFromDataSource(settings.dataSource,settings.dataSourceType,function(_tmp_img){
+        var __tmpImg=_tmp_img;
+        settings.onTmpImgGenerate(_tmp_img);
+        //--计算尺寸。
+        var _limitSizeInfo=innerTools.getResizeSizeFromImg(__tmpImg);
+        console.log(_limitSizeInfo);
+        var _img_info={
+            w:$(__tmpImg)[0].naturalWidth,
+            h:$(__tmpImg)[0].naturalHeight
+        };
+        innerTools.drawToCanvas(__tmpImg,_limitSizeInfo.w,_limitSizeInfo.h,_img_info.w,_img_info.h,function(base64str,canvas){
+            settings.success(base64str,canvas);
+        });
+
+    });
+})();
+
+returnObject({
+    a:1
+});
+
+//return returnObject;
+</code></pre><p>};</p>
+<h3 id="blob上传遇到的问题"><a href="#blob上传遇到的问题" class="headerlink" title="blob上传遇到的问题"></a>blob上传遇到的问题</h3><pre><code>    /**
+    *File对象为base
+    /
+  var img = new FormData();
+img.append(&quot;files&quot;, eachFile,eachFile.name);
+</code></pre><ul>
+<li>项目后台代码反正我不清楚，平时上传的图片是存在图片名字的，base64在转为Blob后上传，获取不到文件名字，就需要eachFile.name作为参数一起append到文件流里面。</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/10/JqueryFileUpload遇到angulrjs/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1273,659 +2060,6 @@ return function(inputArray){
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/09/25/angularjs$directive$compile/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="CHEN.星">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CHEN.星~博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/09/25/angularjs$directive$compile/" itemprop="url">angularjs$directive$compile渲染html</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-25T17:30:21+08:00">
-                2016-09-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="例子一"><a href="#例子一" class="headerlink" title="例子一"></a>例子一</h3><pre><code># HTML #
-
-&lt;body ng-controller=&quot;MyController&quot;&gt;
-    &lt;p compile&gt;&lt;/p&gt;
-&lt;/body&gt;
-
-# js #
-  angular.module(&apos;myApp&apos;, [])
-            .controller(&apos;MyController&apos;, function ($scope, $compile, $timeout) {
-            })
-            .directive(&apos;compile&apos;, function($compile) {
-                return {
-                    scope: {
-
-                    },
-                    link: function(scope, elem, attrs) {
-                        scope.title = &apos;list&apos;;
-                        scope.items = [&apos;list1&apos;, &apos;list2&apos;, &apos;list3&apos;];
-                        var html = &apos;&lt;h1&gt;{{title}}&lt;/h1&gt;\
-                        &lt;ul&gt;\
-                            &lt;li ng-repeat=&quot;item in items&quot;&gt;{{item}}&lt;/li&gt;\
-                        &lt;/ul&gt;&apos;;
-                        elem.html($compile(html)(scope))
-                    }
-                }
-            })
-</code></pre><h3 id="例子二"><a href="#例子二" class="headerlink" title="例子二"></a>例子二</h3><pre><code>#HTML#
-
-&lt;body ng-controller=&quot;MyController&quot;&gt;
-&lt;p compile=&quot;html&quot;&gt;&lt;/p&gt;
-&lt;/body&gt;
-
-# JS #
-
-   angular.module(&apos;myApp&apos;, [])
-            .controller(&apos;MyController&apos;, function ($scope) {
-                $scope.html = &apos;&lt;h1&gt;{{title}}&lt;/h1&gt;\
-                        &lt;ul&gt;\
-                            &lt;li ng-repeat=&quot;item in items&quot;&gt;{{item}}&lt;/li&gt;\
-                        &lt;/ul&gt;&apos;
-
-            })
-            .directive(&apos;compile&apos;, function($compile) {
-                return {
-                    scope: {
-                        compile: &apos;=&apos;
-                    },
-                    link: function(scope, elem, attrs) {
-                        scope.title = &apos;list&apos;;
-                        scope.items = [&apos;list1&apos;, &apos;list2&apos;, &apos;list3&apos;];
-                        elem.html($compile(scope.compile)(scope))
-                    }
-                }
-            })
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/26/AngularJS中的指令全面解析/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="CHEN.星">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CHEN.星~博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/08/26/AngularJS中的指令全面解析/" itemprop="url">AngularJS中习惯用法指令scope解析记录</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-26T21:30:45+08:00">
-                2016-08-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ul>
-<li>记录的是个人习惯用法省略多余</li>
-</ul>
-<hr>
-<pre><code>1、作为一个新的HTML元素来使用。
-&lt;hello&gt;&lt;/hello&gt;或者&lt;hello/&gt;
-2、作为一个元素的属性来使用
-&lt;div hello&gt;&lt;/div&gt;
-3、作为一个元素的类来使用
-&lt;div class=&quot;hello&quot;&gt;&lt;/div&gt;
-
-个人习惯也常用元素标签来使用
-</code></pre><h3 id="（1）指令的定义，app-js："><a href="#（1）指令的定义，app-js：" class="headerlink" title="（1）指令的定义，app.js："></a>（1）指令的定义，app.js：</h3><pre><code>app.directive(&apos;myDirective&apos;, function() {
-    return {
-        restrict: &apos;E&apos;, E表示元素标签
-        replace: true,
-        templateUrl: &apos;index.html&apos;,
-        scope: false,   // 默认值 true就开启控制层隔离
-        transclude：true，
-        link：function(scope,element,attrs){}
-    }
-});
-</code></pre><h3 id="自定义指令HTML"><a href="#自定义指令HTML" class="headerlink" title="自定义指令HTML"></a>自定义指令HTML</h3><pre><code>&lt;my-directive&gt;自定义指令&lt;/my-directive&gt;
-</code></pre><h3 id="（2）指令模板index-html"><a href="#（2）指令模板index-html" class="headerlink" title="（2）指令模板index.html"></a>（2）指令模板index.html</h3><pre><code>&lt;div&gt;
-
-&lt;p&gt;自定义指令scope：
-&lt;span ng-transclude&gt;
-&lt;span&gt;
-&lt;/p&gt;
-
-
-&lt;/div&gt;
-</code></pre><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><ul>
-<li>restrict为E 表示元素标签替换 <my-directive><my-directive></my-directive></my-directive></li>
-<li>replace为true替换元素后不保留<my-directive></my-directive></li>
-<li>templateUrl替换URL地址</li>
-<li>scope为true 开启隔离父子级，独立控制层</li>
-<li>transclude保留指令内内容ng-transclude放在templateUrl中元素标签内，就可以保留<h3 id="重点介绍scope"><a href="#重点介绍scope" class="headerlink" title="重点介绍scope"></a>重点介绍scope</h3></li>
-<li>@：单向绑定，外部scope能够影响内部scope，但反过来不成立</li>
-<li>=：双向绑定，外部scope和内部scope的model能够相互改变</li>
-<li><p>&amp;：把内部scope的函数的返回值和外部scope的任何属性绑定起来</p>
-<pre><code>记录
-scope:{
-        select:&quot;&amp;&quot;,
-    },
-
-templateUrl元素中事件传id
-ng-click=&quot;select({id:position})&quot; &gt;&apos;
-
-link中
- scope.position=attrs.id;
-
-html元素中
-select=&quot;selectTpl(id)&quot;
-
-html 元素JS中写法
-$scope.selectTpl=function(id){
-    }
-</code></pre></li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/07/04/AngularJS$anchorScroll用法/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="CHEN.星">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CHEN.星~博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/07/04/AngularJS$anchorScroll用法/" itemprop="url">AngularJS$anchorScroll用法</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-04T10:30:45+08:00">
-                2016-07-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <pre><code>.controller(&apos;ScrollController&apos;, [&apos;$scope&apos;, &apos;$location&apos;, &apos;$anchorScroll&apos;,
-function ($scope, $location, $anchorScroll) {
-$scope.gotoBottom = function() {
-  // 将location.hash的值设置为
-  // 你想要滚动到的元素的id
-  $location.hash(&apos;bottom&apos;);
-
-  // 调用 $anchorScroll()
-  $anchorScroll();
-
-};
-</code></pre><p>  }]);</p>
-<h3 id="如何使用一个垂直滚动偏移（指定了一个固定值）关于-anchorScroll-yOffset"><a href="#如何使用一个垂直滚动偏移（指定了一个固定值）关于-anchorScroll-yOffset" class="headerlink" title="如何使用一个垂直滚动偏移（指定了一个固定值）关于 $anchorScroll.yOffset"></a>如何使用一个垂直滚动偏移（指定了一个固定值）关于 $anchorScroll.yOffset</h3><h2 id="html"><a href="#html" class="headerlink" title="html"></a>html</h2><pre><code>&lt;div class=&quot;fixed-header&quot; ng-controller=&quot;headerCtrl&quot;&gt;
-  &lt;a href=&quot;&quot; ng-click=&quot;gotoAnchor(x)&quot; ng-repeat=&quot;x in [1,2,3,4,5]&quot;&gt;
-Go to anchor {{x}}
-  &lt;/a&gt;
-&lt;/div&gt;
-&lt;div id=&quot;anchor{{x}}&quot; class=&quot;anchor&quot; ng-repeat=&quot;x in [1,2,3,4,5]&quot;&gt;
-  Anchor {{x}} of 5
-&lt;/div&gt;
-</code></pre><h2 id="js"><a href="#js" class="headerlink" title="js"></a>js</h2><pre><code>angular.module(&apos;anchorScrollOffsetExample&apos;, [])
-.run([&apos;$anchorScroll&apos;, function($anchorScroll) {
-
-      $anchorScroll.yOffset = 50;   // 总是滚动额外的50像素
-
-}])
-.controller(&apos;headerCtrl&apos;, [&apos;$anchorScroll&apos;, &apos;$location&apos;, &apos;$scope&apos;,
-  function ($anchorScroll, $location, $scope) {
-$scope.gotoAnchor = function(x) {
-
-  var newHash = &apos;anchor&apos; + x;
-  if ($location.hash() !== newHash) {
-
-    // 将$location.hash设置为`newHash` and
-    // $anchorScroll也将自动滚到该处
-
-    $location.hash(&apos;anchor&apos; + x);
-
-  } else {
-
-    // 显式地调用 $anchorScroll()方法 ,
-    // 因为 $location.hash 并没有改变
-    $anchorScroll();
-
-  }
-};
-</code></pre><p>  }<br>]);</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/06/20/angulrjs$http/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="CHEN.星">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CHEN.星~博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/06/20/angulrjs$http/" itemprop="url">angularjs$http</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-06-20T21:19:07+08:00">
-                2016-06-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="get和post"><a href="#get和post" class="headerlink" title="get和post"></a>get和post</h3><pre><code>$http.get(contextPath+&quot;/api/cmsSceModel/getResume&quot;+&quot;?tiananCode=&quot;+tiananCode+&quot;&amp;tenantId=&quot;+tenantId).then(function(result){
-        $scope.list = result.data.list;
-    })
--
-$http.post(contextPath+&apos;/cpUrl/deleteRelation&apos;,null, {params:{urlId:urlId,pdctId:pdctId}}).then(function(resp){
-加上params可以参数就可以转换成key1=value1&amp;key2=value2格式，
--
-$http.post(contextPath + &apos;/cmsSceMenuModelEx/save&apos;,data2save) .then(function(resp){
-</code></pre><h3 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h3><ul>
-<li><p>默认情况下，$http服务不会对请求进行本地缓存。在发送单独的请求时，我们可以通过向$http请求传入一个布尔值或者一个缓存实例来启用缓存。</p>
-<pre><code>$http.get(&apos;/api/users.json&apos;,{ cache: true })
-.success(function(data) {})
-.error(function(data) {});
-</code></pre></li>
-</ul>
-<p>-then()方法与其他两种方法的主要区别是，它会接收到完整的响应对象，而success()和error()则会对响应对象进行析构。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1976,7 +2110,7 @@ $http.post(contextPath + &apos;/cmsSceMenuModelEx/save&apos;,data2save) .then(fu
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">43</span>
+                <span class="site-state-item-count">46</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
