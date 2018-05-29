@@ -263,6 +263,712 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/29/腾讯地图/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/29/腾讯地图/" itemprop="url">腾讯地图</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-29T16:36:28+08:00">
+                2018-05-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="angulrjs工厂模式"><a href="#angulrjs工厂模式" class="headerlink" title="angulrjs工厂模式"></a>angulrjs工厂模式</h3><pre><code>(function (angular) {
+&quot;use strict&quot;;
+angular.module(&apos;public.map.factory&apos;, [])
+    .factory(&apos;publicMapFactory&apos;, [function () {
+        //地图
+        return {
+            //地图初始化
+            initMap: function (id) {
+                var markersArray = [];
+                var center = new qq.maps.LatLng(39.916527,116.397128);
+                var map = new qq.maps.Map(document.getElementById(id),{
+                    center: center,
+                    zoom: 10
+                });
+                //获取城市列表接口设置中心点
+                var citylocation = new qq.maps.CityService({
+                    complete : function(result){
+                        map.setCenter(result.detail.latLng);
+                    }
+                });
+                //调用searchLocalCity();方法    根据用户IP查询城市信息。
+                citylocation.searchLocalCity();
+                //调用地址解析类
+                var geocoder = new qq.maps.Geocoder({
+                    complete : function(result){
+                        map.setCenter(result.detail.location);
+                        var marker = new qq.maps.Marker({
+                            map:map,
+                            position: result.detail.location
+                        });
+                        markersArray.push(marker);
+                    }
+                });
+                return {
+                    currentGeocoder:function(location){
+                        if (markersArray.length&gt;0) {
+                            for (var i in markersArray) {
+                                markersArray[i].setMap(null);//清除标记
+                            }
+                        }
+                        //通过getLocation();方法获取位置信息值
+                        geocoder.getLocation(location);
+                    }
+                }
+            }
+        };
+    }]);
+})(angular);
+</code></pre><h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><pre><code>//初始化map
+ var productMapInfo = publicMapFactory.initMap(&apos;map&apos;);
+//标记坐标
+productMapInfo.currentGeocoder(data);
+</code></pre><h3 id="marker图标设置"><a href="#marker图标设置" class="headerlink" title="marker图标设置"></a>marker图标设置</h3><h4 id="marker设置"><a href="#marker设置" class="headerlink" title="marker设置"></a>marker设置</h4><pre><code>//解析数据marker标记
+function markData() {
+    var latlngs = [];
+    for (var j = 0; j &lt; $scope.mapData.length; j++) {
+        latlngs.push(new qq.maps.LatLng($scope.mapData[j].lat, $scope.mapData[j].lng));
+    }
+    for (var i = 0; i &lt; latlngs.length; i++) {
+        iconMark(i, infoWin, latlngs, map, $scope.mapData[i].dictId);
+    }
+    //标记END-------------------------------
+    //四种颜色iconMark。循环list 添加坐标
+}
+
+function iconMark(n, infoWin, latlngs, map, dictId) {
+        var marker = new qq.maps.Marker({
+            position: latlngs[n],
+            map: map
+        });
+        markersArray.push(marker);
+        var img;
+        if (dictId === &apos;traceabilityChain01&apos;) {
+            img = &apos;dist/img/map/orange-red.png&apos;;
+        } else if (dictId === &apos;traceabilityChain02&apos;) {
+            img = &apos;dist/img/map/blue.png&apos;;
+        } else if (dictId === &apos;traceabilityChain03&apos;) {
+            img = &apos;dist/img/map/dark-green.png&apos;;
+        } else if (dictId === &apos;traceabilityChain04&apos;) {
+            img = &apos;dist/img/map/green.png&apos;;
+        }
+        var icon = new qq.maps.MarkerImage(img);
+        marker.setIcon(icon);
+        qq.maps.event.addListener(marker, &apos;click&apos;, function () {
+            $scope.nodeId = &quot;&quot;;
+}
+</code></pre><h4 id="marker清除"><a href="#marker清除" class="headerlink" title="marker清除"></a>marker清除</h4><pre><code>if (markersArray) {
+       for (var i = 0; i &lt; markersArray.length; i++) {
+           markersArray[i].setMap(null);
+       }
+       markersArray.length = 0;
+   }
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/29/对象深度拷贝/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/29/对象深度拷贝/" itemprop="url">对象深度拷贝</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-29T16:28:47+08:00">
+                2018-05-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><pre><code>JavaScript实现继承的时候，需要进行对象的拷贝；而为了不影响拷贝后的数据对原数据造成影响，也就是存在共享关系的时候，我们就需要进行深拷贝；
+</code></pre><h3 id="深度拷贝对象，带数组"><a href="#深度拷贝对象，带数组" class="headerlink" title="深度拷贝对象，带数组"></a>深度拷贝对象，带数组</h3><pre><code>var data = extendCopy(node);
+ function extendCopy(p) {
+     var c = {};
+     for (var key in p) {
+         if (key !== &apos;$$hashKey&apos;) {
+             if(key === &apos;files&apos;||key === &apos;filesId&apos;||key === &apos;base64Image&apos;){
+                 c[key]=[];
+             }else{
+                 if (key === &apos;configData&apos;) {
+                     if(p[key]){
+                         var newArray = [];
+                         for(var i=0;i&lt; p[key].length;i++){
+                             newArray.push(p[key][i]);
+                         }
+                         c[key]=newArray;
+                     }
+
+                 }else{
+                     c[key] = p[key];
+                 }
+             }
+         }
+     }
+     return c;
+ }
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/29/angularjsfileupload/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/29/angularjsfileupload/" itemprop="url">angularjsfileupload</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-29T16:06:10+08:00">
+                2018-05-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="options配置"><a href="#options配置" class="headerlink" title="options配置"></a>options配置</h3><pre><code>$scope.options = {
+    url: contextPath + &apos;/weChatConfig/uploadText&apos;,
+    acceptFileTypes: /(\.|\/)(txt)$/i,
+    processfail: function (e, data) {
+        if(data.files[data.index].error==&quot;File type not allowed&quot;){
+            data.files[data.index].error=&quot;文件类型不正确&quot;;
+            $rootScope.flag=false;
+        }else{
+            $rootScope.flag=true;
+        }
+    },
+    done:function(){
+        $(&quot;#traceList&quot;).modal(&quot;hide&quot;);
+    }
+};
+------file-upload=&quot;options&quot;--------
+&lt;form  class=&quot;form-horizontal&quot; name=&quot;wechatConfigForm&quot; id=&quot;domainConfigForm&quot; method=&quot;POST&quot; file-upload=&quot;options&quot; ng-class=&quot;{&apos;fileupload-processing&apos;: processing()}&quot; enctype=&quot;multipart/form-data&quot;&gt;
+</code></pre><h3 id="表单绑定"><a href="#表单绑定" class="headerlink" title="表单绑定"></a>表单绑定</h3><pre><code>var formWechat=$(&quot;#domainConfigForm&quot;)
+    formWechat.bind(&apos;fileuploadprocessalways&apos;, function (e, data) {
+        console.log($scope.queue);
+        if($scope.queue.length&gt;=1){
+            $scope.queue.splice(0,1);
+            $rootScope.flag=true;
+
+            return;
+        }
+});
+</code></pre><h3 id="监听事件"><a href="#监听事件" class="headerlink" title="监听事件"></a>监听事件</h3><pre><code>//可以直接监听绑定的事件
+$scope.$on(&apos;fileuploadadd&apos;, function(event, data) {
+    // 如果文件大于200KB
+    if(data.files[0].size&gt;200*1024){
+        swal(&quot;提示！&quot;, &quot;当前文件超过200KB，请注意上传文件大小&quot;);
+        //文件过大，在添加队列中删除文件
+        $scope.fileLarge=true;
+    }
+});
+</code></pre><h3 id="api配置文件"><a href="#api配置文件" class="headerlink" title="api配置文件"></a>api配置文件</h3><pre><code>js/jquery.fileupload-angular.js//文件
+$element.fileupload(angular.extend(
+        {scope: $scope},
+        fileUpload.defaults
+    )).on(&apos;fileuploadadd&apos;, function (e, data) {
+        data.scope = $scope;
+    }).on(&apos;fileuploadfail&apos;, function (e, data) {
+        if (data.errorThrown === &apos;abort&apos;) {
+            return;
+        }
+        if (data.dataType &amp;&amp;
+                data.dataType.indexOf(&apos;json&apos;) === data.dataType.length - 4) {
+            try {
+                data.result = angular.fromJson(data.jqXHR.responseText);
+            } catch (ignore) {}
+        }
+    }).on([
+        &apos;fileuploadadd&apos;,
+        &apos;fileuploadsubmit&apos;,
+        &apos;fileuploadsend&apos;,
+        &apos;fileuploaddone&apos;,
+        &apos;fileuploadfail&apos;,
+        &apos;fileuploadalways&apos;,
+        &apos;fileuploadprogress&apos;,
+        &apos;fileuploadprogressall&apos;,
+        &apos;fileuploadstart&apos;,
+        &apos;fileuploadstop&apos;,
+        &apos;fileuploadchange&apos;,
+        &apos;fileuploadpaste&apos;,
+        &apos;fileuploaddrop&apos;,
+        &apos;fileuploaddragover&apos;,
+        &apos;fileuploadchunksend&apos;,
+        &apos;fileuploadchunkdone&apos;,
+        &apos;fileuploadchunkfail&apos;,
+        &apos;fileuploadchunkalways&apos;,
+        &apos;fileuploadprocessstart&apos;,
+        &apos;fileuploadprocess&apos;,
+        &apos;fileuploadprocessdone&apos;,
+        &apos;fileuploadprocessfail&apos;,
+        &apos;fileuploadprocessalways&apos;,
+        &apos;fileuploadprocessstop&apos;
+    ].join(&apos; &apos;), function (e, data) {
+        $scope.$parent.$applyAsync(function () {
+            if ($scope.$emit(e.type, data).defaultPrevented) {
+                e.preventDefault();
+            }
+        });
+    }).on(&apos;remove&apos;, function () {
+        // Remove upload methods from the scope,
+        // when the widget is removed:
+        var method;
+        for (method in uploadMethods) {
+            if (uploadMethods.hasOwnProperty(method)) {
+                delete $scope[method];
+            }
+        }
+    });
+</code></pre><h3 id="id绑定demo"><a href="#id绑定demo" class="headerlink" title="id绑定demo"></a>id绑定demo</h3><pre><code>$(&apos;#fileupload&apos;).fileupload({
+       acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
+       maxFileSize: 999000,
+       // Enable image resizing, except for Android and Opera,
+       // which actually support image resizing, but fail to
+       // send Blob objects via XHR requests:
+       disableImageResize: /Android(?!.*Chrome)|Opera/
+           .test(window.navigator.userAgent),
+       previewMaxWidth: 1024,
+       previewMaxHeight: 1024,
+       previewCrop: false
+   }).on(&apos;fileuploadadd&apos;, function (e, data) {
+   }).on(&apos;fileuploadprocessalways&apos;, function (e, data) {
+       var index = data.index,
+           file = data.files[index],
+           node = $(data.context.children()[index]);
+   });
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/29/iframe/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/29/iframe/" itemprop="url">iframe</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-29T16:04:18+08:00">
+                2018-05-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>#iframe传参#<br>     let iframe = document.createElement(‘iframe’);<br>    iframe.className =’statistics-iframe’;<br>    iframe.style.width= “100%”;<br>    iframe.style.height= “100%”;<br>    iframe.src=CONTEXT_iframe_PATH+this.pageUrl+”?access_token=”+this.Token;<br>    document.getElementById(“preview-iframe”).appendChild(iframe);<br>    console.log(“路径=&gt;:”+CONTEXT_iframe_PATH+this.pageUrl+”?access_token=”+this.Token);</p>
+<p>#重新创建清空#<br>     $(‘#preview-iframe’).empty();</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/21/cookie工厂方法公用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -740,129 +1446,6 @@ $colors: ( primary: #488aff, secondary: #32db64, danger: #f53d3d, light: #f4f4f4
 @import &quot;noto-sans&quot;;
 </code></pre><h3 id="学习来源"><a href="#学习来源" class="headerlink" title="学习来源"></a>学习来源</h3><pre><code>[https://github.com/JerryMissTom/Blog/issues](https://github.com/JerryMissTom/Blog/issues &quot;学习来源&quot;)
 </code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/21/创建iframe/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="CHEN.星">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CHEN.星~博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/21/创建iframe/" itemprop="url">未命名</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-21T10:54:16+08:00">
-                2018-05-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <hr>
-<p>title: 创建iframe<br>date: 2018-05-21 10:54:16</p>
-<h2 id="tags"><a href="#tags" class="headerlink" title="tags:"></a>tags:</h2><p>#iframe传参#<br>     let iframe = document.createElement(‘iframe’);<br>    iframe.className =’statistics-iframe’;<br>    iframe.style.width= “100%”;<br>    iframe.style.height= “100%”;<br>    iframe.src=CONTEXT_iframe_PATH+this.pageUrl+”?access_token=”+this.Token;<br>    document.getElementById(“preview-iframe”).appendChild(iframe);<br>    console.log(“路径=&gt;:”+CONTEXT_iframe_PATH+this.pageUrl+”?access_token=”+this.Token);</p>
-<p>#重新创建清空#<br>     $(‘#preview-iframe’).empty();</p>
-
           
         
       
@@ -1434,559 +2017,6 @@ apiServer.listen( port + 1,function(){ //json服务器端口:比如你使用8080
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/29/随机数/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="CHEN.星">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CHEN.星~博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/12/29/随机数/" itemprop="url">随机数</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-29T14:00:34+08:00">
-                2017-12-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <pre><code>   var numAll = []；
- function createrandom() {
-           //生成随机数
-           var newNum = parseInt(Math.random() * (100 - 10 + 1) + 10);
-           var num = repeatNum(newNum); //验证是否重复
-           if (num) {//有合格随机数
-               return num;//返回当前合格随机数
-           }
-       }
-//判断随机数重复
-       function repeatNum(newNum) {
-           var repeat = 0;
-           if (numAll.length &gt; 0) {//数组有值
-               for (var i = 0; i &lt; numAll.length; i++) {//循环全部随机数
-                   if (numAll[i] === newNum) {//若有相同随机数，重新生成
-                       repeat = 1; //有重复值 为1
-                       i = numAll.length;//跳出循环
-                       createrandom();//重新生成随机数
-                   }
-               }
-           }
-           if (repeat === 0) {//无重复
-               numAll.push(newNum);//本次随机数加入总随机数组
-               return newNum;//返回当前合格随机数
-           }
-       }
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/29/echart封装组件/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="CHEN.星">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CHEN.星~博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/12/29/echart封装组件/" itemprop="url">echart封装组件</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-29T13:47:52+08:00">
-                2017-12-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>controller层</p>
-<pre><code>  饼图
-function regroupFirstPie(data) {
-              var chartData = {
-                  color: [&apos;#5E86B8&apos;, &apos;#94B9DA&apos;],
-                  series: [
-                      {
-                          name: &apos;产品溯源数据报送统计&apos;,
-                          data: [
-                              {value: data.sended, name: &apos;产品报送&apos;},
-                              {value: data.unSend, name: &apos;产品未报送&apos;}
-                          ]
-                      }
-                  ]
-              };
-              chartsShapeFactory.drawPie(&apos;chart_main_first_pie&apos;, chartData);
-          }
-  折现图
-   var chartData = {
-                  color: [&apos;#D05f0c&apos;],
-                  xAxis: {
-                      data: xAxis
-                  },
-                  series: [
-                      {
-                          name:&apos;次数&apos;,
-                          type: &apos;line&apos;,
-                          data: yearData
-                      }
-                  ]
-              };
-              chartsShapeFactory.drawLine(&apos;chart_main_first_line&apos;, chartData);
-</code></pre><p>组件</p>
-<pre><code>angular.module(&apos;charts.shape&apos;, [])
-.factory(&apos;chartsShapeFactory&apos;, [function () {
-    /**pie饼图*/
-    function pieChart(id, data) {
-        //初始化echarts实例
-        var myChart = echarts.init(document.getElementById(id));
-        //指定图表的配置项和数据
-        var option = {
-            color: data.color,
-            tooltip : {
-                trigger: &apos;item&apos;,
-                formatter: &quot;{a} &lt;br/&gt;{b} : {c} ({d}%)&quot;
-            },
-            series: [
-                {
-                    name: data.series[0].name,
-                    type: &apos;pie&apos;,
-                    label: {
-                        normal: {
-                            position: &apos;inner&apos;
-                        }
-                    },
-                    radius: &apos;75%&apos;,
-                    center: [&apos;25%&apos;, &apos;55%&apos;],
-                    data: data.series[0].data,
-                    itemStyle: {
-                        normal: {
-                            label: {
-                                show: true,
-                                formatter: &apos;{d}%&apos;
-                            },
-                            labelLine: {show: true}
-                        }
-                    }
-                }
-            ]
-        };
-        //指定的配置项和数据显示图表。
-        myChart.setOption(option);
-    }
-
-    /**line折线图*/
-    function lineChart(id, data) {
-        //初始化echarts实例
-        var myChart = echarts.init(document.getElementById(id));
-        //指定图表的配置项和数据
-        var option = {
-            color: data.color,
-            tooltip: {
-                trigger: &apos;axis&apos;
-            },
-            xAxis:  {
-                type: &apos;category&apos;,
-                boundaryGap: false,
-                axisLabel:{interval: 0,rotate:40},
-                data : data.xAxis.data
-            },
-            yAxis: {
-                type: &apos;value&apos;
-            },
-            series: data.series
-        };
-        //指定的配置项和数据显示图表。
-        myChart.setOption(option);
-    }
-
-    /**bar柱状图*/
-    function barChart(id, data) {
-        //初始化echarts实例
-        var myChart = echarts.init(document.getElementById(id));
-        //指定图表的配置项和数据
-        var option = {
-            color: data.color,
-            tooltip : {
-                trigger: &apos;axis&apos;,
-                axisPointer : {            // 坐标轴指示器，坐标轴触发有效
-                    type : &apos;shadow&apos;        // 默认为直线，可选为：&apos;line&apos; | &apos;shadow&apos;
-                }
-            },
-            grid: {
-                left: &apos;3%&apos;,
-                right: &apos;4%&apos;,
-                bottom: &apos;3%&apos;,
-                containLabel: true
-            },
-            xAxis : [
-                {
-                    data : [&apos;01月&apos;, &apos;02月&apos;, &apos;03月&apos;, &apos;04月&apos;, &apos;05月&apos;, &apos;06月&apos;, &apos;07月&apos;,&apos;08月&apos;, &apos;09月&apos;, &apos;10月&apos;, &apos;11月&apos;, &apos;12月&apos;],
-                }
-            ],
-            yAxis : [
-                {
-                    type : &apos;value&apos;
-                }
-            ],
-            series: data.series
-        };
-        //指定的配置项和数据显示图表。
-        myChart.setOption(option);
-    }
-
-    return {
-        drawPie: function (id, data) {
-            pieChart(id, data);
-        },
-        drawLine: function (id, data) {
-            lineChart(id, data);
-        },
-        drawBar: function (id, data) {
-            barChart(id, data);
-        }
-    };
-}]);
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/29/多文件上传/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="CHEN.星">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CHEN.星~博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/12/29/多文件上传/" itemprop="url">多文件上传</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-29T11:02:31+08:00">
-                2017-12-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <pre><code> var formData = new FormData();
-
-$.each($scope.tssContingencyPlan, function (i, v) {
-        formData.append(i, v);
-    });
-    //图片封装
-    $.each($scope.certificateImgs, function (i, v) {
-        formData.append(&quot;files&quot;, v.files, v.orderIdx + &quot;_&quot; + v.id + &quot;_&quot; + v.name);
-    });
-    $.ajax({
-        url: contextPath + &quot;/tssContingencyPlan/save&quot;,
-        type: &apos;POST&apos;,
-        data: formData,
-        processData: false,
-        contentType: false,
-        async: false,
-        success: function (result) {
-            if (result.code &gt;= 0) {
-                $(&apos;#tss_emergencyPlanManagement_create_view&apos;).modal(&apos;hide&apos;);
-                $scope.tableRefresh();
-                toastr.success(result.text);
-            }
-        }
-});
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2037,7 +2067,7 @@ $.each($scope.tssContingencyPlan, function (i, v) {
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">46</span>
+                <span class="site-state-item-count">49</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

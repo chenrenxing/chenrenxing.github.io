@@ -263,6 +263,640 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/04/06/grunt前端打包/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/04/06/grunt前端打包/" itemprop="url">grunt前端打包</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-04-06T20:56:47+08:00">
+                2016-04-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ul>
+<li>公司项目一直都是用的后端打包工具gradle，这段时间项目相对空隙，就把项        目中前端打包重构了，采用grunt插件。   </li>
+<li>压缩工具grunt-contrib-compress  </li>
+<li>上传工具grunt-nexus-deployer</li>
+<li>最后记录Gruntfile.js<h3 id="压缩配置grunt-contrib-compress"><a href="#压缩配置grunt-contrib-compress" class="headerlink" title="压缩配置grunt-contrib-compress"></a>压缩配置grunt-contrib-compress</h3><pre><code> compress: {
+  main: {
+    options: {
+      archive: &apos;nexus/ocps-web-all.zip&apos;
+    //生成压缩包到nexus/ocps-web-all.zip
+    },
+    files: [{
+      expand: true,
+      cwd: &apos;&apos;,
+      src: [zipList],//压缩的文件
+      dest:&apos;ocps-web-all/&apos;//生成的文件包名
+        //这里dest是ocps-web-all.zip压缩包内的文件包名，也可以不要。
+    }]
+  }
+},
+</code></pre><h3 id="zipList配置"><a href="#zipList配置" class="headerlink" title="zipList配置"></a>zipList配置</h3><pre><code>  //压缩zip排除文件
+  var zipList = [
+&apos;**/*&apos;,//所有文件,下面！排除不需要文件
+&apos;!nexus/**&apos;,
+&apos;!build/**&apos;,//
+&apos;!node_modules/**&apos;,
+&apos;!bower.json&apos;,
+&apos;!build.gradle&apos;,
+&apos;!package-lock.json&apos;,
+&apos;!Gruntfile.js&apos;,
+&apos;!package.json&apos;,
+&apos;!less/**&apos;,
+&apos;!cbp-less/**&apos;,
+&apos;!cmss-less/**&apos;,
+&apos;!data/**&apos;
+  ];
+</code></pre></li>
+</ul>
+<h3 id="发布grunt-nexus-deployer"><a href="#发布grunt-nexus-deployer" class="headerlink" title="发布grunt-nexus-deployer"></a>发布grunt-nexus-deployer</h3><pre><code>//发布 nexus插件
+nexusDeployer: {
+  snapshot: {
+    options: {
+      groupId: &quot;com.cyberkey&quot;,
+      artifactId: &quot;ocps-web-all&quot;,//前端统一zip包名
+      version: &quot;1.10.8.1-SNAPSHOT&quot;,//版本
+      packaging: &apos;zip&apos;,//zip包
+      auth: {
+        username:&apos;nexus用户名&apos;,
+        password:&apos;nexus密码&apos;
+      },
+      url: &apos;nexus仓库快照版的URL&apos;,
+      artifact:&quot;nexus/ocps-web-all.zip&quot;//生成压缩包的路径和包名
+    }
+  },
+  release: {
+    options: {
+      groupId: &quot;com.cyberkey&quot;,
+      artifactId: &quot;ocps-web-all&quot;,//前端统一zip包名
+      version: &quot;1.10.8.1-RELEASE&quot;,//版本
+      packaging: &apos;zip&apos;,//zip包
+      auth: {
+        username:&apos;nexus用户名&apos;,
+        password:&apos;nexus密码&apos;
+      },
+      url: &apos;nexus仓库发布版的URL&apos;,
+      artifact:&quot;nexus/ocps-web-all.zip&quot;//生成压缩包的路径和包名
+    }
+  }
+},
+</code></pre><h3 id="clean清除"><a href="#clean清除" class="headerlink" title="clean清除"></a>clean清除</h3><pre><code>- 项目打包前清除下上次包
+- 
+  clean: {
+      pre: [&apos;nexus/**.zip&apos;] //删除掉先前的开发文件
+    },
+</code></pre><h3 id="GruntFile-js"><a href="#GruntFile-js" class="headerlink" title="GruntFile.js"></a>GruntFile.js</h3><pre><code>// AdminLTE Gruntfile
+module.exports = function (grunt) {
+
+  &apos;use strict&apos;;
+  //压缩zip排除文件
+  var zipList = [
+    &apos;**/*&apos;,
+    &apos;!nexus/**&apos;,
+    &apos;!build/**&apos;,//
+    &apos;!node_modules/**&apos;,
+    &apos;!bower.json&apos;,
+    &apos;!build.gradle&apos;,
+    &apos;!package-lock.json&apos;,
+    &apos;!Gruntfile.js&apos;,
+    &apos;!package.json&apos;,
+    &apos;!less/**&apos;,
+    &apos;!cbp-less/**&apos;,
+    &apos;!cmss-less/**&apos;,
+    &apos;!data/**&apos;
+  ];
+      grunt.initConfig({
+    watch: {
+      files: [
+        &quot;less/platform-less/*.less&quot;,&quot;eipts/**/*.js&quot;],
+      tasks: [&quot;less&quot;,&quot;jshint&quot;,&quot;concat&quot;,&quot;uglify&quot;]
+    },
+    less: {
+      development: {
+        options: {
+          compress: false
+    },
+    files: {
+      &quot;framework/validation/validationEngine.jquery.css&quot;:&quot;less/less/validationEngine.jquery.less&quot;,
+      &quot;dist/css/cbp-main.css&quot;: &quot;cbp-less/cbp-main.less&quot;,
+      &quot;dist/css/cbp-login.css&quot;: &quot;cbp-less/cbp-login.less&quot;,
+      &quot;dist/css/cbp-cbp.css&quot;: &quot;cbp-less/cbp-cbp.less&quot;,
+      &quot;dist/css/cbp-qrcode.css&quot;: &quot;cbp-less/cbp-qrcode.less&quot;,
+      &quot;dist/css/dic-form.css&quot;: &quot;less/platform-less/dic-form.less&quot;,
+      &quot;css/main.css&quot;:&quot;less/platform-less/main.less&quot; ,
+      &quot;css/urlComponent.css&quot;:&quot;less/platform-less/urlComponent.less&quot;,
+      &quot;css/scan-trace.css&quot;:&quot;less/platform-less/scan-trace.less&quot;,
+      &quot;dist/css/cmss-main.css&quot;:&quot;cmss-less/cmss-main.less&quot;,
+      &quot;dist/css/main.css&quot;:&quot;less/platform-less/main.less&quot;,
+      &quot;dist/css/public.css&quot;:&quot;less/platform-less/public.less&quot;,
+      &quot;css/codeconfig.css&quot;: &quot;less/platform-less/codeconfig.less&quot;
+    }
+  },
+  production: {
+    options: {
+      compress: true
+    },
+    files: {
+      &quot;dist/css/cbp-main.min.css&quot;: &quot;cbp-less/cbp-main.less&quot;,
+      &quot;dist/css/cbp-login.min.css&quot;: &quot;cbp-less/cbp-login.less&quot;,
+      &quot;dist/css/cbp-cbp.min.css&quot;: &quot;cbp-less/cbp-cbp.less&quot;,
+      &quot;dist/css/cbp-qrcode.min.css&quot;: &quot;cbp-less/cbp-qrcode.less&quot;,
+      &quot;dist/css/cmss-main.min.css&quot;: &quot;cmss-less/cmss-main.less&quot;,
+      &quot;dist/css/dic-form.min.css&quot;: &quot;less/platform-less/dic-form.less&quot;,
+      &quot;css/urlComponent.min.css&quot;:&quot;less/platform-less/urlComponent.less&quot;,
+      &quot;css/main.css&quot;:&quot;less/platform-less/main.less&quot;,
+      &quot;css/codeconfig.min.css&quot;: &quot;less/platform-less/codeconfig.less&quot;
+    }
+  }
+},
+   //发布 nexus插件
+nexusDeployer: {
+  snapshot: {
+    options: {
+      groupId: &quot;com.cyberkey&quot;,
+      artifactId: &quot;ocps-web-all&quot;,//前端统一zip包名
+      version: &quot;1.10.8.1-SNAPSHOT&quot;,//版本
+      packaging: &apos;zip&apos;,//zip包
+      auth: {
+        username:&apos;nexus用户名&apos;,
+        password:&apos;nexus密码&apos;
+      },
+      url: &apos;nexus仓库快照版的URL&apos;,
+      artifact:&quot;nexus/ocps-web-all.zip&quot;//生成压缩包的路径和包名
+    }
+  },
+  release: {
+    options: {
+      groupId: &quot;com.cyberkey&quot;,
+      artifactId: &quot;ocps-web-all&quot;,//前端统一zip包名
+      version: &quot;1.10.8.1-RELEASE&quot;,//版本
+      packaging: &apos;zip&apos;,//zip包
+      auth: {
+        username:&apos;nexus用户名&apos;,
+        password:&apos;nexus密码&apos;
+      },
+      url: &apos;nexus仓库发布版的URL&apos;,
+      artifact:&quot;nexus/ocps-web-all.zip&quot;//生成压缩包的路径和包名
+    }
+  }
+},
+ compress: {
+  main: {
+    options: {
+      archive: &apos;nexus/ocps-web-all.zip&apos;
+    //生成压缩包到nexus/ocps-web-all.zip
+    },
+    files: [{
+      expand: true,
+      cwd: &apos;&apos;,
+      src: [zipList],//压缩的文件
+      dest:&apos;ocps-web-all/&apos;//生成的文件包名
+        //这里dest是ocps-web-all.zip压缩包内的文件包名，也可以不要。
+    }]
+  }
+},
+clean: {
+  pre: [&apos;nexus/**.zip&apos;] //删除掉先前的开发文件
+},
+concat:{
+  options: {
+    separator: &apos;;&apos;
+  },
+  eipts: {
+    src: [&apos;eipts/**/*.js&apos;],
+    dest: &apos;dist/js/eipts-all.js&apos;
+  }
+},
+uglify: {
+  options: {
+    mangle: true,
+    preserveComments: &apos;some&apos;
+  },
+  my_target: {
+    files: {
+      &apos;dist/js/eipts-all.min.js&apos;:[&apos;eipts/**/*.js&apos;]
+    }
+  }
+},
+jshint: {
+  options: {
+    jshintrc: &apos;.jshintrc&apos;
+  },
+  eipts:{
+    src:[&apos;eipts/**/*.js&apos;]
+  }
+},
+csslint: {
+  options: {
+    csslintrc: &apos;less/less/.csslintrc&apos;
+  },
+  dist: [
+    &apos;css/AdminLTE.css&apos;,&apos;css/main.css&apos;
+  ]
+}
+  });
+  grunt.loadNpmTasks(&apos;grunt-nexus-deployer&apos;);
+  grunt.loadNpmTasks(&apos;grunt-contrib-compress&apos;);
+  grunt.loadNpmTasks(&apos;grunt-contrib-less&apos;);
+  grunt.loadNpmTasks(&apos;grunt-contrib-watch&apos;);
+  grunt.loadNpmTasks(&apos;grunt-contrib-concat&apos;);
+  grunt.loadNpmTasks(&apos;grunt-contrib-uglify&apos;);
+  grunt.loadNpmTasks(&apos;grunt-contrib-jshint&apos;);
+  grunt.loadNpmTasks(&apos;grunt-contrib-csslint&apos;);
+  grunt.loadNpmTasks(&apos;grunt-contrib-clean&apos;);
+  grunt.registerTask(&apos;lint&apos;, [&apos;jshint&apos;, &apos;csslint&apos;]);
+  grunt.registerTask(&apos;default&apos;, [&apos;watch&apos;]);
+  grunt.registerTask(&apos;snapshot&apos;,[&apos;clean&apos;,&apos;compress&apos;,&apos;nexusDeployer:snapshot&apos;]);//1:清除历史zip。2:压缩.3:上传nexus快照版本
+  grunt.registerTask(&apos;release&apos;,[&apos;clean&apos;,&apos;compress&apos;,&apos;nexusDeployer:release&apos;]);//1:清除历史zip。2:压缩.3:上传nexus发布版本
+};
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/03/17/cookie换肤功能/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/03/17/cookie换肤功能/" itemprop="url">cookie换肤功能</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-03-17T19:19:07+08:00">
+                2016-03-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ul>
+<li>javaScript是运行在客户端的脚本，因此一般是不能够设置Session的，因为Session是运行在服务器端的。</li>
+<li>而cookie是运行在客户端的，所以可以用JS来设置cookie.</li>
+</ul>
+<p>#设置cookie#</p>
+<ul>
+<li>document.cookie=”skin=”+skin;</li>
+</ul>
+<p>#获取cookie#</p>
+<ul>
+<li>getCooKie(“cookie)  </li>
+<li>function getCooKie(name){<br>  var arr;reg=new RegExp(“(^| )”+name+”=([^;]*)(;|$)”);<br>  if(arr=document.cookie.match(reg)){  <pre><code>$scope.current_skin=arr[2];      
+ return;  
+</code></pre>  } else{  <pre><code> $scope.current_skin = &quot;skin-blue&quot;;  
+return;  
+</code></pre>  }<br>  }<br>#换肤#</li>
+</ul>
+<blockquote>
+<p>$(‘#change_skin [data-skin]’).unbind(“click”).click<br>(function(e) {<br>    e.preventDefault();<br>    var skinName = $(this).data(‘skin’);//点击this获取data-shin data    属性<br>    $(‘body’).removeClass($scope.current_skin);<br>    $(‘body’).addClass(skinName);<br>    $scope.current_skin = skinName;<br>    $scope.$apply(function(){<br>        $scope.current_skin=skinName;<br>    });<br>    document.cookie=”skin=”+ $scope.current_skin;//皮肤写入    cookie<br>});</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/02/10/获取URL上的参数/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/02/10/获取URL上的参数/" itemprop="url">获取URL上的参数</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-02-10T16:12:36+08:00">
+                2016-02-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="获取URL上的参数"><a href="#获取URL上的参数" class="headerlink" title="获取URL上的参数"></a>获取URL上的参数</h3><pre><code>function getUrlParam(name) {
+var pattern = new RegExp(&quot;[?&amp;]&quot; + name + &quot;\=([^&amp;]+)&quot;, &quot;g&quot;);
+var matcher = pattern.exec(window.location);
+var items = null;
+if (matcher != null) {
+    try {
+        items = decodeURIComponent(decodeURIComponent(matcher[1]));
+    } catch (e) {
+        try {
+            items = decodeURIComponent(matcher[1]);
+        } catch (e) {
+            items = matcher[1];
+        }
+    }
+}
+return items;
+}
+----------------------
+  var tiananCode = getUrlParam(&quot;code&quot;);
+code为键传入tiananCode为值
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/01/25/判断对象为空/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1155,7 +1789,7 @@ hexo deploy #将.deploy目录部署到GitHub
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">46</span>
+                <span class="site-state-item-count">49</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
