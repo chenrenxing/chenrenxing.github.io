@@ -263,6 +263,168 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/15/angulrjs中run的运用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/02/15/angulrjs中run的运用/" itemprop="url">angulrjs中run的运用</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-15T19:59:35+08:00">
+                2017-02-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="run方法用于初始化全局的数据，仅对全局作用域起作用。"><a href="#run方法用于初始化全局的数据，仅对全局作用域起作用。" class="headerlink" title="run方法用于初始化全局的数据，仅对全局作用域起作用。"></a>run方法用于初始化全局的数据，仅对全局作用域起作用。</h1><h3 id="浏览器判断"><a href="#浏览器判断" class="headerlink" title="浏览器判断"></a>浏览器判断</h3><pre><code>.run([&apos;$rootScope&apos;, &apos;$route&apos;, &apos;$window&apos;, &apos;$location&apos;, &apos;Position&apos;, &apos;$cookies&apos;, &apos;Request&apos;, &apos;$cookieStore&apos;,
+  function($rootScope, $route, $window, $location, position, $cookies, request, $cookieStore) {
+   //非微信的登陆
+   $rootScope.isWeiXinLogin = function() {
+//判断是否微信登陆
+var ua = window.navigator.userAgent.toLowerCase();
+//console.log(ua); //mozilla/5.0 (iphone; cpu iphone os 9_1 like mac os x) applewebkit/601.1.46 (khtml, like gecko) version/9.0 mobile/13b143 safari/601.1
+if (ua.match(/MicroMessenger/i) == &apos;micromessenger&apos;) {
+ console.log(&quot; 是来自微信内置浏览器&quot;);
+ return true;
+} else {
+ console.log(&quot;不是来自微信内置浏览器&quot;);
+ return false;
+}
+   };
+]);
+--------------
+控制层处理
+angular.module(&apos;autumnswind&apos;).controller(&apos;OrderCtrl&apos;, [&apos;$rootScope&apos;, &apos;$scope&apos;, &apos;Request&apos;, &apos;$cookies&apos;, &apos;$window&apos;, &apos;$routeParams&apos;, &apos;$location&apos;, &apos;Tool&apos;,
+ function($rootScope, $scope, request, $cookies, $window, $routeParams, $location, tool) { 
+if ($rootScope.isWeiXinLogin()) {
+     ...
+    }
+   }
+]);
+</code></pre><h3 id="登陆判断"><a href="#登陆判断" class="headerlink" title="登陆判断"></a>登陆判断</h3><h4 id="项目中run-http和ajax请求头全局"><a href="#项目中run-http和ajax请求头全局" class="headerlink" title="项目中run$http和ajax请求头全局"></a>项目中run$http和ajax请求头全局</h4><pre><code>.run([&apos;$http&apos;, &apos;$cookies&apos;,&apos;$rootScope&apos;,&apos;$location&apos;, function($http, $cookies,$rootScope,$location) {
+        $http.defaults.headers.common[&apos;X-Requested-With&apos;] = &apos;XMLHttpRequest&apos;;
+        $http.defaults.headers.common[&apos;X-Auth-Token&apos;] = $cookies.get(&apos;X-Auth-Token&apos;);
+        $.ajaxSetup({
+            headers: {
+                &apos;X-Auth-Token&apos;: $cookies.get(&apos;X-Auth-Token&apos;)
+            }
+        });
+
+    }]);
+    //x-requested-with XMLHttpRequest是Ajax 异步请求方式
+    //直接用于全局环境每次$http头信息
+</code></pre><h3 id="什么是-XMLHttpRequest-对象？"><a href="#什么是-XMLHttpRequest-对象？" class="headerlink" title="什么是 XMLHttpRequest 对象？"></a>什么是 XMLHttpRequest 对象？</h3><ul>
+<li>XMLHttpRequest 对象用于在后台与服务器交换数据。</li>
+<li>XMLHttpRequest 对象是开发者的梦想，因为您能够：</li>
+<li>在不重新加载页面的情况下更新网页<br>在页面已加载后从服务器请求数据<br>在页面已加载后从服务器接收数据<br>在后台向服务器发送数据</li>
+<li>所有现代的浏览……</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/10/webpack-dev-server/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1964,225 +2126,6 @@ return {
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/05/10/判断页面中存在相同id/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="CHEN.星">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CHEN.星~博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/05/10/判断页面中存在相同id/" itemprop="url">判断页面中存在相同id</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-05-10T20:56:47+08:00">
-                2016-05-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>前言：项目是管理系统，采用的angularjs框架，table页加载，不多说。<br>新建、修改的时候弹出框from表单内里面采用了一些自定义写法、以及3方插件类的，赋值就会存在id赋值。在一次上线过程中，打开了多个菜单，模态框中的input的id赋值出现了问题。分析后多个菜单里面存在了相同id。</p>
-<h2 id="后续：id冲突最好的模式遵守开发规范，用这个方法也是对系统的负担增加。"><a href="#后续：id冲突最好的模式遵守开发规范，用这个方法也是对系统的负担增加。" class="headerlink" title="后续：id冲突最好的模式遵守开发规范，用这个方法也是对系统的负担增加。"></a>后续：id冲突最好的模式遵守开发规范，用这个方法也是对系统的负担增加。</h2><pre><code>//工厂方法
-(function (angular) {
-&quot;use strict&quot;;
-angular.module(&apos;check.id.factory&apos;, [])
-    .factory(&apos;checkIdFactory&apos;,[function(){
-        function checkid(modalId){
-             var inputid=[];
-            var inputArrayId=$(&quot;#&quot;+modalId).find(&apos;:input&apos;);
-            inputArrayId.each(//使用数组的循环函数 循环这个input数组
-                function (){
-                    var input =$(this);//循环中的每一个input元素
-                    inputid.push(input.attr(&quot;id&quot;));//查看循环中的每一个input的id
-                }
-            );
-            for(var i in inputid){
-                var checkId=inputid[i];
-                if( $(&quot;body [id=&quot;+checkId+&quot;]&quot;).length &gt;= 2 ){
-                    return (true);
-                }
-            }
-        }
-        return {
-            checkAllid: function (id) {
-                return checkid(id);
-            }
-        }
-    }])
-})(angular);
-</code></pre><hr>
-<p>工厂写法2不跟上组件有关系两种返回写法而已</p>
-<pre><code>(function (angular) {
-&apos;use strict&apos;;
-        angular.module(&apos;check.id.factory&apos;, [])
-    .factory(&apos;checkIdFactory&apos;,[function(){$http) {
-        var service = {};//定义一个Object对象&apos;
-        var allData={
-            fixFileData:{},
-            navIconQueue:[],
-            cacheNavData:[],//用于缓存button图片数据,转换了数组navIconQueue传出
-            autoFileData:{}
-        };
-        service.getData=function(){
-            var urlUnClickIcon={};//导航模板上传的未点击图标
-            var urlClickIcon={};//导航模板上传的点击图标
-            var antoBtnClickIcon={};//自增长buttn跳转的图标
-            for (var i in allData.cacheNavData) {
-                var eachFile = allData.cacheNavData[i].data;
-                if(eachFile.fileType==&quot;urlUnClickIcon&quot;){
-                    urlUnClickIcon[eachFile.navId]=eachFile
-                }else if(eachFile.fileType==&quot;urlClickIcon&quot;){
-                    urlClickIcon[eachFile.navId]=eachFile
-                }else if(eachFile.fileType=&quot;btnClickIcon&quot;){
-                    antoBtnClickIcon[eachFile.navId]=eachFile
-                }
-            }
-            for (var i in urlUnClickIcon) {
-                var urlUnClickIconData = urlUnClickIcon[i];
-                allData.navIconQueue.push(urlUnClickIconData);
-            }
-            for (var i in urlClickIcon) {
-                var urlClickIconData = urlClickIcon[i];
-                allData.navIconQueue.push(urlClickIconData);
-            }
-            for (var i in antoBtnClickIcon) {
-                var antoBtnClickIconData = antoBtnClickIcon[i];
-                allData.navIconQueue.push(antoBtnClickIconData);
-            }
-            return allData;
-        };
-        service.clearData=function(){
-            allData={
-                fixFileData:{},
-                cacheNavData:[],//用于缓存button图片数据
-                navIconQueue:[],
-                autoFileData:{}
-            };
-        }
-        //获取固定的图片file对象
-        $rootScope.$on(&apos;fixDataLink&apos;,function(event,data,positionId){
-                data.fileContent.PicCutInfoDto=data.PicCutInfoDto;
-            data.fileContent.cut=data.cut;
-            data.fileContent.position=data.position;
-            allData.fixFileData[positionId]=data.fileContent ;
-        });
-        $rootScope.$on(&apos;autoFileData&apos;,function(event,data,positionId){
-                data.fileContent.PicCutInfoDto=data.PicCutInfoDto;
-            data.fileContent.cut=data.cut;
-            data.fileContent.position=data.position;
-            allData.autoFileData[positionId]=data.fileContent ;
-        });
-        //获取底部导航的图片file对象
-        $rootScope.$on(&apos;navIconQueue&apos;,function(event,data,positionId){
-            allData.cacheNavData.push({
-                    data:data
-            });
-        });
-        return service;//返回这个Object对象
-    }]);
-})(angular);
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2233,7 +2176,7 @@ angular.module(&apos;check.id.factory&apos;, [])
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">59</span>
+                <span class="site-state-item-count">60</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
