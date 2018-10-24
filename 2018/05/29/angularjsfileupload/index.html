@@ -101,7 +101,7 @@
 <meta property="og:site_name" content="CHEN.星~博客">
 <meta property="og:description" content="options配置$scope.options = {     url: contextPath + &amp;apos;/weChatConfig/uploadText&amp;apos;,     acceptFileTypes: /(\.|\/)(txt)$/i,     processfail: function (e, data) {         if(data.files[data.index].">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-29T08:30:28.358Z">
+<meta property="og:updated_time" content="2018-07-05T07:54:00.407Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="angularjsfileupload">
 <meta name="twitter:description" content="options配置$scope.options = {     url: contextPath + &amp;apos;/weChatConfig/uploadText&amp;apos;,     acceptFileTypes: /(\.|\/)(txt)$/i,     processfail: function (e, data) {         if(data.files[data.index].">
@@ -356,6 +356,29 @@
             return;
         }
 });
+
+var fileForm = $(&quot;#file_form_&quot; + autoData.agumentOrder);
+    fileForm.bind(&apos;fileuploadsubmit&apos;, function (e, data) {
+        var file = data.files[0];
+        data.formData = {
+            modelId: file.modelId,
+            fileType: file.fileType,
+            autoAgument: file.autoAgument,
+            agumentOrder: file.agumentOrder
+        };//完善表单信息
+    }).bind(&apos;fileuploadadd&apos;, function (e, data) {
+        var order = $(data.fileInput[0]).attr(&quot;fileOrder&quot;);
+        var type = &quot;autoAgumentImage&quot; + order;
+        var oldFile = $scope[type];
+        if (!$scope.imgUploadMapping[type]) {
+            $scope.imgUploadMapping[type] = oldFile;
+        } else {
+            oldFile.error = &quot;invalid&quot;;
+        }
+        $scope[type] = data.files[0];
+        $scope.urlDataList[order - 1].file = data.files[0];
+        $scope.urlDataList[order - 1].hideDefaultImage = true;
+    })
 </code></pre><h3 id="监听事件"><a href="#监听事件" class="headerlink" title="监听事件"></a>监听事件</h3><pre><code>//可以直接监听绑定的事件
 $scope.$on(&apos;fileuploadadd&apos;, function(event, data) {
     // 如果文件大于200KB
@@ -434,11 +457,23 @@ $element.fileupload(angular.extend(
        previewMaxHeight: 1024,
        previewCrop: false
    }).on(&apos;fileuploadadd&apos;, function (e, data) {
+           var reader = new FileReader();//新建FILE流
+           reader.readAsDataURL(data.files[0]);//获取URL
+           reader.onload = function (e) {//成功后返回
+               addUrl(e.target.result, data.files[0]);//图片显示方法（参数：URL，文件流）
+           };
    }).on(&apos;fileuploadprocessalways&apos;, function (e, data) {
        var index = data.index,
            file = data.files[index],
            node = $(data.context.children()[index]);
+
    });
+</code></pre><h3 id="angulrjs上传文件流"><a href="#angulrjs上传文件流" class="headerlink" title="angulrjs上传文件流"></a>angulrjs上传文件流</h3><pre><code>$http.post(contextPath+&apos;&apos;, formData,{
+                transformRequest: angular.identity,
+                headers: {&apos;Content-Type&apos;: undefined}
+            }).then(function (resp) {
+                return resp.data;
+            });
 </code></pre>
       
     </div>
@@ -552,7 +587,7 @@ $element.fileupload(angular.extend(
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">49</span>
+                <span class="site-state-item-count">59</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -591,7 +626,7 @@ $element.fileupload(angular.extend(
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#options配置"><span class="nav-number">1.</span> <span class="nav-text">options配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#表单绑定"><span class="nav-number">2.</span> <span class="nav-text">表单绑定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#监听事件"><span class="nav-number">3.</span> <span class="nav-text">监听事件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#api配置文件"><span class="nav-number">4.</span> <span class="nav-text">api配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#id绑定demo"><span class="nav-number">5.</span> <span class="nav-text">id绑定demo</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#options配置"><span class="nav-number">1.</span> <span class="nav-text">options配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#表单绑定"><span class="nav-number">2.</span> <span class="nav-text">表单绑定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#监听事件"><span class="nav-number">3.</span> <span class="nav-text">监听事件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#api配置文件"><span class="nav-number">4.</span> <span class="nav-text">api配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#id绑定demo"><span class="nav-number">5.</span> <span class="nav-text">id绑定demo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#angulrjs上传文件流"><span class="nav-number">6.</span> <span class="nav-text">angulrjs上传文件流</span></a></li></ol></div>
             
 
           </div>

@@ -263,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/04/06/grunt前端打包/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/10/webpack-dev-server/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="CHEN.星">
@@ -282,7 +282,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/04/06/grunt前端打包/" itemprop="url">grunt前端打包</a></h1>
+                <a class="post-title-link" href="/2017/01/10/webpack-dev-server/" itemprop="url">webpack-dev-server</a></h1>
         
 
         <div class="post-meta">
@@ -294,8 +294,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-04-06T20:56:47+08:00">
-                2016-04-06
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-10T09:38:15+08:00">
+                2017-01-10
               </time>
             
 
@@ -335,190 +335,1391 @@
         
           
             <ul>
-<li>公司项目一直都是用的后端打包工具gradle，这段时间项目相对空隙，就把项        目中前端打包重构了，采用grunt插件。   </li>
-<li>压缩工具grunt-contrib-compress  </li>
-<li>上传工具grunt-nexus-deployer</li>
-<li>最后记录Gruntfile.js<h3 id="压缩配置grunt-contrib-compress"><a href="#压缩配置grunt-contrib-compress" class="headerlink" title="压缩配置grunt-contrib-compress"></a>压缩配置grunt-contrib-compress</h3><pre><code> compress: {
-  main: {
-    options: {
-      archive: &apos;nexus/ocps-web-all.zip&apos;
-    //生成压缩包到nexus/ocps-web-all.zip
-    },
-    files: [{
-      expand: true,
-      cwd: &apos;&apos;,
-      src: [zipList],//压缩的文件
-      dest:&apos;ocps-web-all/&apos;//生成的文件包名
-        //这里dest是ocps-web-all.zip压缩包内的文件包名，也可以不要。
-    }]
-  }
+<li><p>一直在angulrjs项目，查阅资料grunt配置环境里面，没有找到相关的热替换，然后找了一个简单的vue项目，做了一个热替换</p>
+<h3 id="package-json文件"><a href="#package-json文件" class="headerlink" title="package.json文件"></a>package.json文件</h3><p>  {</p>
+<pre><code>&quot;name&quot;: &quot;vue-project&quot;,
+&quot;version&quot;: &quot;1.0.0&quot;,
+&quot;description&quot;: &quot;chenxq&quot;,
+&quot;main&quot;: &quot;index.js&quot;,
+&quot;scripts&quot;: {
+  &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;,
+  &quot;dev&quot;: &quot;webpack-dev-server  --progress --inline&quot;
 },
-</code></pre><h3 id="zipList配置"><a href="#zipList配置" class="headerlink" title="zipList配置"></a>zipList配置</h3><pre><code>  //压缩zip排除文件
-  var zipList = [
-&apos;**/*&apos;,//所有文件,下面！排除不需要文件
-&apos;!nexus/**&apos;,
-&apos;!build/**&apos;,//
-&apos;!node_modules/**&apos;,
-&apos;!bower.json&apos;,
-&apos;!build.gradle&apos;,
-&apos;!package-lock.json&apos;,
-&apos;!Gruntfile.js&apos;,
-&apos;!package.json&apos;,
-&apos;!less/**&apos;,
-&apos;!cbp-less/**&apos;,
-&apos;!cmss-less/**&apos;,
-&apos;!data/**&apos;
-  ];
+&quot;author&quot;: &quot;&quot;,
+&quot;license&quot;: &quot;ISC&quot;,
+&quot;devDependencies&quot;: {
+  &quot;babel-core&quot;: &quot;^6.3.17&quot;,
+  &quot;babel-loader&quot;: &quot;^6.2.0&quot;,
+  &quot;babel-plugin-transform-runtime&quot;: &quot;^6.3.13&quot;,
+  &quot;babel-preset-es2015&quot;: &quot;^6.3.13&quot;,
+  &quot;babel-runtime&quot;: &quot;^5.8.34&quot;,
+  &quot;css-loader&quot;: &quot;^0.23.0&quot;,
+  &quot;file-loader&quot;: &quot;^0.10.1&quot;,
+  &quot;html-webpack-plugin&quot;: &quot;^2.30.1&quot;,
+  &quot;jquery&quot;: &quot;^3.2.1&quot;,
+  &quot;style-loader&quot;: &quot;^0.15.0&quot;,
+  &quot;url-loader&quot;: &quot;^0.5.8&quot;,
+  &quot;vue&quot;: &quot;^2.2.5&quot;,
+  &quot;vue-cli&quot;: &quot;^2.8.1&quot;,
+  &quot;vue-hot-reload-api&quot;: &quot;^1.2.2&quot;,
+  &quot;vue-html-loader&quot;: &quot;^1.0.0&quot;,
+  &quot;vue-loader&quot;: &quot;^7.2.0&quot;,
+  &quot;vue-resource&quot;: &quot;^1.2.1&quot;,
+  &quot;vue-router&quot;: &quot;^2.3.0&quot;,
+  &quot;vue-style-loader&quot;: &quot;^1.0.0&quot;,
+  &quot;webpack&quot;: &quot;^1.12.9&quot;,
+  &quot;webpack-dev-server&quot;: &quot;^1.16.5&quot;
+    },
+&quot;dependencies&quot;: {
+  &quot;vue&quot;: &quot;^2.2.5&quot;
+}
+</code></pre><p>  }</p>
+<h3 id="webpack-config-js"><a href="#webpack-config-js" class="headerlink" title="webpack.config.js"></a>webpack.config.js</h3><pre><code>// nodejs 中的path模块
+var path = require(&apos;path&apos;);
+var webpack = require(&apos;webpack&apos;);
+//var HtmlWebpackPlugin = require(&apos;html-webpack-plugin&apos;);
+var HtmlWebpackPlugin = require(&apos;html-webpack-plugin&apos;);//生成新的html
+module.exports = {
+// 入口文件，path.resolve()方法，可以结合我们给定的两个参数最后生成绝对路径，最终指向的就是我们的index.js文件
+entry: {
+    index:&quot;./main.js&quot;},
+//entry:[&apos;&quot;./main.js&quot;&apos;,&quot;./main.js&quot;]多文件打包入口，同样对象也可以多文件
+output: {
+    path: &apos;./dist/js/&apos;,  //路径
+    publicPath: &apos;&apos;,  //网站运行时访问的路径
+    filename: &apos;[name]-[hash].js&apos; // 生成文件名  name为entry下的属性名
+
+},
+devServer:{
+    //contentBase: &apos;&apos;,
+    historyApiFallback:true,
+    //hot:true,//webpack2 不支持了
+    inline:true
+    //progress:true,
+    //port:8080,//端口你可以自定义
+    //quiet:true,//显示打包的hash值
+    //stats: &quot;errors-only&quot;
+},
+module: {
+    loaders: [
+        // 使用vue-loader 加载 .vue 结尾的文件
+        {
+            test: /\.vue$/,
+            loader: &apos;vue&apos;//装载机loader
+        },
+        {
+            test: /\.js$/,
+            loader: &apos;babel?presets=es2015&apos;,
+            exclude: /node_modules///排除
+        },
+        {
+            test: /\.(jpg|png|gif|jpeg)?$/,
+            loader: &apos;url?limit=20480&amp;name=dist/images/[name].[hash:8].[ext]&apos;
+        }
+    ]
+},
+resolve: {//决定
+    extensions: [&apos;&apos;, &apos;.js&apos;, &apos;.vue&apos;],//扩展
+    alias: {//别名
+        &apos;vue$&apos;: &apos;vue/dist/vue.common.js&apos;
+    }
+},
+plugins:[//热响应插件
+    new webpack.HotModuleReplacementPlugin(),
+    new HtmlWebpackPlugin({
+        title: &apos;My App&apos;,
+        path:&quot;&quot;,
+        template:&quot;./index.html&quot;,
+        filename: &apos;./home.html&apos;
+    })
+]
+};
 </code></pre></li>
 </ul>
-<h3 id="发布grunt-nexus-deployer"><a href="#发布grunt-nexus-deployer" class="headerlink" title="发布grunt-nexus-deployer"></a>发布grunt-nexus-deployer</h3><pre><code>//发布 nexus插件
-nexusDeployer: {
-  snapshot: {
-    options: {
-      groupId: &quot;com.cyberkey&quot;,
-      artifactId: &quot;ocps-web-all&quot;,//前端统一zip包名
-      version: &quot;1.10.8.1-SNAPSHOT&quot;,//版本
-      packaging: &apos;zip&apos;,//zip包
-      auth: {
-        username:&apos;nexus用户名&apos;,
-        password:&apos;nexus密码&apos;
-      },
-      url: &apos;nexus仓库快照版的URL&apos;,
-      artifact:&quot;nexus/ocps-web-all.zip&quot;//生成压缩包的路径和包名
-    }
-  },
-  release: {
-    options: {
-      groupId: &quot;com.cyberkey&quot;,
-      artifactId: &quot;ocps-web-all&quot;,//前端统一zip包名
-      version: &quot;1.10.8.1-RELEASE&quot;,//版本
-      packaging: &apos;zip&apos;,//zip包
-      auth: {
-        username:&apos;nexus用户名&apos;,
-        password:&apos;nexus密码&apos;
-      },
-      url: &apos;nexus仓库发布版的URL&apos;,
-      artifact:&quot;nexus/ocps-web-all.zip&quot;//生成压缩包的路径和包名
-    }
-  }
+<h3 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h3><pre><code>webpack.js output.path:指定输出文件的路径。
+webpack输出真实的文件，而webpack-dev-server输出的文件只存在于内存中,不输出真实的文件！
+output: {
+    path: &apos;./dist/js/&apos;,  //路径
+    publicPath: &apos;&apos;,  //网站运行时访问的路径
+    filename: &apos;[name]-[hash].js&apos; // 生成文件名  name为entry下的属性名
+
 },
-</code></pre><h3 id="clean清除"><a href="#clean清除" class="headerlink" title="clean清除"></a>clean清除</h3><pre><code>- 项目打包前清除下上次包
-- 
-  clean: {
-      pre: [&apos;nexus/**.zip&apos;] //删除掉先前的开发文件
+webpack-dev-server生成的文件在内存中也是存在dist/js 这个文件内。
+
+ &quot;scripts&quot;: {
+    &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;,
+    &quot;dev&quot;: &quot;webpack-dev-server  --progress --inline&quot;
+  },
+### 启动 ###
+npm run dev 
+dev 手动配置的
+启动后浏览器http://localhost:8080/home.html
+</code></pre><h3 id="坑过重要的点"><a href="#坑过重要的点" class="headerlink" title="坑过重要的点"></a>坑过重要的点</h3><pre><code>webpack配置生成的合并js到dist/js 下面跟 热替换是没有关系的。    
+webpack-dev-server生成的文件在内存中也是存在dist/js 这个文件内。
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/02/angularjs渲染ng-repeat后执行代码/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/12/02/angularjs渲染ng-repeat后执行代码/" itemprop="url">angularjs渲染ng-repeat后执行代码</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-12-02T17:33:22+08:00">
+                2016-12-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ul>
+<li>AnguarJs提供了一些对于Html进行加强的语义标签(directive)，这些标签在浏览器加载完页面后被执行</li>
+</ul>
+<hr>
+<pre><code>//定义一个指令
+app.directive(&apos;onFinishRender&apos;, function ($timeout) {
+return {
+    restrict: &apos;A&apos;,
+    link: function(scope, element, attr) {
+        if (scope.$last === true) {
+            $timeout(function() {
+                scope.$emit(&apos;ngRepeatFinished&apos;);
+            });
+        }
+    }
+};
+});
+//HTML
+&lt;tr ng-repeat=&quot;user in users&quot; on-finish-render=&quot;ngRepeatFinished&quot;&gt;
+  &lt;td&gt;{{user.Id}}&lt;/td&gt;
+  &lt;td&gt;{{user.Name}}&lt;/td&gt;
+  &lt;td&gt;{{user.Salary}}&lt;/td&gt;
+&lt;/tr&gt;
+//控制层
+$scope.$on(&apos;ngRepeatFinished&apos;, function () {
+        //监听渲染完成后执行
+          });
+});
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/18/angulrjs基数偶数过滤/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/10/18/angulrjs基数偶数过滤/" itemprop="url">angulrjs基数偶数过滤</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-10-18T13:30:02+08:00">
+                2016-10-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="js"><a href="#js" class="headerlink" title="js"></a>js</h3><pre><code>.filter(&apos;odditems&apos;,function(){//奇数
+return function(inputArray){
+    var array = [];
+    if(inputArray){
+        for(var i=0;i&lt;inputArray.length;i++){
+            if(i%2!==0){
+                array.push(inputArray[i]);
+            }
+        }
+    }
+    return array;
+}})
+-
+.filter(&apos;evenitems&apos;,function(){//偶数
+return function(inputArray){
+    var array = [];
+    if(inputArray){
+        for(var i=0;i&lt;inputArray.length;i++){
+            if(i%2==0){
+                array.push(inputArray[i]);
+            }
+        }
+    }
+    return array;
+}})
+</code></pre><h3 id="html"><a href="#html" class="headerlink" title="html"></a>html</h3><pre><code>&lt;div ng-repeat=&quot;item in firstSlide |odditems&quot;&gt;
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/09/25/angularjs$directive$compile/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/09/25/angularjs$directive$compile/" itemprop="url">angularjs$directive$compile渲染html</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-25T17:30:21+08:00">
+                2016-09-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="例子一"><a href="#例子一" class="headerlink" title="例子一"></a>例子一</h3><pre><code># HTML #
+
+&lt;body ng-controller=&quot;MyController&quot;&gt;
+    &lt;p compile&gt;&lt;/p&gt;
+&lt;/body&gt;
+
+# js #
+  angular.module(&apos;myApp&apos;, [])
+            .controller(&apos;MyController&apos;, function ($scope, $compile, $timeout) {
+            })
+            .directive(&apos;compile&apos;, function($compile) {
+                return {
+                    scope: {
+
+                    },
+                    link: function(scope, elem, attrs) {
+                        scope.title = &apos;list&apos;;
+                        scope.items = [&apos;list1&apos;, &apos;list2&apos;, &apos;list3&apos;];
+                        var html = &apos;&lt;h1&gt;{{title}}&lt;/h1&gt;\
+                        &lt;ul&gt;\
+                            &lt;li ng-repeat=&quot;item in items&quot;&gt;{{item}}&lt;/li&gt;\
+                        &lt;/ul&gt;&apos;;
+                        elem.html($compile(html)(scope))
+                    }
+                }
+            })
+</code></pre><h3 id="例子二"><a href="#例子二" class="headerlink" title="例子二"></a>例子二</h3><pre><code>#HTML#
+
+&lt;body ng-controller=&quot;MyController&quot;&gt;
+&lt;p compile=&quot;html&quot;&gt;&lt;/p&gt;
+&lt;/body&gt;
+
+# JS #
+
+   angular.module(&apos;myApp&apos;, [])
+            .controller(&apos;MyController&apos;, function ($scope) {
+                $scope.html = &apos;&lt;h1&gt;{{title}}&lt;/h1&gt;\
+                        &lt;ul&gt;\
+                            &lt;li ng-repeat=&quot;item in items&quot;&gt;{{item}}&lt;/li&gt;\
+                        &lt;/ul&gt;&apos;
+
+            })
+            .directive(&apos;compile&apos;, function($compile) {
+                return {
+                    scope: {
+                        compile: &apos;=&apos;
+                    },
+                    link: function(scope, elem, attrs) {
+                        scope.title = &apos;list&apos;;
+                        scope.items = [&apos;list1&apos;, &apos;list2&apos;, &apos;list3&apos;];
+                        elem.html($compile(scope.compile)(scope))
+                    }
+                }
+            })
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/26/AngularJS中的指令全面解析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/08/26/AngularJS中的指令全面解析/" itemprop="url">AngularJS中习惯用法指令scope解析记录</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-26T21:30:45+08:00">
+                2016-08-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ul>
+<li>记录的是个人习惯用法省略多余</li>
+</ul>
+<hr>
+<pre><code>1、作为一个新的HTML元素来使用。
+&lt;hello&gt;&lt;/hello&gt;或者&lt;hello/&gt;
+2、作为一个元素的属性来使用
+&lt;div hello&gt;&lt;/div&gt;
+3、作为一个元素的类来使用
+&lt;div class=&quot;hello&quot;&gt;&lt;/div&gt;
+
+个人习惯也常用元素标签来使用
+</code></pre><h3 id="（1）指令的定义，app-js："><a href="#（1）指令的定义，app-js：" class="headerlink" title="（1）指令的定义，app.js："></a>（1）指令的定义，app.js：</h3><pre><code>app.directive(&apos;myDirective&apos;, function() {
+    return {
+        restrict: &apos;E&apos;, E表示元素标签
+        replace: true,
+        templateUrl: &apos;index.html&apos;,
+        scope: false,   // 默认值 true就开启控制层隔离
+        transclude：true，
+        link：function(scope,element,attrs){}
+    }
+});
+</code></pre><h3 id="自定义指令HTML"><a href="#自定义指令HTML" class="headerlink" title="自定义指令HTML"></a>自定义指令HTML</h3><pre><code>&lt;my-directive&gt;自定义指令&lt;/my-directive&gt;
+</code></pre><h3 id="（2）指令模板index-html"><a href="#（2）指令模板index-html" class="headerlink" title="（2）指令模板index.html"></a>（2）指令模板index.html</h3><pre><code>&lt;div&gt;
+
+&lt;p&gt;自定义指令scope：
+&lt;span ng-transclude&gt;
+&lt;span&gt;
+&lt;/p&gt;
+
+
+&lt;/div&gt;
+</code></pre><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><ul>
+<li>restrict为E 表示元素标签替换 <my-directive><my-directive></my-directive></my-directive></li>
+<li>replace为true替换元素后不保留<my-directive></my-directive></li>
+<li>templateUrl替换URL地址</li>
+<li>scope为true 开启隔离父子级，独立控制层</li>
+<li>transclude保留指令内内容ng-transclude放在templateUrl中元素标签内，就可以保留<h3 id="重点介绍scope"><a href="#重点介绍scope" class="headerlink" title="重点介绍scope"></a>重点介绍scope</h3></li>
+<li>@：单向绑定，外部scope能够影响内部scope，但反过来不成立</li>
+<li>=：双向绑定，外部scope和内部scope的model能够相互改变</li>
+<li><p>&amp;：把内部scope的函数的返回值和外部scope的任何属性绑定起来</p>
+<pre><code>记录
+scope:{
+        select:&quot;&amp;&quot;,
     },
-</code></pre><h3 id="GruntFile-js"><a href="#GruntFile-js" class="headerlink" title="GruntFile.js"></a>GruntFile.js</h3><pre><code>// AdminLTE Gruntfile
-module.exports = function (grunt) {
+
+templateUrl元素中事件传id
+ng-click=&quot;select({id:position})&quot; &gt;&apos;
+
+link中
+ scope.position=attrs.id;
+
+html元素中
+select=&quot;selectTpl(id)&quot;
+
+html 元素JS中写法
+$scope.selectTpl=function(id){
+    }
+</code></pre></li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/07/04/AngularJS$anchorScroll用法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/07/04/AngularJS$anchorScroll用法/" itemprop="url">AngularJS$anchorScroll用法</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-04T10:30:45+08:00">
+                2016-07-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <pre><code>.controller(&apos;ScrollController&apos;, [&apos;$scope&apos;, &apos;$location&apos;, &apos;$anchorScroll&apos;,
+function ($scope, $location, $anchorScroll) {
+$scope.gotoBottom = function() {
+  // 将location.hash的值设置为
+  // 你想要滚动到的元素的id
+  $location.hash(&apos;bottom&apos;);
+
+  // 调用 $anchorScroll()
+  $anchorScroll();
+
+};
+</code></pre><p>  }]);</p>
+<h3 id="如何使用一个垂直滚动偏移（指定了一个固定值）关于-anchorScroll-yOffset"><a href="#如何使用一个垂直滚动偏移（指定了一个固定值）关于-anchorScroll-yOffset" class="headerlink" title="如何使用一个垂直滚动偏移（指定了一个固定值）关于 $anchorScroll.yOffset"></a>如何使用一个垂直滚动偏移（指定了一个固定值）关于 $anchorScroll.yOffset</h3><h2 id="html"><a href="#html" class="headerlink" title="html"></a>html</h2><pre><code>&lt;div class=&quot;fixed-header&quot; ng-controller=&quot;headerCtrl&quot;&gt;
+  &lt;a href=&quot;&quot; ng-click=&quot;gotoAnchor(x)&quot; ng-repeat=&quot;x in [1,2,3,4,5]&quot;&gt;
+Go to anchor {{x}}
+  &lt;/a&gt;
+&lt;/div&gt;
+&lt;div id=&quot;anchor{{x}}&quot; class=&quot;anchor&quot; ng-repeat=&quot;x in [1,2,3,4,5]&quot;&gt;
+  Anchor {{x}} of 5
+&lt;/div&gt;
+</code></pre><h2 id="js"><a href="#js" class="headerlink" title="js"></a>js</h2><pre><code>angular.module(&apos;anchorScrollOffsetExample&apos;, [])
+.run([&apos;$anchorScroll&apos;, function($anchorScroll) {
+
+      $anchorScroll.yOffset = 50;   // 总是滚动额外的50像素
+
+}])
+.controller(&apos;headerCtrl&apos;, [&apos;$anchorScroll&apos;, &apos;$location&apos;, &apos;$scope&apos;,
+  function ($anchorScroll, $location, $scope) {
+$scope.gotoAnchor = function(x) {
+
+  var newHash = &apos;anchor&apos; + x;
+  if ($location.hash() !== newHash) {
+
+    // 将$location.hash设置为`newHash` and
+    // $anchorScroll也将自动滚到该处
+
+    $location.hash(&apos;anchor&apos; + x);
+
+  } else {
+
+    // 显式地调用 $anchorScroll()方法 ,
+    // 因为 $location.hash 并没有改变
+    $anchorScroll();
+
+  }
+};
+</code></pre><p>  }<br>]);</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/06/20/angulrjs$http/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/06/20/angulrjs$http/" itemprop="url">angularjs$http</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-06-20T21:19:07+08:00">
+                2016-06-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="get和post"><a href="#get和post" class="headerlink" title="get和post"></a>get和post</h3><pre><code>$http.get(contextPath+&quot;/api/cmsSceModel/getResume&quot;+&quot;?tiananCode=&quot;+tiananCode+&quot;&amp;tenantId=&quot;+tenantId).then(function(result){
+        $scope.list = result.data.list;
+    })
+-
+$http.post(contextPath+&apos;/cpUrl/deleteRelation&apos;,null, {params:{urlId:urlId,pdctId:pdctId}}).then(function(resp){
+加上params可以参数就可以转换成key1=value1&amp;key2=value2格式，
+-
+$http.post(contextPath + &apos;/cmsSceMenuModelEx/save&apos;,data2save) .then(function(resp){
+</code></pre><h3 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h3><ul>
+<li><p>默认情况下，$http服务不会对请求进行本地缓存。在发送单独的请求时，我们可以通过向$http请求传入一个布尔值或者一个缓存实例来启用缓存。</p>
+<pre><code>$http.get(&apos;/api/users.json&apos;,{ cache: true })
+.success(function(data) {})
+.error(function(data) {});
+</code></pre></li>
+</ul>
+<p>-then()方法与其他两种方法的主要区别是，它会接收到完整的响应对象，而success()和error()则会对响应对象进行析构。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/06/10/angularjs封装指令返回顶部/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/06/10/angularjs封装指令返回顶部/" itemprop="url">angularjs封装指令返回顶部</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-06-10T21:29:41+08:00">
+                2016-06-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="angularjs封装指令返回顶部"><a href="#angularjs封装指令返回顶部" class="headerlink" title="angularjs封装指令返回顶部"></a>angularjs封装指令返回顶部</h3><pre><code>JS**************
+ directive(&quot;backToTop&quot;, function () {  
+    return {  
+        restrict: &quot;E&quot;,  
+        link: function (scope, element, attr) {  
+            var e = $(element);  
+            $(window).scroll(function () {                 //滚动时触发  
+                if ($(document).scrollTop() &gt; 300)         //获取滚动条到顶部的垂直高度,到相对顶部300px高度显示  
+                    e.fadeIn(300)  
+                else  
+                    e.fadeOut(200);  
+            });  
+            /*点击回到顶部*/  
+            e.click(function () {  
+                $(&apos;html, body&apos;).animate({                 //添加animate动画效果  
+                    scrollTop: 0  
+                }, 500);  
+            });  
+        }  
+    };  
+});  
+}); 
+————————————————————————————————
+html***************    
+&lt;back-to-top class=&quot;back_top&quot; title=&quot;返回顶部&quot;&gt;&lt;i class=&quot;fa fa-angle-up&quot;&gt;&lt;/i&gt;&lt;/back-to-top&gt;  
+</code></pre><h3 id="js平滑滚动到顶部-底部-指定地方"><a href="#js平滑滚动到顶部-底部-指定地方" class="headerlink" title="js平滑滚动到顶部,底部,指定地方"></a>js平滑滚动到顶部,底部,指定地方</h3><pre><code>滚动到顶部：
+$(&apos;.scroll_top&apos;).click(function(){$(&apos;html,body&apos;).animate({scrollTop: &apos;0px&apos;}, 800);});
+
+滚动到指定位置：
+$(&apos;.scroll_a&apos;).click(function(){$(&apos;html,body&apos;).animate({scrollTop:$(&apos;.a&apos;).offset().top}, 800);});
+
+滚动到底部：
+ $(&apos;.scroll_bottom&apos;).click(function(){$(&apos;html,body&apos;).animate({scrollTop:$(&apos;.bottom&apos;).offset().top}, 800);});
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/05/10/grunt环境配置rem单位/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/05/10/grunt环境配置rem单位/" itemprop="url">grunt环境配置rem单位</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-05-10T21:30:56+08:00">
+                2016-05-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="GruntFile-js"><a href="#GruntFile-js" class="headerlink" title="GruntFile.js"></a>GruntFile.js</h3><hr>
+<pre><code>  module.exports = function (grunt) {
 
   &apos;use strict&apos;;
-  //压缩zip排除文件
-  var zipList = [
-    &apos;**/*&apos;,
-    &apos;!nexus/**&apos;,
-    &apos;!build/**&apos;,//
-    &apos;!node_modules/**&apos;,
-    &apos;!bower.json&apos;,
-    &apos;!build.gradle&apos;,
-    &apos;!package-lock.json&apos;,
-    &apos;!Gruntfile.js&apos;,
-    &apos;!package.json&apos;,
-    &apos;!less/**&apos;,
-    &apos;!cbp-less/**&apos;,
-    &apos;!cmss-less/**&apos;,
-    &apos;!data/**&apos;
-  ];
-      grunt.initConfig({
-    watch: {
-      files: [
-        &quot;less/platform-less/*.less&quot;,&quot;eipts/**/*.js&quot;],
-      tasks: [&quot;less&quot;,&quot;jshint&quot;,&quot;concat&quot;,&quot;uglify&quot;]
-    },
-    less: {
-      development: {
-        options: {
-          compress: false
-    },
-    files: {
-      &quot;framework/validation/validationEngine.jquery.css&quot;:&quot;less/less/validationEngine.jquery.less&quot;,
-      &quot;dist/css/cbp-main.css&quot;: &quot;cbp-less/cbp-main.less&quot;,
-      &quot;dist/css/cbp-login.css&quot;: &quot;cbp-less/cbp-login.less&quot;,
-      &quot;dist/css/cbp-cbp.css&quot;: &quot;cbp-less/cbp-cbp.less&quot;,
-      &quot;dist/css/cbp-qrcode.css&quot;: &quot;cbp-less/cbp-qrcode.less&quot;,
-      &quot;dist/css/dic-form.css&quot;: &quot;less/platform-less/dic-form.less&quot;,
-      &quot;css/main.css&quot;:&quot;less/platform-less/main.less&quot; ,
-      &quot;css/urlComponent.css&quot;:&quot;less/platform-less/urlComponent.less&quot;,
-      &quot;css/scan-trace.css&quot;:&quot;less/platform-less/scan-trace.less&quot;,
-      &quot;dist/css/cmss-main.css&quot;:&quot;cmss-less/cmss-main.less&quot;,
-      &quot;dist/css/main.css&quot;:&quot;less/platform-less/main.less&quot;,
-      &quot;dist/css/public.css&quot;:&quot;less/platform-less/public.less&quot;,
-      &quot;css/codeconfig.css&quot;: &quot;less/platform-less/codeconfig.less&quot;
-    }
-  },
-  production: {
-    options: {
-      compress: true
-    },
-    files: {
-      &quot;dist/css/cbp-main.min.css&quot;: &quot;cbp-less/cbp-main.less&quot;,
-      &quot;dist/css/cbp-login.min.css&quot;: &quot;cbp-less/cbp-login.less&quot;,
-      &quot;dist/css/cbp-cbp.min.css&quot;: &quot;cbp-less/cbp-cbp.less&quot;,
-      &quot;dist/css/cbp-qrcode.min.css&quot;: &quot;cbp-less/cbp-qrcode.less&quot;,
-      &quot;dist/css/cmss-main.min.css&quot;: &quot;cmss-less/cmss-main.less&quot;,
-      &quot;dist/css/dic-form.min.css&quot;: &quot;less/platform-less/dic-form.less&quot;,
-      &quot;css/urlComponent.min.css&quot;:&quot;less/platform-less/urlComponent.less&quot;,
-      &quot;css/main.css&quot;:&quot;less/platform-less/main.less&quot;,
-      &quot;css/codeconfig.min.css&quot;: &quot;less/platform-less/codeconfig.less&quot;
-    }
-  }
+
+  grunt.initConfig({
+// Before generating any new files, remove any previously-created files.
+clean: {
+  tests: [&apos;css/rem/*-rem.css&apos;]
 },
-   //发布 nexus插件
-nexusDeployer: {
-  snapshot: {
+px2rem: {
+  default: {
     options: {
-      groupId: &quot;com.cyberkey&quot;,
-      artifactId: &quot;ocps-web-all&quot;,//前端统一zip包名
-      version: &quot;1.10.8.1-SNAPSHOT&quot;,//版本
-      packaging: &apos;zip&apos;,//zip包
-      auth: {
-        username:&apos;nexus用户名&apos;,
-        password:&apos;nexus密码&apos;
-      },
-      url: &apos;nexus仓库快照版的URL&apos;,
-      artifact:&quot;nexus/ocps-web-all.zip&quot;//生成压缩包的路径和包名
-    }
-  },
-  release: {
-    options: {
-      groupId: &quot;com.cyberkey&quot;,
-      artifactId: &quot;ocps-web-all&quot;,//前端统一zip包名
-      version: &quot;1.10.8.1-RELEASE&quot;,//版本
-      packaging: &apos;zip&apos;,//zip包
-      auth: {
-        username:&apos;nexus用户名&apos;,
-        password:&apos;nexus密码&apos;
-      },
-      url: &apos;nexus仓库发布版的URL&apos;,
-      artifact:&quot;nexus/ocps-web-all.zip&quot;//生成压缩包的路径和包名
-    }
-  }
-},
- compress: {
-  main: {
-    options: {
-      archive: &apos;nexus/ocps-web-all.zip&apos;
-    //生成压缩包到nexus/ocps-web-all.zip
+      designWidth : 640,//设计稿宽度
+      baseFont    : 64,//基础字体
+      border      : 0,//1不处理border，0处理
+      ie8         : 0,//1生成ie8代码，0不生成
+      mode        : 0,//0px转rem，1rem转px
+      media       : 0,//1生成meadia query代码，0不生成
+      dest        : &apos;css/rem/&apos;//rem css输出目录
     },
     files: [{
-      expand: true,
-      cwd: &apos;&apos;,
-      src: [zipList],//压缩的文件
-      dest:&apos;ocps-web-all/&apos;//生成的文件包名
-        //这里dest是ocps-web-all.zip压缩包内的文件包名，也可以不要。
+      src : [&apos;css/css/myindex.css&apos;]//要监听的css目录
     }]
   }
 },
-clean: {
-  pre: [&apos;nexus/**.zip&apos;] //删除掉先前的开发文件
+watch: {
+  files: [
+    &quot;less/*.less&quot;,&quot;css/css/.css&quot;],
+  tasks: [&quot;less&quot;,&quot;cssmin&quot;]
+},
+less: {
+  development: {
+    options: {
+      compress: false
+    },
+    files: {
+      &quot;css/css/myindex.css&quot;: &quot;less/myindex.less&quot;
+    }
+  }
+},
+cssmin: {
+  css: {
+    src:&apos;css/css/myindex.css&apos;,
+    dest:&apos;css/mincss/myindex.min.css&apos;
+
+  }
+
 },
 concat:{
   options: {
@@ -527,6 +1728,10 @@ concat:{
   eipts: {
     src: [&apos;eipts/**/*.js&apos;],
     dest: &apos;dist/js/eipts-all.js&apos;
+  },
+  css : {
+    src: [&apos;src/asset/*.css&apos;],
+    dest:&apos;dest/asset/all.css&apos;
   }
 },
 uglify: {
@@ -557,9 +1762,10 @@ csslint: {
   ]
 }
   });
-  grunt.loadNpmTasks(&apos;grunt-nexus-deployer&apos;);
-  grunt.loadNpmTasks(&apos;grunt-contrib-compress&apos;);
+  grunt.loadTasks(&apos;task&apos;);
   grunt.loadNpmTasks(&apos;grunt-contrib-less&apos;);
+  grunt.loadNpmTasks(&apos;grunt-hash&apos;);
+  grunt.loadNpmTasks(&apos;grunt-css&apos;);
   grunt.loadNpmTasks(&apos;grunt-contrib-watch&apos;);
   grunt.loadNpmTasks(&apos;grunt-contrib-concat&apos;);
   grunt.loadNpmTasks(&apos;grunt-contrib-uglify&apos;);
@@ -568,8 +1774,160 @@ csslint: {
   grunt.loadNpmTasks(&apos;grunt-contrib-clean&apos;);
   grunt.registerTask(&apos;lint&apos;, [&apos;jshint&apos;, &apos;csslint&apos;]);
   grunt.registerTask(&apos;default&apos;, [&apos;watch&apos;]);
-  grunt.registerTask(&apos;snapshot&apos;,[&apos;clean&apos;,&apos;compress&apos;,&apos;nexusDeployer:snapshot&apos;]);//1:清除历史zip。2:压缩.3:上传nexus快照版本
-  grunt.registerTask(&apos;release&apos;,[&apos;clean&apos;,&apos;compress&apos;,&apos;nexusDeployer:release&apos;]);//1:清除历史zip。2:压缩.3:上传nexus发布版本
+  grunt.registerTask(&apos;rem&apos;, [&apos;clean&apos;,&apos;px2rem&apos;]);
+};
+</code></pre><p>注意事项：</p>
+<ul>
+<li>width:calc(~”50% - 4px”);</li>
+<li><p>loadTasks查找的guilpfile同级文件下task下的js。</p>
+<h3 id="px2rem-js"><a href="#px2rem-js" class="headerlink" title="px2rem.js"></a>px2rem.js</h3><pre><code>    /**
+ * Created by DELL on 2017/3/21.
+ */
+/*
+ * px2rem
+ * https://github.com/leon776/px2rem
+ *
+ * Copyright (c) 2015 xiaoweili
+ * Licensed under the MIT license.
+ */
+
+&apos;use strict&apos;;
+var path = require(&apos;path&apos;);
+
+var RemTransform = function(option) {
+var baseFont = option.baseFont, designWidth = option.designWidth;
+//创建media query
+function _createMedia() {
+    var tmp = &apos;&apos;;
+    var tpl = &apos;@media only screen and (max-width: &lt;%=screenWidth%&gt;px), only screen and (max-device-width:&lt;%=screenWidth%&gt;px) {\n&apos; +
+        &apos;html,body {\n&apos; +
+        &apos;font-size:&lt;%=fontSize%&gt;px;\n&apos; +
+        &apos;}\n&apos; +
+        &apos;}\n&apos;;
+    var screens = [1080, 960, 800, 720, 640, 600, 540, 480, 414, 400, 375, 360, 320, 240];
+    for (var i = 0; i &lt; screens.length; i++) {
+        tmp += (tpl.replace(/\&lt;%\=screenWidth%\&gt;/g, screens[i]).replace(&apos;&lt;%=fontSize%&gt;&apos;, (screens[i] / designWidth)*baseFont));
+    }
+    return tmp;
+}
+//获取rem值
+function _getRem(px) {
+    var reg = new RegExp(&quot;[0-9]+([.]{1}[0-9]+){0,1}&quot;,&quot;g&quot;), rem = px;
+    var tmp = px.match(reg);
+    for (var i = 0; i &lt; tmp.length; i++) {
+        if(Number(tmp[i]) === 0 || px.indexOf( tmp[i] + &apos;px&apos; ) &lt; 0) {
+            continue;//0不做处理,数字后面不是px不做处理
+        }
+        rem = rem.replace(tmp[i] + &apos;px&apos;, (Number(tmp[i]) / baseFont) + &apos;rem&apos;);
+    }
+    return rem;
+}
+//获取px值
+function _getPx(rem) {
+    var reg = new RegExp(&quot;[0-9]+([.][0-9]+)?&quot;,&quot;g&quot;), px = rem;
+    var tmp = rem.match(reg);
+    for (var i = 0; i &lt; tmp.length; i++) {
+        px = px.replace(tmp[i] + &apos;rem&apos;, (Number(tmp[i]) * baseFont) + &apos;px&apos;);
+    }
+    return px;
+}
+//末尾自动添加分号
+function _addSemicolon (str) {
+    var reg = new RegExp(/([0-9]+)([^;{}])?}/g);
+    return str.replace(reg, &quot;$1$2;}&quot;);
+}
+function _filterBorder(str) {
+    if(str.substr(-6) === &apos;border&apos;
+        || str.substr(-12) === &apos;border-width&apos;
+        || str.substr(-10) === &apos;border-top&apos;
+        || str.substr(-11) === &apos;border-left&apos;
+        || str.substr(-12) === &apos;border-right&apos;
+        || str.substr(-13) === &apos;border-bottom&apos;
+        || str.substr(-13) === &apos;border-radius&apos;
+    ) {
+        return true;
+    }
+    return false;
+}
+//将px转换成rem
+function changeToRem (input) {
+    var after = &apos;&apos;, tmp = [],
+        reg = new RegExp(&quot;:[^:]*px([^;/])*;&quot;,&quot;g&quot;),
+        before = _addSemicolon(input);
+    var pxArray = before.match(reg);
+    if(!pxArray) { return; }
+    for (var i = 0; i &lt; pxArray.length; i++) {
+        tmp = before.split(pxArray[i]);
+        if(option.border &amp;&amp; _filterBorder(tmp[0])) {
+            continue;
+        }
+        after += tmp[0];
+        if(option.ie8) {
+            after += pxArray[i];
+            after += tmp[0].substr(Math.max( tmp[0].lastIndexOf(&apos;;&apos;), tmp[0].lastIndexOf(&apos;{&apos;) ) + 1);
+        }
+        after += _getRem(pxArray[i], baseFont);
+        before = before.replace(tmp[0], &apos;&apos;).replace(pxArray[i], &apos;&apos;);
+    }
+    if(option.media) {
+        return _createMedia() + after + before;
+    } else {
+        return after + before;
+    }
+}
+//rem转px
+function changeToPx (input) {
+    var after = &apos;&apos;, tmp = [], reg = new RegExp(&quot;:.*rem&quot;,&quot;g&quot;), before = input;
+    var pxArray = before.match(reg);
+    if(!pxArray) { return; }
+    for (var i = 0; i &lt; pxArray.length; i++) {
+        tmp = before.split(pxArray[i]);
+        after += tmp[0]  + _getPx(pxArray[i], baseFont);
+        before = before.replace(tmp[0], &apos;&apos;).replace(pxArray[i], &apos;&apos;);
+    }
+    return after + before;
+}
+return {
+    px2rem: changeToRem,
+    rem2px: changeToPx
+};
+</code></pre></li>
+</ul>
+<pre><code>    module.exports = function(grunt) {
+
+    // Please see the Grunt documentation for more information regarding task
+    // creation: http://gruntjs.com/creating-tasks
+
+    grunt.registerMultiTask(&apos;px2rem&apos;, function() {
+    var options = this.options({});
+    var rem = new RemTransform(options);
+    //console.log(JSON.stringify(this.files));
+    grunt.file.defaultEncoding = &apos;utf8&apos;;
+    this.files.forEach(function(file) {
+
+        file.src.forEach(function(src) {
+            var input = &apos;&apos;, output = &apos;&apos;, filepath = options.dest;
+            if(src.indexOf(&apos;-rem&apos;) &gt; 0) {
+                return false;
+            }
+            if (!grunt.file.exists(src)) {
+                grunt.log.warn(&apos;Source file &quot;&apos; + src + &apos;&quot; not found.&apos;);
+                return false;
+            }
+            input = grunt.file.read(src);
+            if(!options.mode) {
+                output = rem.px2rem(input);
+            } else{
+                output = rem.rem2px(input);
+            }
+            filepath += path.basename(src, &apos;.css&apos;) + &apos;-rem.css&apos;;
+            grunt.file.write(filepath, output);
+            var fd = new FormData();
+            fd.append(&apos;file&apos;, file);//图片file
+            fd.append(&apos;键&apos;, 值);//你想要传的参数
+        });
+    });
+});
 };
 </code></pre>
           
@@ -619,7 +1977,7 @@ csslint: {
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/03/17/cookie换肤功能/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/05/10/判断页面中存在相同id/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="CHEN.星">
@@ -638,7 +1996,7 @@ csslint: {
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/03/17/cookie换肤功能/" itemprop="url">cookie换肤功能</a></h1>
+                <a class="post-title-link" href="/2016/05/10/判断页面中存在相同id/" itemprop="url">判断页面中存在相同id</a></h1>
         
 
         <div class="post-meta">
@@ -650,8 +2008,8 @@ csslint: {
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-03-17T19:19:07+08:00">
-                2016-03-17
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-05-10T20:56:47+08:00">
+                2016-05-10
               </time>
             
 
@@ -690,1021 +2048,107 @@ csslint: {
       
         
           
-            <ul>
-<li>javaScript是运行在客户端的脚本，因此一般是不能够设置Session的，因为Session是运行在服务器端的。</li>
-<li>而cookie是运行在客户端的，所以可以用JS来设置cookie.</li>
-</ul>
-<p>#设置cookie#</p>
-<ul>
-<li>document.cookie=”skin=”+skin;</li>
-</ul>
-<p>#获取cookie#</p>
-<ul>
-<li>getCooKie(“cookie)  </li>
-<li>function getCooKie(name){<br>  var arr;reg=new RegExp(“(^| )”+name+”=([^;]*)(;|$)”);<br>  if(arr=document.cookie.match(reg)){  <pre><code>$scope.current_skin=arr[2];      
- return;  
-</code></pre>  } else{  <pre><code> $scope.current_skin = &quot;skin-blue&quot;;  
-return;  
-</code></pre>  }<br>  }<br>#换肤#</li>
-</ul>
-<blockquote>
-<p>$(‘#change_skin [data-skin]’).unbind(“click”).click<br>(function(e) {<br>    e.preventDefault();<br>    var skinName = $(this).data(‘skin’);//点击this获取data-shin data    属性<br>    $(‘body’).removeClass($scope.current_skin);<br>    $(‘body’).addClass(skinName);<br>    $scope.current_skin = skinName;<br>    $scope.$apply(function(){<br>        $scope.current_skin=skinName;<br>    });<br>    document.cookie=”skin=”+ $scope.current_skin;//皮肤写入    cookie<br>});</p>
-</blockquote>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/02/10/获取URL上的参数/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="CHEN.星">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CHEN.星~博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/02/10/获取URL上的参数/" itemprop="url">获取URL上的参数</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-02-10T16:12:36+08:00">
-                2016-02-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="获取URL上的参数"><a href="#获取URL上的参数" class="headerlink" title="获取URL上的参数"></a>获取URL上的参数</h3><pre><code>function getUrlParam(name) {
-var pattern = new RegExp(&quot;[?&amp;]&quot; + name + &quot;\=([^&amp;]+)&quot;, &quot;g&quot;);
-var matcher = pattern.exec(window.location);
-var items = null;
-if (matcher != null) {
-    try {
-        items = decodeURIComponent(decodeURIComponent(matcher[1]));
-    } catch (e) {
-        try {
-            items = decodeURIComponent(matcher[1]);
-        } catch (e) {
-            items = matcher[1];
+            <p>前言：项目是管理系统，采用的angularjs框架，table页加载，不多说。<br>新建、修改的时候弹出框from表单内里面采用了一些自定义写法、以及3方插件类的，赋值就会存在id赋值。在一次上线过程中，打开了多个菜单，模态框中的input的id赋值出现了问题。分析后多个菜单里面存在了相同id。</p>
+<h2 id="后续：id冲突最好的模式遵守开发规范，用这个方法也是对系统的负担增加。"><a href="#后续：id冲突最好的模式遵守开发规范，用这个方法也是对系统的负担增加。" class="headerlink" title="后续：id冲突最好的模式遵守开发规范，用这个方法也是对系统的负担增加。"></a>后续：id冲突最好的模式遵守开发规范，用这个方法也是对系统的负担增加。</h2><pre><code>//工厂方法
+(function (angular) {
+&quot;use strict&quot;;
+angular.module(&apos;check.id.factory&apos;, [])
+    .factory(&apos;checkIdFactory&apos;,[function(){
+        function checkid(modalId){
+             var inputid=[];
+            var inputArrayId=$(&quot;#&quot;+modalId).find(&apos;:input&apos;);
+            inputArrayId.each(//使用数组的循环函数 循环这个input数组
+                function (){
+                    var input =$(this);//循环中的每一个input元素
+                    inputid.push(input.attr(&quot;id&quot;));//查看循环中的每一个input的id
+                }
+            );
+            for(var i in inputid){
+                var checkId=inputid[i];
+                if( $(&quot;body [id=&quot;+checkId+&quot;]&quot;).length &gt;= 2 ){
+                    return (true);
+                }
+            }
         }
-    }
-}
-return items;
-}
-----------------------
-  var tiananCode = getUrlParam(&quot;code&quot;);
-code为键传入tiananCode为值
+        return {
+            checkAllid: function (id) {
+                return checkid(id);
+            }
+        }
+    }])
+})(angular);
+</code></pre><hr>
+<p>工厂写法2不跟上组件有关系两种返回写法而已</p>
+<pre><code>(function (angular) {
+&apos;use strict&apos;;
+        angular.module(&apos;check.id.factory&apos;, [])
+    .factory(&apos;checkIdFactory&apos;,[function(){$http) {
+        var service = {};//定义一个Object对象&apos;
+        var allData={
+            fixFileData:{},
+            navIconQueue:[],
+            cacheNavData:[],//用于缓存button图片数据,转换了数组navIconQueue传出
+            autoFileData:{}
+        };
+        service.getData=function(){
+            var urlUnClickIcon={};//导航模板上传的未点击图标
+            var urlClickIcon={};//导航模板上传的点击图标
+            var antoBtnClickIcon={};//自增长buttn跳转的图标
+            for (var i in allData.cacheNavData) {
+                var eachFile = allData.cacheNavData[i].data;
+                if(eachFile.fileType==&quot;urlUnClickIcon&quot;){
+                    urlUnClickIcon[eachFile.navId]=eachFile
+                }else if(eachFile.fileType==&quot;urlClickIcon&quot;){
+                    urlClickIcon[eachFile.navId]=eachFile
+                }else if(eachFile.fileType=&quot;btnClickIcon&quot;){
+                    antoBtnClickIcon[eachFile.navId]=eachFile
+                }
+            }
+            for (var i in urlUnClickIcon) {
+                var urlUnClickIconData = urlUnClickIcon[i];
+                allData.navIconQueue.push(urlUnClickIconData);
+            }
+            for (var i in urlClickIcon) {
+                var urlClickIconData = urlClickIcon[i];
+                allData.navIconQueue.push(urlClickIconData);
+            }
+            for (var i in antoBtnClickIcon) {
+                var antoBtnClickIconData = antoBtnClickIcon[i];
+                allData.navIconQueue.push(antoBtnClickIconData);
+            }
+            return allData;
+        };
+        service.clearData=function(){
+            allData={
+                fixFileData:{},
+                cacheNavData:[],//用于缓存button图片数据
+                navIconQueue:[],
+                autoFileData:{}
+            };
+        }
+        //获取固定的图片file对象
+        $rootScope.$on(&apos;fixDataLink&apos;,function(event,data,positionId){
+                data.fileContent.PicCutInfoDto=data.PicCutInfoDto;
+            data.fileContent.cut=data.cut;
+            data.fileContent.position=data.position;
+            allData.fixFileData[positionId]=data.fileContent ;
+        });
+        $rootScope.$on(&apos;autoFileData&apos;,function(event,data,positionId){
+                data.fileContent.PicCutInfoDto=data.PicCutInfoDto;
+            data.fileContent.cut=data.cut;
+            data.fileContent.position=data.position;
+            allData.autoFileData[positionId]=data.fileContent ;
+        });
+        //获取底部导航的图片file对象
+        $rootScope.$on(&apos;navIconQueue&apos;,function(event,data,positionId){
+            allData.cacheNavData.push({
+                    data:data
+            });
+        });
+        return service;//返回这个Object对象
+    }]);
+})(angular);
 </code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/01/25/判断对象为空/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="CHEN.星">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CHEN.星~博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/01/25/判断对象为空/" itemprop="url">判断对象为空</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-01-25T20:56:47+08:00">
-                2016-01-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="for…in…遍历属性"><a href="#for…in…遍历属性" class="headerlink" title="for…in…遍历属性"></a>for…in…遍历属性</h3><pre><code>var judgeObj = function(obj){
-    for(var item in obj){
-        return true;
-    }
-        return false;
-}
-</code></pre><h3 id="JSON-stringify方法来判断"><a href="#JSON-stringify方法来判断" class="headerlink" title="JSON.stringify方法来判断"></a>JSON.stringify方法来判断</h3><pre><code>var judgeObj = function(obj){
-    if(JSON.stringify(obj) == &quot;{}&quot;) return true;
-    else return false;
-}    
-</code></pre><h3 id="ES6新增的方法Object-keys"><a href="#ES6新增的方法Object-keys" class="headerlink" title="ES6新增的方法Object.keys()"></a>ES6新增的方法Object.keys()</h3><pre><code>var judgeObj = function(obj){
-if(Object.keys(obj).length  == 0) return true;
-else return false;
-}
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/12/20/CSS3中transform和transition/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="CHEN.星">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CHEN.星~博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/12/20/CSS3中transform和transition/" itemprop="url">CSS3中transform和transition</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-12-20T21:34:12+08:00">
-                2015-12-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ul>
-<li>很多时候是被这2个属性搞混淆，长的太像了。</li>
-<li>transition过渡效果</li>
-<li>transform，2D/3D转换效果</li>
-</ul>
-<hr>
-<h3 id="transition过渡效果"><a href="#transition过渡效果" class="headerlink" title="transition过渡效果"></a>transition过渡效果</h3><p>transition属性是一个简写属性，用于设置四个过渡属性：</p>
-<pre><code>transition-property    规定设置过渡效果的 CSS 属性的名称。
-transition-duration    规定完成过渡效果需要多少秒或毫秒。
-transition-timing-function    规定速度效果的速度曲线。
-transition-delay    定义过渡效果何时开始。
-简写transition：left 0.5s ease-out 0.1S;
-</code></pre><h3 id="Transform"><a href="#Transform" class="headerlink" title="Transform"></a>Transform</h3><p>transform的属性包括：rotate() / skew() / scale() / translate(,) ，分别还有x、y之分，比如：rotatex() 和 rotatey() ，以此类推<br>transform为静态属性。</p>
-<h3 id="Animation"><a href="#Animation" class="headerlink" title="Animation"></a>Animation</h3><pre><code>animation-name    规定需要绑定到选择器的 keyframe 名称。。
-animation-duration    规定完成动画所花费的时间，以秒或毫秒计。
-animation-timing-function    规定动画的速度曲线。
-animation-delay    规定在动画开始之前的延迟。
-animation-iteration-count    规定动画应该播放的次数。
-animation-direction    规定是否应该轮流反向播放动画。
-语法：name duration timing-function delay iteration-count direction
-</code></pre><h3 id="Transform和Animation"><a href="#Transform和Animation" class="headerlink" title="Transform和Animation"></a>Transform和Animation</h3><p>@-moz-keyframes start {</p>
-<pre><code>  @-moz-keyframes start {
-    0%,30% {opacity: 0;-moz-transform: translate(0,10px);}
-    60% {opacity: 1;-moz-transform: translate(0,0);}
-    100% {opacity: 0;-moz-transform: translate(0,-8px);}
-}
-@keyframes start {
-    0%,30% {opacity: 0;transform: translate(0,10px);}
-    60% {opacity: 1;transform: translate(0,0);}
-    100% {opacity: 0;transform: translate(0,-8px);}
-}
-.ani{
-    position:absolute;
-}
-.txt{
-    position:absolute;
-}
-#array{
-    position:absolute;z-index:10;;
-    -webkit-animation: start 1.5s infinite ease-in-out
-}
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/11/15/倒计时/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="CHEN.星">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CHEN.星~博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/11/15/倒计时/" itemprop="url">按钮倒计时</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-11-15T11:20:00+08:00">
-                2015-11-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ul>
-<li>JQ时间倒计时</li>
-<li><pre><code>function timer(time) {
-var btn = $(&quot;#sendButton&quot;);
-btn.attr(&quot;disabled&quot;, true);  //按钮禁止点击
-btn.val(time &lt;= 0 ? &quot;发送动态密码&quot; : (&quot;&quot; + (time) + &quot;秒后可发送&quot;));
-var hander = setInterval(function() {
-    if (time &lt;= 0) {
-        clearInterval(hander); //清除倒计时
-        btn.val(&quot;发送动态密码&quot;);
-        btn.attr(&quot;disabled&quot;, false);
-        return false;
-    }else {
-        btn.val(&quot;&quot; + (time--) + &quot;秒后可发送&quot;);
-    }
-}, 1000);
-    }
-        //调用方法
-        timer(30);
-
--angrulrjs 时间到计时
--
-angular.module(&apos;controllers&apos;, []).controller(&apos;registerCtrl&apos;, function($scope,    $interval){ 
-    $scope.paracont = &quot;获取验证码&quot;; 
-    $scope.paraclass = &quot;but_null&quot;; 
-    $scope.paraevent = true; 
-    var second = 60, 
-      timePromise = undefined; 
-    timePromise = $interval(function(){ 
-         if(second&lt;=0){ 
-              $interval.cancel(timePromise); 
-              timePromise = undefined; 
-              second = 60; 
-              $scope.paracont = &quot;重发验证码&quot;; 
-              $scope.paraclass = &quot;but_null&quot;; 
-              $scope.paraevent = true; 
-         }else{ 
-              $scope.paracont = second + &quot;秒后可重发&quot;; 
-              $scope.paraclass = &quot;not but_null&quot;; 
-              second--; 
-         } 
-    },1000,100); 
-});
-
-$scope.$watch(&apos;filterOptions&apos;, function (newVal, oldVal) {
- if (newVal !== oldVal) {
-  if (timeout) $timeout.cancel(timeout);
-  timeout = $timeout(function() {
-  $scope.getPagedDataAsync(&apos;admin/bill/&apos;+$stateParams.page+&apos;?pageCount=&apos;+$scope.paginationConf.itemsPerPage,$scope.filterOptions);
-  }, 800);
- }
- }, true);
-</code></pre></li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/09/24/JS转换英文星期几/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="CHEN.星">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CHEN.星~博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/09/24/JS转换英文星期几/" itemprop="url">“JS转换英文星期几”</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-09-24T20:19:07+08:00">
-                2015-09-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>   根据下标获取  </p>
-<ul>
-<li>new Date().getDay()获取到数字星期几。  </li>
-<li>var dayNames=[‘Sunday’,’Monday ‘,’Tuesday’,’Wednesday’,<br>‘Thursday’,’Friday’,’Saturday’];<h4 id="获取今天星期几"><a href="#获取今天星期几" class="headerlink" title="获取今天星期几"></a>获取今天星期几</h4></li>
-<li>$scope.day=dayNames[new Date().getDay()];<h3 id="获取明天星期几"><a href="#获取明天星期几" class="headerlink" title="获取明天星期几"></a>获取明天星期几</h3></li>
-<li>$scope.day=dayNames[(new Date().getDay()+1)%7];  </li>
-</ul>
-<hr>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/09/07/hexo常用命令笔记/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="CHEN.星">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CHEN.星~博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/09/07/hexo常用命令笔记/" itemprop="url">hexo常用命令笔记</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-09-07T19:19:07+08:00">
-                2015-09-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="hexo"><a href="#hexo" class="headerlink" title="#hexo#"></a>#hexo#</h2><pre><code>npm install hexo -g #安装  
-npm update hexo -g #升级  
-hexo init #初始化
-</code></pre><h2 id="简写"><a href="#简写" class="headerlink" title="#简写#"></a>#简写#</h2><pre><code>hexo n &quot;我的博客&quot; == hexo new &quot;我的博客&quot; #新建文章  
-hexo p == hexo publish   
-hexo g == hexo generate#生成  
-hexo s == hexo server #启动服务预览  
-hexo d == hexo deploy#部署  
-</code></pre><h2 id="服务器"><a href="#服务器" class="headerlink" title="#服务器#"></a>#服务器#</h2><pre><code>hexo server #Hexo 会监视文件变动并自动更新，您无须重启服务器。  
-hexo server -s #静态模式  
-hexo server -p 5000 #更改端口  
-hexo server -i 192.168.1.1 #自定义 IP  
-
-hexo clean #清除缓存 网页正常情况下可以忽略此条命令  
-hexo g #生成静态网页  
-hexo d #开始部署  
-</code></pre><h2 id="监视文件变动"><a href="#监视文件变动" class="headerlink" title="#监视文件变动#"></a>#监视文件变动#</h2><pre><code>hexo generate #使用 Hexo 生成静态文件快速而且简单  
-hexo generate --watch #监视文件变动
-</code></pre><h2 id="模版"><a href="#模版" class="headerlink" title="#模版#"></a>#模版#</h2><pre><code>hexo new &quot;postName&quot; #新建文章  
-hexo new page &quot;pageName&quot; #新建页面  
-hexo generate #生成静态页面至public目录  
-hexo server #开启预览访问端口（默认端口4000，&apos;ctrl + c&apos;关闭server）  
-hexo deploy #将.deploy目录部署到GitHub  
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/09/07/生命在于折腾/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="CHEN.星">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CHEN.星~博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/09/07/生命在于折腾/" itemprop="url">生命在于折腾</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-09-07T15:19:07+08:00">
-                2015-09-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>你好，欢迎来到我的个人技术博客。</p>
-
           
         
       
@@ -1743,7 +2187,7 @@ hexo deploy #将.deploy目录部署到GitHub
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span>
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1789,7 +2233,7 @@ hexo deploy #将.deploy目录部署到GitHub
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">49</span>
+                <span class="site-state-item-count">59</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

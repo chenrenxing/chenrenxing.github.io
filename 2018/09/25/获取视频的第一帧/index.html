@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="业务场景1）管理系统上传视频，H5页面在微信端显示的时候。 发现问题H5页在在微信浏览器/safari/chrome上默认展示的poster各有不同，chrome应用了默认行为截取了视频第一帧作为显示，微信浏览器和safari却显示空白 解决问题1）video的loadeddata事件，获取到视频第一帧来展示。  var  dom=document.getElementById(&amp;quot;vid">
+<meta property="og:type" content="article">
+<meta property="og:title" content="获取视频的第一帧">
+<meta property="og:url" content="http://yoursite.com/2018/09/25/获取视频的第一帧/index.html">
+<meta property="og:site_name" content="CHEN.星~博客">
+<meta property="og:description" content="业务场景1）管理系统上传视频，H5页面在微信端显示的时候。 发现问题H5页在在微信浏览器/safari/chrome上默认展示的poster各有不同，chrome应用了默认行为截取了视频第一帧作为显示，微信浏览器和safari却显示空白 解决问题1）video的loadeddata事件，获取到视频第一帧来展示。  var  dom=document.getElementById(&amp;quot;vid">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-09-25T08:46:13.114Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="获取视频的第一帧">
+<meta name="twitter:description" content="业务场景1）管理系统上传视频，H5页面在微信端显示的时候。 发现问题H5页在在微信浏览器/safari/chrome上默认展示的poster各有不同，chrome应用了默认行为截取了视频第一帧作为显示，微信浏览器和safari却显示空白 解决问题1）video的loadeddata事件，获取到视频第一帧来展示。  var  dom=document.getElementById(&amp;quot;vid">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/09/25/获取视频的第一帧/"/>
+
+
+
+
+
+  <title>获取视频的第一帧 | CHEN.星~博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CHEN.星~博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生命在于折腾</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/25/获取视频的第一帧/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">获取视频的第一帧</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-25T14:56:03+08:00">
+                2018-09-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="业务场景"><a href="#业务场景" class="headerlink" title="业务场景"></a>业务场景</h3><pre><code>1）管理系统上传视频，H5页面在微信端显示的时候。
+</code></pre><h3 id="发现问题"><a href="#发现问题" class="headerlink" title="发现问题"></a>发现问题</h3><pre><code>H5页在在微信浏览器/safari/chrome上默认展示的poster各有不同，chrome应用了默认行为截取了视频第一帧作为显示，微信浏览器和safari却显示空白
+</code></pre><h3 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h3><pre><code>1）video的loadeddata事件，获取到视频第一帧来展示。
+ var  dom=document.getElementById(&quot;videofir&quot;);
+var scale=0.8;
+var cut = function() {
+    var  canvas = document.createElement(&quot;canvas&quot;);//创建画布
+    canvas.width = myVid.videoWidth * scale;
+    canvas.height = myVid.videoHeight * scale;//设定宽高比
+    canvas.getContext(&apos;2d&apos;).drawImage(myVid, 0, 0, canvas.width, canvas.height);//将视频此刻帧数画入画布
+    var img = document.createElement(&quot;img&quot;);
+    img.src = canvas.toDataURL(&quot;image/png&quot;);
+    dom.appendChild(img);//写入到Dom
+};
+   var  myVid=document.getElementById(&quot;video1&quot;);
+myVid.addEventListener(&apos;loadeddata&apos;,cut);//在视频帧数已加载时执行截取
+
+2）上传视频的时候，获取到视频第一帧，也一并跟video进行上传，在H5页面展示的poster展示图片。
+
+3)如果第一帧并不好看，可以在管理系统增加业务，在上传视频的时候，同时上传一张设计好的图片，进行上传。
+</code></pre><h3 id="补充知识"><a href="#补充知识" class="headerlink" title="补充知识"></a>补充知识</h3><h4 id="webkit-playsinline-”true”-playsinline"><a href="#webkit-playsinline-”true”-playsinline" class="headerlink" title="webkit-playsinline=”true” playsinline"></a>webkit-playsinline=”true” playsinline</h4><pre><code>在使用htmlvideo标签的时候，点击播放后会进入播放器占用整个屏幕，之后开始播放,webkit-playsinline=&quot;true&quot; playsinline
+这个属性会让视频播放时局部播放，但这个属性需要嵌入网页的APP比如WeChat中UIwebview 的allowsInlineMediaPlayback = YES webview.allowsInlineMediaPlayback = YES，才能生效。换句话说，安卓不支持，而IOS的wechat却支持，因为APP不支持playsinline，所以安卓是默认全屏播放的
+</code></pre><h3 id="x5-video-player-type-”h5”"><a href="#x5-video-player-type-”h5”" class="headerlink" title="x5-video-player-type=”h5”"></a>x5-video-player-type=”h5”</h3><pre><code>x5-video-player-type=&apos;h5&apos; 启用同层H5播放器，学名叫沉浸式播放。播放的时候除去了control和微信的导航栏，只留下&quot;X&quot;和&quot;&lt;&quot;两键
+</code></pre><h3 id="video标签对视频格式以及编码的支持"><a href="#video标签对视频格式以及编码的支持" class="headerlink" title="video标签对视频格式以及编码的支持"></a>video标签对视频格式以及编码的支持</h3><ul>
+<li>MPEG4 = 带有H.264视频编码和AAC音频编码的MPEG4文件</li>
+<li>WebM = 带有VP8视频编码和Vorbis音频编码的 WebM文件</li>
+<li><p>Ogg = 带有Theora视频编码和Vorbis音频编码的Ogg文件</p>
+<h4 id="视频充满屏幕"><a href="#视频充满屏幕" class="headerlink" title="视频充满屏幕"></a>视频充满屏幕</h4><p>  #video{</p>
+<pre><code>object-fit: fill;
+</code></pre><p>  }</p>
+<h3 id="把当前的视频投放到其他支持此技术的设备上"><a href="#把当前的视频投放到其他支持此技术的设备上" class="headerlink" title="把当前的视频投放到其他支持此技术的设备上"></a>把当前的视频投放到其他支持此技术的设备上</h3><p>  <video x-webkit-airplay="true"></video></p>
+<h4 id="在视频结束时执行事件。"><a href="#在视频结束时执行事件。" class="headerlink" title="在视频结束时执行事件。"></a>在视频结束时执行事件。</h4><p>  $(“#video”).get(0).addEventListener(“ended”, function() {</p>
+<p>  }, false);</p>
+<h4 id="微信浏览器下实现自动播放。"><a href="#微信浏览器下实现自动播放。" class="headerlink" title="微信浏览器下实现自动播放。"></a>微信浏览器下实现自动播放。</h4><p>  document.addEventListener(“WeixinJSBridgeReady”,     function() {<br>  video.play()<br>  }, false)</p>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/12/axios请求/" rel="next" title="axios请求">
+                <i class="fa fa-chevron-left"></i> axios请求
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/09/26/H5移动端安卓键盘出来覆盖页面/" rel="prev" title="H5移动端安卓键盘出来覆盖页面">
+                H5移动端安卓键盘出来覆盖页面 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="CHEN.星" />
+          <p class="site-author-name" itemprop="name">CHEN.星</p>
+           
+              <p class="site-description motion-element" itemprop="description">个人技术博客</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">59</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#业务场景"><span class="nav-number">1.</span> <span class="nav-text">业务场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#发现问题"><span class="nav-number">2.</span> <span class="nav-text">发现问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决问题"><span class="nav-number">3.</span> <span class="nav-text">解决问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#补充知识"><span class="nav-number">4.</span> <span class="nav-text">补充知识</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#webkit-playsinline-”true”-playsinline"><span class="nav-number">4.1.</span> <span class="nav-text">webkit-playsinline=”true” playsinline</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#x5-video-player-type-”h5”"><span class="nav-number">5.</span> <span class="nav-text">x5-video-player-type=”h5”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#video标签对视频格式以及编码的支持"><span class="nav-number">6.</span> <span class="nav-text">video标签对视频格式以及编码的支持</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#视频充满屏幕"><span class="nav-number">6.1.</span> <span class="nav-text">视频充满屏幕</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#把当前的视频投放到其他支持此技术的设备上"><span class="nav-number">7.</span> <span class="nav-text">把当前的视频投放到其他支持此技术的设备上</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#在视频结束时执行事件。"><span class="nav-number">7.1.</span> <span class="nav-text">在视频结束时执行事件。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#微信浏览器下实现自动播放。"><span class="nav-number">7.2.</span> <span class="nav-text">微信浏览器下实现自动播放。</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CHEN.星</span>
+</div>
+
+
+<div class="powered-by">
+   个人专属
+</div>
+
+<div class="theme-info">
+  博客 -CHEN.星
+  
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
