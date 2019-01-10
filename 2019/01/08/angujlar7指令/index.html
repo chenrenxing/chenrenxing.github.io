@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="在 Angular 中有三种类型的指令：  组件 — 拥有模板的指令 结构型指令 — 通过添加和移除 DOM 元素改变 DOM 布局的指令（修改视图的结构。例如，NgFor 和 结构型指令） 属性型指令 — 改变元素、组件或其它指令的外观和行为的指令。（改变一个元素的外观或行为）属性指令   例子    import { Directive, ElementRef, HostListener, I">
+<meta property="og:type" content="article">
+<meta property="og:title" content="angujlar7指令">
+<meta property="og:url" content="http://yoursite.com/2019/01/08/angujlar7指令/index.html">
+<meta property="og:site_name" content="CHEN.星~博客">
+<meta property="og:description" content="在 Angular 中有三种类型的指令：  组件 — 拥有模板的指令 结构型指令 — 通过添加和移除 DOM 元素改变 DOM 布局的指令（修改视图的结构。例如，NgFor 和 结构型指令） 属性型指令 — 改变元素、组件或其它指令的外观和行为的指令。（改变一个元素的外观或行为）属性指令   例子    import { Directive, ElementRef, HostListener, I">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-01-08T08:22:15.986Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="angujlar7指令">
+<meta name="twitter:description" content="在 Angular 中有三种类型的指令：  组件 — 拥有模板的指令 结构型指令 — 通过添加和移除 DOM 元素改变 DOM 布局的指令（修改视图的结构。例如，NgFor 和 结构型指令） 属性型指令 — 改变元素、组件或其它指令的外观和行为的指令。（改变一个元素的外观或行为）属性指令   例子    import { Directive, ElementRef, HostListener, I">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/01/08/angujlar7指令/"/>
+
+
+
+
+
+  <title>angujlar7指令 | CHEN.星~博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CHEN.星~博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生命在于折腾</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/08/angujlar7指令/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">angujlar7指令</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-08T15:39:00+08:00">
+                2019-01-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在 Angular 中有三种类型的指令：</p>
+<ol>
+<li>组件 — 拥有模板的指令</li>
+<li>结构型指令 — 通过添加和移除 DOM 元素改变 DOM 布局的指令（修改视图的结构。例如，NgFor 和 结构型指令）</li>
+<li>属性型指令 — 改变元素、组件或其它指令的外观和行为的指令。（改变一个元素的外观或行为）<h3 id="属性指令"><a href="#属性指令" class="headerlink" title="属性指令"></a>属性指令</h3></li>
+</ol>
+<ul>
+<li><p>例子 </p>
+<p>  import { Directive, ElementRef, HostListener, Input } from ‘@angular/core’;</p>
+<p>  @Directive({</p>
+<pre><code>selector: &apos;[appHighlight]&apos;
+</code></pre><p>  })<br>  export class HighlightDirective {</p>
+<pre><code>constructor(private el: ElementRef) { }
+
+@Input(&apos;appHighlight&apos;) highlightColor: string;
+*当它出现在等号左边的方括号（[ ]）中时，该属性属于其它组件或指令，它必须带有 @Input 装饰器*
+@Input() defaultColor: string;
+
+@HostListener(&apos;mouseenter&apos;) onMouseEnter() {
+  this.highlight(this.highlightColor ||this.defaultColor|| &apos;red&apos;);
+}
+
+@HostListener(&apos;mouseleave&apos;) onMouseLeave() {
+  this.highlight(null);
+}
+
+private highlight(color: string) {
+  this.el.nativeElement.style.backgroundColor = color;
+}
+</code></pre><p>  }</p>
+</li>
+<li><p>引用元素</p>
+  <p [apphighlight]="color">Highlight me!</p>
+</li>
+<li><p>defaultColor</p>
+<p>  在绑定的引用元素上开始如果没有color的值 这个时候引用的就是默认defaultColor<br>  </p><p [apphighlight]="color" defaultcolor="violet"></p>
+<pre><code>Highlight me too!
+</code></pre><p>  </p><p></p>
+<h3 id="结构型指令"><a href="#结构型指令" class="headerlink" title="结构型指令"></a>结构型指令</h3><p>三个常用的内置结构型指令 —— NgIf、NgFor和模板语法</p>
+  <div *ngif="hero" class="name"></div>
+
+<p>  <ul></ul></p>
+<pre><code>&lt;li *ngFor=&quot;let hero of heroes&quot;&gt;{{hero.name}}&lt;/li&gt;
+</code></pre><p>  </p></li></ul><br>  NgSwitch 本身不是结构型指令，而是一个属性型指令，它控制其它两个 switch 指令的行为。 这也就是为什么你要写成 [ngSwitch] 而不是 *ngSwitch 的原因<br>  <div [ngswitch]="hero?.emotion"><p></p>
+<pre><code>&lt;app-happy-hero    *ngSwitchCase=&quot;&apos;happy&apos;&quot;    [hero]=&quot;hero&quot;&gt;&lt;/app-happy-hero&gt;
+&lt;app-sad-hero      *ngSwitchCase=&quot;&apos;sad&apos;&quot;      [hero]=&quot;hero&quot;&gt;&lt;/app-sad-hero&gt;
+&lt;app-confused-hero *ngSwitchCase=&quot;&apos;app-confused&apos;&quot; [hero]=&quot;hero&quot;&gt;&lt;/app-confused-hero&gt;
+&lt;app-unknown-hero  *ngSwitchDefault           [hero]=&quot;hero&quot;&gt;&lt;/app-unknown-hero&gt;
+</code></pre><p>  &lt;/div</p>
+
+
+</div>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/02/angulrjs7/" rel="next" title="angulrjs7">
+                <i class="fa fa-chevron-left"></i> angulrjs7
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/09/本地配置域名映射/" rel="prev" title="本地配置域名映射">
+                本地配置域名映射 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="CHEN.星" />
+          <p class="site-author-name" itemprop="name">CHEN.星</p>
+           
+              <p class="site-description motion-element" itemprop="description">个人技术博客</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">77</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#属性指令"><span class="nav-number">1.</span> <span class="nav-text">属性指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结构型指令"><span class="nav-number">2.</span> <span class="nav-text">结构型指令</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CHEN.星</span>
+</div>
+
+
+<div class="powered-by">
+   个人专属
+</div>
+
+<div class="theme-info">
+  博客 -CHEN.星
+  
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

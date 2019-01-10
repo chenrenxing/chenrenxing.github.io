@@ -94,17 +94,17 @@
 
 
 
-<meta name="description" content="原理JavaScript实现继承的时候，需要进行对象的拷贝；而为了不影响拷贝后的数据对原数据造成影响，也就是存在共享关系的时候，我们就需要进行深拷贝； 深度拷贝对象，带数组var data = extendCopy(node);  function extendCopy(p) {      var c = {};      for (var key in p) {          if (key">
+<meta name="description" content="原理JavaScript实现继承的时候，需要进行对象的拷贝；而为了不影响拷贝后的数据对原数据造成影响，也就是存在共享关系的时候，我们就需要进行深拷贝； 数据类型数据分为基本数据类型(String, Number, Boolean, Null, Undefined，Symbol)和对象数据类型。  基本数据类型的特点：直接存储在栈(stack)中的数据 引用数据类型的特点：存储的是该对象在栈中引用，">
 <meta property="og:type" content="article">
-<meta property="og:title" content="对象深度拷贝">
-<meta property="og:url" content="http://yoursite.com/2018/05/29/对象深度拷贝/index.html">
+<meta property="og:title" content="浅拷贝与深拷贝">
+<meta property="og:url" content="http://yoursite.com/2018/05/29/浅拷贝与深拷贝/index.html">
 <meta property="og:site_name" content="CHEN.星~博客">
-<meta property="og:description" content="原理JavaScript实现继承的时候，需要进行对象的拷贝；而为了不影响拷贝后的数据对原数据造成影响，也就是存在共享关系的时候，我们就需要进行深拷贝； 深度拷贝对象，带数组var data = extendCopy(node);  function extendCopy(p) {      var c = {};      for (var key in p) {          if (key">
+<meta property="og:description" content="原理JavaScript实现继承的时候，需要进行对象的拷贝；而为了不影响拷贝后的数据对原数据造成影响，也就是存在共享关系的时候，我们就需要进行深拷贝； 数据类型数据分为基本数据类型(String, Number, Boolean, Null, Undefined，Symbol)和对象数据类型。  基本数据类型的特点：直接存储在栈(stack)中的数据 引用数据类型的特点：存储的是该对象在栈中引用，">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-29T08:35:19.810Z">
+<meta property="og:updated_time" content="2018-12-26T02:20:02.344Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="对象深度拷贝">
-<meta name="twitter:description" content="原理JavaScript实现继承的时候，需要进行对象的拷贝；而为了不影响拷贝后的数据对原数据造成影响，也就是存在共享关系的时候，我们就需要进行深拷贝； 深度拷贝对象，带数组var data = extendCopy(node);  function extendCopy(p) {      var c = {};      for (var key in p) {          if (key">
+<meta name="twitter:title" content="浅拷贝与深拷贝">
+<meta name="twitter:description" content="原理JavaScript实现继承的时候，需要进行对象的拷贝；而为了不影响拷贝后的数据对原数据造成影响，也就是存在共享关系的时候，我们就需要进行深拷贝； 数据类型数据分为基本数据类型(String, Number, Boolean, Null, Undefined，Symbol)和对象数据类型。  基本数据类型的特点：直接存储在栈(stack)中的数据 引用数据类型的特点：存储的是该对象在栈中引用，">
 
 
 
@@ -133,13 +133,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/05/29/对象深度拷贝/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/05/29/浅拷贝与深拷贝/"/>
 
 
 
 
 
-  <title>对象深度拷贝 | CHEN.星~博客</title>
+  <title>浅拷贝与深拷贝 | CHEN.星~博客</title>
   
 
 
@@ -262,7 +262,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/29/对象深度拷贝/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/29/浅拷贝与深拷贝/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="CHEN.星">
@@ -279,7 +279,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">对象深度拷贝</h1>
+          <h1 class="post-title" itemprop="name headline">浅拷贝与深拷贝</h1>
         
 
         <div class="post-meta">
@@ -330,7 +330,49 @@
 
       
         <h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><pre><code>JavaScript实现继承的时候，需要进行对象的拷贝；而为了不影响拷贝后的数据对原数据造成影响，也就是存在共享关系的时候，我们就需要进行深拷贝；
-</code></pre><h3 id="深度拷贝对象，带数组"><a href="#深度拷贝对象，带数组" class="headerlink" title="深度拷贝对象，带数组"></a>深度拷贝对象，带数组</h3><pre><code>var data = extendCopy(node);
+</code></pre><h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><p>数据分为基本数据类型(String, Number, Boolean, Null, Undefined，Symbol)和对象数据类型。</p>
+<ol>
+<li>基本数据类型的特点：直接存储在栈(stack)中的数据</li>
+<li>引用数据类型的特点：存储的是该对象在栈中引用，真实的数据存放在堆内存里</li>
+</ol>
+<h3 id="浅拷贝与深拷贝"><a href="#浅拷贝与深拷贝" class="headerlink" title="浅拷贝与深拷贝"></a>浅拷贝与深拷贝</h3><ul>
+<li>深拷贝和浅拷贝是只针对Object和Array这样的引用数据类型的</li>
+<li>浅拷贝只复制指向某个对象的指针，而不复制对象本身，新旧对象还是共享同一块内存。但深拷贝会另外创造一个一模一样的对象，新对象跟原对象不共享内存，修改新对象不会改到原对象。</li>
+</ul>
+<h3 id="赋值和浅拷贝的区别"><a href="#赋值和浅拷贝的区别" class="headerlink" title="赋值和浅拷贝的区别"></a>赋值和浅拷贝的区别</h3><ul>
+<li>当我们把一个对象赋值给一个新的变量时，赋的其实是该对象的在栈中的地址，而不是堆中的数据。也就是两个对象指向的是同一个存储空间，无论哪个对象发生改变，其实都是改变的存储空间的内容，因此，两个对象是联动的。</li>
+<li>浅拷贝是按位拷贝对象，它会创建一个新对象，这个对象有着原始对象属性值的一份精确拷贝。如果属性是基本类型，拷贝的就是基本类型的值；如果属性是内存地址（引用类型），拷贝的就是内存地址 ，因此如果其中一个对象改变了这个地址，就会影响到另一个对象。即默认拷贝构造函数只是对对象进行浅拷贝复制(逐个成员依次拷贝)，即只复制对象空间而不复制资源。</li>
+</ul>
+<h3 id="浅拷贝的实现方式"><a href="#浅拷贝的实现方式" class="headerlink" title="浅拷贝的实现方式"></a>浅拷贝的实现方式</h3><ol>
+<li><p>Object.assign()；<br>Object.assign() 方法可以把任意多个的源对象自身的可枚举属性拷贝给目标对象，然后返回目标对象。但是 Object.assign() 进行的是浅拷贝，拷贝的是对象的属性的引用，而不是对象本身。</p>
+<pre><code>var obj={a:{a:&apos;kobe&apos;,b:39}};
+var initalObj=Object.assign({},obj);
+initalObj.a.a=&apos;wade&apos;;
+console.log(obj.a.a)//wade
+注意：当object只有一层的时候，是深拷贝
+let obj={
+    username:&quot;Kobe&quot;    
+    }
+let obj2=Object.assign({},obj);
+obj2.username=&apos;wade&apos;;
+console.log(obj);//{username:&apos;kobe&apos;}
+</code></pre></li>
+</ol>
+<ul>
+<li>Array.prototype.concat()<br>  let arr=[1,3,{username:’kobe’}]<br>  let arr2=arr.concat();<br>  arr2[2].username=’wode’;<br>  console.log(arr);<br>  修改新对象会改变到原对象 arr.username//wode</li>
+<li>Array.prototype.slice()<br>  let arr=[1,3,{username:’kobe’}]<br>  let arr3=arr.slice();<br>  arr3[3].username=’wode’;<br>  console.log(arr);<br>  修改新对象会改变到原对象 arr.username//wode</li>
+</ul>
+<p>关于Array的slice和concat方法的补充说明：Array的slice和concat方法不修改原数组，只会返回一个浅复制了原数组中的元素的一个新数组。<br>原数组的元素会按照下述规则拷贝</p>
+<ul>
+<li>如果该元素是个对象引用(不是实际的对象)，slice 会拷贝这个对象引用到新的数组里。两个对象引用都引用了同一个对象。如果被引用的对象发生改变，则新的和原来的数组中的这个元素也会发生改变。</li>
+<li>对于字符串、数字及布尔值来说（不是 String、Number 或者 Boolean 对象），slice 会拷贝这些值到新的数组里。在别的数组里修改这些字符串或数字或是布尔值，将不会影响另一个数组</li>
+</ul>
+<h3 id="深拷贝的实现方式"><a href="#深拷贝的实现方式" class="headerlink" title="深拷贝的实现方式"></a>深拷贝的实现方式</h3><ul>
+<li>JSON.parse(JSON.stringify())<br>原理： 用JSON.stringify将对象转成JSON字符串，再用JSON.parse()把字符串解析成对象，一去一来，新的对象产生了，而且对象会开辟新的栈，实现深拷贝。<br>这种方法虽然可以实现数组或对象深拷贝，但不能处理函数。</li>
+<li>手写递归方法<br>递归方法实现深度克隆原理：遍历对象、数组直到里边都是基本数据类型，然后再去复制，就是深度拷贝。</li>
+<li>函数库lodash</li>
+</ul>
+<h3 id="深度拷贝对象，带数组"><a href="#深度拷贝对象，带数组" class="headerlink" title="深度拷贝对象，带数组"></a>深度拷贝对象，带数组</h3><pre><code>var data = extendCopy(node);
  function extendCopy(p) {
      var c = {};
      for (var key in p) {
@@ -355,7 +397,8 @@
      }
      return c;
  }
-</code></pre>
+</code></pre><h3 id="文章出处"><a href="#文章出处" class="headerlink" title="文章出处"></a>文章出处</h3><p><a href="https://mp.weixin.qq.com/s?__biz=MzIzNTU2ODM4Mw==&amp;mid=2247487594&amp;idx=2&amp;sn=b95f2dad85139117c50d7117a70c70c4&amp;chksm=e8e47dfadf93f4ec2041a42059efb50c6190e6f88d5e5d52cfea5a1bb7a5893c8b97cfe993e5&amp;mpshare=1&amp;scene=23&amp;srcid=12262LzGOfFCIMNfrlaEexCO#rd" target="_blank" rel="external">https://mp.weixin.qq.com/s?__biz=MzIzNTU2ODM4Mw==&amp;mid=2247487594&amp;idx=2&amp;sn=b95f2dad85139117c50d7117a70c70c4&amp;chksm=e8e47dfadf93f4ec2041a42059efb50c6190e6f88d5e5d52cfea5a1bb7a5893c8b97cfe993e5&amp;mpshare=1&amp;scene=23&amp;srcid=12262LzGOfFCIMNfrlaEexCO#rd</a></p>
+
       
     </div>
     
@@ -468,7 +511,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">60</span>
+                <span class="site-state-item-count">77</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -507,7 +550,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#原理"><span class="nav-number">1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#深度拷贝对象，带数组"><span class="nav-number">2.</span> <span class="nav-text">深度拷贝对象，带数组</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#原理"><span class="nav-number">1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据类型"><span class="nav-number">2.</span> <span class="nav-text">数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浅拷贝与深拷贝"><span class="nav-number">3.</span> <span class="nav-text">浅拷贝与深拷贝</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#赋值和浅拷贝的区别"><span class="nav-number">4.</span> <span class="nav-text">赋值和浅拷贝的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浅拷贝的实现方式"><span class="nav-number">5.</span> <span class="nav-text">浅拷贝的实现方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#深拷贝的实现方式"><span class="nav-number">6.</span> <span class="nav-text">深拷贝的实现方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#深度拷贝对象，带数组"><span class="nav-number">7.</span> <span class="nav-text">深度拷贝对象，带数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文章出处"><span class="nav-number">8.</span> <span class="nav-text">文章出处</span></a></li></ol></div>
             
 
           </div>
@@ -530,7 +573,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

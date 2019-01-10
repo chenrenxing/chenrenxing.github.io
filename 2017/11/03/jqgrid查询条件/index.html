@@ -94,17 +94,17 @@
 
 
 
-<meta name="description" content="jqgridcts/scanCodeUrlModal/js/scan.code.url.controller.js 遇到一次查询条件出问题的情况， //首次查询  postData: {         filters: angular.toJson({             groupOp: &amp;apos;or&amp;apos;,             rules: [{field: &amp;apos;t">
+<meta name="description" content="jqgrid查询范围语句    IN(&amp;quot; IN &amp;quot;), /**等于*/ EQ(&amp;quot; = &amp;quot;), /**大于*/ GT(&amp;quot; &amp;gt; &amp;quot;), /**小于*/ LT(&amp;quot; &amp;lt; &amp;quot;), /**不等于*/ NE(&amp;quot; != &amp;quot;), /**大于等于*/ GE(&amp;quot; &amp;gt;= &amp;quot;), /**">
 <meta property="og:type" content="article">
-<meta property="og:title" content="jqgrid查询条件">
+<meta property="og:title" content="jqgrid">
 <meta property="og:url" content="http://yoursite.com/2017/11/03/jqgrid查询条件/index.html">
 <meta property="og:site_name" content="CHEN.星~博客">
-<meta property="og:description" content="jqgridcts/scanCodeUrlModal/js/scan.code.url.controller.js 遇到一次查询条件出问题的情况， //首次查询  postData: {         filters: angular.toJson({             groupOp: &amp;apos;or&amp;apos;,             rules: [{field: &amp;apos;t">
+<meta property="og:description" content="jqgrid查询范围语句    IN(&amp;quot; IN &amp;quot;), /**等于*/ EQ(&amp;quot; = &amp;quot;), /**大于*/ GT(&amp;quot; &amp;gt; &amp;quot;), /**小于*/ LT(&amp;quot; &amp;lt; &amp;quot;), /**不等于*/ NE(&amp;quot; != &amp;quot;), /**大于等于*/ GE(&amp;quot; &amp;gt;= &amp;quot;), /**">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-03T05:30:20.564Z">
+<meta property="og:updated_time" content="2018-12-21T08:01:34.160Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="jqgrid查询条件">
-<meta name="twitter:description" content="jqgridcts/scanCodeUrlModal/js/scan.code.url.controller.js 遇到一次查询条件出问题的情况， //首次查询  postData: {         filters: angular.toJson({             groupOp: &amp;apos;or&amp;apos;,             rules: [{field: &amp;apos;t">
+<meta name="twitter:title" content="jqgrid">
+<meta name="twitter:description" content="jqgrid查询范围语句    IN(&amp;quot; IN &amp;quot;), /**等于*/ EQ(&amp;quot; = &amp;quot;), /**大于*/ GT(&amp;quot; &amp;gt; &amp;quot;), /**小于*/ LT(&amp;quot; &amp;lt; &amp;quot;), /**不等于*/ NE(&amp;quot; != &amp;quot;), /**大于等于*/ GE(&amp;quot; &amp;gt;= &amp;quot;), /**">
 
 
 
@@ -139,7 +139,7 @@
 
 
 
-  <title>jqgrid查询条件 | CHEN.星~博客</title>
+  <title>jqgrid | CHEN.星~博客</title>
   
 
 
@@ -279,7 +279,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">jqgrid查询条件</h1>
+          <h1 class="post-title" itemprop="name headline">jqgrid</h1>
         
 
         <div class="post-meta">
@@ -329,7 +329,41 @@
       
 
       
-        <h3 id="jqgrid"><a href="#jqgrid" class="headerlink" title="jqgrid"></a>jqgrid</h3><pre><code>cts/scanCodeUrlModal/js/scan.code.url.controller.js
+        <h3 id="jqgrid查询范围语句"><a href="#jqgrid查询范围语句" class="headerlink" title="jqgrid查询范围语句"></a>jqgrid查询范围语句</h3><pre><code>    IN(&quot; IN &quot;),
+/**等于*/
+EQ(&quot; = &quot;),
+/**大于*/
+GT(&quot; &gt; &quot;),
+/**小于*/
+LT(&quot; &lt; &quot;),
+/**不等于*/
+NE(&quot; != &quot;),
+/**大于等于*/
+GE(&quot; &gt;= &quot;),
+/**小于等于*/
+LE(&quot; &lt;= &quot;),
+/**两者之间*/
+BETWEEN(&quot; BETWEEN &quot;),
+/**包含*/
+CN(&quot; LIKE &quot;),
+/**开始于*/
+BW(&quot; LIKE &quot;),
+/**结束于*/
+EW(&quot; LIKE &quot;),
+/**不开始于*/
+BN(&quot; NOT LIKE &quot;),
+/**不属于*/
+NI(&quot; NOT IN &quot;),
+/**不包含*/
+NC(&quot; NOT LIKE &quot;),
+/**不结束于*/
+EN(&quot; NOT LIKE &quot;),
+/**空值*/
+NU(&quot; IS NULL &quot;),
+/**非空值*/
+NN(&quot; IS NOT NULL &quot;);
+时间条件查询常用ge-le
+</code></pre><h3 id="jqgrid查询条件"><a href="#jqgrid查询条件" class="headerlink" title="jqgrid查询条件"></a>jqgrid查询条件</h3><pre><code>cts/scanCodeUrlModal/js/scan.code.url.controller.js
 遇到一次查询条件出问题的情况，
 //首次查询
  postData: {
@@ -352,6 +386,13 @@ filters = {
                 }
         });
         $(urlTable).trigger(&apos;reloadGrid&apos;);
+</code></pre><h3 id="jqgrid本地数据分页"><a href="#jqgrid本地数据分页" class="headerlink" title="jqgrid本地数据分页"></a>jqgrid本地数据分页</h3><pre><code>grid.jqGrid(&quot;clearGridData&quot;);//清除缓存数据
+  grid.setGridParam({
+    datatype: &quot;local&quot;,
+    data: rows,
+    rowNum: 12
+  }).trigger(&apos;reloadGrid&apos;);
+rows为接口返回的数组
 </code></pre>
       
     </div>
@@ -465,7 +506,7 @@ filters = {
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">60</span>
+                <span class="site-state-item-count">77</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -504,7 +545,7 @@ filters = {
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#jqgrid"><span class="nav-number">1.</span> <span class="nav-text">jqgrid</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#jqgrid查询范围语句"><span class="nav-number">1.</span> <span class="nav-text">jqgrid查询范围语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jqgrid查询条件"><span class="nav-number">2.</span> <span class="nav-text">jqgrid查询条件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jqgrid本地数据分页"><span class="nav-number">3.</span> <span class="nav-text">jqgrid本地数据分页</span></a></li></ol></div>
             
 
           </div>
@@ -527,7 +568,7 @@ filters = {
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

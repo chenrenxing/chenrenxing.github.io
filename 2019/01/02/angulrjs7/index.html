@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="上手 npm install -g @angular/cli ng new my-app cd my-app ng serve –open创建组件 ng generate component heroes Angular CLI 在生成 component 组件的时候就自动把它加到了 AppModule 中打开 src/app/app.module.ts 你就会发现 component 已经在顶部">
+<meta property="og:type" content="article">
+<meta property="og:title" content="angulrjs7">
+<meta property="og:url" content="http://yoursite.com/2019/01/02/angulrjs7/index.html">
+<meta property="og:site_name" content="CHEN.星~博客">
+<meta property="og:description" content="上手 npm install -g @angular/cli ng new my-app cd my-app ng serve –open创建组件 ng generate component heroes Angular CLI 在生成 component 组件的时候就自动把它加到了 AppModule 中打开 src/app/app.module.ts 你就会发现 component 已经在顶部">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-01-08T07:38:11.006Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="angulrjs7">
+<meta name="twitter:description" content="上手 npm install -g @angular/cli ng new my-app cd my-app ng serve –open创建组件 ng generate component heroes Angular CLI 在生成 component 组件的时候就自动把它加到了 AppModule 中打开 src/app/app.module.ts 你就会发现 component 已经在顶部">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/01/02/angulrjs7/"/>
+
+
+
+
+
+  <title>angulrjs7 | CHEN.星~博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CHEN.星~博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生命在于折腾</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/02/angulrjs7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">angulrjs7</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-02T21:21:08+08:00">
+                2019-01-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="上手"><a href="#上手" class="headerlink" title="上手"></a>上手</h3><ul>
+<li>npm install -g @angular/cli</li>
+<li>ng new my-app</li>
+<li>cd my-app</li>
+<li>ng serve –open<h3 id="创建组件"><a href="#创建组件" class="headerlink" title="创建组件"></a>创建组件</h3></li>
+<li><p>ng generate component heroes</p>
+<p>Angular CLI 在生成 component 组件的时候就自动把它加到了 AppModule 中<br>打开 src/app/app.module.ts 你就会发现 component 已经在顶部导入过了。<br>component 也已经声明在了 @NgModule.declarations 数组中。</p>
+<h3 id="Service"><a href="#Service" class="headerlink" title="Service"></a>Service</h3><p>ng generate service hero</p>
+<h3 id="FormsModule"><a href="#FormsModule" class="headerlink" title="FormsModule"></a>FormsModule</h3></li>
+<li>打开 AppModule (app.module.ts) 并从 @angular/forms 库中导入 FormsModule 符号。<br>import { FormsModule } from ‘@angular/forms’; // &lt;– NgModel lives here</li>
+<li><p>然后把 FormsModule 添加到 @NgModule 元数据的 imports 数组中，这里是该应用所需外部模块的列表。imports: [BrowserModule,<br>FormsModule<br>],</p>
+<h3 id="AppRoutingModule添加路由"><a href="#AppRoutingModule添加路由" class="headerlink" title="AppRoutingModule添加路由"></a>AppRoutingModule添加路由</h3><p>  ng generate module app-routing –flat –module=app<br>  –flat 把这个文件放进了 src/app 中，而不是单独的目录中。<br>  –module=app 告诉 CLI 把它注册到 AppModule 的 imports 数组中。<br>  –flat puts the file in src/app instead of its own folder.<br>  –module=app tells the CLI to register it in the imports array of the AppModule.</p>
+<h3 id="ActivatedRoute"><a href="#ActivatedRoute" class="headerlink" title="ActivatedRoute"></a>ActivatedRoute</h3><p>  import {ActivatedRoute} from ‘@angular/router’;<br>  ActivatedRoute 保存着到当前传递过来 实例的路由信息<br>  getHero(): void {</p>
+<pre><code>const id = +this.route.snapshot.paramMap.get(&apos;id&apos;);
+this.heroService.getHero(id)
+  .subscribe(hero =&gt; this.hero = hero);
+</code></pre><p>  }<br>  route.snapshot 是一个路由信息的静态快照，抓取自组件刚刚创建完毕之后。<br>  paramMap 是一个从 URL 中提取的路由参数值的字典。 “id” 对应的值就是要获取的英雄的 id。</p>
+<h3 id="localhost"><a href="#localhost" class="headerlink" title="localhost"></a>localhost</h3><p>  goBack(): void {</p>
+<pre><code>this.location.back();
+</code></pre><p>  }<br>   Location 服务在浏览器的历史栈中后退一步。</p>
+<h3 id="为数据创建类"><a href="#为数据创建类" class="headerlink" title="为数据创建类"></a>为数据创建类</h3><p>  ng generate class hero</p>
+<h3 id="父组件监听子组件的事件"><a href="#父组件监听子组件的事件" class="headerlink" title="父组件监听子组件的事件"></a>父组件监听子组件的事件</h3><p>  子组件暴露一个 EventEmitter 属性，当事件发生时，子组件利用该属性 emits(向上弹射)事件。父组件绑定到这个事件属性，并在事件发生时作出回应。<br>  //子组件demo<br>  import { Component, EventEmitter, Input, Output } from ‘@angular/core’;</p>
+<p>  <button (click)="vote(false)" [disabled]="didVote">Disagree</button><br>  @Output() voted = new EventEmitter<boolean>();</boolean></p>
+<p>  vote(agreed: boolean) {<br>  this.voted.emit(agreed);<br>  this.didVote = true;</p>
+<pre><code>}
+</code></pre><p>  //父组件<br>  &lt;app-voter *ngFor=”let voter of voters”</p>
+<pre><code>[name]=&quot;voter&quot;
+(voted)=&quot;onVoted($event)&quot;&gt;
+</code></pre><p>  <br>  onVoted(agreed: boolean) {</p>
+<pre><code>console.log(agreed)
+</code></pre><p>   }</p>
+<h3 id="父组件与子组件通过本地变量互动"><a href="#父组件与子组件通过本地变量互动" class="headerlink" title="父组件与子组件通过本地变量互动"></a>父组件与子组件通过本地变量互动</h3><p>  父组件不能使用数据绑定来读取子组件的属性或调用子组件的方法。但可以在父组件模板里，新建一个本地变量来代表子组件，然后利用这个变量来读取子组件的属性和调用子组件的方法<br>  button (click)=”timer.start()”&gt;Start</p>
+<pre><code>&lt;button (click)=&quot;timer.stop()&quot;&gt;Stop&lt;/button&gt;
+&lt;div class=&quot;seconds&quot;&gt;{{timer.seconds}}&lt;/div&gt;
+&lt;app-countdown-timer #timer&gt;&lt;/app-countdown-timer&gt;
+</code></pre><p>  父组件不能通过数据绑定使用子组件的 start 和 stop 方法，也不能访问子组件的 seconds 属性。把本地变量(#timer)放到(<countdown-timer>)标签中，用来代表子组件。这样父组件的模板就得到了子组件的引用，于是可以在父组件的模板中访问子组件的所有属性和方法。</countdown-timer></p>
+<h3 id="父组件调用-ViewChild"><a href="#父组件调用-ViewChild" class="headerlink" title="父组件调用@ViewChild()"></a>父组件调用@ViewChild()</h3><p>  本地变量方法是个简单便利的方法。但是它也有局限性，因为父组件-子组件的连接必须全部在父组件的模板中进行。父组件本身的代码对子组件没有访问权。’</p>
+<p>  如果父组件的类需要读取子组件的属性值或调用子组件的方法，就不能使用本地变量方法。<br>  当父组件类需要这种访问时，可以把子组件作为 ViewChild，注入到父组件里面。<br>  import { AfterViewInit, ViewChild } from ‘@angular/core’;<br>  import { Component }                from ‘@angular/core’;<br>  import { CountdownTimerComponent }  from ‘./countdown-timer.component’;</p>
+<p>  @Component({</p>
+<pre><code>selector: &apos;app-countdown-parent-vc&apos;,
+template: `
+&lt;h3&gt;Countdown to Liftoff (via ViewChild)&lt;/h3&gt;
+&lt;button (click)=&quot;start()&quot;&gt;Start&lt;/button&gt;
+&lt;button (click)=&quot;stop()&quot;&gt;Stop&lt;/button&gt;
+&lt;div class=&quot;seconds&quot;&gt;{{ seconds() }}&lt;/div&gt;
+&lt;app-countdown-timer&gt;&lt;/app-countdown-timer&gt;
+`,
+styleUrls: [&apos;../assets/demo.css&apos;]
+</code></pre><p>  })<br>  export class CountdownViewChildParentComponent implements AfterViewInit {</p>
+<pre><code>@ViewChild(CountdownTimerComponent)
+private timerComponent: CountdownTimerComponent;
+
+seconds() { return 0; }
+  *//ngAfterViewInit() 生命周期钩子是非常重要的一步。被注入的计时器组件只有在 Angular 显示了父组件视图之后才能访问，所以它先把秒数显示为 0.*
+ngAfterViewInit() {
+  // Redefine `seconds()` to get from the `CountdownTimerComponent.seconds` ...
+  // but wait a tick first to avoid one-time devMode
+  // unidirectional-data-flow-violation error
+  setTimeout(() =&gt; this.seconds = () =&gt; this.timerComponent.seconds, 0);
+}
+
+start() { this.timerComponent.start(); }
+stop() { this.timerComponent.stop(); }
+</code></pre><p>  }<br>  把子组件的视图插入到父组件类需要做一点额外的工作。</p>
+<p>  首先，你要使用 ViewChild 装饰器导入这个引用，并挂上 AfterViewInit 生命周期钩子。</p>
+<p>  接着，通过 @ViewChild 属性装饰器，将子组件 CountdownTimerComponent 注入到私有属性 timerComponent 里面</p>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/23/react-setState/" rel="next" title="react-setState">
+                <i class="fa fa-chevron-left"></i> react-setState
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/08/angujlar7指令/" rel="prev" title="angujlar7指令">
+                angujlar7指令 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="CHEN.星" />
+          <p class="site-author-name" itemprop="name">CHEN.星</p>
+           
+              <p class="site-description motion-element" itemprop="description">个人技术博客</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">77</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#上手"><span class="nav-number">1.</span> <span class="nav-text">上手</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建组件"><span class="nav-number">2.</span> <span class="nav-text">创建组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Service"><span class="nav-number">3.</span> <span class="nav-text">Service</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FormsModule"><span class="nav-number">4.</span> <span class="nav-text">FormsModule</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AppRoutingModule添加路由"><span class="nav-number">5.</span> <span class="nav-text">AppRoutingModule添加路由</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ActivatedRoute"><span class="nav-number">6.</span> <span class="nav-text">ActivatedRoute</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#localhost"><span class="nav-number">7.</span> <span class="nav-text">localhost</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为数据创建类"><span class="nav-number">8.</span> <span class="nav-text">为数据创建类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#父组件监听子组件的事件"><span class="nav-number">9.</span> <span class="nav-text">父组件监听子组件的事件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#父组件与子组件通过本地变量互动"><span class="nav-number">10.</span> <span class="nav-text">父组件与子组件通过本地变量互动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#父组件调用-ViewChild"><span class="nav-number">11.</span> <span class="nav-text">父组件调用@ViewChild()</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CHEN.星</span>
+</div>
+
+
+<div class="powered-by">
+   个人专属
+</div>
+
+<div class="theme-info">
+  博客 -CHEN.星
+  
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

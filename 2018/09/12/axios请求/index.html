@@ -101,7 +101,7 @@
 <meta property="og:site_name" content="CHEN.星~博客">
 <meta property="og:description" content="##关于axios-post走地址栏    axios的post走的请求体    request payload    {username: “”, password: “”}    password:””    username:”” 如果post要走地址栏的话，可以配合qs库格式化数据。 地址：http://www.bootcdn.cn/qs/（npm install qs -S） impor">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-12T03:33:16.898Z">
+<meta property="og:updated_time" content="2019-01-10T09:32:07.009Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="axios请求">
 <meta name="twitter:description" content="##关于axios-post走地址栏    axios的post走的请求体    request payload    {username: “”, password: “”}    password:””    username:”” 如果post要走地址栏的话，可以配合qs库格式化数据。 地址：http://www.bootcdn.cn/qs/（npm install qs -S） impor">
@@ -341,6 +341,49 @@ Form Data （Form Data不同query string parameters）
 password:&quot;&quot;
 username:&quot;&quot;
 不要介意已经成功
+</code></pre><h3 id="get"><a href="#get" class="headerlink" title="get"></a>get</h3><p>axios.get(url[,options]);<br>传参方式：<br>1.通过url传参<br>2.通过params选项传参</p>
+<pre><code>axios.get(&apos;server.php&apos;,{
+    params:{
+        name:&apos;alice&apos;,
+        age:19
+    }
+})
+.then(resp =&gt; {
+    console.log(resp.data);
+}).catch(err =&gt; {
+    console.log(&apos;请求失败：&apos;+err.status+&apos;,&apos;+err.statusText);
+});
+axios.get(`https://api.github.com/users/${uid}`)
+                .then(resp =&gt; {
+                    // console.log(resp.data);
+                    this.user=resp.data;
+                });
+</code></pre><h3 id="post"><a href="#post" class="headerlink" title="post"></a>post</h3><p> axios.post(url,data,[options]);<br>axios默认发送数据时，数据格式是Request Payload，并非我们常用的Form Data格式，<br>所以参数必须要以键值对形式传递，不能以json形式传参<br>传参方式：<br>1.自己拼接为键值对<br>2.使用transformRequest，在请求发送前将请求数据进行转换<br>3.如果使用模块化开发，可以使用qs模块进行转换</p>
+<pre><code>axios.post(&apos;server.php&apos;,this.user,{
+    transformRequest:[
+        function(data){
+            let params=&apos;&apos;;
+            for(let index in data){
+                params+=index+&apos;=&apos;+data[index]+&apos;&amp;&apos;;
+            }
+            return params;
+        }
+    ]
+})
+.then(resp =&gt; {
+    console.log(resp.data);
+}).catch(err =&gt; {
+    console.log(&apos;请求失败：&apos;+err.status+&apos;,&apos;+err.statusText);
+});
+</code></pre><h3 id="Jsonp"><a href="#Jsonp" class="headerlink" title="Jsonp"></a>Jsonp</h3><p>axios本身并不支持发送跨域的请求，没有提供相应的API，作者也暂没计划在axios添加支持发送跨域请求，所以只能使用第三方库<br>vue-resource.min.js<br>使用this.$http发送请求<br>this.$http.get(url, [options])<br>this.$http.head(url, [options])<br>this.$http.delete(url, [options])<br>this.$http.jsonp(url, [options])<br>this.$http.post(url, [body], [options])<br>this.$http.put(url, [body], [options])<br>this.$http.patch(url, [body], [options])<br>this.$http.jsonp(‘<a href="https://sug.so.360.cn/suggest&#39;,{" target="_blank" rel="external">https://sug.so.360.cn/suggest&#39;,{</a><br>        params:{<br>            word:’a’<br>        }<br>    }).then(resp =&gt; {<br>        console.log(resp.data.s);<br>    });</p>
+<pre><code>this.$http.jsonp(&apos;https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su&apos;,{
+    params:{
+        wd:&apos;a&apos;
+    },
+    jsonp:&apos;cb&apos; //百度使用的jsonp参数名为cb，所以需要修改
+}).then(resp =&gt; {
+    console.log(resp.data.s);
+});
 </code></pre>
       
     </div>
@@ -429,8 +472,17 @@ username:&quot;&quot;
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -445,7 +497,7 @@ username:&quot;&quot;
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">60</span>
+                <span class="site-state-item-count">77</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -475,6 +527,22 @@ username:&quot;&quot;
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#get"><span class="nav-number">1.</span> <span class="nav-text">get</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#post"><span class="nav-number">2.</span> <span class="nav-text">post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Jsonp"><span class="nav-number">3.</span> <span class="nav-text">Jsonp</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -491,7 +559,7 @@ username:&quot;&quot;
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

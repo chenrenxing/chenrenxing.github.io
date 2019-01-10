@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="#####安装MongoDB##### 我选择的是windows平台的mongodb安装方式，也很简单，只需要 下载 对应操作系统版本的Mongodb即可。（建议下载ZIP的安装包） #####怎么验证我们的mongodb已经可以使用了？#####1、通过命令行切换到mongodb的安装目录， 我的目录为 C:\Program Files\MongoDB\Server\3.0\bin。2、在c盘中">
+<meta property="og:type" content="article">
+<meta property="og:title" content="&#39;mongo快速入门手册&#39;">
+<meta property="og:url" content="http://yoursite.com/2018/11/23/mongo快速入门手册/index.html">
+<meta property="og:site_name" content="CHEN.星~博客">
+<meta property="og:description" content="#####安装MongoDB##### 我选择的是windows平台的mongodb安装方式，也很简单，只需要 下载 对应操作系统版本的Mongodb即可。（建议下载ZIP的安装包） #####怎么验证我们的mongodb已经可以使用了？#####1、通过命令行切换到mongodb的安装目录， 我的目录为 C:\Program Files\MongoDB\Server\3.0\bin。2、在c盘中">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-11-23T02:28:24.297Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="&#39;mongo快速入门手册&#39;">
+<meta name="twitter:description" content="#####安装MongoDB##### 我选择的是windows平台的mongodb安装方式，也很简单，只需要 下载 对应操作系统版本的Mongodb即可。（建议下载ZIP的安装包） #####怎么验证我们的mongodb已经可以使用了？#####1、通过命令行切换到mongodb的安装目录， 我的目录为 C:\Program Files\MongoDB\Server\3.0\bin。2、在c盘中">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/11/23/mongo快速入门手册/"/>
+
+
+
+
+
+  <title>'mongo快速入门手册' | CHEN.星~博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CHEN.星~博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生命在于折腾</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/23/mongo快速入门手册/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">'mongo快速入门手册'</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-23T10:27:49+08:00">
+                2018-11-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>#####安装MongoDB#####</p>
+<p>我选择的是windows平台的mongodb安装方式，也很简单，只需要 下载 对应操作系统版本的Mongodb即可。（建议下载ZIP的安装包）</p>
+<p>#####怎么验证我们的mongodb已经可以使用了？#####<br>1、通过命令行切换到mongodb的安装目录， 我的目录为 C:\Program Files\MongoDB\Server\3.0\bin。<br>2、在c盘中创建 C:\mongodb\data 和 C:\mongodb\logs，分别用来存储数据文件和日志文件。<br>3、命令行执行 mongod –dbpath C:\mongodb\data，用来启动 mongodb 服务器。<br>4、命令行执行 mongo 127.0.0.1:27017，启动 mongodb 客户端。</p>
+<p>#####MongoDB常规操作#####</p>
+<p>Mongodb服务启动成功后，我们就可以使用客户端工具来连接mongodb了。 这里我们使用的是mongo提供的客户端工具，在我们刚才安装的mongodb目录下bin目录底下</p>
+<p>同样的进入到我们的mongodb的bin目录，执行 mongo命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">C:\Program Files\MongoDB\Server\3.0\bin\mongo</div><div class="line">MongoDB shell version: 2.6.3</div><div class="line">connecting to: test</div><div class="line">&gt;</div></pre></td></tr></table></figure>
+<p>当然，如果你已经将 C:\Program Files\MongoDB\Server\3.0\bin 加入到环境变量中，你就可以不需要切换目录了，直接执行mongo即可看到效果。</p>
+<p>通过上面的客户端连接结果可以看到，默认情况下会连接到 test这个数据库 。 如果我们想要知道mongodb现在有多少数据库，可以通过命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt; show dbs</div><div class="line">admin     0.078GB</div><div class="line">local     0.078GB</div><div class="line">persons   0.078GB</div><div class="line">persons1  0.078GB</div><div class="line">test      0.078GB</div></pre></td></tr></table></figure></p>
+<p>如果想要知道当前是哪个数据库，使用 db 命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; db</div><div class="line">test</div></pre></td></tr></table></figure></p>
+<p>如果想要切换到其他的数据库， 使用命令 use <your-dbname><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; use admin</div><div class="line">switched to db admin</div></pre></td></tr></table></figure></your-dbname></p>
+<p>显示当前数据库有哪一些集合show collections<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&gt; show collections</div><div class="line">cinema</div><div class="line">emps</div><div class="line">parents</div><div class="line">people</div><div class="line">persons</div><div class="line">system.indexes</div><div class="line">user</div></pre></td></tr></table></figure></p>
+<p>当然，如果你第一次使用运行 show collection ，结果是空的，但是当你往集合里面插入数据后，就可以看到集合以及对应的数据库都会被创建。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&gt; use demo</div><div class="line">switched to db demo</div><div class="line">&gt; show collections</div><div class="line">&gt; db.users.insert(&#123;name:&quot;zhangsan&quot;,password:111111&#125;)</div><div class="line">WriteResult(&#123; &quot;nInserted&quot; : 1 &#125;)</div><div class="line">&gt; show collections</div><div class="line">system.indexes</div><div class="line">users</div><div class="line">&gt; db</div><div class="line">demo</div><div class="line">&gt; db.users.find()</div><div class="line">&#123; &quot;_id&quot; : ObjectId(&quot;56cc6bb710f6b32d1d3c1278&quot;), &quot;name&quot; : &quot;zhangsan&quot;, &quot;password&quot; : 111111 &#125;</div></pre></td></tr></table></figure></p>
+<p>在上面的操作中，我们切换到demo数据库，并且创建了users这个集合，还往users集合插入一条数据。</p>
+<p>#####插入数据#####<br>在mongodb中，插入数据使用命令 db.collectionName.insert({data}) 或者 db.collectionName.save({data})<br>这两个方法都可以正常工作。 对于 insert方法在上文中已经提到，这里演示save方法的使用。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; db.users.save(&#123;name:&quot;lis&quot;,password:222222&#125;)</div><div class="line">WriteResult(&#123; &quot;nInserted&quot; : 1 &#125;)</div></pre></td></tr></table></figure></p>
+<p>#####修改数据#####<br>要修改数据，也有两种方式，一个是修改整个文档，一个是修改部分。首先先介绍修改整个文档的做法， 我们先把usres这个集合的数据都查询出来，方便和修改操作后的对比<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; db.users.find();</div><div class="line">&#123; &quot;_id&quot; : ObjectId(&quot;56cc6bb710f6b32d1d3c1278&quot;), &quot;name&quot; : &quot;zhangsan&quot;, &quot;password&quot; : 111111 &#125;</div><div class="line">&#123; &quot;_id&quot; : ObjectId(&quot;56cc6d2410f6b32d1d3c1279&quot;), &quot;name&quot; : &quot;zhangsan1&quot; &#125;</div><div class="line">&#123; &quot;_id&quot; : &quot;56cc6d2410f6b32d1d3c1279&quot;, &quot;name&quot; : &quot;zhangsan1&quot;, &quot;password&quot; : 333333 &#125;</div></pre></td></tr></table></figure></p>
+<p>第一种方式： db.collectionName.update({criteria},{data}); 这个方法会替换整个文档。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt; db.users.update(&#123;name:&quot;zhangsan1&quot;&#125;,&#123;password:222222&#125;);</div><div class="line">WriteResult(&#123; &quot;nMatched&quot; : 1, &quot;nUpserted&quot; : 0, &quot;nModified&quot; : 1 &#125;)</div><div class="line">&gt; db.users.find();</div><div class="line">&#123; &quot;_id&quot; : ObjectId(&quot;56cc6bb710f6b32d1d3c1278&quot;), &quot;name&quot; : &quot;zhangsan&quot;, &quot;password&quot; : 111111 &#125;</div><div class="line">&#123; &quot;_id&quot; : ObjectId(&quot;56cc6d2410f6b32d1d3c1279&quot;), &quot;password&quot; : 222222 &#125;</div><div class="line">&#123; &quot;_id&quot; : &quot;56cc6d2410f6b32d1d3c1279&quot;, &quot;name&quot; : &quot;zhangsan1&quot;, &quot;password&quot; : 333333 &#125;</div></pre></td></tr></table></figure></p>
+<p>可以发现，当我们修改完之后，再去查找username为’linwenbin’的数据就不存在了。<br>第二种方式： db.collectionName.update({criteria},{$set:{newData}}); 现在我们对另一条数据进行set的修改操作<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; db.users.update(&#123;_id: ObjectId(&quot;56cc6bb710f6b32d1d3c1278&quot;)&#125;,&#123;$set:&#123;name:&quot;zhangsan&quot;, password:1&#125;&#125;)</div><div class="line">WriteResult(&#123; &quot;nMatched&quot; : 1, &quot;nUpserted&quot; : 0, &quot;nModified&quot; : 1 &#125;)</div></pre></td></tr></table></figure></p>
+<p>$set操作可以只修改局部的属性，如果属性存在就是更新，如果不存在，就是新增。</p>
+<p>#####删除数据#####<br>如果要删除某一个集合，可以通过 db.collectionName.drop(); 来删除。<br>如果删除某一个集合内的数据，则通过 db.collectionName.remove({criteria});</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">//删除一条记录</div><div class="line">&gt; db.users.remove(&#123;_id: ObjectId(&quot;56cc6d2410f6b32d1d3c1279&quot;)&#125;)</div><div class="line">WriteResult(&#123; &quot;nRemoved&quot; : 1 &#125;)</div><div class="line"></div><div class="line">//删除所有记录</div><div class="line">&gt; db.users.drop()</div><div class="line">true</div><div class="line">&gt; show collections</div><div class="line">system.indexes</div></pre></td></tr></table></figure>
+<p>#####查询数据#####<br>查询所有数据<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; db.persons.find().pretty()</div></pre></td></tr></table></figure></p>
+<p>pretty() 方法是对查询结果进行格式化</p>
+<p>查询条件<br>等于<br>等于操作直接使用 {key:value} 这样的文档形式即可<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; db.persons.find(&#123;age: 27&#125;).pretty()</div></pre></td></tr></table></figure></p>
+<p>大于<br>语法： {key : {$gt:value} }<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; db.persons.find(&#123;age: &#123;$gt: 25&#125;&#125;).pretty()</div></pre></td></tr></table></figure></p>
+<p>大于等于<br>语法： {key : {$gte:value} }<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; db.persons.find(&#123;age: &#123;$gte: 25&#125;&#125;).pretty()</div></pre></td></tr></table></figure></p>
+<p>小于<br>语法：　{key : {$lt:value} }<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; db.persons.find(&#123;age:&#123;$lt:25&#125;&#125;).pretty()</div></pre></td></tr></table></figure></p>
+<p>小于等于<br>语法：　{key : {$lte:value}}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; db.persons.find(&#123;age:&#123;$lte:25&#125;&#125;).pretty()</div></pre></td></tr></table></figure></p>
+<p>不等于<br>语法： {key : {$ne:value} }<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; db.persons.find(&#123;age:&#123;$ne:25&#125;&#125;).pretty()</div></pre></td></tr></table></figure></p>
+<p>且操作 AND<br>语法： {key1:value1, key2:value2, key3:value3 …}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; db.persons.find(&#123;age:25, name:&quot;jim&quot;&#125;).pretty()</div></pre></td></tr></table></figure></p>
+<p>或操作 OR<br>语法： { $or: [ {key1: value1}, {key2:value2} ] } 将or条件的所有 {key:value} 都放在 $or 的value中（数组）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; db.persons.find(&#123;$or:[&#123;age: 25&#125;,&#123;age:&#123;$lt:25&#125;&#125;]&#125;,&#123;_id:0,name:1,age:1&#125;)</div></pre></td></tr></table></figure></p>
+<p>limit, skip, sort<br>为了更好的测试分页的效果，新建一个集合，并插入30条数据<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt; for(var i=0; i&lt;30; i++)&#123;</div><div class="line">... db.pages.insert(&#123;&quot;val&quot;:i&#125;);</div><div class="line">... &#125;</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; db.pages.find().limit(5)</div></pre></td></tr></table></figure>
+<p>可以发现，如果使用 limit方法的话会显示整个集合的所有文档。 指定了 limit 之后， 显示具体的条数，上文中，limit(5) 表示， 显示5条文档。</p>
+<p>limit方法除外，还有一个 skip 方法，skip也是接受一个整型的参数，表示查询结果跳过多少个文档。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt; db.pages.find().skip(18).limit(5)</div><div class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5574ca7b192e9dda0925e391&quot;), &quot;val&quot; : 18 &#125;</div><div class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5574ca7b192e9dda0925e392&quot;), &quot;val&quot; : 19 &#125;</div><div class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5574ca7b192e9dda0925e393&quot;), &quot;val&quot; : 20 &#125;</div><div class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5574ca7b192e9dda0925e394&quot;), &quot;val&quot; : 21 &#125;</div><div class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5574ca7b192e9dda0925e395&quot;), &quot;val&quot; : 22 &#125;</div></pre></td></tr></table></figure></p>
+<p>在mongodb中，如果要对查询结果排序，那么需要使用sort方法。sort方法接收一个文档参数。也就是{key:value}的形式。其中，key表示要排序的字段，value的可取值为 1 / -1 。1表示升序asc，-1表示降序desc。话不多说，直接上例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">&gt; db.pages.find().sort(&#123;val:-1&#125;)</div><div class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5574ca7b192e9dda0925e39c&quot;), &quot;val&quot; : 29 &#125;</div><div class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5574ca7b192e9dda0925e39b&quot;), &quot;val&quot; : 28 &#125;</div><div class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5574ca7b192e9dda0925e39a&quot;), &quot;val&quot; : 27 &#125;</div><div class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5574ca7b192e9dda0925e399&quot;), &quot;val&quot; : 26 &#125;</div><div class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5574ca7b192e9dda0925e398&quot;), &quot;val&quot; : 25 &#125;</div><div class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5574ca7b192e9dda0925e397&quot;), &quot;val&quot; : 24 &#125;</div><div class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5574ca7b192e9dda0925e396&quot;), &quot;val&quot; : 23 &#125;</div><div class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5574ca7b192e9dda0925e395&quot;), &quot;val&quot; : 22 &#125;</div><div class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5574ca7b192e9dda0925e394&quot;), &quot;val&quot; : 21 &#125;</div><div class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5574ca7b192e9dda0925e393&quot;), &quot;val&quot; : 20 &#125;</div><div class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5574ca7b192e9dda0925e392&quot;), &quot;val&quot; : 19 &#125;</div><div class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5574ca7b192e9dda0925e391&quot;), &quot;val&quot; : 18 &#125;</div><div class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5574ca7b192e9dda0925e390&quot;), &quot;val&quot; : 17 &#125;</div><div class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5574ca7b192e9dda0925e38f&quot;), &quot;val&quot; : 16 &#125;</div><div class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5574ca7b192e9dda0925e38e&quot;), &quot;val&quot; : 15 &#125;</div><div class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5574ca7b192e9dda0925e38d&quot;), &quot;val&quot; : 14 &#125;</div><div class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5574ca7b192e9dda0925e38c&quot;), &quot;val&quot; : 13 &#125;</div><div class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5574ca7b192e9dda0925e38b&quot;), &quot;val&quot; : 12 &#125;</div><div class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5574ca7b192e9dda0925e38a&quot;), &quot;val&quot; : 11 &#125;</div><div class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5574ca7b192e9dda0925e389&quot;), &quot;val&quot; : 10 &#125;</div><div class="line">Type &quot;it&quot; for more</div></pre></td></tr></table></figure></p>
+<p>#####express + mongoose#####</p>
+<p>Mongoose库简而言之就是在node环境中操作MongoDB数据库的一种便捷的封装，一种对象模型工具，类似ORM，Mongoose将数据库中的数据转换为JavaScript对象以供你在应用中使用。</p>
+<p>1、准备工作<br>可以通过npm下载Mongoose依赖<br>2、在项目中创建一个数据库连接<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var mongoose = require( &apos;mongoose&apos; );</div><div class="line">var dbURI = &apos;mongodb://localhost/test&apos;;</div><div class="line">mongoose.connect(dbURI);</div><div class="line">mongoose.connection.on(&apos;connected&apos;, function () &#123;</div><div class="line">    console.log(&apos;Mongoose connected to &apos; + dbURI);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>以上操作，通过mongoose已经创建了一个数据库连接，并连接上数据库。</p>
+<p>3、mongoose 是一种对象模型工具，它将具体的数据抽象成模型，这些模型拥有属性和操作数据的方法。那么，在操作之前，我们应该首先创建数据模型。</p>
+<p>名词解释：<br>Schema: 用来描述数据的结构，里面包含数据的属性，每个属性的类型。它只是一种结构，并不具备对数据的实际操作（行为）<br>Model: 将Schema发布为数据模型，它拥有数据的属性和行为。<br>Entity: 由Model创建的数据实体，它的操作同样可以影响数据。</p>
+<p>在做具体的应用实现之前，我们都应该首先根据业务的需求，抽象出相应的数据模型，然后在通过mongoose提供的API方法，封装出业务方法，来满足实际操作的需要。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/22/Node调试工具入门/" rel="next" title="'Node调试工具入门'">
+                <i class="fa fa-chevron-left"></i> 'Node调试工具入门'
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/06/git/" rel="prev" title="git">
+                git <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="CHEN.星" />
+          <p class="site-author-name" itemprop="name">CHEN.星</p>
+           
+              <p class="site-description motion-element" itemprop="description">个人技术博客</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">77</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CHEN.星</span>
+</div>
+
+
+<div class="powered-by">
+   个人专属
+</div>
+
+<div class="theme-info">
+  博客 -CHEN.星
+  
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

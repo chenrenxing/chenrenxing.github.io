@@ -263,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/24/jdk和android-sdk/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/10/vue路由/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="CHEN.星">
@@ -282,7 +282,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/24/jdk和android-sdk/" itemprop="url">jdk和android-sdk</a></h1>
+                <a class="post-title-link" href="/2019/01/10/vue路由/" itemprop="url">vue路由</a></h1>
         
 
         <div class="post-meta">
@@ -294,8 +294,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-24T20:07:55+08:00">
-                2018-10-24
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-10T19:55:59+08:00">
+                2019-01-10
               </time>
             
 
@@ -334,1466 +334,1937 @@
       
         
           
-            <h3 id="JDK安装"><a href="#JDK安装" class="headerlink" title="JDK安装"></a>JDK安装</h3><pre><code>1：参考https://blog.csdn.net/love4399/article/details/77164500
-下载Java SE 8u191 / Java SE 8u192（目前我这边最新11下载安装了android-sdk不支持）
-下载的版本jdk-8u191-windows-x64.exe安装参考上面网站
-
-2：环境变量
-JAVA_HOME - D:\Program Files\Java\jdk1.8.0_191（我这里是安装到D盘的）path变量里添加 %JAVA_HOME%\bin
-CLASSPATH - .;%JAVA_HOME%\lib;%JAVA_HOME%\lib\tools.jar 
-可以参考https://jingyan.baidu.com/article/6dad5075d1dc40a123e36ea3.html
-不会java也是泪
-
-3：检查javac -version
-（最开始我存在其他版本，这里再次安装了发现javac -version没打出来版本java -version存在版本，卸载了以前的jdk重新再次安装就没有问题了)    
-</code></pre><h3 id="android-sdk"><a href="#android-sdk" class="headerlink" title="android-sdk"></a>android-sdk</h3><pre><code>1：下载地址http://www.androiddevtools.cn/
-选择Android SDK工具 SDK tolls
-我这里下载的是Windows系统installer_r24.4.1-windows.exe
-2、双击“SDK Manager”，启动SDK Manager
-根据自己需要下载自己需要的版本
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/23/cordova-vue-app/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="CHEN.星">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CHEN.星~博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/23/cordova-vue-app/" itemprop="url">cordova-vue-app</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-23T18:39:54+08:00">
-                2018-10-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="Cordova创建应用"><a href="#Cordova创建应用" class="headerlink" title="Cordova创建应用"></a>Cordova创建应用</h3><pre><code>[https://cordova.apache.org](https://cordova.apache.org &quot;cordova官网&quot;)
-1:安装，不推荐使用cnpm可能会出现问题(我是出现了问题)。
-#npm install -g cordova
-2：检测cordova是否安装成功： 
-#cordova -v
-3：创建应用
-#cordova create oneApp
-</code></pre><h3 id="vue创建应用"><a href="#vue创建应用" class="headerlink" title="vue创建应用"></a>vue创建应用</h3><pre><code>1：vue-cli(vue2)创建模版：这里是在cordova创建的应用目录中执行下面操作
-#vue init webpack vueApp
-#cd vueApp
-#npm install 
-#npm run dev
-
-插曲:oneApp目录结构展示(这里只对文件夹具体看构建)
--hooks
--res
--platforms
--vueApp
--plugins
--www
-2：修改vueApp项目中config\index.js
-修改前- build: {
-    // Template for index.html
-    index: path.resolve(__dirname, &apos;../dist/index.html&apos;),
-
-    // Paths
-    assetsRoot: path.resolve(__dirname, &apos;../dist&apos;),
-    assetsSubDirectory: &apos;static&apos;,
-    assetsPublicPath: &apos;/&apos;,
-修改后- build: {
-    // Template for index.html
-    index: path.resolve(__dirname, &apos;../../www/index.html&apos;),
-
-    // Paths
-    assetsRoot: path.resolve(__dirname, &apos;../../www&apos;),
-    assetsSubDirectory: &apos;static&apos;,
-    assetsPublicPath: &apos;&apos;,
-3:执行npm run build 把文件通过webpack生成到oneApp的-www文件中
-</code></pre><h3 id="apk生成（我自己只做了Android）"><a href="#apk生成（我自己只做了Android）" class="headerlink" title=".apk生成（我自己只做了Android）"></a>.apk生成（我自己只做了Android）</h3><pre><code>1：添加平台
-
-$ cordova platform add ios
-$ cordova platform add android
-
-2：检查您是否满足构建平台的要求
-
-$ cordova requirements
-Requirements check results for android:
-Java JDK: installed .
-Android SDK: installed
-Android target: installed android-19,android-21,android-22,android-23,Google Inc.:Google APIs:19,Google Inc.:Google APIs (x86 System Image):19,Google Inc.:Google APIs:23
-Gradle: installed
-
-Requirements check results for ios:
-Apple OS X: not installed
-Cordova tooling for iOS requires Apple OS X
-Error: Some of requirements check failed
-
-3：运行以下命令为所有平台构建项目
-我这里自己只安装了Android，cordova build执行就ok
-cordova build Android
-cordova build ios
-</code></pre><h3 id="我的开发环境如下（仅供参考）"><a href="#我的开发环境如下（仅供参考）" class="headerlink" title="我的开发环境如下（仅供参考）"></a>我的开发环境如下（仅供参考）</h3><pre><code>node:v6.11.4
-npm:5.4.2
-cordova：8.1.2 
-jdk：1.8.0_191(java -version)
-gradle：4.10.2
-android sdk
-</code></pre><h3 id="cordova-build-Android遇到一个问题"><a href="#cordova-build-Android遇到一个问题" class="headerlink" title="cordova build Android遇到一个问题"></a>cordova build Android遇到一个问题</h3><pre><code>Error:Could not find intellij-core.jar 
-(com.android.tools.external.com-intellij:intellij-core:26.0.1).
- Searched in the following locations:
- https://jcenter.bintray.com/com/android/tools/external/com-intellij/
-intellij-core/26.0.1/intellij-core-26.0.1.jar
-这里访问谷歌[https://stackoverflow.com/questions/52946371/android-studio-could-not-find-intellij-core-jar](https://stackoverflow.com/questions/52946371/android-studio-could-not-find-intellij-core-jar &quot;解决链接&quot;)
-
-修改/platforms/android/CordovaLib/build.gradle文件
-from this:
-        repositories {
-        jcenter()
-        maven {
-            url &quot;https://maven.google.com&quot;
-        }
-    }
-to this:
-        repositories {
-        maven {
-            url &quot;https://maven.google.com&quot;
-        }
-        jcenter()
-    }
-就ok了
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/19/vue-cli构建rem开发环境/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="CHEN.星">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CHEN.星~博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/19/vue-cli构建rem开发环境/" itemprop="url">vue-cli构建rem开发环境</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-19T14:43:32+08:00">
-                2018-10-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>vue-cli构建rem运行环境搭建</p>
-<h3 id="配置（针对自己的css不处理三方uicss）"><a href="#配置（针对自己的css不处理三方uicss）" class="headerlink" title="配置（针对自己的css不处理三方uicss）"></a>配置（针对自己的css不处理三方uicss）</h3><pre><code>1：下载lib-flexible文件
-npm install lib-flexible -S
-
-2：在mian.js中引入lib-flexible文件
-import &apos;lib-flexible&apos;
-
-3：安装px2rem
-npm i postcss-px2rem --save
-npm install px2rem-loader --save
-
-4：配置build目录下vue-loader.conf.js
-
-module.exports = {
-      loaders: utils.cssLoaders({
-    sourceMap: sourceMapEnabled,
-    extract: isProduction,
-    usePostCSS:true//这里设置为true，否则vue引入css会报错
-  }),
-  cssSourceMap: sourceMapEnabled,
-  cacheBusting: config.dev.cacheBusting,
-  transformToRequire: {
-    video: [&apos;src&apos;, &apos;poster&apos;],
-    source: &apos;src&apos;,
-    img: &apos;src&apos;,
-    image: &apos;xlink:href&apos;
-  },
-  postcss:[require(&apos;postcss-px2rem&apos;)({&apos;remUnit&apos;:75,&apos;baseDpr&apos;:2})]   
-    /*因为我是以750px(iphone6)宽度为基准，所以remUnit为75*/}
-</code></pre><h3 id="带有三方ui库转换css为rem"><a href="#带有三方ui库转换css为rem" class="headerlink" title="带有三方ui库转换css为rem"></a>带有三方ui库转换css为rem</h3><pre><code>utils.js
-const px2remLoader = {
-loader: &apos;px2rem-loader&apos;,
-options: {
-  &apos;remUnit&apos;: 37.5,//这里基准如果为75转换出来的样式要小一倍，为35.7为正常，但是开发的时候这里写37.5 以750px宽为基础，量出来的尺寸必须要也要少写1倍，即（100px写50px）；
-    这里是自己测试出来的，如果不对请参考其他网上资料。
-    *变小的*原因是ui框架为data-dpr=&quot;1&quot;写的
-  &apos;baseDpr&apos;: 1
-}
-  }
-//px2remLoader在这里加入就会转换
-  function generateLoaders(loader, loaderOptions) {
-    const loaders = options.usePostCSS ? [cssLoader, postcssLoader,px2remLoader] : [cssLoader]
-if (loader) {
-  loaders.push({
-    loader: loader + &apos;-loader&apos;,
-    options: Object.assign({}, loaderOptions, {
-      sourceMap: options.sourceMap
-    })
-  })
-}
-
-// Extract CSS when that option is specified
-// (which is the case during production build)
-if (options.extract) {
-  return ExtractTextPlugin.extract({
-    use: loaders,
-    fallback: &apos;vue-style-loader&apos;
-  })
-} else {
-  return [&apos;vue-style-loader&apos;].concat(loaders)
-}
-</code></pre><p>  }</p>
-<h3 id="温馨提示"><a href="#温馨提示" class="headerlink" title="温馨提示"></a>温馨提示</h3><pre><code>当你遇到1px的边框时，通常容易发现页面缺失部分边框，这时你可以使用/*no*/语法来屏蔽该属性转换，例如：
-border: 1px solid red; /*no*/
-
-由于字体的特殊性，我们在编译font-size属性时，通常不使用rem单位，这时候你可以这样使用：
-font-size: 24px; /*px*/ 
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/28/ES6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="CHEN.星">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CHEN.星~博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/28/ES6/" itemprop="url">ES6</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-28T10:26:45+08:00">
-                2018-09-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h3><ul>
-<li>ES5中常量写法<br>  Objeck.defineProperty(window,’PI2’,{<pre><code>value:3.1415926,
-writable:false        })
-</code></pre></li>
-<li>ES6的常量写法<br>  const PI=3.1415926；</li>
-<li><p>对于复合类型的变量，变量名不指向里面的数据，而是指向数据的地址，const只是保证地址不改变，而不是里面的数据不改变</p>
-<h3 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h3><p>   -es3-es5<br>  var arr = [1, 2, 4, 7, 8];<br>  // 目标：上述数组里的每一项偶数都+1，使整个数组里都是奇数。</p>
-<p>  // map 方法<br>  var result = arr.map(function(item) {</p>
-<pre><code>return item % 2 === 0 ? item + 1 : item;
-</code></pre><p>  });<br>  //forEach 方法<br>  var result = [];<br>  arr.forEach(function(item) {</p>
-<pre><code>if (item % 2 === 0) {
-    item += 1;
-}
-result.push(item);
-</code></pre><p>  });<br>  -es6<br>  var result = arr.map(item = &gt; item % 2 === 0 ? item + 1 : item);</p>
-<p>  ()=&gt;{}<br>  1：当小括号（）里面只有一个参数是可以省略的<br>  2：当{}中的表达式作为返回值的时候可以神略花括号的。<br>  箭头函数指向是定义时的指向。    </p>
-<h3 id="对象代理Proxy"><a href="#对象代理Proxy" class="headerlink" title="对象代理Proxy"></a>对象代理Proxy</h3><h3 id="1：es3数据保护"><a href="#1：es3数据保护" class="headerlink" title="1：es3数据保护"></a>1：es3数据保护</h3><p>  var Person=function(){</p>
-<pre><code>var data={
-    name=&apos;es3&apos;,
-    sex:&apos;male&apos;,
-    age:15
-}
-this.get=funciton(key){
-    return data[key]
-}
-this.set=function(key,value){
-    if(key!==&apos;sex&apos;){
-    data[key]=value;    
-    }
-}
-</code></pre><p>  }<br>  //申请一个实例<br>  var person=new Person();<br>  //读取<br>  console.table({name:person.get(‘name’),sex:person.get(‘sex’),age:person.get(‘age’)})<br>  person.set(‘name’,’es3-cname’)<br>  console.table({name:person.get(‘name’),sex:person.get(‘sex’),age:person.get(‘age’)})<br>  person.set(‘sex’,’female’)    </p>
-<h4 id="2：es5"><a href="#2：es5" class="headerlink" title="2：es5"></a>2：es5</h4><p>  var Person={</p>
-<pre><code>name:&quot;es5&quot;,
-age:14
-</code></pre><p>  }<br>  Object.defineProperty(Person,’sex’,{</p>
-<pre><code>writable:false,
-value:&apos;male&apos;    
-</code></pre><p>  })</p>
-<h4 id="3：ES6"><a href="#3：ES6" class="headerlink" title="3：ES6"></a>3：ES6</h4><p>  let Person={</p>
-<pre><code>name:&quot;es6&apos;,
-sex:&apos;male&apos;,
-age:15
-</code></pre><p>  }<br>  let person=new Proxy(person,{</p>
-<pre><code>get(target,key){
-    return target[key]
-},
-set(target,key,value){
-    if(key!==&apos;sex&apos;){
-        target[key]=value;
-    }
-}
-</code></pre><p>  })<br>  console.table({</p>
-<pre><code>name:person.name,
-sex:person.sex,
-age:person.age    
-</code></pre><p>  })<br>  try{person.sex=’female’;}catch(e){console.log(e)}finaly{};            </p>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/26/H5移动端安卓键盘出来覆盖页面/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="CHEN.星">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CHEN.星~博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/26/H5移动端安卓键盘出来覆盖页面/" itemprop="url">H5移动端安卓键盘出来覆盖页面</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-26T11:21:34+08:00">
-                2018-09-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="在移动端安卓-键盘出来覆盖页面（页面没有上移）"><a href="#在移动端安卓-键盘出来覆盖页面（页面没有上移）" class="headerlink" title="在移动端安卓 键盘出来覆盖页面（页面没有上移）"></a>在移动端安卓 键盘出来覆盖页面（页面没有上移）</h3><pre><code>在ios系统中会自己响应。
-if (/Android/gi.test(navigator.userAgent)) {
-  window.addEventListener(&apos;resize&apos;, function () {
-    if (document.activeElement.tagName == &apos;INPUT&apos; || document.activeElement.tagName == &apos;TEXTAREA&apos;) {
-      window.setTimeout(function () {
-        document.activeElement.scrollIntoViewIfNeeded();
-      }, 0);
-    }
-    $(&apos;#orderidNum&apos;).blur(function(){
-      document.activeElement.scrollIntoViewIfNeeded();
-    });
-  })
-}
-</code></pre><h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><pre><code>CSS中如果有定位为postion:flex;测试没通过，用 position: absolute;
-</code></pre><h3 id="scrollIntoView属性有兴趣可以看看"><a href="#scrollIntoView属性有兴趣可以看看" class="headerlink" title="scrollIntoView属性有兴趣可以看看"></a>scrollIntoView属性有兴趣可以看看</h3><pre><code>* {
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    height: 200vh;
-}
-
-.chunk {
-    margin-top: 100vh;
-    height: 20vh;
-    background: lightcoral;
-}
-
-div[class^=btn] {
-    width: 50px;
-    padding: 10px 15px;
-    position: fixed;
-    top: 50vh;
-    right: 0;
-    border-radius: 10px;
-    cursor: pointer;
-    text-align: center;
-}
-
-.btn-top {
-    background: lightgreen;
-}
-
-.btn-bottom {
-    margin-top: 50px;
-    background: lightblue;
-}
-
-const up = document.querySelector(&apos;.btn-top&apos;);
-const down = document.querySelector(&apos;.btn-bottom&apos;);
-up.addEventListener(&apos;click&apos;, function() {
-  test.scrollIntoView(true);
-});
-down.addEventListener(&apos;click&apos;, function() {
-  test.scrollIntoView(false);
-});
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/25/获取视频的第一帧/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="CHEN.星">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CHEN.星~博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/25/获取视频的第一帧/" itemprop="url">获取视频的第一帧</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-25T14:56:03+08:00">
-                2018-09-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="业务场景"><a href="#业务场景" class="headerlink" title="业务场景"></a>业务场景</h3><pre><code>1）管理系统上传视频，H5页面在微信端显示的时候。
-</code></pre><h3 id="发现问题"><a href="#发现问题" class="headerlink" title="发现问题"></a>发现问题</h3><pre><code>H5页在在微信浏览器/safari/chrome上默认展示的poster各有不同，chrome应用了默认行为截取了视频第一帧作为显示，微信浏览器和safari却显示空白
-</code></pre><h3 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h3><pre><code>1）video的loadeddata事件，获取到视频第一帧来展示。
- var  dom=document.getElementById(&quot;videofir&quot;);
-var scale=0.8;
-var cut = function() {
-    var  canvas = document.createElement(&quot;canvas&quot;);//创建画布
-    canvas.width = myVid.videoWidth * scale;
-    canvas.height = myVid.videoHeight * scale;//设定宽高比
-    canvas.getContext(&apos;2d&apos;).drawImage(myVid, 0, 0, canvas.width, canvas.height);//将视频此刻帧数画入画布
-    var img = document.createElement(&quot;img&quot;);
-    img.src = canvas.toDataURL(&quot;image/png&quot;);
-    dom.appendChild(img);//写入到Dom
-};
-   var  myVid=document.getElementById(&quot;video1&quot;);
-myVid.addEventListener(&apos;loadeddata&apos;,cut);//在视频帧数已加载时执行截取
-
-2）上传视频的时候，获取到视频第一帧，也一并跟video进行上传，在H5页面展示的poster展示图片。
-
-3)如果第一帧并不好看，可以在管理系统增加业务，在上传视频的时候，同时上传一张设计好的图片，进行上传。
-</code></pre><h3 id="补充知识"><a href="#补充知识" class="headerlink" title="补充知识"></a>补充知识</h3><h4 id="webkit-playsinline-”true”-playsinline"><a href="#webkit-playsinline-”true”-playsinline" class="headerlink" title="webkit-playsinline=”true” playsinline"></a>webkit-playsinline=”true” playsinline</h4><pre><code>在使用htmlvideo标签的时候，点击播放后会进入播放器占用整个屏幕，之后开始播放,webkit-playsinline=&quot;true&quot; playsinline
-这个属性会让视频播放时局部播放，但这个属性需要嵌入网页的APP比如WeChat中UIwebview 的allowsInlineMediaPlayback = YES webview.allowsInlineMediaPlayback = YES，才能生效。换句话说，安卓不支持，而IOS的wechat却支持，因为APP不支持playsinline，所以安卓是默认全屏播放的
-</code></pre><h3 id="x5-video-player-type-”h5”"><a href="#x5-video-player-type-”h5”" class="headerlink" title="x5-video-player-type=”h5”"></a>x5-video-player-type=”h5”</h3><pre><code>x5-video-player-type=&apos;h5&apos; 启用同层H5播放器，学名叫沉浸式播放。播放的时候除去了control和微信的导航栏，只留下&quot;X&quot;和&quot;&lt;&quot;两键
-</code></pre><h3 id="video标签对视频格式以及编码的支持"><a href="#video标签对视频格式以及编码的支持" class="headerlink" title="video标签对视频格式以及编码的支持"></a>video标签对视频格式以及编码的支持</h3><ul>
-<li>MPEG4 = 带有H.264视频编码和AAC音频编码的MPEG4文件</li>
-<li>WebM = 带有VP8视频编码和Vorbis音频编码的 WebM文件</li>
-<li><p>Ogg = 带有Theora视频编码和Vorbis音频编码的Ogg文件</p>
-<h4 id="视频充满屏幕"><a href="#视频充满屏幕" class="headerlink" title="视频充满屏幕"></a>视频充满屏幕</h4><p>  #video{</p>
-<pre><code>object-fit: fill;
-</code></pre><p>  }</p>
-<h3 id="把当前的视频投放到其他支持此技术的设备上"><a href="#把当前的视频投放到其他支持此技术的设备上" class="headerlink" title="把当前的视频投放到其他支持此技术的设备上"></a>把当前的视频投放到其他支持此技术的设备上</h3><p>  <video x-webkit-airplay="true"></video></p>
-<h4 id="在视频结束时执行事件。"><a href="#在视频结束时执行事件。" class="headerlink" title="在视频结束时执行事件。"></a>在视频结束时执行事件。</h4><p>  $(“#video”).get(0).addEventListener(“ended”, function() {</p>
-<p>  }, false);</p>
-<h4 id="微信浏览器下实现自动播放。"><a href="#微信浏览器下实现自动播放。" class="headerlink" title="微信浏览器下实现自动播放。"></a>微信浏览器下实现自动播放。</h4><p>  document.addEventListener(“WeixinJSBridgeReady”,     function() {<br>  video.play()<br>  }, false)</p>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/12/axios请求/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="CHEN.星">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CHEN.星~博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/12/axios请求/" itemprop="url">axios请求</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-12T11:08:50+08:00">
-                2018-09-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>##关于axios-post走地址栏<br>    axios的post走的请求体<br>    request payload<br>    {username: “”, password: “”}<br>    password:””<br>    username:””</p>
-<pre><code>如果post要走地址栏的话，可以配合qs库格式化数据。
-地址：http://www.bootcdn.cn/qs/（npm install qs -S）
-import axios from &apos;axios&apos;;
-import qs from &apos;qs&apos;;
-let postData = qs.stringify({username: &quot;&quot;, password: &quot;&quot;})
-axios.post(url,postData);
-
-Form Data （Form Data不同query string parameters）
-password:&quot;&quot;
-username:&quot;&quot;
-不要介意已经成功
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/29/vue项目初始化/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="CHEN.星">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CHEN.星~博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/29/vue项目初始化/" itemprop="url">vue项目初始化</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-29T18:54:21+08:00">
-                2018-08-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>##一、准备工作</p>
-<p>###1.初始化项目<br>    首先vue-cli安装。成功后：<br>     vue init webpak demo<br>    cd demo<br>    cnpm install<br>    cnpm install less less-loader -D webpack自己手动配置<br>    cnpm install vuex axios -S<br>    npm run dev<br>    OK运行成功…</p>
-<p>###2.项目资源<br>    |-reset.ccs<br>    |-data.json</p>
-<p>###3.创建目录结构<br>    清除构建后的部分内容</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/26/vue起步/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="CHEN.星">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CHEN.星~博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/26/vue起步/" itemprop="url">vue起步</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-26T17:25:28+08:00">
-                2018-06-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/08/angulrjs封装CKeditor/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="CHEN.星">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CHEN.星~博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/08/angulrjs封装CKeditor/" itemprop="url">angulrjs封装CKeditor</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-08T10:39:26+08:00">
-                2018-06-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><pre><code>项目需求（模板可视配置），参考秀米H5给的灵感，用ckeditor封装的一个富文本编辑业务
-</code></pre><h3 id="directives"><a href="#directives" class="headerlink" title="directives"></a>directives</h3><pre><code> urlModuleDirectives.directive(&apos;contenteditable&apos;, function() {
-
-    return {
-
-        require: &apos;ngModel&apos;,
-        link: function (scope, element, attrs, ctrl) {
-
-            var editor = CKEDITOR.inline(element[0]);
-            editor.on( &apos;configLoaded&apos;, function() {
-                // Remove unecessary plugins to make the editor simpler.
-                editor.config.removePlugins = &apos;colorbutton,find,flash,font,&apos; +
-                    &apos;forms,iframe,image,newpage,removeformat,&apos; +
-                    &apos;smiley,specialchar,stylescombo,templates&apos;;
-                // Rearrange the layout of the toolbar.
-                editor.config.toolbarGroups = [
-                    { name: &apos;editing&apos;,        groups: [ &apos;basicstyles&apos;, &apos;links&apos; ] },
-                    { name: &apos;undo&apos; },
-                    { name: &apos;clipboard&apos;,    groups: [ &apos;selection&apos;, &apos;clipboard&apos; ] },
-                    { name: &apos;about&apos; }
-                ];
-            });
-            editor.on(&apos;instanceReady&apos;, function() {
-                editor.setData(ctrl.$viewValue);
-            });
-
-            editor.on(&apos;pasteState&apos;, function () {
-                scope.$apply(function () {
-                    ctrl.$setViewValue(editor.getData());
-                });
-
-            });
-
-            // model -&gt; view
-            ctrl.$render = function () {
-
-                editor.setData(ctrl.$viewValue);
-                console.log(ctrl.$viewValue);
-            };
-            // load init value from DOM
-            ctrl.$render();
-        }
-
-    };
-})
-</code></pre><h4 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h4><pre><code> &lt;div  class=&quot;modular-text-one text-placeholder&quot;  contentEditable = &apos;true&apos;     ng-model=&quot;item.configData[0]&quot;&gt;
+            <h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><pre><code>&lt;div id=&quot;itany&quot;&gt;
+    &lt;div&gt;
+        &lt;router-link to=&quot;/home&quot;&gt;主页&lt;/router-link&gt;
+        &lt;router-link to=&quot;/user&quot;&gt;用户&lt;/router-link&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+        &lt;transition enter-active-class=&quot;animated bounceInLeft&quot; leave-active-class=&quot;animated bounceOutRight&quot;&gt;
+            &lt;router-view&gt;&lt;/router-view&gt;
+        &lt;/transition&gt;
+    &lt;/div&gt;
+
+    &lt;hr&gt;
+    &lt;button @click=&quot;push&quot;&gt;添加路由&lt;/button&gt;
+    &lt;button @click=&quot;replace&quot;&gt;替换路由&lt;/button&gt;
 &lt;/div&gt;
+
+&lt;template id=&quot;user&quot;&gt;
+    &lt;div&gt;
+        &lt;h3&gt;用户信息&lt;/h3&gt;
+        &lt;ul&gt;
+            &lt;router-link to=&quot;/user/login?name=tom&amp;pwd=123&quot; tag=&quot;li&quot;&gt;用户登陆&lt;/router-link&gt;
+            &lt;router-link to=&quot;/user/regist/alice/456&quot; tag=&quot;li&quot;&gt;用户注册&lt;/router-link&gt;
+        &lt;/ul&gt;
+        &lt;router-view&gt;&lt;/router-view&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+    var Home={
+        template:&apos;&lt;h3&gt;我是主页&lt;/h3&gt;&apos;
+    }
+    var User={
+        template:&apos;#user&apos;
+    }
+    var Login={
+        template:&apos;&lt;h4&gt;用户登陆。。。获取参数：{{$route.query}},{{$route.path}}&lt;/h4&gt;&apos;
+    }
+    var Regist={
+        template:&apos;&lt;h4&gt;用户注册。。。获取参数：{{$route.params}},{{$route.path}}&lt;/h4&gt;&apos;
+    }
+
+    const routes=[
+        {
+            path:&apos;/home&apos;,
+            component:Home
+        },
+        {
+            path:&apos;/user&apos;,
+            component:User,
+            children:[
+                {
+                    path:&apos;login&apos;,
+                    component:Login
+                },
+                {
+                    path:&apos;regist/:username/:password&apos;,
+                    component:Regist
+                }
+            ]
+        },
+        {
+            path:&apos;*&apos;,
+            redirect:&apos;/home&apos;
+        }
+    ]
+
+    const router=new VueRouter({
+        routes, //简写，相当于routes:routes
+        linkActiveClass:&apos;active&apos; //更新活动链接的class类名
+    });
+
+    new Vue({
+        el:&apos;#itany&apos;,
+        router, //注入路由
+        methods:{
+            push(){
+                router.push({path:&apos;home&apos;}); //添加路由，切换路由
+            },
+            replace(){
+                router.replace({path:&apos;user&apos;}); //替换路由，没有历史记录
+            }
+        }
+    });
+&lt;/script&gt;
+</code></pre><h3 id="路由嵌套和参数传递"><a href="#路由嵌套和参数传递" class="headerlink" title="路由嵌套和参数传递"></a>路由嵌套和参数传递</h3><pre><code>传参的两种形式：
+   a.查询字符串：login?name=tom&amp;pwd=123
+       {{$route.query}}
+   b.rest风格url：regist/alice/456
+       {{$route.params}}
+</code></pre><h3 id="路由实例的方法"><a href="#路由实例的方法" class="headerlink" title="路由实例的方法"></a>路由实例的方法</h3><pre><code>router.push()  添加路由，功能上与&lt;route-link&gt;相同
+router.replace() 替换路由，不产生历史记录 
+</code></pre><h3 id="路由拦截器"><a href="#路由拦截器" class="headerlink" title="路由拦截器"></a>路由拦截器</h3><pre><code>//使用钩子函数对路由进行权限跳转
+router.beforeEach((to, from, next) =&gt; {
+    const role = localStorage.getItem(&apos;ms_username&apos;);
+    if(!role &amp;&amp; to.path !== &apos;/login&apos;){
+        next(&apos;/login&apos;);
+    }else if(to.meta.permission){
+        // 如果是管理员权限则可进入，这里只是简单的模拟管理员权限而已
+        role === &apos;admin&apos; ? next() : next(&apos;/403&apos;);
+    }else{
+        // 简单的判断IE10及以下不进入富文本编辑器，该组件不兼容
+        if(navigator.userAgent.indexOf(&apos;MSIE&apos;) &gt; -1 &amp;&amp; to.path === &apos;/editor&apos;){
+            Vue.prototype.$alert(&apos;vue-quill-editor组件不兼容IE10及以下浏览器，请使用更高版本的浏览器查看&apos;, &apos;浏览器不兼容通知&apos;, {
+                confirmButtonText: &apos;确定&apos;
+            });
+        }else{
+            next();
+        }
+}
 </code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/10/vue-slot内容分发/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/10/vue-slot内容分发/" itemprop="url">solt</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-10T19:25:48+08:00">
+                2019-01-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <pre><code>div id=&quot;itany&quot;&gt;
+    &lt;my-hello&gt;
+        &lt;ul slot=&quot;s1&quot;&gt;
+            &lt;li&gt;aaa&lt;/li&gt;
+            &lt;li&gt;bbb&lt;/li&gt;
+            &lt;li&gt;ccc&lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;ol slot=&quot;s2&quot;&gt;
+            &lt;li&gt;111&lt;/li&gt;
+            &lt;li&gt;222&lt;/li&gt;
+            &lt;li&gt;333&lt;/li&gt;
+        &lt;/ol&gt;
+    &lt;/my-hello&gt;
+&lt;/div&gt;
+
+&lt;template id=&quot;hello&quot;&gt;
+    &lt;div&gt;
+        &lt;slot name=&quot;s2&quot;&gt;&lt;/slot&gt;
+        &lt;h3&gt;welcome to itany&lt;/h3&gt;
+        &lt;!-- &lt;slot&gt;如果没有原内容，则显示该内容&lt;/slot&gt; --&gt;
+        &lt;slot name=&quot;s1&quot;&gt;&lt;/slot&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+</code></pre><h3 id="可复用的插槽"><a href="#可复用的插槽" class="headerlink" title="可复用的插槽"></a>可复用的插槽</h3><p>官网例子<br>    <ul><br>      <li v-for="todo in todos" v-bind:key="todo.id"><br>        <br>      </li><br>    </ul><br>    <ul><br>      <li v-for="todo in todos" v-bind:key="todo.id"><br>        <!-- 我们为每个 todo 准备了一个插槽，--><br>        <!-- 将 `todo` 对象作为一个插槽的 prop 传入。--><br>        <slot v-bind:todo="todo"><br>          <!-- 回退的内容 --><br>          <br>        </slot><br>      </li><br>    </ul></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/10/vue传参/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/10/vue传参/" itemprop="url">vue传参</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-10T19:05:41+08:00">
+                2019-01-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1-父子组件"><a href="#1-父子组件" class="headerlink" title="1. 父子组件"></a>1. 父子组件</h3><pre><code>在一个组件内部定义另一个组件，称为父子组件
+子组件只能在父组件内部使用
+默认情况下，子组件无法访问父组件中的数据，每个组件实例的作用域是独立的
+</code></pre><h3 id="2-组件间数据传递-（通信）"><a href="#2-组件间数据传递-（通信）" class="headerlink" title="2. 组件间数据传递 （通信）"></a>2. 组件间数据传递 （通信）</h3><h4 id="2-1-子组件访问父组件的数据"><a href="#2-1-子组件访问父组件的数据" class="headerlink" title="2.1 子组件访问父组件的数据"></a>2.1 子组件访问父组件的数据</h4><pre><code>a)在调用子组件时，绑定想要获取的父组件中的数据
+b)在子组件内部，使用props选项声明获取的数据，即接收来自父组件的数据
+总结：父组件通过props向下传递数据给子组件
+注：组件中的数据共有三种形式：data、props、computed
+data的传递方式思想就是引用对象数据，下面父组件user，传递下去的user在子组件改变的时候父组件同样会发现变法
+</code></pre><h4 id="2-2-父组件访问子组件的数据"><a href="#2-2-父组件访问子组件的数据" class="headerlink" title="2.2 父组件访问子组件的数据"></a>2.2 父组件访问子组件的数据</h4><pre><code>a)在子组件中使用vm.$emit(事件名,数据)触发一个自定义事件，事件名自定义
+b)父组件在使用子组件的地方监听子组件触发的事件，并在父组件中定义方法，用来获取数据
+总结：子组件通过events给父组件发送消息，实际上就是子组件把自己的数据发送到父组件
+</code></pre><h3 id="3-父子组件及组件间数据传递"><a href="#3-父子组件及组件间数据传递" class="headerlink" title="3. 父子组件及组件间数据传递"></a>3. 父子组件及组件间数据传递</h3><pre><code>&lt;div id=&quot;app&quot;&gt;
+    &lt;my-hello&gt;&lt;/my-hello&gt;
+&lt;/div&gt;
+&lt;template id=&quot;hello&quot;&gt;
+    &lt;div&gt;
+        &lt;h3&gt;我是hello父组件&lt;/h3&gt;
+        &lt;h3&gt;访问自己的数据：{{msg}},{{name}},{{age}},{{user.username}}&lt;/h3&gt;
+        &lt;h3&gt;访问子组件的数据：{{sex}},{{height}}&lt;/h3&gt;
+        &lt;my-world :message=&quot;msg&quot; :name=&quot;name&quot; :age=&quot;age&quot; :user=&quot;user&quot;  @e-world=&quot;getData&quot;&gt;&lt;/my-world&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+&lt;template id=&quot;world&quot;&gt;
+    &lt;div&gt;
+        &lt;h4&gt;我是world子组件&lt;/h4&gt;
+        &lt;h4&gt;访问父组件中的数据：{{message}},{{name}},{{age}}&lt;/h4&gt;
+        &lt;input type=&quot;text&quot; v-model=&quot;user.username&quot;&gt;
+        &lt;h4&gt;访问自己的数据：{{sex}},{{height}}&lt;/h4&gt;
+        &lt;button @click=&quot;send&quot;&gt;将子组件的数据向上传递给父组件&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+    var vm=new Vue({ //根组件
+        el:&apos;#app&apos;,
+        components:{
+            &apos;my-hello&apos;:{  //父组件
+                methods:{
+                    getData(sex,height){
+                        this.sex=sex;
+                        this.height=height;
+                    }
+                },
+                data(){
+                    return {
+                        msg:&apos;hello&apos;,
+                        name:&apos;tom&apos;,
+                        age:23,
+                        user:{id:9527,username:&apos;唐伯虎&apos;},
+                        sex:&apos;&apos;,
+                        height:&apos;&apos;
+                    }
+                },
+                template:&apos;#hello&apos;,
+                components:{
+                    &apos;my-world&apos;:{ //子组件
+                        data(){
+                            return {
+                                sex:&apos;male&apos;,
+                                height:180.5
+                            }
+                        },
+                        template:&apos;#world&apos;,
+                        // props:[&apos;message&apos;,&apos;name&apos;,&apos;age&apos;,&apos;user&apos;] //简单的字符串数组
+                        props:{ //也可以是对象，允许配置高级设置，如类型判断、数据校验、设置默认值
+                            message:String,
+                            name:{
+                                type:String,
+                                required:true
+                            },
+                            age:{
+                                type:Number,
+                                default:18,
+                                validator:function(value){
+                                    return value&gt;=0;
+                                }
+                            },
+                            user:{
+                                type:Object,
+                                default:function(){ //对象或数组的默认值必须使用函数的形式来返回
+                                    return {id:3306,username:&apos;秋香&apos;};
+                                }
+                            }
+                        },
+                        methods:{
+                            send(){
+                                // console.log(this);  //此处的this表示当前子组件实例
+                                this.$emit(&apos;e-world&apos;,this.sex,this.height); //使用$emit()触发一个事件，发送数据
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    });    
+&lt;/script&gt;
+</code></pre><h3 id="单项数据流"><a href="#单项数据流" class="headerlink" title="单项数据流"></a>单项数据流</h3><p>user的传递方式思想就是引用对象数据，下面父组件user，传递下去的user在子组件改变的时候父组件同样会发现变法<br>//方式1：将数据存入另一个变量中再操作<br>/方式2：a.使用.sync，需要显式地触发一个更新事件<br>    <div id="app"><br>        <h2>父组件：</h2><br>        <input type="text" v-model="name"><br>        <h2>父组件：</h2></div></p>
+<pre><code>    &lt;hr&gt;
+    &lt;my-hello :name.sync=&quot;name&quot; :user=&quot;user&quot;&gt;&lt;/my-hello&gt;
+&lt;/div&gt;
+
+&lt;template id=&quot;hello&quot;&gt;
+    &lt;div&gt;
+        &lt;h3&gt;子组件：{{name}}&lt;/h3&gt;
+        &lt;h3&gt;子组件：{{user.age}}&lt;/h3&gt;
+        &lt;button @click=&quot;change&quot;&gt;修改数据&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+    var vm=new Vue({ //父组件
+        el:&apos;#itany&apos;,
+        data:{
+            name:&apos;tom&apos;,
+            user:{
+                name:&apos;zhangsan&apos;,
+                age:24
+            }
+        },
+        components:{
+            &apos;my-hello&apos;:{ //子组件
+                template:&apos;#hello&apos;,
+                props:[&apos;name&apos;,&apos;user&apos;],
+                data(){
+                    return {
+                        username:this.name //方式1：将数据存入另一个变量中再操作
+                    }
+                },
+                methods:{
+                    change(){
+                        // this.username=&apos;alice&apos;;
+                        // this.name=&apos;alice&apos;;
+                        this.$emit(&apos;update:name&apos;,&apos;alice&apos;); //方式2：a.使用.sync，需要显式地触发一个更新事件
+                        this.user.age=18;
+
+                    }
+                }
+            }
+        }
+    });    
+</code></pre><h3 id="非父子组件的通信"><a href="#非父子组件的通信" class="headerlink" title="非父子组件的通信"></a>非父子组件的通信</h3><pre><code>//定义一个空的Vue实例（关键）
+var Event=new Vue();
+var A={
+    template:&apos;#a&apos;,
+    data(){
+        return {
+            name:&apos;tom&apos;
+        }
+    },
+    methods:{
+        send(){
+            Event.$emit(&apos;data-a&apos;,this.name);
+        }
+    }
+}
+var B={
+    template:&apos;#b&apos;,
+    data(){
+        return {
+            age:20
+        }
+    },
+    methods:{
+        send(){
+            Event.$emit(&apos;data-b&apos;,this.age);
+        }
+    }
+}
+var C={
+    template:&apos;#c&apos;,
+    data(){
+        return {
+            name:&apos;&apos;,
+            age:&apos;&apos;
+        }
+    },
+    mounted(){ //在模板编译完成后执行
+        Event.$on(&apos;data-a&apos;,name =&gt; {
+            this.name=name;
+            // console.log(this);
+        });
+
+        Event.$on(&apos;data-b&apos;,age =&gt; {
+            this.age=age;
+        });
+    }
+}
+
+var vm=new Vue({
+    el:&apos;#itany&apos;,
+    components:{
+        &apos;my-a&apos;:A,
+        &apos;my-b&apos;:B,
+        &apos;my-c&apos;:C
+    }
+});
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/10/vue组件/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/10/vue组件/" itemprop="url">定义组件</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-10T18:53:09+08:00">
+                2019-01-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="定义组件方式一（不推荐）"><a href="#定义组件方式一（不推荐）" class="headerlink" title="定义组件方式一（不推荐）"></a>定义组件方式一（不推荐）</h3><pre><code>/**
+ * 方式1：先创建组件构造器，然后由组件构造器创建组件
+ */
+//1.使用Vue.extend()创建一个组件构造器
+var MyComponent=Vue.extend({
+    template:&apos;&lt;h3&gt;Hello World&lt;/h3&gt;&apos;
+});
+//2.使用Vue.component(标签名,组件构造器)，根据组件构造器来创建组件
+Vue.component(&apos;hello&apos;,MyComponent);
+</code></pre><h3 id="定义组件方式二（推荐）"><a href="#定义组件方式二（推荐）" class="headerlink" title="定义组件方式二（推荐）"></a>定义组件方式二（推荐）</h3><p>注意全局组件和局部组件储存数据方式写法不同<br>    //全局-可以在所有vue实例中使用<br>    Vue.component(‘my-world’,{<br>        template:’</p><h1>你好，世界</h1>‘，<br>        data:function(){ //在组件中存储数据时，必须以函数形式，函数返回一个对象<br>            return {<br>                name:’alice’<br>            }<br>        }<br>    });<br>    //局部-只能在当前vue实例中使用<br>    var vm=new Vue({ //这里的vm也是一个组件，称为根组件Root<br>            el:’#itany’,<br>            data:{},<br>            components:{<br>                ‘my-hello’:{<br>                    template:’<div>hello kity</div>‘，<br>                        data(){<br>                            return {<br>                                age:25<br>                        }<br>                    }<br>                }<br>            }<br>        });    <p></p>
+<h3 id="引用模板"><a href="#引用模板" class="headerlink" title="引用模板"></a>引用模板</h3><pre><code>&lt;my-hello&gt;&lt;/my-hello&gt;
+&lt;template id=&quot;hello&quot;&gt;
+    &lt;!-- &lt;template&gt;必须有且只有一个根元素 --&gt;
+    &lt;div&gt;
+        &lt;h3&gt;{{msg}}&lt;/h3&gt;
+        &lt;ul&gt;
+            &lt;li v-for=&quot;value in arr&quot;&gt;{{value}}&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+components:{
+    &apos;my-hello&apos;:{
+        name:&apos;nameY&apos;,  //指定组件的名称，默认为标签名，可以不设置
+        template:&apos;#hello&apos;,
+        data(){
+            return {
+                msg:&apos;helle kity&apos;,
+                arr:[&apos;tom&apos;,&apos;jack&apos;,&apos;mike&apos;]
+            }
+        }
+    }
+}
+</code></pre><h3 id="动态组件"><a href="#动态组件" class="headerlink" title="动态组件"></a>动态组件</h3><pre><code>&lt;button @click=&quot;flag=&apos;my-hello&apos;&quot;&gt;显示hello组件&lt;/button&gt;
+&lt;button @click=&quot;flag=&apos;my-world&apos;&quot;&gt;显示world组件&lt;/button&gt;
+&lt;div&gt;
+    &lt;!-- 使用keep-alive组件缓存非活动组件，可以保留状态，避免重新渲染，默认每次都会销毁非活动组件并重新创建 --&gt;
+    &lt;keep-alive&gt;
+        &lt;component :is=&quot;flag&quot;&gt;&lt;/component&gt;    
+    &lt;/keep-alive&gt;
+&lt;/div&gt;
+&lt;script&gt;
+    var vm=new Vue({
+        el:&apos;#app&apos;,
+        data:{
+            flag:&apos;my-hello&apos;
+        },
+        components:{
+            &apos;my-hello&apos;:{
+                template:&apos;&lt;h3&gt;我是hello组件：{{x}}&lt;/h3&gt;&apos;,
+                data(){
+                    return {
+                        x:Math.random()
+                    }
+                }
+            },
+            &apos;my-world&apos;:{
+                template:&apos;&lt;h3&gt;我是world组件：{{y}}&lt;/h3&gt;&apos;,
+                data(){
+                    return {
+                        y:Math.random()
+                    }
+                }
+            }
+        }
+    });    
+&lt;/script&gt;
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/10/vue动画/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/10/vue动画/" itemprop="url">vue动画</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-10T18:30:44+08:00">
+                2019-01-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ul>
+<li>结合三方动画</li>
+<li>多元素动画</li>
+<li><p>自定义动画</p>
+<h3 id="animate-css三方动画"><a href="#animate-css三方动画" class="headerlink" title="animate.css三方动画"></a>animate.css三方动画</h3><p>  引入css/animate.css p标签CSS用下面的</p>
+<p>  <button @click="flag=!flag">点我</button><br>  <transition enter-active-class="animated fadeInLeft" leave-active-class="animated fadeOutRight"></transition></p>
+<pre><code>&lt;p v-show=&quot;flag&quot;&gt;动画&lt;/p&gt;
+</code></pre><p>  </p>
+<h3 id="多元素动画"><a href="#多元素动画" class="headerlink" title="多元素动画"></a>多元素动画</h3><p>  <transition-group> children must be keyed: <p><br>  当有相同标签名的元素切换时，需要通过 key 特性设置唯一的值来标记以让 Vue 区分它们，否则 Vue 为了效率只会替换相同标签内部的内容。即使在技术上没有必要<br>  <transition-group enter-active-class="animated bounceInLeft" leave-active-class="animated bounceOutRight"></transition-group></p>
+<pre><code>&lt;p v-for=&quot;(v,k) in arr2&quot; :key=&quot;k&quot;&gt;
+            {{v}}
+        &lt;/p&gt;
+</code></pre><p>  </p></transition-group>    </p>
+</li>
+</ul>
+<h3 id="自定义CSS动画"><a href="#自定义CSS动画" class="headerlink" title="自定义CSS动画"></a>自定义CSS动画</h3><pre><code>transition上面的name属性{{name="fade"}}挂钩css的fade-enter-active名
+需要注意的是/* .fade-enter需要放在.fade-enter-active的后面 */
+过滤的CSS类名：6个
+钩子函数8个下面就写6个
+data:{
+        flag:false
+    },
+    methods:{
+        beforeEnter(el){
+            // alert(&apos;动画进入之前&apos;);
+        },
+        enter(){
+            // alert(&apos;动画进入&apos;);
+        },
+        afterEnter(el){
+            // alert(&apos;动画进入之后&apos;);
+            el.style.background=&apos;blue&apos;;
+        },
+        beforeLeave(){
+            // alert(&apos;动画即将之前&apos;);
+        },
+        leave(){
+            // alert(&apos;动画离开&apos;);
+        },
+        afterLeave(el){
+            // alert(&apos;动画离开之后&apos;);
+            el.style.background=&apos;red&apos;;
+        }
+    }
+
+&lt;button @click=&quot;flag=!flag&quot;&gt;点我&lt;/button&gt;
+
+&lt;transition name=&quot;fade&quot; 
+    @before-enter=&quot;beforeEnter&quot;
+    @enter=&quot;enter&quot;
+    @after-enter=&quot;afterEnter&quot;
+    @before-leave=&quot;beforeLeave&quot;
+    @leave=&quot;leave&quot;
+    @after-leave=&quot;afterLeave&quot;&gt;
+    &lt;p v-show=&quot;flag&quot;&gt;动画&lt;/p&gt;
+&lt;/transition&gt;
+
+&lt;style&gt;
+    p{
+        width: 300px;
+        height: 300px;
+        background-color:red;
+    }
+    .fade-enter-active,.fade-leave-active{
+        transition:all 3s ease;
+    }
+    .fade-enter-active{
+        opacity:1;
+        width:300px;
+        height:300px;
+    }
+    .fade-leave-active{
+        opacity:0;
+        width:50px;
+        height:50px;
+    }
+    /* .fade-enter需要放在.fade-enter-active的后面 */
+    .fade-enter{
+        opacity:0;
+        width: 100px;
+        height: 100px;
+    }
+
+&lt;/style&gt;
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/10/vue自定义指令/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/10/vue自定义指令/" itemprop="url">vue自定义指令</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-10T18:03:31+08:00">
+                2019-01-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>分类：全局指令、局部指令</p>
+<h3 id="自定义全局指令"><a href="#自定义全局指令" class="headerlink" title="自定义全局指令"></a>自定义全局指令</h3><pre><code> &lt;h3 v-hello&gt;{{username}}&lt;/h3&gt;
+/**
+ * 自定义全局指令
+ * 注：使用指令时必须在指名名称前加前缀v-，即v-指令名称
+ */
+Vue.directive(&apos;hello&apos;,{
+    bind(){ //常用！！
+        alert(&apos;指令第一次绑定到元素上时调用，只调用一次，可执行初始化操作&apos;);
+    },
+    inserted(){
+        alert(&apos;被绑定元素插入到DOM中时调用&apos;);
+    },
+    update(){
+        alert(&apos;被绑定元素所在模板更新时调用&apos;);
+    },
+    componentUpdated(){
+        alert(&apos;被绑定元素所在模板完成一次更新周期时调用&apos;);
+    },
+    unbind(){
+        alert(&apos;指令与元素解绑时调用，只调用一次&apos;);
+    }
+});
+</code></pre><h3 id="自定义局部指令"><a href="#自定义局部指令" class="headerlink" title="自定义局部指令"></a>自定义局部指令</h3><pre><code> &lt;h3 v-hello&gt;{{username}}&lt;/h3&gt;
+var vm=new Vue({
+        el:&apos;#itany&apos;,
+        data:{
+
+        },
+        methods:{
+
+        },
+        directives:{ //自定义局部指令
+            world: {
+                update(){
+                    alert(&apos;update&apos;);
+                },
+            },
+            wbs:{
+                update(){
+                    alert(&apos;update&apos;);
+                },
+            }
+        }
+    });
+</code></pre><h3 id="练习：自定义指令"><a href="#练习：自定义指令" class="headerlink" title="练习：自定义指令"></a>练习：自定义指令</h3><pre><code>/**CSS**/
+ div{
+    width: 100px;
+    height: 100px;
+    position:absolute;
+}
+ .hello{
+    background-color:red;
+    top:0;
+    left:0;
+}
+ .world{
+    background-color:blue;
+    top:0;
+    right:0;
+}
+
+&lt;div class=&quot;world&quot; v-drag&gt;拖拽&lt;/div&gt;
+Vue.directive(&apos;drag&apos;,function(el){
+    el.onmousedown=function(e){
+        //获取鼠标点击处分别与div左边和上边的距离：鼠标位置-div位置
+        var disX=e.clientX-el.offsetLeft;
+        var disY=e.clientY-el.offsetTop;
+        // console.log(disX,disY);
+
+        //包含在onmousedown里面，表示点击后才移动，为防止鼠标移出div，使用document.onmousemove
+        document.onmousemove=function(e){
+            //获取移动后div的位置：鼠标位置-disX/disY
+            var l=e.clientX-disX;
+            var t=e.clientY-disY;
+            el.style.left=l+&apos;px&apos;;
+            el.style.top=t+&apos;px&apos;;
+        }
+
+        //停止移动
+        document.onmouseup=function(e){
+            document.onmousemove=null;
+            document.onmouseup=null;
+        }
+
+    }
+});
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/10/vue实例属性和方法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/10/vue实例属性和方法/" itemprop="url">vue实例属性和方法</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-10T17:46:01+08:00">
+                2019-01-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1-属性"><a href="#1-属性" class="headerlink" title="1. 属性"></a>1. 属性</h3><pre><code>vm.$el  //DOM对象 vm.$el.style.color=&apos;red&apos;;
+vm.$data //vm.$data.msg
+vm.$options  //获取自定义属性 vm.$options.name  vm.$options.age  vm$options.show(); 
+vm.$refs //获取所有添加ref属性的元素 &lt;p ref=&quot;world&quot;&gt;世界&lt;/p&gt;  console.log(vm.$refs.hello);   vm.$refs.world.style.color=&apos;blue&apos;;
+var vm=new Vue({
+         el:&apos;#itany&apos;,
+        data:{
+            msg:&apos;welcome&apos;
+        },
+        name:&apos;tom&apos;,
+        age:24,
+        show:function(){
+            console.log(&apos;show&apos;);
+        }
+    });
+</code></pre><h3 id="2-方法"><a href="#2-方法" class="headerlink" title="2. 方法"></a>2. 方法</h3><ul>
+<li>vm.$mount() //挂载</li>
+<li>vm.$destroy() //销毁</li>
+<li><p>vm.$nextTick(callback)</p>
+<pre><code>//在DOM更新完成后再执行回调函数，一般在修改数据之后使用该方法，以便获取更新后的DOM。Vue实现响应式并不是数据发生改变之后DOM立即变化，需要按一定的策略进行DOM更新，需要时间！！
+vm.$nextTick(function(){
+    //DOM更新完成，更新完成后再执行此代码
+    console.log(vm.$refs.title.textContent);
+});
+</code></pre></li>
+<li>vm.$set(object,key,value) //给对象添加属性的值</li>
+<li><p>vm.$delete(object,key)    //删除对象属性</p>
+<pre><code>methods:{
+    doUpdate(){
+        this.user.name=&apos;汤姆&apos;
+    },
+    doAdd(){
+        // this.user.age=25; //通过普通方式为对象添加属性时vue无法实时监视到
+        // this.$set(this.user,&apos;age&apos;,18); //通过vue实例的$set方法为对象添加属性，可以实时监视
+        // Vue.set(this.user,&apos;age&apos;,22);//
+        if(this.user.age){
+            this.user.age++;
+        }else{
+            this.$set(this.user,&apos;age&apos;,1);
+
+        }
+        // console.log(this.user);
+    },
+    doDelete(){
+        if(this.user.age){
+            // delete this.user.age; //无效
+            this.$delete(this.user,&apos;age&apos;);
+            console.log(this.user);
+        }
+    }
+}
+</code></pre></li>
+<li><p>vm.$watch(data,callback[,options]) </p>
+<p>  //方式1：使用vue实例提供的$watch()方法<br>  vm.$watch(‘name’,function(newValue,oldValue){</p>
+<pre><code>console.log(&apos;name被修改啦，原值：&apos;+oldValue+&apos;，新值：&apos;+newValue);
+</code></pre><p>  });<br>  //方式2：使用vue实例提供的watch选项<br>  data:{</p>
+<pre><code>name:&apos;tom&apos;,
+age:23,
+user:{
+    id:1001,
+    name:&apos;alice&apos;
+}
+</code></pre><p>  },<br>  watch:{ </p>
+<pre><code>age:(newValue,oldValue) =&gt; {
+    console.log(&apos;age被修改啦，原值：&apos;+oldValue+&apos;，新值：&apos;+newValue);
+},
+user:{//对象
+    handler:(newValue,oldValue) =&gt; {
+        console.log(&apos;user被修改啦，原值：&apos;+oldValue.name+&apos;，新值：&apos;+newValue.name);
+    },
+    deep:true //深度监视，当对象中的属性发生变化时也会监视
+}
+</code></pre><p>  }</p>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/10/vue第一章/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/10/vue第一章/" itemprop="url">vue第一章</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-10T10:41:44+08:00">
+                2019-01-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="常用指令：v-for"><a href="#常用指令：v-for" class="headerlink" title="常用指令：v-for"></a>常用指令：v-for</h3><pre><code>new Vue({
+            el:&apos;#itany&apos;,
+            data:{
+                arr:[12,4,5,34,2,11],
+                user:{id:9527,name:&apos;唐伯虎&apos;,age:25},
+                arr2:[12,4,5,34,2,11,12],
+                users:[
+                    {id:9527,name:&apos;唐伯虎&apos;,age:25},
+                    {id:1001,name:&apos;秋香&apos;,age:22},
+                    {id:1002,name:&apos;石榴姐&apos;,age:24}
+                ]
+            }
+        });
+&lt;!-- 普通循环 --&gt;
+         &lt;li v-for=&quot;value in arr&quot;&gt;{{value}}&lt;/li&gt; 
+         &lt;li v-for=&quot;value in user&quot;&gt;{{value}}&lt;/li&gt; 
+
+        &lt;!-- 键值循环 --&gt;
+         &lt;li v-for=&quot;(v,k) in arr&quot;&gt;{{k}}={{v}}&lt;/li&gt;
+        &lt;hr&gt;
+         &lt;li v-for=&quot;(v,k) in user&quot;&gt;{{k}}={{v}}&lt;/li&gt;
+
+        &lt;!-- 可以直接循环包含重复数据的集合，可以通过指定:key属性绑定唯一key，当更新元素时可重用元素，提高效率，类似于vue1.0中track-by --&gt;
+         &lt;li v-for=&quot;(v,k) in arr2&quot; :key=&quot;k&quot;&gt;{{v}}&lt;/li&gt;
+        &lt;br&gt;
+        &lt;hr&gt;
+        &lt;li v-for=&quot;(user,index) in users&quot;&gt;
+            {{index+1}},{{user.id}},{{user.name}},{{user.age}}
+        &lt;/li&gt;
+        &lt;hr&gt;
+        &lt;p v-for=&quot;(user,index) in  users&quot;&gt;
+            {{user.name}}
+        &lt;/p&gt;
+</code></pre><h3 id="事件对象-event"><a href="#事件对象-event" class="headerlink" title="事件对象$event"></a>事件对象$event</h3><pre><code>&lt;!-- 事件修饰符 --&gt;
+&lt;button @click.once=&quot;print&quot;&gt;只触发一次&lt;/button&gt;
+&lt;button @click=&quot;print($event)&quot;&gt;Click Me&lt;/button&gt;
+print(e){
+    console.log(e);
+    console.log(e.target.innerHTML); //DOM对象
+
+}
+</code></pre><h3 id="事件冒泡和默认行为"><a href="#事件冒泡和默认行为" class="headerlink" title="事件冒泡和默认行为"></a>事件冒泡和默认行为</h3><pre><code>&lt;div @click=&quot;write&quot;&gt;
+        &lt;p @click=&quot;print&quot;&gt;
+            &lt;button @click.stop=&quot;show&quot;&gt;点我&lt;/button&gt;
+        &lt;/p&gt;
+&lt;/div&gt;
+&lt;a href=&quot;#&quot; @click.prevent=&quot;study&quot;&gt;俺是链接&lt;/a&gt;
+</code></pre><h3 id="键盘事件"><a href="#键盘事件" class="headerlink" title="键盘事件"></a>键盘事件</h3><pre><code>/**
+ * 自定义键位别名
+ */
+Vue.config.keyCodes={
+    a:65,
+    f1:112
+}
+用户名：&lt;input type=&quot;text&quot; @keydown=&quot;show($event)&quot;&gt;
+show(e){
+        console.log(e.keyCode);
+        if(e.keyCode==13){
+            console.log(&apos;您按了回车&apos;);
+        }
+},
+用户名：&lt;input type=&quot;text&quot; @keydown.f1=&quot;print&quot;&gt;
+</code></pre><h3 id="属性绑定和属性的简写"><a href="#属性绑定和属性的简写" class="headerlink" title="属性绑定和属性的简写"></a>属性绑定和属性的简写</h3><pre><code>&lt;p :width=&quot;w&quot; :height=&quot;h&quot; :color=&quot;r&quot;&gt;123&lt;/p&gt;
+&lt;img :src=&quot;url&quot; :width=&quot;w&quot; :height=&quot;h&quot; &gt;
+
+data:{
+    url:&apos;https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png&apos;,
+    w:&apos;200px&apos;,
+    h:&apos;100px&apos;,
+    r:&quot;red&quot;
+}
+</code></pre><h3 id="class和style属性"><a href="#class和style属性" class="headerlink" title="class和style属性"></a>class和style属性</h3><pre><code>&lt;!-- class属性--&gt;
+&lt;p :class=&quot;aa&quot;&gt;123&lt;/p&gt;   不可以，Vue的属性绑定时不能直接css样式
+&lt;!-- 方式1:变量形式 --&gt;
+&lt;p :class=&quot;bb&quot;&gt;123&lt;/p&gt; 
+&lt;!-- 方式2：数组形式，同时引用多个 --&gt;
+ &lt;p :class=&quot;[bb,dd]&quot;&gt;123&lt;/p&gt;
+&lt;!-- 方式3：json形式，常用！！！ --&gt;
+&lt;p :class=&quot;{aa:true,cc:flag}&quot;&gt;123&lt;/p&gt;
+&lt;!-- 方式4：变量引用json形式 --&gt;
+ &lt;p :class=&quot;hello&quot;&gt;南京网博&lt;/p&gt; 
+
+&lt;!-- style属性--&gt;
+ &lt;p :style=&quot;[xx,yy]&quot;&gt;itany&lt;/p&gt;
+data:{
+        bb:&apos;aa&apos;,
+        dd:&apos;cc&apos;,
+        flag:true,
+        num:-2,
+        hello:{aa:true,cc:true},
+        xx:{color:&apos;blue&apos;,fontSize:&apos;30px&apos;},
+        yy:{backgroundColor:&apos;#ff7300&apos;}
+    }
+</code></pre><h3 id="自定义过滤器"><a href="#自定义过滤器" class="headerlink" title="自定义过滤器"></a>自定义过滤器</h3><pre><code>{{ data | filter1(参数) | filter2(参数)}}
+&lt;!-- 自定义全局过滤器--&gt;
+//时间转换
+&lt;h3&gt;{{currentTime | date}}&lt;/h3&gt;
+Vue.filter(&apos;date&apos;,data =&gt; {
+        let d=new Date(data);
+        return d.getFullYear()+&apos;-&apos;+(d.getMonth()+1)+&apos;-&apos;+d.getDate()+&apos; &apos;+d.getHours()+&apos;:&apos;+d.getMinutes()+&apos;:&apos;+d.getSeconds();
+});
+&lt;!-- 自定义局部过滤器--&gt;
+toFiexed()四舍五入的功能
+&lt;h3&gt;{{12.345678 | number(2)}}&lt;/h3&gt;    
+filters:{ //局部过滤器
+            number:(data,n) =&gt; {
+            return data.toFixed(n);
+        }
+    }
+</code></pre><h3 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h3><pre><code>beforeCreate(){
+    alert(&apos;组件实例刚刚创建，还未进行数据观测和事件配置&apos;);
+},
+created(){  //常用！！！
+    alert(&apos;实例已经创建完成，并且已经进行数据观测和事件配置&apos;);
+},
+beforeMount(){
+    alert(&apos;模板编译之前，还没挂载&apos;);
+},
+mounted(){ //常用！！！
+    alert(&apos;模板编译之后，已经挂载，此时才会渲染页面，才能看到页面上数据的展示&apos;);
+},
+beforeUpdate(){
+    alert(&apos;组件更新之前&apos;);
+},
+updated(){
+    alert(&apos;组件更新之后&apos;);
+},
+beforeDestroy(){
+    alert(&apos;组件销毁之前&apos;);
+},
+destroyed(){
+    alert(&apos;组件销毁之后&apos;);
+}
+</code></pre><h3 id="计算属性"><a href="#计算属性" class="headerlink" title="计算属性"></a>计算属性</h3><ul>
+<li>计算属性也是用来存储数据，但具有以下几个特点：-&gt;<br>a.数据可以进行逻辑处理操作<br>b.对计算属性中的数据进行监视</li>
+<li>计算属性 vs 方法-&gt;<br>将计算属性的get函数定义为一个方法也可以实现类似的功能<br>区别：<br>a.计算属性是基于它的依赖进行更新的，只有在相关依赖发生改变时才能更新变化<br>b.计算属性是缓存的，只要相关依赖没有改变，多次访问计算属性得到的值是之前缓存的计算结果，不会多次执行</li>
+<li><p>get和set-&gt;<br>计算属性由两部分组成：get和set，分别用来获取计算属性和设置计算属性<br>默认只有get，如果需要set，要自己添加</p>
+<pre><code> &lt;p&gt; {{msg.split(' ').reverse().join(' ')}} &lt;/p&gt;
+ &lt;p&gt;{{reverseMsg}}&lt;/p&gt;
+ &lt;!--3.get和set--&gt;
+ &lt;p&gt;{{num2}}&lt;/h2&gt;
+ data:{ //普通属性
+        msg:&apos;hello word&apos;,
+    },
+computed:{ //计算属性
+    msg2:function(){ //该函数必须有返回值，用来获取属性，称为get函数
+        return &apos;hello kity&apos;;
+    },
+    reverseMsg:function(){
+        //可以包含逻辑处理操作，同时reverseMsg依赖于msg
+        return this.msg.split(&apos; &apos;).reverse().join(&apos; &apos;);
+    },
+    num2:{
+        get:function(){
+            console.log(&apos;num2：&apos;+new Date());
+            return this.num1-1;
+        },
+        set:function(val){
+            console.log(&apos;修改num2值&apos;);
+            this.num2=val;
+        }
+    }
+},
+</code></pre><h3 id=""><a href="#" class="headerlink" title="#"></a>#</h3></li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/09/本地配置域名映射/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/09/本地配置域名映射/" itemprop="url">本地配置域名映射</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-09T19:46:20+08:00">
+                2019-01-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>C:\Windows\System32\drivers\etc 下hosts文件下追加</p>
+<p>192.168.1.47    a.cpsfz.com<br>192.168.1.221    b.cpsfz.com<br>启动ip服务，后面直接跟域名，<br>该demo为不同二级域名地址，顶级域名cookie</p>
+<p>a.cpsfz.com ID页面登陆跳转到b.cpsfz.com  cookie缓存<br>domainPath=cpsfz.com；<br>$.cookie(‘X-Auth-Token’, result.text, {expires: 7, path: ‘/‘, domain: domainPath, secure: false, raw: false});<br>登陆成功跳转到b.cpsfz.com 后，获取cookie X-Auth-Token 在b.cpsfz.com下面获取不到的时候，会直接去顶级域名获取。<br>注意点：退出最好登陆清除cookie    $cookies.remove(“X-Auth-Token”);</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/08/angujlar7指令/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/08/angujlar7指令/" itemprop="url">angujlar7指令</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-08T15:39:00+08:00">
+                2019-01-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在 Angular 中有三种类型的指令：</p>
+<ol>
+<li>组件 — 拥有模板的指令</li>
+<li>结构型指令 — 通过添加和移除 DOM 元素改变 DOM 布局的指令（修改视图的结构。例如，NgFor 和 结构型指令）</li>
+<li>属性型指令 — 改变元素、组件或其它指令的外观和行为的指令。（改变一个元素的外观或行为）<h3 id="属性指令"><a href="#属性指令" class="headerlink" title="属性指令"></a>属性指令</h3></li>
+</ol>
+<ul>
+<li><p>例子 </p>
+<p>  import { Directive, ElementRef, HostListener, Input } from ‘@angular/core’;</p>
+<p>  @Directive({</p>
+<pre><code>selector: &apos;[appHighlight]&apos;
+</code></pre><p>  })<br>  export class HighlightDirective {</p>
+<pre><code>constructor(private el: ElementRef) { }
+
+@Input(&apos;appHighlight&apos;) highlightColor: string;
+*当它出现在等号左边的方括号（[ ]）中时，该属性属于其它组件或指令，它必须带有 @Input 装饰器*
+@Input() defaultColor: string;
+
+@HostListener(&apos;mouseenter&apos;) onMouseEnter() {
+  this.highlight(this.highlightColor ||this.defaultColor|| &apos;red&apos;);
+}
+
+@HostListener(&apos;mouseleave&apos;) onMouseLeave() {
+  this.highlight(null);
+}
+
+private highlight(color: string) {
+  this.el.nativeElement.style.backgroundColor = color;
+}
+</code></pre><p>  }</p>
+</li>
+<li><p>引用元素</p>
+  <p [apphighlight]="color">Highlight me!</p>
+</li>
+<li><p>defaultColor</p>
+<p>  在绑定的引用元素上开始如果没有color的值 这个时候引用的就是默认defaultColor<br>  </p><p [apphighlight]="color" defaultcolor="violet"></p>
+<pre><code>Highlight me too!
+</code></pre><p>  </p><p></p>
+<h3 id="结构型指令"><a href="#结构型指令" class="headerlink" title="结构型指令"></a>结构型指令</h3><p>三个常用的内置结构型指令 —— NgIf、NgFor和模板语法</p>
+  <div *ngif="hero" class="name"></div>
+
+<p>  <ul></ul></p>
+<pre><code>&lt;li *ngFor=&quot;let hero of heroes&quot;&gt;{{hero.name}}&lt;/li&gt;
+</code></pre><p>  </p></li></ul><br>  NgSwitch 本身不是结构型指令，而是一个属性型指令，它控制其它两个 switch 指令的行为。 这也就是为什么你要写成 [ngSwitch] 而不是 *ngSwitch 的原因<br>  <div [ngswitch]="hero?.emotion"><p></p>
+<pre><code>&lt;app-happy-hero    *ngSwitchCase=&quot;&apos;happy&apos;&quot;    [hero]=&quot;hero&quot;&gt;&lt;/app-happy-hero&gt;
+&lt;app-sad-hero      *ngSwitchCase=&quot;&apos;sad&apos;&quot;      [hero]=&quot;hero&quot;&gt;&lt;/app-sad-hero&gt;
+&lt;app-confused-hero *ngSwitchCase=&quot;&apos;app-confused&apos;&quot; [hero]=&quot;hero&quot;&gt;&lt;/app-confused-hero&gt;
+&lt;app-unknown-hero  *ngSwitchDefault           [hero]=&quot;hero&quot;&gt;&lt;/app-unknown-hero&gt;
+</code></pre><p>  &lt;/div</p>
+
+
+</div>
           
         
       
@@ -1832,7 +2303,7 @@ username:&quot;&quot;
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1878,7 +2349,7 @@ username:&quot;&quot;
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">60</span>
+                <span class="site-state-item-count">77</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1924,7 +2395,7 @@ username:&quot;&quot;
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

@@ -94,17 +94,17 @@
 
 
 
-<meta name="description" content="个人技术博客">
+<meta name="description" content="开发环境后端：nodejs Express框架 前端:vue-cli2 数据库：mongo和Navicat Premium 12 Express 应用程序生成器这里用的是express框架， 通过应用生成器工具 express-generator 可以快速创建一个应用的骨架。 express-generator 包含了 express 命令行工具。通过如下命令即可安装： npm install e">
 <meta property="og:type" content="article">
-<meta property="og:title" content="vue起步">
-<meta property="og:url" content="http://yoursite.com/2018/06/26/vue起步/index.html">
+<meta property="og:title" content="&#39;Node调试工具入门&#39;">
+<meta property="og:url" content="http://yoursite.com/2018/11/22/Node调试工具入门/index.html">
 <meta property="og:site_name" content="CHEN.星~博客">
-<meta property="og:description" content="个人技术博客">
+<meta property="og:description" content="开发环境后端：nodejs Express框架 前端:vue-cli2 数据库：mongo和Navicat Premium 12 Express 应用程序生成器这里用的是express框架， 通过应用生成器工具 express-generator 可以快速创建一个应用的骨架。 express-generator 包含了 express 命令行工具。通过如下命令即可安装： npm install e">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-26T09:25:28.672Z">
+<meta property="og:updated_time" content="2018-11-22T02:43:04.447Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="vue起步">
-<meta name="twitter:description" content="个人技术博客">
+<meta name="twitter:title" content="&#39;Node调试工具入门&#39;">
+<meta name="twitter:description" content="开发环境后端：nodejs Express框架 前端:vue-cli2 数据库：mongo和Navicat Premium 12 Express 应用程序生成器这里用的是express框架， 通过应用生成器工具 express-generator 可以快速创建一个应用的骨架。 express-generator 包含了 express 命令行工具。通过如下命令即可安装： npm install e">
 
 
 
@@ -133,13 +133,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/06/26/vue起步/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/11/22/Node调试工具入门/"/>
 
 
 
 
 
-  <title>vue起步 | CHEN.星~博客</title>
+  <title>'Node调试工具入门' | CHEN.星~博客</title>
   
 
 
@@ -262,7 +262,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/26/vue起步/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/22/Node调试工具入门/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="CHEN.星">
@@ -279,7 +279,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">vue起步</h1>
+          <h1 class="post-title" itemprop="name headline">'Node调试工具入门'</h1>
         
 
         <div class="post-meta">
@@ -291,8 +291,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-26T17:25:28+08:00">
-                2018-06-26
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-22T10:08:07+08:00">
+                2018-11-22
               </time>
             
 
@@ -329,7 +329,30 @@
       
 
       
-        
+        <h3 id="开发环境"><a href="#开发环境" class="headerlink" title="开发环境"></a>开发环境</h3><pre><code>后端：nodejs Express框架
+前端:vue-cli2
+数据库：mongo和Navicat Premium 12
+</code></pre><h3 id="Express-应用程序生成器"><a href="#Express-应用程序生成器" class="headerlink" title="Express 应用程序生成器"></a>Express 应用程序生成器</h3><pre><code>这里用的是express框架，
+通过应用生成器工具 express-generator 可以快速创建一个应用的骨架。
+express-generator 包含了 express 命令行工具。通过如下命令即可安装：
+npm install express-generator -g
+-h 参数可以列出所有可用的命令行参数：
+
+创建项目-express project
+~~~下载依赖后续自己操作。
+</code></pre><h3 id="启动开发者工具"><a href="#启动开发者工具" class="headerlink" title="启动开发者工具"></a>启动开发者工具</h3><ol>
+<li>正常的启动的方式为根据package.json执行脚本语法</li>
+<li>npm start就能启动node服务</li>
+<li>前端项目配置环境跨域访问node服务（下篇文章讲解）</li>
+<li>这样启动无法对node的代码进行断点调试。</li>
+<li><p>在node启动的-inspect的调试工具里自带热替换功能</p>
+<p> 一：第一种。我用的是webstrom也就是在编辑器内断点调试（不过感觉很不爽，毕竟前端开发人员，还是习惯在浏览器的开发工具下断点调试，而且感觉也特慢）<br> 启动run里面有个debug模式。启动就OK，就可以在webstrom里面断点</p>
+<p> 二：node –inspect bin/www<br> 上面代码中，–inspect参数是启动调试模式必需的。这时，打开浏览器访问<a href="http://127.0.0.1:3000就可以看到Welcome" target="_blank" rel="external">http://127.0.0.1:3000就可以看到Welcome</a> to Express说明node服务启动成功了<br> 接下来，就要开始调试了。一共有两种打开调试工具的方法，</p>
+<p> 1）第一种是在 Chrome 浏览器的地址栏，键入 chrome://inspect或者about:inspect，<br> 会看到Remote Target下面有个Target 点击下面就会弹出node的调试工具</p>
+<p> 2）第二种进入调试工具的方法，是在 <a href="http://127.0.0.1:3000" target="_blank" rel="external">http://127.0.0.1:3000</a> 的窗口打开”开发者工具”，顶部左上角有一个 Node 的绿色标志，点击就可以进入（也可以在你自己启动的vue项目打开开发工具也会看到node标志）</p>
+</li>
+</ol>
+<h3 id="需要跟断点的地方需要debugger"><a href="#需要跟断点的地方需要debugger" class="headerlink" title="需要跟断点的地方需要debugger;"></a>需要跟断点的地方需要debugger;</h3><h3 id="http-www-ruanyifeng-com-blog-2018-03-node-debugger-html这是阮一峰大神的文档"><a href="#http-www-ruanyifeng-com-blog-2018-03-node-debugger-html这是阮一峰大神的文档" class="headerlink" title="http://www.ruanyifeng.com/blog/2018/03/node-debugger.html这是阮一峰大神的文档"></a><a href="http://www.ruanyifeng.com/blog/2018/03/node-debugger.html这是阮一峰大神的文档" target="_blank" rel="external">http://www.ruanyifeng.com/blog/2018/03/node-debugger.html这是阮一峰大神的文档</a></h3>
       
     </div>
     
@@ -353,8 +376,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/06/08/angulrjs封装CKeditor/" rel="next" title="angulrjs封装CKeditor">
-                <i class="fa fa-chevron-left"></i> angulrjs封装CKeditor
+              <a href="/2018/10/30/http知识填坑/" rel="next" title="http知识填坑">
+                <i class="fa fa-chevron-left"></i> http知识填坑
               </a>
             
           </div>
@@ -363,8 +386,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/08/29/vue项目初始化/" rel="prev" title="vue项目初始化">
-                vue项目初始化 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/11/23/mongo快速入门手册/" rel="prev" title="'mongo快速入门手册'">
+                'mongo快速入门手册' <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -417,8 +440,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -433,7 +465,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">60</span>
+                <span class="site-state-item-count">77</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -463,6 +495,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#开发环境"><span class="nav-number">1.</span> <span class="nav-text">开发环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Express-应用程序生成器"><span class="nav-number">2.</span> <span class="nav-text">Express 应用程序生成器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动开发者工具"><span class="nav-number">3.</span> <span class="nav-text">启动开发者工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#需要跟断点的地方需要debugger"><span class="nav-number">4.</span> <span class="nav-text">需要跟断点的地方需要debugger;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#http-www-ruanyifeng-com-blog-2018-03-node-debugger-html这是阮一峰大神的文档"><span class="nav-number">5.</span> <span class="nav-text">http://www.ruanyifeng.com/blog/2018/03/node-debugger.html这是阮一峰大神的文档</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -479,7 +527,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

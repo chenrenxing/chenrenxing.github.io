@@ -263,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/12/vue-cli请求接口配置(一)/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/19/vue-cli构建rem开发环境/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="CHEN.星">
@@ -282,7 +282,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/01/12/vue-cli请求接口配置(一)/" itemprop="url">vue-cli请求接口配置(一)</a></h1>
+                <a class="post-title-link" href="/2018/10/19/vue-cli构建rem开发环境/" itemprop="url">vue-cli构建rem开发环境</a></h1>
         
 
         <div class="post-meta">
@@ -294,8 +294,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-12T10:15:13+08:00">
-                2018-01-12
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-19T14:43:32+08:00">
+                2018-10-19
               </time>
             
 
@@ -334,15 +334,425 @@
       
         
           
-            <p>#创建http_url.js#<br>    let localhostDev = true;<br>    let _host = localhostDev ? ‘<a href="http://localhost:8091" target="_blank" rel="external">http://localhost:8091</a>‘ : ‘<a href="http://xxx.com" target="_blank" rel="external">http://xxx.com</a>‘;<br>    export default {_host}<br>    /<em> 如果是本地开发，就把localhostDev 设置成true，连接就是拼成‘<a href="http://localhost:8080/api/test’" target="_blank" rel="external">http://localhost:8080/api/test’</a> </em>/<br>    /<em> 生产环境，就把localhostDev 设置成false，连接就是拼成‘<a href="http://xxx.com/api/test’" target="_blank" rel="external">http://xxx.com/api/test’</a> </em>/</p>
-<p>#引用#</p>
-<pre><code> import localhttp from &apos;../../http_url&apos;
-  this.$http.get(localhttp._host+&apos;/posts&apos;).then(response =&gt; {
-  // get body data
-  console.log(response.body);
+            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>vue-cli构建rem运行环境搭建</p>
+<h3 id="配置（针对自己的css不处理三方uicss）"><a href="#配置（针对自己的css不处理三方uicss）" class="headerlink" title="配置（针对自己的css不处理三方uicss）"></a>配置（针对自己的css不处理三方uicss）</h3><pre><code>1：下载lib-flexible文件
+npm install lib-flexible -S
 
-}, response =&gt; {
-  console.log(response)
+2：在mian.js中引入lib-flexible文件
+import &apos;lib-flexible&apos;
+
+3：安装px2rem
+npm i postcss-px2rem --save
+npm install px2rem-loader --save
+
+4：配置build目录下vue-loader.conf.js
+
+module.exports = {
+      loaders: utils.cssLoaders({
+    sourceMap: sourceMapEnabled,
+    extract: isProduction,
+    usePostCSS:true//这里设置为true，否则vue引入css会报错
+  }),
+  cssSourceMap: sourceMapEnabled,
+  cacheBusting: config.dev.cacheBusting,
+  transformToRequire: {
+    video: [&apos;src&apos;, &apos;poster&apos;],
+    source: &apos;src&apos;,
+    img: &apos;src&apos;,
+    image: &apos;xlink:href&apos;
+  },
+  postcss:[require(&apos;postcss-px2rem&apos;)({&apos;remUnit&apos;:75,&apos;baseDpr&apos;:2})]   
+    /*因为我是以750px(iphone6)宽度为基准，所以remUnit为75*/}
+</code></pre><h3 id="带有三方ui库转换css为rem"><a href="#带有三方ui库转换css为rem" class="headerlink" title="带有三方ui库转换css为rem"></a>带有三方ui库转换css为rem</h3><pre><code>utils.js
+const px2remLoader = {
+loader: &apos;px2rem-loader&apos;,
+options: {
+  &apos;remUnit&apos;: 37.5,//这里基准如果为75转换出来的样式要小一倍，为35.7为正常，但是开发的时候这里写37.5 以750px宽为基础，量出来的尺寸必须要也要少写1倍，即（100px写50px）；
+    这里是自己测试出来的，如果不对请参考其他网上资料。
+    *变小的*原因是ui框架为data-dpr=&quot;1&quot;写的
+  &apos;baseDpr&apos;: 1
+}
+  }
+//px2remLoader在这里加入就会转换
+  function generateLoaders(loader, loaderOptions) {
+    const loaders = options.usePostCSS ? [cssLoader, postcssLoader,px2remLoader] : [cssLoader]
+if (loader) {
+  loaders.push({
+    loader: loader + &apos;-loader&apos;,
+    options: Object.assign({}, loaderOptions, {
+      sourceMap: options.sourceMap
+    })
+  })
+}
+
+// Extract CSS when that option is specified
+// (which is the case during production build)
+if (options.extract) {
+  return ExtractTextPlugin.extract({
+    use: loaders,
+    fallback: &apos;vue-style-loader&apos;
+  })
+} else {
+  return [&apos;vue-style-loader&apos;].concat(loaders)
+}
+</code></pre><p>  }</p>
+<h3 id="温馨提示"><a href="#温馨提示" class="headerlink" title="温馨提示"></a>温馨提示</h3><pre><code>当你遇到1px的边框时，通常容易发现页面缺失部分边框，这时你可以使用/*no*/语法来屏蔽该属性转换，例如：
+border: 1px solid red; /*no*/
+
+由于字体的特殊性，我们在编译font-size属性时，通常不使用rem单位，这时候你可以这样使用：
+font-size: 24px; /*px*/ 
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/28/ES6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/28/ES6/" itemprop="url">ES6</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-28T10:26:45+08:00">
+                2018-09-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h3><ul>
+<li>ES5中常量写法<br>  Objeck.defineProperty(window,’PI2’,{<pre><code>value:3.1415926,
+writable:false        })
+</code></pre></li>
+<li>ES6的常量写法<br>  const PI=3.1415926；</li>
+<li><p>对于复合类型的变量，变量名不指向里面的数据，而是指向数据的地址，const只是保证地址不改变，而不是里面的数据不改变</p>
+<h3 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h3><p>   -es3-es5<br>  var arr = [1, 2, 4, 7, 8];<br>  // 目标：上述数组里的每一项偶数都+1，使整个数组里都是奇数。</p>
+<p>  // map 方法<br>  var result = arr.map(function(item) {</p>
+<pre><code>return item % 2 === 0 ? item + 1 : item;
+</code></pre><p>  });<br>  //forEach 方法<br>  var result = [];<br>  arr.forEach(function(item) {</p>
+<pre><code>if (item % 2 === 0) {
+    item += 1;
+}
+result.push(item);
+</code></pre><p>  });<br>  -es6<br>  var result = arr.map(item = &gt; item % 2 === 0 ? item + 1 : item);</p>
+<p>  ()=&gt;{}<br>  1：当小括号（）里面只有一个参数是可以省略的<br>  2：当{}中的表达式作为返回值的时候可以神略花括号的。<br>  箭头函数指向是定义时的指向。    </p>
+<h3 id="对象代理Proxy"><a href="#对象代理Proxy" class="headerlink" title="对象代理Proxy"></a>对象代理Proxy</h3><h3 id="1：es3数据保护"><a href="#1：es3数据保护" class="headerlink" title="1：es3数据保护"></a>1：es3数据保护</h3><p>  var Person=function(){</p>
+<pre><code>var data={
+    name=&apos;es3&apos;,
+    sex:&apos;male&apos;,
+    age:15
+}
+this.get=funciton(key){
+    return data[key]
+}
+this.set=function(key,value){
+    if(key!==&apos;sex&apos;){
+    data[key]=value;    
+    }
+}
+</code></pre><p>  }<br>  //申请一个实例<br>  var person=new Person();<br>  //读取<br>  console.table({name:person.get(‘name’),sex:person.get(‘sex’),age:person.get(‘age’)})<br>  person.set(‘name’,’es3-cname’)<br>  console.table({name:person.get(‘name’),sex:person.get(‘sex’),age:person.get(‘age’)})<br>  person.set(‘sex’,’female’)    </p>
+<h4 id="2：es5"><a href="#2：es5" class="headerlink" title="2：es5"></a>2：es5</h4><p>  var Person={</p>
+<pre><code>name:&quot;es5&quot;,
+age:14
+</code></pre><p>  }<br>  Object.defineProperty(Person,’sex’,{</p>
+<pre><code>writable:false,
+value:&apos;male&apos;    
+</code></pre><p>  })</p>
+<h4 id="3：ES6"><a href="#3：ES6" class="headerlink" title="3：ES6"></a>3：ES6</h4><p>  let Person={</p>
+<pre><code>name:&quot;es6&apos;,
+sex:&apos;male&apos;,
+age:15
+</code></pre><p>  }<br>  let person=new Proxy(person,{</p>
+<pre><code>get(target,key){
+    return target[key]
+},
+set(target,key,value){
+    if(key!==&apos;sex&apos;){
+        target[key]=value;
+    }
+}
+</code></pre><p>  })<br>  console.table({</p>
+<pre><code>name:person.name,
+sex:person.sex,
+age:person.age    
+</code></pre><p>  })<br>  try{person.sex=’female’;}catch(e){console.log(e)}finaly{};            </p>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/26/H5移动端安卓键盘出来覆盖页面/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/26/H5移动端安卓键盘出来覆盖页面/" itemprop="url">H5移动端安卓键盘出来覆盖页面</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-26T11:21:34+08:00">
+                2018-09-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="在移动端安卓-键盘出来覆盖页面（页面没有上移）"><a href="#在移动端安卓-键盘出来覆盖页面（页面没有上移）" class="headerlink" title="在移动端安卓 键盘出来覆盖页面（页面没有上移）"></a>在移动端安卓 键盘出来覆盖页面（页面没有上移）</h3><pre><code>在ios系统中会自己响应。
+if (/Android/gi.test(navigator.userAgent)) {
+  window.addEventListener(&apos;resize&apos;, function () {
+    if (document.activeElement.tagName == &apos;INPUT&apos; || document.activeElement.tagName == &apos;TEXTAREA&apos;) {
+      window.setTimeout(function () {
+        document.activeElement.scrollIntoViewIfNeeded();
+      }, 0);
+    }
+    $(&apos;#orderidNum&apos;).blur(function(){
+      document.activeElement.scrollIntoViewIfNeeded();
+    });
+  })
+}
+</code></pre><h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><pre><code>CSS中如果有定位为postion:flex;测试没通过，用 position: absolute;
+</code></pre><h3 id="scrollIntoView属性有兴趣可以看看"><a href="#scrollIntoView属性有兴趣可以看看" class="headerlink" title="scrollIntoView属性有兴趣可以看看"></a>scrollIntoView属性有兴趣可以看看</h3><pre><code>* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 200vh;
+}
+
+.chunk {
+    margin-top: 100vh;
+    height: 20vh;
+    background: lightcoral;
+}
+
+div[class^=btn] {
+    width: 50px;
+    padding: 10px 15px;
+    position: fixed;
+    top: 50vh;
+    right: 0;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.btn-top {
+    background: lightgreen;
+}
+
+.btn-bottom {
+    margin-top: 50px;
+    background: lightblue;
+}
+
+const up = document.querySelector(&apos;.btn-top&apos;);
+const down = document.querySelector(&apos;.btn-bottom&apos;);
+up.addEventListener(&apos;click&apos;, function() {
+  test.scrollIntoView(true);
+});
+down.addEventListener(&apos;click&apos;, function() {
+  test.scrollIntoView(false);
 });
 </code></pre>
           
@@ -392,7 +802,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/29/随机数/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/25/获取视频的第一帧/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="CHEN.星">
@@ -411,7 +821,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/12/29/随机数/" itemprop="url">随机数</a></h1>
+                <a class="post-title-link" href="/2018/09/25/获取视频的第一帧/" itemprop="url">获取视频的第一帧</a></h1>
         
 
         <div class="post-meta">
@@ -423,8 +833,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-29T14:00:34+08:00">
-                2017-12-29
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-25T14:56:03+08:00">
+                2018-09-25
               </time>
             
 
@@ -463,32 +873,216 @@
       
         
           
-            <pre><code>   var numAll = []；
- function createrandom() {
-           //生成随机数
-           var newNum = parseInt(Math.random() * (100 - 10 + 1) + 10);
-           var num = repeatNum(newNum); //验证是否重复
-           if (num) {//有合格随机数
-               return num;//返回当前合格随机数
-           }
-       }
-//判断随机数重复
-       function repeatNum(newNum) {
-           var repeat = 0;
-           if (numAll.length &gt; 0) {//数组有值
-               for (var i = 0; i &lt; numAll.length; i++) {//循环全部随机数
-                   if (numAll[i] === newNum) {//若有相同随机数，重新生成
-                       repeat = 1; //有重复值 为1
-                       i = numAll.length;//跳出循环
-                       createrandom();//重新生成随机数
-                   }
-               }
-           }
-           if (repeat === 0) {//无重复
-               numAll.push(newNum);//本次随机数加入总随机数组
-               return newNum;//返回当前合格随机数
-           }
-       }
+            <h3 id="业务场景"><a href="#业务场景" class="headerlink" title="业务场景"></a>业务场景</h3><pre><code>1）管理系统上传视频，H5页面在微信端显示的时候。
+</code></pre><h3 id="发现问题"><a href="#发现问题" class="headerlink" title="发现问题"></a>发现问题</h3><pre><code>H5页在在微信浏览器/safari/chrome上默认展示的poster各有不同，chrome应用了默认行为截取了视频第一帧作为显示，微信浏览器和safari却显示空白
+</code></pre><h3 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h3><pre><code>1）video的loadeddata事件，获取到视频第一帧来展示。
+ var  dom=document.getElementById(&quot;videofir&quot;);
+var scale=0.8;
+var cut = function() {
+    var  canvas = document.createElement(&quot;canvas&quot;);//创建画布
+    canvas.width = myVid.videoWidth * scale;
+    canvas.height = myVid.videoHeight * scale;//设定宽高比
+    canvas.getContext(&apos;2d&apos;).drawImage(myVid, 0, 0, canvas.width, canvas.height);//将视频此刻帧数画入画布
+    var img = document.createElement(&quot;img&quot;);
+    img.src = canvas.toDataURL(&quot;image/png&quot;);
+    dom.appendChild(img);//写入到Dom
+};
+   var  myVid=document.getElementById(&quot;video1&quot;);
+myVid.addEventListener(&apos;loadeddata&apos;,cut);//在视频帧数已加载时执行截取
+
+2）上传视频的时候，获取到视频第一帧，也一并跟video进行上传，在H5页面展示的poster展示图片。
+
+3)如果第一帧并不好看，可以在管理系统增加业务，在上传视频的时候，同时上传一张设计好的图片，进行上传。
+</code></pre><h3 id="补充知识"><a href="#补充知识" class="headerlink" title="补充知识"></a>补充知识</h3><h4 id="webkit-playsinline-”true”-playsinline"><a href="#webkit-playsinline-”true”-playsinline" class="headerlink" title="webkit-playsinline=”true” playsinline"></a>webkit-playsinline=”true” playsinline</h4><pre><code>在使用htmlvideo标签的时候，点击播放后会进入播放器占用整个屏幕，之后开始播放,webkit-playsinline=&quot;true&quot; playsinline
+这个属性会让视频播放时局部播放，但这个属性需要嵌入网页的APP比如WeChat中UIwebview 的allowsInlineMediaPlayback = YES webview.allowsInlineMediaPlayback = YES，才能生效。换句话说，安卓不支持，而IOS的wechat却支持，因为APP不支持playsinline，所以安卓是默认全屏播放的
+</code></pre><h3 id="x5-video-player-type-”h5”"><a href="#x5-video-player-type-”h5”" class="headerlink" title="x5-video-player-type=”h5”"></a>x5-video-player-type=”h5”</h3><pre><code>x5-video-player-type=&apos;h5&apos; 启用同层H5播放器，学名叫沉浸式播放。播放的时候除去了control和微信的导航栏，只留下&quot;X&quot;和&quot;&lt;&quot;两键
+</code></pre><h3 id="video标签对视频格式以及编码的支持"><a href="#video标签对视频格式以及编码的支持" class="headerlink" title="video标签对视频格式以及编码的支持"></a>video标签对视频格式以及编码的支持</h3><ul>
+<li>MPEG4 = 带有H.264视频编码和AAC音频编码的MPEG4文件</li>
+<li>WebM = 带有VP8视频编码和Vorbis音频编码的 WebM文件</li>
+<li><p>Ogg = 带有Theora视频编码和Vorbis音频编码的Ogg文件</p>
+<h4 id="视频充满屏幕"><a href="#视频充满屏幕" class="headerlink" title="视频充满屏幕"></a>视频充满屏幕</h4><p>  #video{</p>
+<pre><code>object-fit: fill;
+</code></pre><p>  }</p>
+<h3 id="把当前的视频投放到其他支持此技术的设备上"><a href="#把当前的视频投放到其他支持此技术的设备上" class="headerlink" title="把当前的视频投放到其他支持此技术的设备上"></a>把当前的视频投放到其他支持此技术的设备上</h3><p>  <video x-webkit-airplay="true"></video></p>
+<h4 id="在视频结束时执行事件。"><a href="#在视频结束时执行事件。" class="headerlink" title="在视频结束时执行事件。"></a>在视频结束时执行事件。</h4><p>  $(“#video”).get(0).addEventListener(“ended”, function() {</p>
+<p>  }, false);</p>
+<h4 id="微信浏览器下实现自动播放。"><a href="#微信浏览器下实现自动播放。" class="headerlink" title="微信浏览器下实现自动播放。"></a>微信浏览器下实现自动播放。</h4><p>  document.addEventListener(“WeixinJSBridgeReady”,     function() {<br>  video.play()<br>  }, false)</p>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/12/axios请求/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/12/axios请求/" itemprop="url">axios请求</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-12T11:08:50+08:00">
+                2018-09-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>##关于axios-post走地址栏<br>    axios的post走的请求体<br>    request payload<br>    {username: “”, password: “”}<br>    password:””<br>    username:””</p>
+<pre><code>如果post要走地址栏的话，可以配合qs库格式化数据。
+地址：http://www.bootcdn.cn/qs/（npm install qs -S）
+import axios from &apos;axios&apos;;
+import qs from &apos;qs&apos;;
+let postData = qs.stringify({username: &quot;&quot;, password: &quot;&quot;})
+axios.post(url,postData);
+
+Form Data （Form Data不同query string parameters）
+password:&quot;&quot;
+username:&quot;&quot;
+不要介意已经成功
+</code></pre><h3 id="get"><a href="#get" class="headerlink" title="get"></a>get</h3><p>axios.get(url[,options]);<br>传参方式：<br>1.通过url传参<br>2.通过params选项传参</p>
+<pre><code>axios.get(&apos;server.php&apos;,{
+    params:{
+        name:&apos;alice&apos;,
+        age:19
+    }
+})
+.then(resp =&gt; {
+    console.log(resp.data);
+}).catch(err =&gt; {
+    console.log(&apos;请求失败：&apos;+err.status+&apos;,&apos;+err.statusText);
+});
+axios.get(`https://api.github.com/users/${uid}`)
+                .then(resp =&gt; {
+                    // console.log(resp.data);
+                    this.user=resp.data;
+                });
+</code></pre><h3 id="post"><a href="#post" class="headerlink" title="post"></a>post</h3><p> axios.post(url,data,[options]);<br>axios默认发送数据时，数据格式是Request Payload，并非我们常用的Form Data格式，<br>所以参数必须要以键值对形式传递，不能以json形式传参<br>传参方式：<br>1.自己拼接为键值对<br>2.使用transformRequest，在请求发送前将请求数据进行转换<br>3.如果使用模块化开发，可以使用qs模块进行转换</p>
+<pre><code>axios.post(&apos;server.php&apos;,this.user,{
+    transformRequest:[
+        function(data){
+            let params=&apos;&apos;;
+            for(let index in data){
+                params+=index+&apos;=&apos;+data[index]+&apos;&amp;&apos;;
+            }
+            return params;
+        }
+    ]
+})
+.then(resp =&gt; {
+    console.log(resp.data);
+}).catch(err =&gt; {
+    console.log(&apos;请求失败：&apos;+err.status+&apos;,&apos;+err.statusText);
+});
+</code></pre><h3 id="Jsonp"><a href="#Jsonp" class="headerlink" title="Jsonp"></a>Jsonp</h3><p>axios本身并不支持发送跨域的请求，没有提供相应的API，作者也暂没计划在axios添加支持发送跨域请求，所以只能使用第三方库<br>vue-resource.min.js<br>使用this.$http发送请求<br>this.$http.get(url, [options])<br>this.$http.head(url, [options])<br>this.$http.delete(url, [options])<br>this.$http.jsonp(url, [options])<br>this.$http.post(url, [body], [options])<br>this.$http.put(url, [body], [options])<br>this.$http.patch(url, [body], [options])<br>this.$http.jsonp(‘<a href="https://sug.so.360.cn/suggest&#39;,{" target="_blank" rel="external">https://sug.so.360.cn/suggest&#39;,{</a><br>        params:{<br>            word:’a’<br>        }<br>    }).then(resp =&gt; {<br>        console.log(resp.data.s);<br>    });</p>
+<pre><code>this.$http.jsonp(&apos;https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su&apos;,{
+    params:{
+        wd:&apos;a&apos;
+    },
+    jsonp:&apos;cb&apos; //百度使用的jsonp参数名为cb，所以需要修改
+}).then(resp =&gt; {
+    console.log(resp.data.s);
+});
 </code></pre>
           
         
@@ -537,7 +1131,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/29/echart封装组件/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/29/vue项目初始化/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="CHEN.星">
@@ -556,7 +1150,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/12/29/echart封装组件/" itemprop="url">echart封装组件</a></h1>
+                <a class="post-title-link" href="/2018/08/29/vue项目初始化/" itemprop="url">vue项目初始化</a></h1>
         
 
         <div class="post-meta">
@@ -568,8 +1162,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-29T13:47:52+08:00">
-                2017-12-29
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-29T18:54:21+08:00">
+                2018-08-29
               </time>
             
 
@@ -608,152 +1202,176 @@
       
         
           
-            <p>controller层</p>
-<pre><code>  饼图
-function regroupFirstPie(data) {
-              var chartData = {
-                  color: [&apos;#5E86B8&apos;, &apos;#94B9DA&apos;],
-                  series: [
-                      {
-                          name: &apos;产品溯源数据报送统计&apos;,
-                          data: [
-                              {value: data.sended, name: &apos;产品报送&apos;},
-                              {value: data.unSend, name: &apos;产品未报送&apos;}
-                          ]
-                      }
-                  ]
-              };
-              chartsShapeFactory.drawPie(&apos;chart_main_first_pie&apos;, chartData);
-          }
-  折现图
-   var chartData = {
-                  color: [&apos;#D05f0c&apos;],
-                  xAxis: {
-                      data: xAxis
-                  },
-                  series: [
-                      {
-                          name:&apos;次数&apos;,
-                          type: &apos;line&apos;,
-                          data: yearData
-                      }
-                  ]
-              };
-              chartsShapeFactory.drawLine(&apos;chart_main_first_line&apos;, chartData);
-</code></pre><p>组件</p>
-<pre><code>angular.module(&apos;charts.shape&apos;, [])
-.factory(&apos;chartsShapeFactory&apos;, [function () {
-    /**pie饼图*/
-    function pieChart(id, data) {
-        //初始化echarts实例
-        var myChart = echarts.init(document.getElementById(id));
-        //指定图表的配置项和数据
-        var option = {
-            color: data.color,
-            tooltip : {
-                trigger: &apos;item&apos;,
-                formatter: &quot;{a} &lt;br/&gt;{b} : {c} ({d}%)&quot;
-            },
-            series: [
-                {
-                    name: data.series[0].name,
-                    type: &apos;pie&apos;,
-                    label: {
-                        normal: {
-                            position: &apos;inner&apos;
-                        }
-                    },
-                    radius: &apos;75%&apos;,
-                    center: [&apos;25%&apos;, &apos;55%&apos;],
-                    data: data.series[0].data,
-                    itemStyle: {
-                        normal: {
-                            label: {
-                                show: true,
-                                formatter: &apos;{d}%&apos;
-                            },
-                            labelLine: {show: true}
-                        }
-                    }
-                }
-            ]
-        };
-        //指定的配置项和数据显示图表。
-        myChart.setOption(option);
-    }
+            <p>##一、准备工作</p>
+<p>###1.初始化项目<br>    首先vue-cli安装。成功后：<br>     vue init webpak demo<br>    cd demo<br>    cnpm install<br>    cnpm install less less-loader -D webpack自己手动配置<br>    cnpm install vuex axios -S<br>    npm run dev<br>    OK运行成功…</p>
+<p>###2.项目资源<br>    |-reset.ccs<br>    |-data.json</p>
+<p>###3.创建目录结构<br>    清除构建后的部分内容</p>
 
-    /**line折线图*/
-    function lineChart(id, data) {
-        //初始化echarts实例
-        var myChart = echarts.init(document.getElementById(id));
-        //指定图表的配置项和数据
-        var option = {
-            color: data.color,
-            tooltip: {
-                trigger: &apos;axis&apos;
-            },
-            xAxis:  {
-                type: &apos;category&apos;,
-                boundaryGap: false,
-                axisLabel:{interval: 0,rotate:40},
-                data : data.xAxis.data
-            },
-            yAxis: {
-                type: &apos;value&apos;
-            },
-            series: data.series
-        };
-        //指定的配置项和数据显示图表。
-        myChart.setOption(option);
-    }
+          
+        
+      
+    </div>
+    
+    
+    
 
-    /**bar柱状图*/
-    function barChart(id, data) {
-        //初始化echarts实例
-        var myChart = echarts.init(document.getElementById(id));
-        //指定图表的配置项和数据
-        var option = {
-            color: data.color,
-            tooltip : {
-                trigger: &apos;axis&apos;,
-                axisPointer : {            // 坐标轴指示器，坐标轴触发有效
-                    type : &apos;shadow&apos;        // 默认为直线，可选为：&apos;line&apos; | &apos;shadow&apos;
-                }
-            },
-            grid: {
-                left: &apos;3%&apos;,
-                right: &apos;4%&apos;,
-                bottom: &apos;3%&apos;,
-                containLabel: true
-            },
-            xAxis : [
-                {
-                    data : [&apos;01月&apos;, &apos;02月&apos;, &apos;03月&apos;, &apos;04月&apos;, &apos;05月&apos;, &apos;06月&apos;, &apos;07月&apos;,&apos;08月&apos;, &apos;09月&apos;, &apos;10月&apos;, &apos;11月&apos;, &apos;12月&apos;],
-                }
-            ],
-            yAxis : [
-                {
-                    type : &apos;value&apos;
-                }
-            ],
-            series: data.series
-        };
-        //指定的配置项和数据显示图表。
-        myChart.setOption(option);
-    }
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/08/angulrjs封装CKeditor/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/08/angulrjs封装CKeditor/" itemprop="url">angulrjs封装CKeditor</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-08T10:39:26+08:00">
+                2018-06-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><pre><code>项目需求（模板可视配置），参考秀米H5给的灵感，用ckeditor封装的一个富文本编辑业务
+</code></pre><h3 id="directives"><a href="#directives" class="headerlink" title="directives"></a>directives</h3><pre><code> urlModuleDirectives.directive(&apos;contenteditable&apos;, function() {
 
     return {
-        drawPie: function (id, data) {
-            pieChart(id, data);
-        },
-        drawLine: function (id, data) {
-            lineChart(id, data);
-        },
-        drawBar: function (id, data) {
-            barChart(id, data);
+
+        require: &apos;ngModel&apos;,
+        link: function (scope, element, attrs, ctrl) {
+
+            var editor = CKEDITOR.inline(element[0]);
+            editor.on( &apos;configLoaded&apos;, function() {
+                // Remove unecessary plugins to make the editor simpler.
+                editor.config.removePlugins = &apos;colorbutton,find,flash,font,&apos; +
+                    &apos;forms,iframe,image,newpage,removeformat,&apos; +
+                    &apos;smiley,specialchar,stylescombo,templates&apos;;
+                // Rearrange the layout of the toolbar.
+                editor.config.toolbarGroups = [
+                    { name: &apos;editing&apos;,        groups: [ &apos;basicstyles&apos;, &apos;links&apos; ] },
+                    { name: &apos;undo&apos; },
+                    { name: &apos;clipboard&apos;,    groups: [ &apos;selection&apos;, &apos;clipboard&apos; ] },
+                    { name: &apos;about&apos; }
+                ];
+            });
+            editor.on(&apos;instanceReady&apos;, function() {
+                editor.setData(ctrl.$viewValue);
+            });
+
+            editor.on(&apos;pasteState&apos;, function () {
+                scope.$apply(function () {
+                    ctrl.$setViewValue(editor.getData());
+                });
+
+            });
+
+            // model -&gt; view
+            ctrl.$render = function () {
+
+                editor.setData(ctrl.$viewValue);
+                console.log(ctrl.$viewValue);
+            };
+            // load init value from DOM
+            ctrl.$render();
         }
+
     };
-}]);
+})
+</code></pre><h4 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h4><pre><code> &lt;div  class=&quot;modular-text-one text-placeholder&quot;  contentEditable = &apos;true&apos;     ng-model=&quot;item.configData[0]&quot;&gt;
+&lt;/div&gt;
 </code></pre>
           
         
@@ -802,7 +1420,7 @@ function regroupFirstPie(data) {
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/29/多文件上传/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/30/meat-http-equiv/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="CHEN.星">
@@ -821,7 +1439,7 @@ function regroupFirstPie(data) {
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/12/29/多文件上传/" itemprop="url">多文件上传</a></h1>
+                <a class="post-title-link" href="/2018/05/30/meat-http-equiv/" itemprop="url">meat http-equiv(转)</a></h1>
         
 
         <div class="post-meta">
@@ -833,8 +1451,8 @@ function regroupFirstPie(data) {
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-29T11:02:31+08:00">
-                2017-12-29
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-30T10:19:09+08:00">
+                2018-05-30
               </time>
             
 
@@ -873,468 +1491,45 @@ function regroupFirstPie(data) {
       
         
           
-            <pre><code> var formData = new FormData();
-
-$.each($scope.tssContingencyPlan, function (i, v) {
-        formData.append(i, v);
-    });
-    //图片封装
-    $.each($scope.certificateImgs, function (i, v) {
-        formData.append(&quot;files&quot;, v.files, v.orderIdx + &quot;_&quot; + v.id + &quot;_&quot; + v.name);
-    });
-    $.ajax({
-        url: contextPath + &quot;/tssContingencyPlan/save&quot;,
-        type: &apos;POST&apos;,
-        data: formData,
-        processData: false,
-        contentType: false,
-        async: false,
-        success: function (result) {
-            if (result.code &gt;= 0) {
-                $(&apos;#tss_emergencyPlanManagement_create_view&apos;).modal(&apos;hide&apos;);
-                $scope.tableRefresh();
-                toastr.success(result.text);
-            }
-        }
-});
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/29/事件绑定图片上传以及验证格式/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="CHEN.星">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CHEN.星~博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/12/29/事件绑定图片上传以及验证格式/" itemprop="url">事件绑定图片上传以及验证格式</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-29T10:57:54+08:00">
-                2017-12-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <pre><code>    //选择图片触发事件，传入选中ID
-  $scope.upload = function (id) {
-      $scope.inputCode = id;//ID赋值
-      $(&quot;#fileBtn&quot; + id).trigger(&apos;click&apos;);//模拟对应ID的input点击事件
-      bindFileUpload();//调用文件上传方法
-  };
-function bindFileUpload() {//input
-          var input = $(&quot;#fileBtn&quot; + $scope.inputCode);//找到相应INPUT
-          if (input.fileupload) {
-              input.fileupload({
-                  dataType: &apos;json&apos;,
-                  autoUpload: false,
-                  acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
-                  maxFileSize: 999000,
-                  disableImageResize: /Android(?!.*Chrome)|Opera/
-                      .test(window.navigator.userAgent)
-              }).on(&apos;fileuploadadd&apos;, function (e, data) {
-                  if (data.files &amp;&amp; data.files[0]) {//是否有数据
-                      var fileName = data.files[0].name;
-                      var reg = /(\.|\/)(gif|jpe?g|png)$/i;
-                      if (reg.exec(fileName) === null) {
-                          swal({
-                                  title: &quot;提示&quot;,
-                                  text: &quot;图片格式不正确&quot;,
-                                  type: &quot;info&quot;,
-                                  showCancelButton: false,
-                                  closeOnConfirm: true,
-                                  showLoaderOnConfirm: false
-                              },
-                              function () {
-                                  swal.close();
-                              });
-                          return;
-                      }
-                      var reader = new FileReader();//新建FILE流
-                      reader.readAsDataURL(data.files[0]);//获取URL
-                      reader.onload = function (e) {//成功后返回
-                          addUrl(e.target.result, data.files[0]);//图片显示方法（参数：URL，文件流）
-                      };
-                  }
-              });
-          }
-      }
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/28/常用正则/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="CHEN.星">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CHEN.星~博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/12/28/常用正则/" itemprop="url">‘常用正则</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-28T10:35:59+08:00">
-                2017-12-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<ul>
-<li>拆分中英文冒号正则(：:) split(/\:|\：/);</li>
-<li>拆分文本域换行符替换BR replace(/\n|\r\n/g, “<br>“）</li>
-<li>拆分BR转换成回车replace(/<br\>/g,”\r\n”)</br\></li>
-</ul>
-</blockquote>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/16/前端性能优化之meta缓存/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="CHEN.星">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CHEN.星~博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/16/前端性能优化之meta缓存/" itemprop="url">前端性能优化之meta做缓存</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-16T14:55:45+08:00">
-                2017-11-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <pre><code>&lt;meta http-equiv=&quot;Cache-Control&quot; content=&quot;no-cache, no-store, must-revalidate&quot; /&gt;
+            <h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><pre><code>meta是html语言head区的一个辅助性标签。也许你认为这些代码可有可无。
+其实如果你能够用好meta标签，会给你带来意想不到的效果，meta标签的作用有：
+搜索引擎优化（SEO），定义页面使用语言，自动刷新并指向新的页面，
+实现网页转换时的动态效果，控制页面缓冲，网页定级评价，控制网页显示的窗口等！
+
+meat标签的http-equiv属性语法格式是：＜meta http-equiv=&quot;参数&quot; 
+content=&quot;参数变量值&quot;＞ ；其中http-equiv属性主要有以下几种参数：
+(下面描述常用的)
+在实际业务中，也是需要缓存的，解决的办法就是给引用的文件加版本号；
+</code></pre><h3 id="禁止缓存"><a href="#禁止缓存" class="headerlink" title="禁止缓存"></a>禁止缓存</h3><pre><code>&lt;meta http-equiv=&quot;Cache-Control&quot; content=&quot;no-cache, no-store, must-revalidate&quot; /&gt;
 &lt;meta http-equiv=&quot;Pragma&quot; content=&quot;no-cache&quot; /&gt;
 &lt;meta http-equiv=&quot;Expires&quot; content=&quot;0&quot; /&gt;
-//Cache-Control（缓存控制） HTTP头信息
-//Expires期限（过期时间
-//实际上在微信环境中并没有用
- &lt;meta http-equiv=&quot;Cache-Control&quot; content=&quot;max-age=31536000&quot;&gt;
-给个时间期限
-在每个页面的html,js，css文件URL后加上版本号，如http://xxx/index.js?t=版本号
-</code></pre><h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><blockquote>
-<ul>
-<li>meat标签的http-equiv属性语法格式是：＜meta http-equiv=”参数” content=”参数变量值”＞ <h3 id="Http头介绍-Expires-Cache-Control-Last-Modified-ETag"><a href="#Http头介绍-Expires-Cache-Control-Last-Modified-ETag" class="headerlink" title="Http头介绍:Expires,Cache-Control,Last-Modified,ETag"></a>Http头介绍:Expires,Cache-Control,Last-Modified,ETag</h3> 这里就只记录下Expires和Cache-Control,下文解释采用的是网络上抓取。</li>
-</ul>
-</blockquote>
-<h3 id="Expires"><a href="#Expires" class="headerlink" title="Expires"></a>Expires</h3><pre><code>-属性是HTTP控制缓存的基本手段。
-这个属性告诉缓存器：相关副本在多长时间内是新鲜的。
-过了这个时间，缓存器就会向源服务器发送请求，检查文档是否被修改。
-几乎所有的缓存服务器都支持Expires（过期时间）属性
-&lt;meta http-equiv=&quot;Expires&quot; content=&quot;Fri, 30 Oct 1998 14:19:41&quot; /&gt;
-</code></pre><h3 id="Cache-Control"><a href="#Cache-Control" class="headerlink" title="Cache-Control"></a>Cache-Control</h3><pre><code>Cache-Control响应头信息，
-让网站的发布者可以更全面的控制他们的内容,并定位过期时间的限制.
-
-public — 标记认证内容也可以被缓存，一般来说： 经过HTTP认证才能访问的内容，输出是自动不可以缓存的；
-
-no-cache — 强制每次请求直接发送给源服务器，而不经过本地缓存版本的校验。这对于需要确认认证应用很有用（可以和public结合使用），或者严格要求使用最新数据 的应用（不惜牺牲使用缓存的所有好处）；
-
-no-store — 强制缓存在任何情况下都不要保留任何副本
-
-must-revalidate — 告诉缓存必须遵循所有你给予副本的新鲜度的，HTTP允许缓存在某些特定情况下返回过期数据，指定了这个属性，你高速缓存，你希望严格的遵循你的规则。
-
-max-age=[秒] — 执行缓存被认为是最新的最长时间。类似于过期时间，这个参数是基于请求时间的相对时间间隔，而不是绝对过期时间，[秒]是一个数字，单位是秒：从请求时间 开始到过期时间之间的秒数。
+</code></pre><h3 id="缓存静态资源"><a href="#缓存静态资源" class="headerlink" title="缓存静态资源"></a>缓存静态资源</h3><pre><code>&lt;meta http-equiv=&quot;Cache-Control&quot; content=&quot;public, max-age=31536000&quot; /&gt;
+</code></pre><h3 id="1、Cache-Control"><a href="#1、Cache-Control" class="headerlink" title="1、Cache-Control"></a>1、Cache-Control</h3><pre><code>//常用的几个
+no-cache，浏览器和缓存服务器都不应该缓存页面信息；
+public，浏览器和缓存服务器都可以缓存页面信息；
+no-store，请求和响应的信息都不应该被存储在对方的磁盘系统中；
+must-revalidate，对于客户机的每次请求，代理服务器必须想服务器验证缓存是否过时
+private：表明响应只能被单个用户缓存，不能作为共享缓存（即代理服务器不能缓存它）
+only-if-cached：表明如果缓存存在，只使用缓存，无论原始服务器数据是否有更新。
+max-age=&lt;seconds&gt;：设置缓存存储的最大周期，超过这个时间缓存被认为过期(单位秒)。
+与Expires相反，时间是相对于请求的时间。
+注意：
+no-cache：这个很容易让人产生误解，使人误以为是响应不被缓存。实际上Cache-Control:
+ no-cache是会被缓存的，只不过每次在向客户端（浏览器）提供响应数据时，
+缓存都要向服务器评估缓存响应的有效性。
+Cache-Control: no-store：这个才是响应不被缓存的意思。
+</code></pre><h3 id="2、Expires-期限"><a href="#2、Expires-期限" class="headerlink" title="2、Expires(期限)"></a>2、Expires(期限)</h3><pre><code>说明：可以用于设定网页的到期时间。一旦网页过期，必须到服务器上重新传输。
+用法:＜meta http-equiv=&quot;expires&quot; content=&quot;Wed, 20 Jun 2007 22:33:00 GMT&quot;＞
+注意：必须使用GMT的时间格式。  
+</code></pre><h3 id="3、Pragma-cache模式"><a href="#3、Pragma-cache模式" class="headerlink" title="3、Pragma(cache模式)"></a>3、Pragma(cache模式)</h3><pre><code>说明：是用于设定禁止浏览器从本地机的缓存中调阅页面内容，设定后一旦离开网页就无法从Cache中再调出 
+用法：＜meta http-equiv=&quot;Pragma&quot; content=&quot;no-cache&quot;＞ 
+注意：这样设定，访问者将无法脱机浏览。
+</code></pre><h3 id="4、Refresh-刷新"><a href="#4、Refresh-刷新" class="headerlink" title="4、Refresh(刷新)"></a>4、Refresh(刷新)</h3><pre><code>说明：自动刷新并指向新页面。 
+用法：＜meta http-equiv=&quot;Refresh&quot; content=&quot;2；URL=http://www.net.cn/&quot;＞  
+注意：其中的2是指停留2秒钟后自动刷新到URL网址
+</code></pre><h3 id="5、Set-Cookie-cookie设定"><a href="#5、Set-Cookie-cookie设定" class="headerlink" title="5、Set-Cookie(cookie设定)"></a>5、Set-Cookie(cookie设定)</h3><pre><code>说明：如果网页过期，那么存盘的cookie将被删除。
+用法：＜meta http-equiv=&quot;Set-Cookie&quot; content=&quot;cookievalue=xxx;expires=Wednesday, 20-Jun-2007 22:33:00 GMT； path=/&quot;＞
+注意：必须使用GMT的时间格式。 
 </code></pre>
           
         
@@ -1383,7 +1578,7 @@ max-age=[秒] — 执行缓存被认为是最新的最长时间。类似于过�
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/07/location/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/29/腾讯地图/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="CHEN.星">
@@ -1402,7 +1597,7 @@ max-age=[秒] — 执行缓存被认为是最新的最长时间。类似于过�
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/11/07/location/" itemprop="url">$location</a></h1>
+                <a class="post-title-link" href="/2018/05/29/腾讯地图/" itemprop="url">腾讯地图</a></h1>
         
 
         <div class="post-meta">
@@ -1414,8 +1609,8 @@ max-age=[秒] — 执行缓存被认为是最新的最长时间。类似于过�
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-07T10:32:03+08:00">
-                2017-11-07
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-29T16:36:28+08:00">
+                2018-05-29
               </time>
             
 
@@ -1454,447 +1649,287 @@ max-age=[秒] — 执行缓存被认为是最新的最长时间。类似于过�
       
         
           
-            <h3 id="【一】获取-不修改URL"><a href="#【一】获取-不修改URL" class="headerlink" title="【一】获取 (不修改URL)"></a>【一】获取 (不修改URL)</h3><blockquote>
-<ul>
-<li><p>1.获取当前完整的url路径<br>var absurl = $location.absUrl();<br>//<a href="http://172.16.0.88:8100/#/homePage?id=10&amp;a=100#helloworld" target="_blank" rel="external">http://172.16.0.88:8100/#/homePage?id=10&amp;a=100#helloworld</a>  </p>
-</li>
-<li><p>2.获取当前url路径(当前url#后面的内容,包括参数和哈希值):<br>var url = $location.url();<br>// 结果：/homePage?id=10&amp;a=100  </p>
-</li>
-<li><p>3.获取当前url的子路径(也就是当前url#后面的内容,不包括参数)<br>var pathUrl = $location.path()<br>//结果：/homePage  </p>
-</li>
-</ul>
-<ul>
-<li>4.获取当前url的协议(比如http,https)<br>var protocol = $location.protocol();<br>//结果：http  </li>
-</ul>
-<ul>
-<li>5.获取主机名<br>var localhost = $location.host();<br>//结果：172.16.0.88  </li>
-</ul>
-<ul>
-<li>6.获取当前url的端口<br>var port = $location.port();<br>//结果：8100  </li>
-</ul>
-<ul>
-<li>7.获取当前url的哈希值<br>var hash = $location.hash()<br>//结果：helloworld</li>
-</ul>
-<ul>
-<li>8.获取当前url的参数的序列化json对象<br>var search = $location.search();<br>//结果：{id: “10”, a: “100”} </li>
-</ul>
-</blockquote>
-<h4 id="【二】修改-改变URL相关内容"><a href="#【二】修改-改变URL相关内容" class="headerlink" title="【二】修改 (改变URL相关内容)"></a>【二】修改 (改变URL相关内容)</h4><blockquote>
-<ul>
-<li><p>1 修改url的子路径部分(也就是当前url#后面的内容,不包括参数):<br>$location.url(‘/validation’);<br>//结果：<a href="http://172.16.0.88:8100/#/validation" target="_blank" rel="external">http://172.16.0.88:8100/#/validation</a>  </p>
-</li>
-<li><p>2 修改url的哈希值部分<br>$location.hash(‘myhash3’);<br>//结果:<a href="http://172.16.0.88:8100/#/homePage?id=10&amp;a=100#myhash3" target="_blank" rel="external">http://172.16.0.88:8100/#/homePage?id=10&amp;a=100#myhash3</a>  </p>
-</li>
-<li><p>3 修改url的参数部分(第一个参数表示url参数的属性名,第二个参数是该属性名的属性值,如果是已有属性名,则修改,如果不是已有属性,则新增)  $location.search(‘id’,’111’)<br>// 结果(修改参数值)：<a href="http://172.16.0.88:8100/#/homePage?id=111&amp;a=100" target="_blank" rel="external">http://172.16.0.88:8100/#/homePage?id=111&amp;a=100</a><br>$location.search(‘ids’,’111’)<br>// 结果（新增ids参数): <a href="http://172.16.0.88:8100/#/homePage?id=111&amp;a=100&amp;ids=111" target="_blank" rel="external">http://172.16.0.88:8100/#/homePage?id=111&amp;a=100&amp;ids=111</a>  </p>
-</li>
-<li><p>4.一次性修改多个参数<br>$location.search({id:’55’,’a’:’66’})<br>//结果：<a href="http://172.16.0.88:8100/#/homePage?id=55&amp;a=66#myhash3" target="_blank" rel="external">http://172.16.0.88:8100/#/homePage?id=55&amp;a=66#myhash3</a>  </p>
-</li>
-<li><p>5.第一个值表示url参数的属性名,如果是已有属性名,则删除该属性,如果不是已有属性,那就等于没改过<br>$location.search(‘age’,null)  </p>
-</li>
-</ul>
-</blockquote>
-<h3 id="【三】修改URL但不存入历史记录"><a href="#【三】修改URL但不存入历史记录" class="headerlink" title="【三】修改URL但不存入历史记录"></a>【三】修改URL但不存入历史记录</h3><blockquote>
-<ul>
-<li>在上面的修改url的方法的时候,每修改一次,url都会被存入历史记录,可以使用后退按钮回到修改前的url,如果不想要这种效果,而仅仅是替换当前的记录,可以使用  $location.path(‘/validation’).replace();</li>
-</ul>
-</blockquote>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/06/移动端，弹出层，禁止父级容器滚动/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="CHEN.星">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CHEN.星~博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/06/移动端，弹出层，禁止父级容器滚动/" itemprop="url">移动端，弹出层，禁止父级容器滚动</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-06T11:51:42+08:00">
-                2017-11-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <pre><code>CSS代码：
-.noscroll,
-.noscroll body {
-    overflow: hidden;
-}
-.noscroll body {
-    position: relative;
-}
-JS代码：
-var elButton = $(&apos;#button&apos;), elButtonWith = $(&apos;#buttonWith&apos;);
-var elAside = $(&apos;#aside&apos;);
-elButton.on(&apos;click&apos;, function () {
-    elAside.addClass(&apos;active&apos;);
-    $(&apos;html&apos;).addClass(&apos;noscroll&apos;);
-});
-elButtonWith.on(&apos;click&apos;, function() {
-    elAside.addClass(&apos;active&apos;);
-    $.smartScroll(elAside, &apos;.scrollable&apos;);
-    elButton.html(elButton.html().replace(&apos;没有&apos;, &apos;已经&apos;));
-    $(&apos;html&apos;).addClass(&apos;noscroll&apos;);
-});
-
-$(&apos;.hideAside&apos;).on(&apos;click&apos;, function () {
-    $(&apos;html&apos;).removeClass(&apos;noscroll&apos;);
-    elAside.removeClass(&apos;active&apos;);
-});
-//方法
-$.smartScroll = function(container, selectorScrollable) {
-// 如果没有滚动容器选择器，或者已经绑定了滚动时间，忽略
-if (!selectorScrollable || container.data(&apos;isBindScroll&apos;)) {
-    return;
+            <h3 id="angulrjs工厂模式"><a href="#angulrjs工厂模式" class="headerlink" title="angulrjs工厂模式"></a>angulrjs工厂模式</h3><pre><code>(function (angular) {
+&quot;use strict&quot;;
+angular.module(&apos;public.map.factory&apos;, [])
+    .factory(&apos;publicMapFactory&apos;, [function () {
+        //地图
+        return {
+            //地图初始化
+            initMap: function (id) {
+                var markersArray = [];
+                var center = new qq.maps.LatLng(39.916527,116.397128);
+                var map = new qq.maps.Map(document.getElementById(id),{
+                    center: center,
+                    zoom: 10
+                });
+                //获取城市列表接口设置中心点
+                var citylocation = new qq.maps.CityService({
+                    complete : function(result){
+                        map.setCenter(result.detail.latLng);
+                    }
+                });
+                //调用searchLocalCity();方法    根据用户IP查询城市信息。
+                citylocation.searchLocalCity();
+                //调用地址解析类
+                var geocoder = new qq.maps.Geocoder({
+                    complete : function(result){
+                        map.setCenter(result.detail.location);
+                        var marker = new qq.maps.Marker({
+                            map:map,
+                            position: result.detail.location
+                        });
+                        markersArray.push(marker);
+                    }
+                });
+                return {
+                    currentGeocoder:function(location){
+                        if (markersArray.length&gt;0) {
+                            for (var i in markersArray) {
+                                markersArray[i].setMap(null);//清除标记
+                            }
+                        }
+                        //通过getLocation();方法获取位置信息值
+                        geocoder.getLocation(location);
+                    }
+                }
+            }
+        };
+    }]);
+})(angular);
+</code></pre><h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><pre><code>//初始化map
+ var productMapInfo = publicMapFactory.initMap(&apos;map&apos;);
+//标记坐标
+productMapInfo.currentGeocoder(data);
+</code></pre><h3 id="marker图标设置"><a href="#marker图标设置" class="headerlink" title="marker图标设置"></a>marker图标设置</h3><h4 id="marker设置"><a href="#marker设置" class="headerlink" title="marker设置"></a>marker设置</h4><pre><code>//解析数据marker标记
+function markData() {
+    var latlngs = [];
+    for (var j = 0; j &lt; $scope.mapData.length; j++) {
+        latlngs.push(new qq.maps.LatLng($scope.mapData[j].lat, $scope.mapData[j].lng));
+    }
+    for (var i = 0; i &lt; latlngs.length; i++) {
+        iconMark(i, infoWin, latlngs, map, $scope.mapData[i].dictId);
+    }
+    //标记END-------------------------------
+    //四种颜色iconMark。循环list 添加坐标
 }
 
-// 是否是搓浏览器
-// 自己在这里添加判断和筛选
-var isSBBrowser;
-
-var data = {
-    posY: 0,
-    maxscroll: 0
-};
-
-// 事件处理
-container.on({
-    touchstart: function (event) {
-        var events = event.touches[0] || event;
-
-        // 先求得是不是滚动元素或者滚动元素的子元素
-        var elTarget = $(event.target);
-
-        if (!elTarget.length) {
-            return;    
+function iconMark(n, infoWin, latlngs, map, dictId) {
+        var marker = new qq.maps.Marker({
+            position: latlngs[n],
+            map: map
+        });
+        markersArray.push(marker);
+        var img;
+        if (dictId === &apos;traceabilityChain01&apos;) {
+            img = &apos;dist/img/map/orange-red.png&apos;;
+        } else if (dictId === &apos;traceabilityChain02&apos;) {
+            img = &apos;dist/img/map/blue.png&apos;;
+        } else if (dictId === &apos;traceabilityChain03&apos;) {
+            img = &apos;dist/img/map/dark-green.png&apos;;
+        } else if (dictId === &apos;traceabilityChain04&apos;) {
+            img = &apos;dist/img/map/green.png&apos;;
         }
-
-        var elScroll;
-
-        // 获取标记的滚动元素，自身或子元素皆可
-        if (elTarget.is(selectorScrollable)) {
-            elScroll = elTarget;
-        } else if ((elScroll = elTarget.parents(selectorScrollable)).length == 0) {
-            elScroll = null;
-        }
-
-        if (!elScroll) {
-            return;
-        }
-
-        // 当前滚动元素标记
-        data.elScroll = elScroll;
-
-        // 垂直位置标记
-        data.posY = events.pageY;
-        data.scrollY = elScroll.scrollTop();
-        // 是否可以滚动
-        data.maxscroll = elScroll[0].scrollHeight - elScroll[0].clientHeight;
-    },
-    touchmove: function () {
-        // 如果不足于滚动，则禁止触发整个窗体元素的滚动
-        if (data.maxscroll &lt;= 0 || isSBBrowser) {
-            // 禁止滚动
-            event.preventDefault();
-        }
-        // 滚动元素
-        var elScroll = data.elScroll;
-        // 当前的滚动高度
-        var scrollTop = elScroll.scrollTop();
-
-        // 现在移动的垂直位置，用来判断是往上移动还是往下
-        var events = event.touches[0] || event;
-        // 移动距离
-        var distanceY = events.pageY - data.posY;
-
-        if (isSBBrowser) {
-            elScroll.scrollTop(data.scrollY - distanceY);
-            elScroll.trigger(&apos;scroll&apos;);
-            return;
-        }
-
-        // 上下边缘检测
-        if (distanceY &gt; 0 &amp;&amp; scrollTop == 0) {
-            // 往上滑，并且到头
-            // 禁止滚动的默认行为
-            event.preventDefault();
-            return;
-        }
-
-        // 下边缘检测
-        if (distanceY &lt; 0 &amp;&amp; (scrollTop + 1 &gt;= data.maxscroll)) {
-            // 往下滑，并且到头
-            // 禁止滚动的默认行为
-            event.preventDefault();
-            return;
-        }
-    },
-    touchend: function () {
-        data.maxscroll = 0;
-    }    
-});
-
-// 防止多次重复绑定
-container.data(&apos;isBindScroll&apos;, true);
-</code></pre><p>};</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/03/new Map-遍历/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="CHEN.星">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CHEN.星~博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/03/new Map-遍历/" itemprop="url">new Map 遍历</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-03T13:33:35+08:00">
-                2017-11-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<ul>
-<li>需求为数组对象中存在一个相同对象的值得时候，把相同对象合并，对应的值相加<pre><code>var map = new Map();
-  for(var i in data){
-      var a=[]
-      var each=data[i];
-      if(!map.has(each.productName)){
-          map.set(each.productName,each)
-      }else{
-          map.get(each.productName).turnover= map.get(each.productName).turnover+each.turnover
-      }
-  }
-</code></pre>  //这里of 就是遍历map循环的语句<br>   for(var each of map){<pre><code>    legendDataArr.push(each[1].activeName);
-    seriesDataArr[0].data.push({value:each[1].turnover,name:each[1].productName});//循环加入
+        var icon = new qq.maps.MarkerImage(img);
+        marker.setIcon(icon);
+        qq.maps.event.addListener(marker, &apos;click&apos;, function () {
+            $scope.nodeId = &quot;&quot;;
 }
-</code></pre><h3 id="Maps-set-get-hash"><a href="#Maps-set-get-hash" class="headerlink" title="Maps set get hash"></a>Maps set get hash</h3>   map.set(each.productName,each)<br>  //缓存数据到map中<br>  map.get(each.productName)<br>  //获取数据<br>  map.has(each.productName)<br>  //Boolean值<h3 id="Maps-with-for-of"><a href="#Maps-with-for-of" class="headerlink" title="Maps with for..of"></a>Maps with for..of</h3>  var myMap = new Map();<br>  myMap.set(0, ‘zero’);<br>  myMap.set(1, ‘one’);<br>  for (var [key, value] of myMap) {<pre><code>console.log(key + &apos; = &apos; + value);
-</code></pre>  }<br>  // 0 = zero<br>  // 1 = one</li>
-</ul>
-</blockquote>
-<pre><code>for (var key of myMap.keys()) {
-  console.log(key);
-}
-// 0
-// 1
-
-for (var value of myMap.values()) {
-  console.log(value);
-}
-// zero
-// one
-
-for (var [key, value] of myMap.entries()) {
-  console.log(key + &apos; = &apos; + value);
-}
-// 0 = zero
-// 1 = one
+</code></pre><h4 id="marker清除"><a href="#marker清除" class="headerlink" title="marker清除"></a>marker清除</h4><pre><code>if (markersArray) {
+       for (var i = 0; i &lt; markersArray.length; i++) {
+           markersArray[i].setMap(null);
+       }
+       markersArray.length = 0;
+   }
 </code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/29/浅拷贝与深拷贝/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/29/浅拷贝与深拷贝/" itemprop="url">浅拷贝与深拷贝</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-29T16:28:47+08:00">
+                2018-05-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><pre><code>JavaScript实现继承的时候，需要进行对象的拷贝；而为了不影响拷贝后的数据对原数据造成影响，也就是存在共享关系的时候，我们就需要进行深拷贝；
+</code></pre><h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><p>数据分为基本数据类型(String, Number, Boolean, Null, Undefined，Symbol)和对象数据类型。</p>
+<ol>
+<li>基本数据类型的特点：直接存储在栈(stack)中的数据</li>
+<li>引用数据类型的特点：存储的是该对象在栈中引用，真实的数据存放在堆内存里</li>
+</ol>
+<h3 id="浅拷贝与深拷贝"><a href="#浅拷贝与深拷贝" class="headerlink" title="浅拷贝与深拷贝"></a>浅拷贝与深拷贝</h3><ul>
+<li>深拷贝和浅拷贝是只针对Object和Array这样的引用数据类型的</li>
+<li>浅拷贝只复制指向某个对象的指针，而不复制对象本身，新旧对象还是共享同一块内存。但深拷贝会另外创造一个一模一样的对象，新对象跟原对象不共享内存，修改新对象不会改到原对象。</li>
+</ul>
+<h3 id="赋值和浅拷贝的区别"><a href="#赋值和浅拷贝的区别" class="headerlink" title="赋值和浅拷贝的区别"></a>赋值和浅拷贝的区别</h3><ul>
+<li>当我们把一个对象赋值给一个新的变量时，赋的其实是该对象的在栈中的地址，而不是堆中的数据。也就是两个对象指向的是同一个存储空间，无论哪个对象发生改变，其实都是改变的存储空间的内容，因此，两个对象是联动的。</li>
+<li>浅拷贝是按位拷贝对象，它会创建一个新对象，这个对象有着原始对象属性值的一份精确拷贝。如果属性是基本类型，拷贝的就是基本类型的值；如果属性是内存地址（引用类型），拷贝的就是内存地址 ，因此如果其中一个对象改变了这个地址，就会影响到另一个对象。即默认拷贝构造函数只是对对象进行浅拷贝复制(逐个成员依次拷贝)，即只复制对象空间而不复制资源。</li>
+</ul>
+<h3 id="浅拷贝的实现方式"><a href="#浅拷贝的实现方式" class="headerlink" title="浅拷贝的实现方式"></a>浅拷贝的实现方式</h3><ol>
+<li><p>Object.assign()；<br>Object.assign() 方法可以把任意多个的源对象自身的可枚举属性拷贝给目标对象，然后返回目标对象。但是 Object.assign() 进行的是浅拷贝，拷贝的是对象的属性的引用，而不是对象本身。</p>
+<pre><code>var obj={a:{a:&apos;kobe&apos;,b:39}};
+var initalObj=Object.assign({},obj);
+initalObj.a.a=&apos;wade&apos;;
+console.log(obj.a.a)//wade
+注意：当object只有一层的时候，是深拷贝
+let obj={
+    username:&quot;Kobe&quot;    
+    }
+let obj2=Object.assign({},obj);
+obj2.username=&apos;wade&apos;;
+console.log(obj);//{username:&apos;kobe&apos;}
+</code></pre></li>
+</ol>
+<ul>
+<li>Array.prototype.concat()<br>  let arr=[1,3,{username:’kobe’}]<br>  let arr2=arr.concat();<br>  arr2[2].username=’wode’;<br>  console.log(arr);<br>  修改新对象会改变到原对象 arr.username//wode</li>
+<li>Array.prototype.slice()<br>  let arr=[1,3,{username:’kobe’}]<br>  let arr3=arr.slice();<br>  arr3[3].username=’wode’;<br>  console.log(arr);<br>  修改新对象会改变到原对象 arr.username//wode</li>
+</ul>
+<p>关于Array的slice和concat方法的补充说明：Array的slice和concat方法不修改原数组，只会返回一个浅复制了原数组中的元素的一个新数组。<br>原数组的元素会按照下述规则拷贝</p>
+<ul>
+<li>如果该元素是个对象引用(不是实际的对象)，slice 会拷贝这个对象引用到新的数组里。两个对象引用都引用了同一个对象。如果被引用的对象发生改变，则新的和原来的数组中的这个元素也会发生改变。</li>
+<li>对于字符串、数字及布尔值来说（不是 String、Number 或者 Boolean 对象），slice 会拷贝这些值到新的数组里。在别的数组里修改这些字符串或数字或是布尔值，将不会影响另一个数组</li>
+</ul>
+<h3 id="深拷贝的实现方式"><a href="#深拷贝的实现方式" class="headerlink" title="深拷贝的实现方式"></a>深拷贝的实现方式</h3><ul>
+<li>JSON.parse(JSON.stringify())<br>原理： 用JSON.stringify将对象转成JSON字符串，再用JSON.parse()把字符串解析成对象，一去一来，新的对象产生了，而且对象会开辟新的栈，实现深拷贝。<br>这种方法虽然可以实现数组或对象深拷贝，但不能处理函数。</li>
+<li>手写递归方法<br>递归方法实现深度克隆原理：遍历对象、数组直到里边都是基本数据类型，然后再去复制，就是深度拷贝。</li>
+<li>函数库lodash</li>
+</ul>
+<h3 id="深度拷贝对象，带数组"><a href="#深度拷贝对象，带数组" class="headerlink" title="深度拷贝对象，带数组"></a>深度拷贝对象，带数组</h3><pre><code>var data = extendCopy(node);
+ function extendCopy(p) {
+     var c = {};
+     for (var key in p) {
+         if (key !== &apos;$$hashKey&apos;) {
+             if(key === &apos;files&apos;||key === &apos;filesId&apos;||key === &apos;base64Image&apos;){
+                 c[key]=[];
+             }else{
+                 if (key === &apos;configData&apos;) {
+                     if(p[key]){
+                         var newArray = [];
+                         for(var i=0;i&lt; p[key].length;i++){
+                             newArray.push(p[key][i]);
+                         }
+                         c[key]=newArray;
+                     }
+
+                 }else{
+                     c[key] = p[key];
+                 }
+             }
+         }
+     }
+     return c;
+ }
+</code></pre><h3 id="文章出处"><a href="#文章出处" class="headerlink" title="文章出处"></a>文章出处</h3><p><a href="https://mp.weixin.qq.com/s?__biz=MzIzNTU2ODM4Mw==&amp;mid=2247487594&amp;idx=2&amp;sn=b95f2dad85139117c50d7117a70c70c4&amp;chksm=e8e47dfadf93f4ec2041a42059efb50c6190e6f88d5e5d52cfea5a1bb7a5893c8b97cfe993e5&amp;mpshare=1&amp;scene=23&amp;srcid=12262LzGOfFCIMNfrlaEexCO#rd" target="_blank" rel="external">https://mp.weixin.qq.com/s?__biz=MzIzNTU2ODM4Mw==&amp;mid=2247487594&amp;idx=2&amp;sn=b95f2dad85139117c50d7117a70c70c4&amp;chksm=e8e47dfadf93f4ec2041a42059efb50c6190e6f88d5e5d52cfea5a1bb7a5893c8b97cfe993e5&amp;mpshare=1&amp;scene=23&amp;srcid=12262LzGOfFCIMNfrlaEexCO#rd</a></p>
+
           
         
       
@@ -1933,7 +1968,7 @@ for (var [key, value] of myMap.entries()) {
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1979,7 +2014,7 @@ for (var [key, value] of myMap.entries()) {
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">60</span>
+                <span class="site-state-item-count">77</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2025,7 +2060,7 @@ for (var [key, value] of myMap.entries()) {
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
