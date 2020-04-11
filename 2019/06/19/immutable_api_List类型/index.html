@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="title: immutable_API_List类型date: 2019-06-19 22:15:43tags: API_List类型 List.isList()判断是否是List类型 const list=List([1,2,3,4]) List.isList(list)  List.of()创建新的List const l=List.of(1,2,3,4)  List[1,2,3,4]">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CHEN.星~博客">
+<meta property="og:url" content="http://yoursite.com/2019/06/19/immutable_api_List类型/index.html">
+<meta property="og:site_name" content="CHEN.星~博客">
+<meta property="og:description" content="title: immutable_API_List类型date: 2019-06-19 22:15:43tags: API_List类型 List.isList()判断是否是List类型 const list=List([1,2,3,4]) List.isList(list)  List.of()创建新的List const l=List.of(1,2,3,4)  List[1,2,3,4]">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-06-19T15:03:25.544Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CHEN.星~博客">
+<meta name="twitter:description" content="title: immutable_API_List类型date: 2019-06-19 22:15:43tags: API_List类型 List.isList()判断是否是List类型 const list=List([1,2,3,4]) List.isList(list)  List.of()创建新的List const l=List.of(1,2,3,4)  List[1,2,3,4]">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/06/19/immutable_api_List类型/"/>
+
+
+
+
+
+  <title> | CHEN.星~博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CHEN.星~博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生命在于折腾</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/19/immutable_api_List类型/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline"></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-19T22:15:43+08:00">
+                2019-06-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <hr>
+<p>title: immutable_API_List类型<br>date: 2019-06-19 22:15:43<br>tags:</p>
+<h3 id="API-List类型"><a href="#API-List类型" class="headerlink" title="API_List类型"></a>API_List类型</h3><ul>
+<li><p>List.isList()判断是否是List类型</p>
+<pre><code>const list=List([1,2,3,4])
+List.isList(list)
+</code></pre></li>
+<li><p>List.of()创建新的List</p>
+<pre><code>const l=List.of(1,2,3,4)
+ List[1,2,3,4]
+</code></pre></li>
+<li><p>size获取List的长度</p>
+<pre><code>console.log(l.size)    
+</code></pre></li>
+<li><p>set方法用来设定指定下标的值set(下标，值)<br>  -1代表从后面往前面</p>
+<pre><code>L3=L.set(0,&apos;122&apos;)
+</code></pre></li>
+<li><p>delete 删除指定下标的值 delete(下标)</p>
+</li>
+<li>insert 差入值 insert(下标，值)</li>
+<li><p>updata用来更新指定下标的值</p>
+<pre><code>const  a=List([1,2,3,4])
+const  b=a.updata(1,x=&gt;x+100)
+涉及业务，对下标为1的数据 进行加100
+</code></pre></li>
+<li><p>clear 清空并返回一个长度为0的新数组</p>
+<pre><code>const c1=List([1,2,3,4])
+const c2=C1.clear();
+c1还是存在不变，c2为空了
+</code></pre></li>
+<li><p>push pop unshit shift同数组的同名方法</p>
+</li>
+<li><p>setSize 重新设定数组长度，小与原数组长度会截断，大于原数组长度会哟个underfined进行填充</p>
+<pre><code>const set1=List([1,2,3,4,5,6])
+const set2=set1.setSize(2)
+截取出来List[1,2]
+</code></pre></li>
+<li><p>setIn()用来设定嵌套结构的值([第一层下标，第二层下标，..第N层下标]，值)    同理还有deleteIn,insertIn,updateIn</p>
+<pre><code>const arr1=List([List([1,2,3,4]),
+                [List([11,22,33,444)],
+                [List([111,222,333,444])]])
+const arr2=arr1.setIn([2,1],0)会改变222为0
+</code></pre></li>
+<li><p>concat链接List concat(List1,List2,…ListN)</p>
+<pre><code>const list1=List([1,2,3,4])
+const list2=List([11,223,4])
+const list3=List([333,4444,4])
+const totalList=list1.concat(list2,list3)
+</code></pre></li>
+<li><p>merge是concat的别名</p>
+<pre><code>const list1=List([1,2,3,4])
+const list2=List([11,223,4])
+const list3=List([333,4444,4])
+const totalList=list1.merge(list2,list3)
+</code></pre></li>
+<li>map 同原生map</li>
+<li>fliter 同原生的filter</li>
+<li><p>flatten 扁平化list</p>
+<pre><code>const f1=List([List([1,2,3,4]),
+                [List([11,22,33,444)],
+                [List([111,222,333,444])]])
+const f2=f1.flatten(Blean/number);
+true:代表浅拉平第一层
+f2:List=[1,2,3,4,11,22,33,444,111,222,333,444]
+flase:代表深N层全部拉平 
+number：代表第二次2层结构拉平 
+</code></pre></li>
+<li><p>find 查找，返回第一个符合的结果</p>
+<pre><code>const names=List([&apos;藏三&apos;,&apos;里斯&apos;，&apos;张丝&apos;])
+const names2=names.finds((v,k))=&gt;v.indexOf(&apos;张&apos;）!== -1)
+console.log(name2)=&gt;藏三
+</code></pre></li>
+<li>findLast 查找，返回最后一个符合的结果 同理find</li>
+<li><p>keys 返回所有的下标</p>
+<pre><code>const names=List([&apos;藏三&apos;,&apos;里斯&apos;，&apos;张丝&apos;])
+const keys=names.keys();-&gt;迭代器
+for(const k of names){
+    console.log(k)
+    0,1,3,4
+}
+</code></pre><p>//values返回所有的值</p>
+<pre><code>const names=List([&apos;藏三&apos;,&apos;里斯&apos;，&apos;张丝&apos;])
+const values=names.values()
+for(const v of names){
+    console.log(v)
+    &apos;藏三&apos;,&apos;里斯&apos;，&apos;张丝&apos;
+}
+</code></pre><p>//entries 返回所有entry,(key，value)形式</p>
+</li>
+</ul>
+<pre><code>const names=List([&apos;藏三&apos;,&apos;里斯&apos;，&apos;张丝&apos;])
+const entrys=names.values()
+for(const entry of entrys){
+    console.log(entry)
+    [0,&apos;藏三&apos;],[0,&apos;里斯&apos;],[0,&apos;张丝&apos;]
+}
+</code></pre><p>//groupBy分组</p>
+<pre><code>男女性别分组
+const people=List([{sex:&apos;male&apos;,name:&apos;张一&apos;}
+                    {sex:&apos;male&apos;,name:&apos;张2&apos;}
+                    {sex:&apos;male&apos;,name:&apos;张三&apos;}
+                    {sex:&apos;female&apos;,name:&apos;张4&apos;}
+                    {sex:&apos;female&apos;,name:&apos;张5&apos;}
+                    {sex:&apos;female&apos;,name:&apos;张6&apos;}
+    ])
+const gp=people.groupBy(x=&gt;x.sex)
+console.log(gp)
+OrderedMap{&apos;male&apos;:List[{},{},{}],&apos;female&apos;:List[{},{},{}]}
+</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/03/react-route/" rel="next" title="react-route">
+                <i class="fa fa-chevron-left"></i> react-route
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/19/immutable-api-Map/" rel="prev" title="immutable_api_Map">
+                immutable_api_Map <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="CHEN.星" />
+          <p class="site-author-name" itemprop="name">CHEN.星</p>
+           
+              <p class="site-description motion-element" itemprop="description">个人技术博客</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">93</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#API-List类型"><span class="nav-number">1.</span> <span class="nav-text">API_List类型</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CHEN.星</span>
+</div>
+
+
+<div class="powered-by">
+   个人专属
+</div>
+
+<div class="theme-info">
+  博客 -CHEN.星
+  
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

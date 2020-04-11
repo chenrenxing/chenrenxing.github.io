@@ -263,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/19/vue-cli构建rem开发环境/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/10/vue第一章/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="CHEN.星">
@@ -282,7 +282,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/19/vue-cli构建rem开发环境/" itemprop="url">vue-cli构建rem开发环境</a></h1>
+                <a class="post-title-link" href="/2019/01/10/vue第一章/" itemprop="url">vue第一章</a></h1>
         
 
         <div class="post-meta">
@@ -294,8 +294,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-19T14:43:32+08:00">
-                2018-10-19
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-10T10:41:44+08:00">
+                2019-01-10
               </time>
             
 
@@ -334,1413 +334,928 @@
       
         
           
-            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>vue-cli构建rem运行环境搭建</p>
-<h3 id="配置（针对自己的css不处理三方uicss）"><a href="#配置（针对自己的css不处理三方uicss）" class="headerlink" title="配置（针对自己的css不处理三方uicss）"></a>配置（针对自己的css不处理三方uicss）</h3><pre><code>1：下载lib-flexible文件
-npm install lib-flexible -S
-
-2：在mian.js中引入lib-flexible文件
-import &apos;lib-flexible&apos;
-
-3：安装px2rem
-npm i postcss-px2rem --save
-npm install px2rem-loader --save
-
-4：配置build目录下vue-loader.conf.js
-
-module.exports = {
-      loaders: utils.cssLoaders({
-    sourceMap: sourceMapEnabled,
-    extract: isProduction,
-    usePostCSS:true//这里设置为true，否则vue引入css会报错
-  }),
-  cssSourceMap: sourceMapEnabled,
-  cacheBusting: config.dev.cacheBusting,
-  transformToRequire: {
-    video: [&apos;src&apos;, &apos;poster&apos;],
-    source: &apos;src&apos;,
-    img: &apos;src&apos;,
-    image: &apos;xlink:href&apos;
-  },
-  postcss:[require(&apos;postcss-px2rem&apos;)({&apos;remUnit&apos;:75,&apos;baseDpr&apos;:2})]   
-    /*因为我是以750px(iphone6)宽度为基准，所以remUnit为75*/}
-</code></pre><h3 id="带有三方ui库转换css为rem"><a href="#带有三方ui库转换css为rem" class="headerlink" title="带有三方ui库转换css为rem"></a>带有三方ui库转换css为rem</h3><pre><code>utils.js
-const px2remLoader = {
-loader: &apos;px2rem-loader&apos;,
-options: {
-  &apos;remUnit&apos;: 37.5,//这里基准如果为75转换出来的样式要小一倍，为35.7为正常，但是开发的时候这里写37.5 以750px宽为基础，量出来的尺寸必须要也要少写1倍，即（100px写50px）；
-    这里是自己测试出来的，如果不对请参考其他网上资料。
-    *变小的*原因是ui框架为data-dpr=&quot;1&quot;写的
-  &apos;baseDpr&apos;: 1
-}
-  }
-//px2remLoader在这里加入就会转换
-  function generateLoaders(loader, loaderOptions) {
-    const loaders = options.usePostCSS ? [cssLoader, postcssLoader,px2remLoader] : [cssLoader]
-if (loader) {
-  loaders.push({
-    loader: loader + &apos;-loader&apos;,
-    options: Object.assign({}, loaderOptions, {
-      sourceMap: options.sourceMap
-    })
-  })
-}
-
-// Extract CSS when that option is specified
-// (which is the case during production build)
-if (options.extract) {
-  return ExtractTextPlugin.extract({
-    use: loaders,
-    fallback: &apos;vue-style-loader&apos;
-  })
-} else {
-  return [&apos;vue-style-loader&apos;].concat(loaders)
-}
-</code></pre><p>  }</p>
-<h3 id="温馨提示"><a href="#温馨提示" class="headerlink" title="温馨提示"></a>温馨提示</h3><pre><code>当你遇到1px的边框时，通常容易发现页面缺失部分边框，这时你可以使用/*no*/语法来屏蔽该属性转换，例如：
-border: 1px solid red; /*no*/
-
-由于字体的特殊性，我们在编译font-size属性时，通常不使用rem单位，这时候你可以这样使用：
-font-size: 24px; /*px*/ 
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/28/ES6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="CHEN.星">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CHEN.星~博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/28/ES6/" itemprop="url">ES6</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-28T10:26:45+08:00">
-                2018-09-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h3><ul>
-<li>ES5中常量写法<br>  Objeck.defineProperty(window,’PI2’,{<pre><code>value:3.1415926,
-writable:false        })
-</code></pre></li>
-<li>ES6的常量写法<br>  const PI=3.1415926；</li>
-<li><p>对于复合类型的变量，变量名不指向里面的数据，而是指向数据的地址，const只是保证地址不改变，而不是里面的数据不改变</p>
-<h3 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h3><p>   -es3-es5<br>  var arr = [1, 2, 4, 7, 8];<br>  // 目标：上述数组里的每一项偶数都+1，使整个数组里都是奇数。</p>
-<p>  // map 方法<br>  var result = arr.map(function(item) {</p>
-<pre><code>return item % 2 === 0 ? item + 1 : item;
-</code></pre><p>  });<br>  //forEach 方法<br>  var result = [];<br>  arr.forEach(function(item) {</p>
-<pre><code>if (item % 2 === 0) {
-    item += 1;
-}
-result.push(item);
-</code></pre><p>  });<br>  -es6<br>  var result = arr.map(item = &gt; item % 2 === 0 ? item + 1 : item);</p>
-<p>  ()=&gt;{}<br>  1：当小括号（）里面只有一个参数是可以省略的<br>  2：当{}中的表达式作为返回值的时候可以神略花括号的。<br>  箭头函数指向是定义时的指向。    </p>
-<h3 id="对象代理Proxy"><a href="#对象代理Proxy" class="headerlink" title="对象代理Proxy"></a>对象代理Proxy</h3><h3 id="1：es3数据保护"><a href="#1：es3数据保护" class="headerlink" title="1：es3数据保护"></a>1：es3数据保护</h3><p>  var Person=function(){</p>
-<pre><code>var data={
-    name=&apos;es3&apos;,
-    sex:&apos;male&apos;,
-    age:15
-}
-this.get=funciton(key){
-    return data[key]
-}
-this.set=function(key,value){
-    if(key!==&apos;sex&apos;){
-    data[key]=value;    
-    }
-}
-</code></pre><p>  }<br>  //申请一个实例<br>  var person=new Person();<br>  //读取<br>  console.table({name:person.get(‘name’),sex:person.get(‘sex’),age:person.get(‘age’)})<br>  person.set(‘name’,’es3-cname’)<br>  console.table({name:person.get(‘name’),sex:person.get(‘sex’),age:person.get(‘age’)})<br>  person.set(‘sex’,’female’)    </p>
-<h4 id="2：es5"><a href="#2：es5" class="headerlink" title="2：es5"></a>2：es5</h4><p>  var Person={</p>
-<pre><code>name:&quot;es5&quot;,
-age:14
-</code></pre><p>  }<br>  Object.defineProperty(Person,’sex’,{</p>
-<pre><code>writable:false,
-value:&apos;male&apos;    
-</code></pre><p>  })</p>
-<h4 id="3：ES6"><a href="#3：ES6" class="headerlink" title="3：ES6"></a>3：ES6</h4><p>  let Person={</p>
-<pre><code>name:&quot;es6&apos;,
-sex:&apos;male&apos;,
-age:15
-</code></pre><p>  }<br>  let person=new Proxy(person,{</p>
-<pre><code>get(target,key){
-    return target[key]
-},
-set(target,key,value){
-    if(key!==&apos;sex&apos;){
-        target[key]=value;
-    }
-}
-</code></pre><p>  })<br>  console.table({</p>
-<pre><code>name:person.name,
-sex:person.sex,
-age:person.age    
-</code></pre><p>  })<br>  try{person.sex=’female’;}catch(e){console.log(e)}finaly{};            </p>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/26/H5移动端安卓键盘出来覆盖页面/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="CHEN.星">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CHEN.星~博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/26/H5移动端安卓键盘出来覆盖页面/" itemprop="url">H5移动端安卓键盘出来覆盖页面</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-26T11:21:34+08:00">
-                2018-09-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="在移动端安卓-键盘出来覆盖页面（页面没有上移）"><a href="#在移动端安卓-键盘出来覆盖页面（页面没有上移）" class="headerlink" title="在移动端安卓 键盘出来覆盖页面（页面没有上移）"></a>在移动端安卓 键盘出来覆盖页面（页面没有上移）</h3><pre><code>在ios系统中会自己响应。
-if (/Android/gi.test(navigator.userAgent)) {
-  window.addEventListener(&apos;resize&apos;, function () {
-    if (document.activeElement.tagName == &apos;INPUT&apos; || document.activeElement.tagName == &apos;TEXTAREA&apos;) {
-      window.setTimeout(function () {
-        document.activeElement.scrollIntoViewIfNeeded();
-      }, 0);
-    }
-    $(&apos;#orderidNum&apos;).blur(function(){
-      document.activeElement.scrollIntoViewIfNeeded();
-    });
-  })
-}
-</code></pre><h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><pre><code>CSS中如果有定位为postion:flex;测试没通过，用 position: absolute;
-</code></pre><h3 id="scrollIntoView属性有兴趣可以看看"><a href="#scrollIntoView属性有兴趣可以看看" class="headerlink" title="scrollIntoView属性有兴趣可以看看"></a>scrollIntoView属性有兴趣可以看看</h3><pre><code>* {
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    height: 200vh;
-}
-
-.chunk {
-    margin-top: 100vh;
-    height: 20vh;
-    background: lightcoral;
-}
-
-div[class^=btn] {
-    width: 50px;
-    padding: 10px 15px;
-    position: fixed;
-    top: 50vh;
-    right: 0;
-    border-radius: 10px;
-    cursor: pointer;
-    text-align: center;
-}
-
-.btn-top {
-    background: lightgreen;
-}
-
-.btn-bottom {
-    margin-top: 50px;
-    background: lightblue;
-}
-
-const up = document.querySelector(&apos;.btn-top&apos;);
-const down = document.querySelector(&apos;.btn-bottom&apos;);
-up.addEventListener(&apos;click&apos;, function() {
-  test.scrollIntoView(true);
-});
-down.addEventListener(&apos;click&apos;, function() {
-  test.scrollIntoView(false);
-});
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/25/获取视频的第一帧/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="CHEN.星">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CHEN.星~博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/25/获取视频的第一帧/" itemprop="url">获取视频的第一帧</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-25T14:56:03+08:00">
-                2018-09-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="业务场景"><a href="#业务场景" class="headerlink" title="业务场景"></a>业务场景</h3><pre><code>1）管理系统上传视频，H5页面在微信端显示的时候。
-</code></pre><h3 id="发现问题"><a href="#发现问题" class="headerlink" title="发现问题"></a>发现问题</h3><pre><code>H5页在在微信浏览器/safari/chrome上默认展示的poster各有不同，chrome应用了默认行为截取了视频第一帧作为显示，微信浏览器和safari却显示空白
-</code></pre><h3 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h3><pre><code>1）video的loadeddata事件，获取到视频第一帧来展示。
- var  dom=document.getElementById(&quot;videofir&quot;);
-var scale=0.8;
-var cut = function() {
-    var  canvas = document.createElement(&quot;canvas&quot;);//创建画布
-    canvas.width = myVid.videoWidth * scale;
-    canvas.height = myVid.videoHeight * scale;//设定宽高比
-    canvas.getContext(&apos;2d&apos;).drawImage(myVid, 0, 0, canvas.width, canvas.height);//将视频此刻帧数画入画布
-    var img = document.createElement(&quot;img&quot;);
-    img.src = canvas.toDataURL(&quot;image/png&quot;);
-    dom.appendChild(img);//写入到Dom
-};
-   var  myVid=document.getElementById(&quot;video1&quot;);
-myVid.addEventListener(&apos;loadeddata&apos;,cut);//在视频帧数已加载时执行截取
-
-2）上传视频的时候，获取到视频第一帧，也一并跟video进行上传，在H5页面展示的poster展示图片。
-
-3)如果第一帧并不好看，可以在管理系统增加业务，在上传视频的时候，同时上传一张设计好的图片，进行上传。
-</code></pre><h3 id="补充知识"><a href="#补充知识" class="headerlink" title="补充知识"></a>补充知识</h3><h4 id="webkit-playsinline-”true”-playsinline"><a href="#webkit-playsinline-”true”-playsinline" class="headerlink" title="webkit-playsinline=”true” playsinline"></a>webkit-playsinline=”true” playsinline</h4><pre><code>在使用htmlvideo标签的时候，点击播放后会进入播放器占用整个屏幕，之后开始播放,webkit-playsinline=&quot;true&quot; playsinline
-这个属性会让视频播放时局部播放，但这个属性需要嵌入网页的APP比如WeChat中UIwebview 的allowsInlineMediaPlayback = YES webview.allowsInlineMediaPlayback = YES，才能生效。换句话说，安卓不支持，而IOS的wechat却支持，因为APP不支持playsinline，所以安卓是默认全屏播放的
-</code></pre><h3 id="x5-video-player-type-”h5”"><a href="#x5-video-player-type-”h5”" class="headerlink" title="x5-video-player-type=”h5”"></a>x5-video-player-type=”h5”</h3><pre><code>x5-video-player-type=&apos;h5&apos; 启用同层H5播放器，学名叫沉浸式播放。播放的时候除去了control和微信的导航栏，只留下&quot;X&quot;和&quot;&lt;&quot;两键
-</code></pre><h3 id="video标签对视频格式以及编码的支持"><a href="#video标签对视频格式以及编码的支持" class="headerlink" title="video标签对视频格式以及编码的支持"></a>video标签对视频格式以及编码的支持</h3><ul>
-<li>MPEG4 = 带有H.264视频编码和AAC音频编码的MPEG4文件</li>
-<li>WebM = 带有VP8视频编码和Vorbis音频编码的 WebM文件</li>
-<li><p>Ogg = 带有Theora视频编码和Vorbis音频编码的Ogg文件</p>
-<h4 id="视频充满屏幕"><a href="#视频充满屏幕" class="headerlink" title="视频充满屏幕"></a>视频充满屏幕</h4><p>  #video{</p>
-<pre><code>object-fit: fill;
-</code></pre><p>  }</p>
-<h3 id="把当前的视频投放到其他支持此技术的设备上"><a href="#把当前的视频投放到其他支持此技术的设备上" class="headerlink" title="把当前的视频投放到其他支持此技术的设备上"></a>把当前的视频投放到其他支持此技术的设备上</h3><p>  <video x-webkit-airplay="true"></video></p>
-<h4 id="在视频结束时执行事件。"><a href="#在视频结束时执行事件。" class="headerlink" title="在视频结束时执行事件。"></a>在视频结束时执行事件。</h4><p>  $(“#video”).get(0).addEventListener(“ended”, function() {</p>
-<p>  }, false);</p>
-<h4 id="微信浏览器下实现自动播放。"><a href="#微信浏览器下实现自动播放。" class="headerlink" title="微信浏览器下实现自动播放。"></a>微信浏览器下实现自动播放。</h4><p>  document.addEventListener(“WeixinJSBridgeReady”,     function() {<br>  video.play()<br>  }, false)</p>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/12/axios请求/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="CHEN.星">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CHEN.星~博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/12/axios请求/" itemprop="url">axios请求</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-12T11:08:50+08:00">
-                2018-09-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>##关于axios-post走地址栏<br>    axios的post走的请求体<br>    request payload<br>    {username: “”, password: “”}<br>    password:””<br>    username:””</p>
-<pre><code>如果post要走地址栏的话，可以配合qs库格式化数据。
-地址：http://www.bootcdn.cn/qs/（npm install qs -S）
-import axios from &apos;axios&apos;;
-import qs from &apos;qs&apos;;
-let postData = qs.stringify({username: &quot;&quot;, password: &quot;&quot;})
-axios.post(url,postData);
-
-Form Data （Form Data不同query string parameters）
-password:&quot;&quot;
-username:&quot;&quot;
-不要介意已经成功
-</code></pre><h3 id="get"><a href="#get" class="headerlink" title="get"></a>get</h3><p>axios.get(url[,options]);<br>传参方式：<br>1.通过url传参<br>2.通过params选项传参</p>
-<pre><code>axios.get(&apos;server.php&apos;,{
-    params:{
-        name:&apos;alice&apos;,
-        age:19
-    }
-})
-.then(resp =&gt; {
-    console.log(resp.data);
-}).catch(err =&gt; {
-    console.log(&apos;请求失败：&apos;+err.status+&apos;,&apos;+err.statusText);
-});
-axios.get(`https://api.github.com/users/${uid}`)
-                .then(resp =&gt; {
-                    // console.log(resp.data);
-                    this.user=resp.data;
-                });
-</code></pre><h3 id="post"><a href="#post" class="headerlink" title="post"></a>post</h3><p> axios.post(url,data,[options]);<br>axios默认发送数据时，数据格式是Request Payload，并非我们常用的Form Data格式，<br>所以参数必须要以键值对形式传递，不能以json形式传参<br>传参方式：<br>1.自己拼接为键值对<br>2.使用transformRequest，在请求发送前将请求数据进行转换<br>3.如果使用模块化开发，可以使用qs模块进行转换</p>
-<pre><code>axios.post(&apos;server.php&apos;,this.user,{
-    transformRequest:[
-        function(data){
-            let params=&apos;&apos;;
-            for(let index in data){
-                params+=index+&apos;=&apos;+data[index]+&apos;&amp;&apos;;
+            <h3 id="常用指令：v-for"><a href="#常用指令：v-for" class="headerlink" title="常用指令：v-for"></a>常用指令：v-for</h3><pre><code>new Vue({
+            el:&apos;#itany&apos;,
+            data:{
+                arr:[12,4,5,34,2,11],
+                user:{id:9527,name:&apos;唐伯虎&apos;,age:25},
+                arr2:[12,4,5,34,2,11,12],
+                users:[
+                    {id:9527,name:&apos;唐伯虎&apos;,age:25},
+                    {id:1001,name:&apos;秋香&apos;,age:22},
+                    {id:1002,name:&apos;石榴姐&apos;,age:24}
+                ]
             }
-            return params;
-        }
-    ]
-})
-.then(resp =&gt; {
-    console.log(resp.data);
-}).catch(err =&gt; {
-    console.log(&apos;请求失败：&apos;+err.status+&apos;,&apos;+err.statusText);
-});
-</code></pre><h3 id="Jsonp"><a href="#Jsonp" class="headerlink" title="Jsonp"></a>Jsonp</h3><p>axios本身并不支持发送跨域的请求，没有提供相应的API，作者也暂没计划在axios添加支持发送跨域请求，所以只能使用第三方库<br>vue-resource.min.js<br>使用this.$http发送请求<br>this.$http.get(url, [options])<br>this.$http.head(url, [options])<br>this.$http.delete(url, [options])<br>this.$http.jsonp(url, [options])<br>this.$http.post(url, [body], [options])<br>this.$http.put(url, [body], [options])<br>this.$http.patch(url, [body], [options])<br>this.$http.jsonp(‘<a href="https://sug.so.360.cn/suggest&#39;,{" target="_blank" rel="external">https://sug.so.360.cn/suggest&#39;,{</a><br>        params:{<br>            word:’a’<br>        }<br>    }).then(resp =&gt; {<br>        console.log(resp.data.s);<br>    });</p>
-<pre><code>this.$http.jsonp(&apos;https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su&apos;,{
-    params:{
-        wd:&apos;a&apos;
-    },
-    jsonp:&apos;cb&apos; //百度使用的jsonp参数名为cb，所以需要修改
-}).then(resp =&gt; {
-    console.log(resp.data.s);
-});
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/29/vue项目初始化/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="CHEN.星">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CHEN.星~博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/29/vue项目初始化/" itemprop="url">vue项目初始化</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-29T18:54:21+08:00">
-                2018-08-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>##一、准备工作</p>
-<p>###1.初始化项目<br>    首先vue-cli安装。成功后：<br>     vue init webpak demo<br>    cd demo<br>    cnpm install<br>    cnpm install less less-loader -D webpack自己手动配置<br>    cnpm install vuex axios -S<br>    npm run dev<br>    OK运行成功…</p>
-<p>###2.项目资源<br>    |-reset.ccs<br>    |-data.json</p>
-<p>###3.创建目录结构<br>    清除构建后的部分内容</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/08/angulrjs封装CKeditor/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="CHEN.星">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CHEN.星~博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/08/angulrjs封装CKeditor/" itemprop="url">angulrjs封装CKeditor</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-08T10:39:26+08:00">
-                2018-06-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><pre><code>项目需求（模板可视配置），参考秀米H5给的灵感，用ckeditor封装的一个富文本编辑业务
-</code></pre><h3 id="directives"><a href="#directives" class="headerlink" title="directives"></a>directives</h3><pre><code> urlModuleDirectives.directive(&apos;contenteditable&apos;, function() {
-
-    return {
-
-        require: &apos;ngModel&apos;,
-        link: function (scope, element, attrs, ctrl) {
-
-            var editor = CKEDITOR.inline(element[0]);
-            editor.on( &apos;configLoaded&apos;, function() {
-                // Remove unecessary plugins to make the editor simpler.
-                editor.config.removePlugins = &apos;colorbutton,find,flash,font,&apos; +
-                    &apos;forms,iframe,image,newpage,removeformat,&apos; +
-                    &apos;smiley,specialchar,stylescombo,templates&apos;;
-                // Rearrange the layout of the toolbar.
-                editor.config.toolbarGroups = [
-                    { name: &apos;editing&apos;,        groups: [ &apos;basicstyles&apos;, &apos;links&apos; ] },
-                    { name: &apos;undo&apos; },
-                    { name: &apos;clipboard&apos;,    groups: [ &apos;selection&apos;, &apos;clipboard&apos; ] },
-                    { name: &apos;about&apos; }
-                ];
-            });
-            editor.on(&apos;instanceReady&apos;, function() {
-                editor.setData(ctrl.$viewValue);
-            });
-
-            editor.on(&apos;pasteState&apos;, function () {
-                scope.$apply(function () {
-                    ctrl.$setViewValue(editor.getData());
-                });
-
-            });
-
-            // model -&gt; view
-            ctrl.$render = function () {
-
-                editor.setData(ctrl.$viewValue);
-                console.log(ctrl.$viewValue);
-            };
-            // load init value from DOM
-            ctrl.$render();
-        }
-
-    };
-})
-</code></pre><h4 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h4><pre><code> &lt;div  class=&quot;modular-text-one text-placeholder&quot;  contentEditable = &apos;true&apos;     ng-model=&quot;item.configData[0]&quot;&gt;
-&lt;/div&gt;
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/30/meat-http-equiv/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="CHEN.星">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CHEN.星~博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/30/meat-http-equiv/" itemprop="url">meat http-equiv(转)</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-30T10:19:09+08:00">
-                2018-05-30
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><pre><code>meta是html语言head区的一个辅助性标签。也许你认为这些代码可有可无。
-其实如果你能够用好meta标签，会给你带来意想不到的效果，meta标签的作用有：
-搜索引擎优化（SEO），定义页面使用语言，自动刷新并指向新的页面，
-实现网页转换时的动态效果，控制页面缓冲，网页定级评价，控制网页显示的窗口等！
-
-meat标签的http-equiv属性语法格式是：＜meta http-equiv=&quot;参数&quot; 
-content=&quot;参数变量值&quot;＞ ；其中http-equiv属性主要有以下几种参数：
-(下面描述常用的)
-在实际业务中，也是需要缓存的，解决的办法就是给引用的文件加版本号；
-</code></pre><h3 id="禁止缓存"><a href="#禁止缓存" class="headerlink" title="禁止缓存"></a>禁止缓存</h3><pre><code>&lt;meta http-equiv=&quot;Cache-Control&quot; content=&quot;no-cache, no-store, must-revalidate&quot; /&gt;
-&lt;meta http-equiv=&quot;Pragma&quot; content=&quot;no-cache&quot; /&gt;
-&lt;meta http-equiv=&quot;Expires&quot; content=&quot;0&quot; /&gt;
-</code></pre><h3 id="缓存静态资源"><a href="#缓存静态资源" class="headerlink" title="缓存静态资源"></a>缓存静态资源</h3><pre><code>&lt;meta http-equiv=&quot;Cache-Control&quot; content=&quot;public, max-age=31536000&quot; /&gt;
-</code></pre><h3 id="1、Cache-Control"><a href="#1、Cache-Control" class="headerlink" title="1、Cache-Control"></a>1、Cache-Control</h3><pre><code>//常用的几个
-no-cache，浏览器和缓存服务器都不应该缓存页面信息；
-public，浏览器和缓存服务器都可以缓存页面信息；
-no-store，请求和响应的信息都不应该被存储在对方的磁盘系统中；
-must-revalidate，对于客户机的每次请求，代理服务器必须想服务器验证缓存是否过时
-private：表明响应只能被单个用户缓存，不能作为共享缓存（即代理服务器不能缓存它）
-only-if-cached：表明如果缓存存在，只使用缓存，无论原始服务器数据是否有更新。
-max-age=&lt;seconds&gt;：设置缓存存储的最大周期，超过这个时间缓存被认为过期(单位秒)。
-与Expires相反，时间是相对于请求的时间。
-注意：
-no-cache：这个很容易让人产生误解，使人误以为是响应不被缓存。实际上Cache-Control:
- no-cache是会被缓存的，只不过每次在向客户端（浏览器）提供响应数据时，
-缓存都要向服务器评估缓存响应的有效性。
-Cache-Control: no-store：这个才是响应不被缓存的意思。
-</code></pre><h3 id="2、Expires-期限"><a href="#2、Expires-期限" class="headerlink" title="2、Expires(期限)"></a>2、Expires(期限)</h3><pre><code>说明：可以用于设定网页的到期时间。一旦网页过期，必须到服务器上重新传输。
-用法:＜meta http-equiv=&quot;expires&quot; content=&quot;Wed, 20 Jun 2007 22:33:00 GMT&quot;＞
-注意：必须使用GMT的时间格式。  
-</code></pre><h3 id="3、Pragma-cache模式"><a href="#3、Pragma-cache模式" class="headerlink" title="3、Pragma(cache模式)"></a>3、Pragma(cache模式)</h3><pre><code>说明：是用于设定禁止浏览器从本地机的缓存中调阅页面内容，设定后一旦离开网页就无法从Cache中再调出 
-用法：＜meta http-equiv=&quot;Pragma&quot; content=&quot;no-cache&quot;＞ 
-注意：这样设定，访问者将无法脱机浏览。
-</code></pre><h3 id="4、Refresh-刷新"><a href="#4、Refresh-刷新" class="headerlink" title="4、Refresh(刷新)"></a>4、Refresh(刷新)</h3><pre><code>说明：自动刷新并指向新页面。 
-用法：＜meta http-equiv=&quot;Refresh&quot; content=&quot;2；URL=http://www.net.cn/&quot;＞  
-注意：其中的2是指停留2秒钟后自动刷新到URL网址
-</code></pre><h3 id="5、Set-Cookie-cookie设定"><a href="#5、Set-Cookie-cookie设定" class="headerlink" title="5、Set-Cookie(cookie设定)"></a>5、Set-Cookie(cookie设定)</h3><pre><code>说明：如果网页过期，那么存盘的cookie将被删除。
-用法：＜meta http-equiv=&quot;Set-Cookie&quot; content=&quot;cookievalue=xxx;expires=Wednesday, 20-Jun-2007 22:33:00 GMT； path=/&quot;＞
-注意：必须使用GMT的时间格式。 
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/29/腾讯地图/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="CHEN.星">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CHEN.星~博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/29/腾讯地图/" itemprop="url">腾讯地图</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-29T16:36:28+08:00">
-                2018-05-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="angulrjs工厂模式"><a href="#angulrjs工厂模式" class="headerlink" title="angulrjs工厂模式"></a>angulrjs工厂模式</h3><pre><code>(function (angular) {
-&quot;use strict&quot;;
-angular.module(&apos;public.map.factory&apos;, [])
-    .factory(&apos;publicMapFactory&apos;, [function () {
-        //地图
-        return {
-            //地图初始化
-            initMap: function (id) {
-                var markersArray = [];
-                var center = new qq.maps.LatLng(39.916527,116.397128);
-                var map = new qq.maps.Map(document.getElementById(id),{
-                    center: center,
-                    zoom: 10
-                });
-                //获取城市列表接口设置中心点
-                var citylocation = new qq.maps.CityService({
-                    complete : function(result){
-                        map.setCenter(result.detail.latLng);
-                    }
-                });
-                //调用searchLocalCity();方法    根据用户IP查询城市信息。
-                citylocation.searchLocalCity();
-                //调用地址解析类
-                var geocoder = new qq.maps.Geocoder({
-                    complete : function(result){
-                        map.setCenter(result.detail.location);
-                        var marker = new qq.maps.Marker({
-                            map:map,
-                            position: result.detail.location
-                        });
-                        markersArray.push(marker);
-                    }
-                });
-                return {
-                    currentGeocoder:function(location){
-                        if (markersArray.length&gt;0) {
-                            for (var i in markersArray) {
-                                markersArray[i].setMap(null);//清除标记
-                            }
-                        }
-                        //通过getLocation();方法获取位置信息值
-                        geocoder.getLocation(location);
-                    }
-                }
-            }
-        };
-    }]);
-})(angular);
-</code></pre><h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><pre><code>//初始化map
- var productMapInfo = publicMapFactory.initMap(&apos;map&apos;);
-//标记坐标
-productMapInfo.currentGeocoder(data);
-</code></pre><h3 id="marker图标设置"><a href="#marker图标设置" class="headerlink" title="marker图标设置"></a>marker图标设置</h3><h4 id="marker设置"><a href="#marker设置" class="headerlink" title="marker设置"></a>marker设置</h4><pre><code>//解析数据marker标记
-function markData() {
-    var latlngs = [];
-    for (var j = 0; j &lt; $scope.mapData.length; j++) {
-        latlngs.push(new qq.maps.LatLng($scope.mapData[j].lat, $scope.mapData[j].lng));
-    }
-    for (var i = 0; i &lt; latlngs.length; i++) {
-        iconMark(i, infoWin, latlngs, map, $scope.mapData[i].dictId);
-    }
-    //标记END-------------------------------
-    //四种颜色iconMark。循环list 添加坐标
-}
-
-function iconMark(n, infoWin, latlngs, map, dictId) {
-        var marker = new qq.maps.Marker({
-            position: latlngs[n],
-            map: map
         });
-        markersArray.push(marker);
-        var img;
-        if (dictId === &apos;traceabilityChain01&apos;) {
-            img = &apos;dist/img/map/orange-red.png&apos;;
-        } else if (dictId === &apos;traceabilityChain02&apos;) {
-            img = &apos;dist/img/map/blue.png&apos;;
-        } else if (dictId === &apos;traceabilityChain03&apos;) {
-            img = &apos;dist/img/map/dark-green.png&apos;;
-        } else if (dictId === &apos;traceabilityChain04&apos;) {
-            img = &apos;dist/img/map/green.png&apos;;
-        }
-        var icon = new qq.maps.MarkerImage(img);
-        marker.setIcon(icon);
-        qq.maps.event.addListener(marker, &apos;click&apos;, function () {
-            $scope.nodeId = &quot;&quot;;
+&lt;!-- 普通循环 --&gt;
+         &lt;li v-for=&quot;value in arr&quot;&gt;{{value}}&lt;/li&gt; 
+         &lt;li v-for=&quot;value in user&quot;&gt;{{value}}&lt;/li&gt; 
+
+        &lt;!-- 键值循环 --&gt;
+         &lt;li v-for=&quot;(v,k) in arr&quot;&gt;{{k}}={{v}}&lt;/li&gt;
+        &lt;hr&gt;
+         &lt;li v-for=&quot;(v,k) in user&quot;&gt;{{k}}={{v}}&lt;/li&gt;
+
+        &lt;!-- 可以直接循环包含重复数据的集合，可以通过指定:key属性绑定唯一key，当更新元素时可重用元素，提高效率，类似于vue1.0中track-by --&gt;
+         &lt;li v-for=&quot;(v,k) in arr2&quot; :key=&quot;k&quot;&gt;{{v}}&lt;/li&gt;
+        &lt;br&gt;
+        &lt;hr&gt;
+        &lt;li v-for=&quot;(user,index) in users&quot;&gt;
+            {{index+1}},{{user.id}},{{user.name}},{{user.age}}
+        &lt;/li&gt;
+        &lt;hr&gt;
+        &lt;p v-for=&quot;(user,index) in  users&quot;&gt;
+            {{user.name}}
+        &lt;/p&gt;
+</code></pre><h3 id="事件对象-event"><a href="#事件对象-event" class="headerlink" title="事件对象$event"></a>事件对象$event</h3><pre><code>&lt;!-- 事件修饰符 --&gt;
+&lt;button @click.once=&quot;print&quot;&gt;只触发一次&lt;/button&gt;
+&lt;button @click=&quot;print($event)&quot;&gt;Click Me&lt;/button&gt;
+print(e){
+    console.log(e);
+    console.log(e.target.innerHTML); //DOM对象
+
 }
-</code></pre><h4 id="marker清除"><a href="#marker清除" class="headerlink" title="marker清除"></a>marker清除</h4><pre><code>if (markersArray) {
-       for (var i = 0; i &lt; markersArray.length; i++) {
-           markersArray[i].setMap(null);
-       }
-       markersArray.length = 0;
-   }
+</code></pre><h3 id="事件冒泡和默认行为"><a href="#事件冒泡和默认行为" class="headerlink" title="事件冒泡和默认行为"></a>事件冒泡和默认行为</h3><pre><code>&lt;div @click=&quot;write&quot;&gt;
+        &lt;p @click=&quot;print&quot;&gt;
+            &lt;button @click.stop=&quot;show&quot;&gt;点我&lt;/button&gt;
+        &lt;/p&gt;
+&lt;/div&gt;
+&lt;a href=&quot;#&quot; @click.prevent=&quot;study&quot;&gt;俺是链接&lt;/a&gt;
+</code></pre><h3 id="键盘事件"><a href="#键盘事件" class="headerlink" title="键盘事件"></a>键盘事件</h3><pre><code>/**
+ * 自定义键位别名
+ */
+Vue.config.keyCodes={
+    a:65,
+    f1:112
+}
+用户名：&lt;input type=&quot;text&quot; @keydown=&quot;show($event)&quot;&gt;
+show(e){
+        console.log(e.keyCode);
+        if(e.keyCode==13){
+            console.log(&apos;您按了回车&apos;);
+        }
+},
+用户名：&lt;input type=&quot;text&quot; @keydown.f1=&quot;print&quot;&gt;
+</code></pre><h3 id="属性绑定和属性的简写"><a href="#属性绑定和属性的简写" class="headerlink" title="属性绑定和属性的简写"></a>属性绑定和属性的简写</h3><pre><code>&lt;p :width=&quot;w&quot; :height=&quot;h&quot; :color=&quot;r&quot;&gt;123&lt;/p&gt;
+&lt;img :src=&quot;url&quot; :width=&quot;w&quot; :height=&quot;h&quot; &gt;
+
+data:{
+    url:&apos;https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png&apos;,
+    w:&apos;200px&apos;,
+    h:&apos;100px&apos;,
+    r:&quot;red&quot;
+}
+</code></pre><h3 id="class和style属性"><a href="#class和style属性" class="headerlink" title="class和style属性"></a>class和style属性</h3><pre><code>&lt;!-- class属性--&gt;
+&lt;p :class=&quot;aa&quot;&gt;123&lt;/p&gt;   不可以，Vue的属性绑定时不能直接css样式
+&lt;!-- 方式1:变量形式 --&gt;
+&lt;p :class=&quot;bb&quot;&gt;123&lt;/p&gt; 
+&lt;!-- 方式2：数组形式，同时引用多个 --&gt;
+ &lt;p :class=&quot;[bb,dd]&quot;&gt;123&lt;/p&gt;
+&lt;!-- 方式3：json形式，常用！！！ --&gt;
+&lt;p :class=&quot;{aa:true,cc:flag}&quot;&gt;123&lt;/p&gt;
+&lt;!-- 方式4：变量引用json形式 --&gt;
+ &lt;p :class=&quot;hello&quot;&gt;南京网博&lt;/p&gt; 
+
+&lt;!-- style属性--&gt;
+ &lt;p :style=&quot;[xx,yy]&quot;&gt;itany&lt;/p&gt;
+data:{
+        bb:&apos;aa&apos;,
+        dd:&apos;cc&apos;,
+        flag:true,
+        num:-2,
+        hello:{aa:true,cc:true},
+        xx:{color:&apos;blue&apos;,fontSize:&apos;30px&apos;},
+        yy:{backgroundColor:&apos;#ff7300&apos;}
+    }
+</code></pre><h3 id="自定义过滤器"><a href="#自定义过滤器" class="headerlink" title="自定义过滤器"></a>自定义过滤器</h3><pre><code>{{ data | filter1(参数) | filter2(参数)}}
+&lt;!-- 自定义全局过滤器--&gt;
+//时间转换
+&lt;h3&gt;{{currentTime | date}}&lt;/h3&gt;
+Vue.filter(&apos;date&apos;,data =&gt; {
+        let d=new Date(data);
+        return d.getFullYear()+&apos;-&apos;+(d.getMonth()+1)+&apos;-&apos;+d.getDate()+&apos; &apos;+d.getHours()+&apos;:&apos;+d.getMinutes()+&apos;:&apos;+d.getSeconds();
+});
+&lt;!-- 自定义局部过滤器--&gt;
+toFiexed()四舍五入的功能
+&lt;h3&gt;{{12.345678 | number(2)}}&lt;/h3&gt;    
+filters:{ //局部过滤器
+            number:(data,n) =&gt; {
+            return data.toFixed(n);
+        }
+    }
+</code></pre><h3 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h3><pre><code>beforeCreate(){
+    alert(&apos;组件实例刚刚创建，还未进行数据观测和事件配置&apos;);
+},
+created(){  //常用！！！
+    alert(&apos;实例已经创建完成，并且已经进行数据观测和事件配置&apos;);
+},
+beforeMount(){
+    alert(&apos;模板编译之前，还没挂载&apos;);
+},
+mounted(){ //常用！！！
+    alert(&apos;模板编译之后，已经挂载，此时才会渲染页面，才能看到页面上数据的展示&apos;);
+},
+beforeUpdate(){
+    alert(&apos;组件更新之前&apos;);
+},
+updated(){
+    alert(&apos;组件更新之后&apos;);
+},
+beforeDestroy(){
+    alert(&apos;组件销毁之前&apos;);
+},
+destroyed(){
+    alert(&apos;组件销毁之后&apos;);
+}
+</code></pre><h3 id="计算属性"><a href="#计算属性" class="headerlink" title="计算属性"></a>计算属性</h3><ul>
+<li>计算属性也是用来存储数据，但具有以下几个特点：-&gt;<br>a.数据可以进行逻辑处理操作<br>b.对计算属性中的数据进行监视</li>
+<li>计算属性 vs 方法-&gt;<br>将计算属性的get函数定义为一个方法也可以实现类似的功能<br>区别：<br>a.计算属性是基于它的依赖进行更新的，只有在相关依赖发生改变时才能更新变化<br>b.计算属性是缓存的，只要相关依赖没有改变，多次访问计算属性得到的值是之前缓存的计算结果，不会多次执行</li>
+<li><p>get和set-&gt;<br>计算属性由两部分组成：get和set，分别用来获取计算属性和设置计算属性<br>默认只有get，如果需要set，要自己添加</p>
+<pre><code> &lt;p&gt; {{msg.split(' ').reverse().join(' ')}} &lt;/p&gt;
+ &lt;p&gt;{{reverseMsg}}&lt;/p&gt;
+ &lt;!--3.get和set--&gt;
+ &lt;p&gt;{{num2}}&lt;/h2&gt;
+ data:{ //普通属性
+        msg:&apos;hello word&apos;,
+    },
+computed:{ //计算属性
+    msg2:function(){ //该函数必须有返回值，用来获取属性，称为get函数
+        return &apos;hello kity&apos;;
+    },
+    reverseMsg:function(){
+        //可以包含逻辑处理操作，同时reverseMsg依赖于msg
+        return this.msg.split(&apos; &apos;).reverse().join(&apos; &apos;);
+    },
+    num2:{
+        get:function(){
+            console.log(&apos;num2：&apos;+new Date());
+            return this.num1-1;
+        },
+        set:function(val){
+            console.log(&apos;修改num2值&apos;);
+            this.num2=val;
+        }
+    }
+},
+</code></pre><h3 id=""><a href="#" class="headerlink" title="#"></a>#</h3></li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/09/本地配置域名映射/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/09/本地配置域名映射/" itemprop="url">本地配置域名映射</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-09T19:46:20+08:00">
+                2019-01-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>C:\Windows\System32\drivers\etc 下hosts文件下追加</p>
+<p>192.168.1.47    a.cpsfz.com<br>192.168.1.221    b.cpsfz.com<br>启动ip服务，后面直接跟域名，<br>该demo为不同二级域名地址，顶级域名cookie</p>
+<p>a.cpsfz.com ID页面登陆跳转到b.cpsfz.com  cookie缓存<br>domainPath=cpsfz.com；<br>$.cookie(‘X-Auth-Token’, result.text, {expires: 7, path: ‘/‘, domain: domainPath, secure: false, raw: false});<br>登陆成功跳转到b.cpsfz.com 后，获取cookie X-Auth-Token 在b.cpsfz.com下面获取不到的时候，会直接去顶级域名获取。<br>注意点：退出最好登陆清除cookie    $cookies.remove(“X-Auth-Token”);</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/08/angujlar7指令/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/08/angujlar7指令/" itemprop="url">angujlar7指令</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-08T15:39:00+08:00">
+                2019-01-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在 Angular 中有三种类型的指令：</p>
+<ol>
+<li>组件 — 拥有模板的指令</li>
+<li>结构型指令 — 通过添加和移除 DOM 元素改变 DOM 布局的指令（修改视图的结构。例如，NgFor 和 结构型指令）</li>
+<li>属性型指令 — 改变元素、组件或其它指令的外观和行为的指令。（改变一个元素的外观或行为）<h3 id="属性指令"><a href="#属性指令" class="headerlink" title="属性指令"></a>属性指令</h3></li>
+</ol>
+<ul>
+<li><p>例子 </p>
+<p>  import { Directive, ElementRef, HostListener, Input } from ‘@angular/core’;</p>
+<p>  @Directive({</p>
+<pre><code>selector: &apos;[appHighlight]&apos;
+</code></pre><p>  })<br>  export class HighlightDirective {</p>
+<pre><code>constructor(private el: ElementRef) { }
+
+@Input(&apos;appHighlight&apos;) highlightColor: string;
+*当它出现在等号左边的方括号（[ ]）中时，该属性属于其它组件或指令，它必须带有 @Input 装饰器*
+@Input() defaultColor: string;
+
+@HostListener(&apos;mouseenter&apos;) onMouseEnter() {
+  this.highlight(this.highlightColor ||this.defaultColor|| &apos;red&apos;);
+}
+
+@HostListener(&apos;mouseleave&apos;) onMouseLeave() {
+  this.highlight(null);
+}
+
+private highlight(color: string) {
+  this.el.nativeElement.style.backgroundColor = color;
+}
+</code></pre><p>  }</p>
+</li>
+<li><p>引用元素</p>
+  <p [apphighlight]="color">Highlight me!</p>
+</li>
+<li><p>defaultColor</p>
+<p>  在绑定的引用元素上开始如果没有color的值 这个时候引用的就是默认defaultColor<br>  </p><p [apphighlight]="color" defaultcolor="violet"></p>
+<pre><code>Highlight me too!
+</code></pre><p>  </p><p></p>
+<h3 id="结构型指令"><a href="#结构型指令" class="headerlink" title="结构型指令"></a>结构型指令</h3><p>三个常用的内置结构型指令 —— NgIf、NgFor和模板语法</p>
+  <div *ngif="hero" class="name"></div>
+
+<p>  <ul></ul></p>
+<pre><code>&lt;li *ngFor=&quot;let hero of heroes&quot;&gt;{{hero.name}}&lt;/li&gt;
+</code></pre><p>  </p></li></ul><br>  NgSwitch 本身不是结构型指令，而是一个属性型指令，它控制其它两个 switch 指令的行为。 这也就是为什么你要写成 [ngSwitch] 而不是 *ngSwitch 的原因<br>  <div [ngswitch]="hero?.emotion"><p></p>
+<pre><code>&lt;app-happy-hero    *ngSwitchCase=&quot;&apos;happy&apos;&quot;    [hero]=&quot;hero&quot;&gt;&lt;/app-happy-hero&gt;
+&lt;app-sad-hero      *ngSwitchCase=&quot;&apos;sad&apos;&quot;      [hero]=&quot;hero&quot;&gt;&lt;/app-sad-hero&gt;
+&lt;app-confused-hero *ngSwitchCase=&quot;&apos;app-confused&apos;&quot; [hero]=&quot;hero&quot;&gt;&lt;/app-confused-hero&gt;
+&lt;app-unknown-hero  *ngSwitchDefault           [hero]=&quot;hero&quot;&gt;&lt;/app-unknown-hero&gt;
+</code></pre><p>  &lt;/div</p>
+
+
+</div>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/02/angulrjs7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/02/angulrjs7/" itemprop="url">angulrjs7</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-02T21:21:08+08:00">
+                2019-01-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="上手"><a href="#上手" class="headerlink" title="上手"></a>上手</h3><ul>
+<li>npm install -g @angular/cli</li>
+<li>ng new my-app</li>
+<li>cd my-app</li>
+<li>ng serve –open<h3 id="创建组件"><a href="#创建组件" class="headerlink" title="创建组件"></a>创建组件</h3></li>
+<li><p>ng generate component heroes</p>
+<p>Angular CLI 在生成 component 组件的时候就自动把它加到了 AppModule 中<br>打开 src/app/app.module.ts 你就会发现 component 已经在顶部导入过了。<br>component 也已经声明在了 @NgModule.declarations 数组中。</p>
+<h3 id="Service"><a href="#Service" class="headerlink" title="Service"></a>Service</h3><p>ng generate service hero</p>
+<h3 id="FormsModule"><a href="#FormsModule" class="headerlink" title="FormsModule"></a>FormsModule</h3></li>
+<li>打开 AppModule (app.module.ts) 并从 @angular/forms 库中导入 FormsModule 符号。<br>import { FormsModule } from ‘@angular/forms’; // &lt;– NgModel lives here</li>
+<li><p>然后把 FormsModule 添加到 @NgModule 元数据的 imports 数组中，这里是该应用所需外部模块的列表。imports: [BrowserModule,<br>FormsModule<br>],</p>
+<h3 id="AppRoutingModule添加路由"><a href="#AppRoutingModule添加路由" class="headerlink" title="AppRoutingModule添加路由"></a>AppRoutingModule添加路由</h3><p>  ng generate module app-routing –flat –module=app<br>  –flat 把这个文件放进了 src/app 中，而不是单独的目录中。<br>  –module=app 告诉 CLI 把它注册到 AppModule 的 imports 数组中。<br>  –flat puts the file in src/app instead of its own folder.<br>  –module=app tells the CLI to register it in the imports array of the AppModule.</p>
+<h3 id="ActivatedRoute"><a href="#ActivatedRoute" class="headerlink" title="ActivatedRoute"></a>ActivatedRoute</h3><p>  import {ActivatedRoute} from ‘@angular/router’;<br>  ActivatedRoute 保存着到当前传递过来 实例的路由信息<br>  getHero(): void {</p>
+<pre><code>const id = +this.route.snapshot.paramMap.get(&apos;id&apos;);
+this.heroService.getHero(id)
+  .subscribe(hero =&gt; this.hero = hero);
+</code></pre><p>  }<br>  route.snapshot 是一个路由信息的静态快照，抓取自组件刚刚创建完毕之后。<br>  paramMap 是一个从 URL 中提取的路由参数值的字典。 “id” 对应的值就是要获取的英雄的 id。</p>
+<h3 id="localhost"><a href="#localhost" class="headerlink" title="localhost"></a>localhost</h3><p>  goBack(): void {</p>
+<pre><code>this.location.back();
+</code></pre><p>  }<br>   Location 服务在浏览器的历史栈中后退一步。</p>
+<h3 id="为数据创建类"><a href="#为数据创建类" class="headerlink" title="为数据创建类"></a>为数据创建类</h3><p>  ng generate class hero</p>
+<h3 id="父组件监听子组件的事件"><a href="#父组件监听子组件的事件" class="headerlink" title="父组件监听子组件的事件"></a>父组件监听子组件的事件</h3><p>  子组件暴露一个 EventEmitter 属性，当事件发生时，子组件利用该属性 emits(向上弹射)事件。父组件绑定到这个事件属性，并在事件发生时作出回应。<br>  //子组件demo<br>  import { Component, EventEmitter, Input, Output } from ‘@angular/core’;</p>
+<p>  <button (click)="vote(false)" [disabled]="didVote">Disagree</button><br>  @Output() voted = new EventEmitter<boolean>();</boolean></p>
+<p>  vote(agreed: boolean) {<br>  this.voted.emit(agreed);<br>  this.didVote = true;</p>
+<pre><code>}
+</code></pre><p>  //父组件<br>  &lt;app-voter *ngFor=”let voter of voters”</p>
+<pre><code>[name]=&quot;voter&quot;
+(voted)=&quot;onVoted($event)&quot;&gt;
+</code></pre><p>  <br>  onVoted(agreed: boolean) {</p>
+<pre><code>console.log(agreed)
+</code></pre><p>   }</p>
+<h3 id="父组件与子组件通过本地变量互动"><a href="#父组件与子组件通过本地变量互动" class="headerlink" title="父组件与子组件通过本地变量互动"></a>父组件与子组件通过本地变量互动</h3><p>  父组件不能使用数据绑定来读取子组件的属性或调用子组件的方法。但可以在父组件模板里，新建一个本地变量来代表子组件，然后利用这个变量来读取子组件的属性和调用子组件的方法<br>  button (click)=”timer.start()”&gt;Start</p>
+<pre><code>&lt;button (click)=&quot;timer.stop()&quot;&gt;Stop&lt;/button&gt;
+&lt;div class=&quot;seconds&quot;&gt;{{timer.seconds}}&lt;/div&gt;
+&lt;app-countdown-timer #timer&gt;&lt;/app-countdown-timer&gt;
+</code></pre><p>  父组件不能通过数据绑定使用子组件的 start 和 stop 方法，也不能访问子组件的 seconds 属性。把本地变量(#timer)放到(<countdown-timer>)标签中，用来代表子组件。这样父组件的模板就得到了子组件的引用，于是可以在父组件的模板中访问子组件的所有属性和方法。</countdown-timer></p>
+<h3 id="父组件调用-ViewChild"><a href="#父组件调用-ViewChild" class="headerlink" title="父组件调用@ViewChild()"></a>父组件调用@ViewChild()</h3><p>  本地变量方法是个简单便利的方法。但是它也有局限性，因为父组件-子组件的连接必须全部在父组件的模板中进行。父组件本身的代码对子组件没有访问权。’</p>
+<p>  如果父组件的类需要读取子组件的属性值或调用子组件的方法，就不能使用本地变量方法。<br>  当父组件类需要这种访问时，可以把子组件作为 ViewChild，注入到父组件里面。<br>  import { AfterViewInit, ViewChild } from ‘@angular/core’;<br>  import { Component }                from ‘@angular/core’;<br>  import { CountdownTimerComponent }  from ‘./countdown-timer.component’;</p>
+<p>  @Component({</p>
+<pre><code>selector: &apos;app-countdown-parent-vc&apos;,
+template: `
+&lt;h3&gt;Countdown to Liftoff (via ViewChild)&lt;/h3&gt;
+&lt;button (click)=&quot;start()&quot;&gt;Start&lt;/button&gt;
+&lt;button (click)=&quot;stop()&quot;&gt;Stop&lt;/button&gt;
+&lt;div class=&quot;seconds&quot;&gt;{{ seconds() }}&lt;/div&gt;
+&lt;app-countdown-timer&gt;&lt;/app-countdown-timer&gt;
+`,
+styleUrls: [&apos;../assets/demo.css&apos;]
+</code></pre><p>  })<br>  export class CountdownViewChildParentComponent implements AfterViewInit {</p>
+<pre><code>@ViewChild(CountdownTimerComponent)
+private timerComponent: CountdownTimerComponent;
+
+seconds() { return 0; }
+  *//ngAfterViewInit() 生命周期钩子是非常重要的一步。被注入的计时器组件只有在 Angular 显示了父组件视图之后才能访问，所以它先把秒数显示为 0.*
+ngAfterViewInit() {
+  // Redefine `seconds()` to get from the `CountdownTimerComponent.seconds` ...
+  // but wait a tick first to avoid one-time devMode
+  // unidirectional-data-flow-violation error
+  setTimeout(() =&gt; this.seconds = () =&gt; this.timerComponent.seconds, 0);
+}
+
+start() { this.timerComponent.start(); }
+stop() { this.timerComponent.stop(); }
+</code></pre><p>  }<br>  把子组件的视图插入到父组件类需要做一点额外的工作。</p>
+<p>  首先，你要使用 ViewChild 装饰器导入这个引用，并挂上 AfterViewInit 生命周期钩子。</p>
+<p>  接着，通过 @ViewChild 属性装饰器，将子组件 CountdownTimerComponent 注入到私有属性 timerComponent 里面</p>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/23/react-setState/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/23/react-setState/" itemprop="url">react-setState</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-23T15:36:05+08:00">
+                2018-12-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ul>
+<li>setState()将需要处理的变化塞入组件的state对象中（setState源码中将一个需要改变的变化存放到组件的state对象中，采用队列处理），并告诉改组件及其子组件需要更新的状态来重新渲染。这是用于响应事件处理和服务端响应的更新用户界面的主要方式。</li>
+<li><p>setState()认为是一次请求而不是一次立即执行更新组件的命令，reat不会保证在setSate之后，能够立即改变结果响应更新组件。可以使用钩子componentDidUpdata或者一个setState回调（setSate（updater，callback））。</p>
+<h3 id="prevState"><a href="#prevState" class="headerlink" title="prevState"></a>prevState</h3><p>prevState是改变状态之前的引用，他不应该是被直接改变的。<br>例如：</p>
+<p>  this.setState((prevState, props) =&gt; {</p>
+<pre><code>return {counter: prevState.counter + props.step};
+</code></pre><p>  });<br>updater函数接收到的prevState 和 props保证都是最新的。updater的输出是和prevState的浅合并。<br>这里setState（）也是异步的。</p>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/23/react-事件处理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/23/react-事件处理/" itemprop="url">react-事件处理</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-23T14:55:05+08:00">
+                2018-12-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>–React事件绑定属性的命名采用驼峰式写法</p>
+<h3 id="向事件处理程序传递参数两种等价方法"><a href="#向事件处理程序传递参数两种等价方法" class="headerlink" title="向事件处理程序传递参数两种等价方法"></a>向事件处理程序传递参数两种等价方法</h3><pre><code>&lt;button onClick={(e) =&gt; this.deleteRow(id, e)}&gt;Delete Row&lt;/button&gt;
+&lt;button onClick={this.deleteRow.bind(this, id)}&gt;Delete Row&lt;/button&gt;
+</code></pre><h3 id="bind方式向监听函数产参"><a href="#bind方式向监听函数产参" class="headerlink" title="bind方式向监听函数产参"></a>bind方式向监听函数产参</h3><pre><code>class Popper extends React.Component{
+constructor(){
+    super();
+     this.state = {isToggleOn: true};
+    this.handleClick = this.handleClick.bind(this);
+}
+
+preventPop(name, e){    //通过 bind 方式向监听函数传参，在类组件中定义的监听函数，事件对象 e 要排在所传递参数的后面
+    e.preventDefault();
+    alert(name);
+}
+handleClick() {
+    this.setState(prevState =&gt; ({
+      isToggleOn: !prevState.isToggleOn
+    }));
+  }
+render(){
+    return (
+        &lt;div&gt;
+           &lt;button onClick={this.handleClick}&gt;
+            {this.state.isToggleOn ? &apos;ON&apos; : &apos;OFF&apos;}
+              &lt;/button&gt;
+            &lt;a href=&quot;https://reactjs.org&quot; onClick={this.preventPop.bind(this,this.state.name)}&gt;Click&lt;/a&gt;
+        &lt;/div&gt;
+    );
+}
+}
+</code></pre><h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><pre><code>类的方法默认是不会绑定 this 的。如果你忘记绑定 this.handleClick 并把它传入 onClick, 当你调用这个函数的时候 this 的值会是 undefined。
 </code></pre>
           
         
@@ -1789,7 +1304,7 @@ function iconMark(n, infoWin, latlngs, map, dictId) {
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/29/浅拷贝与深拷贝/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/06/git/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="CHEN.星">
@@ -1808,7 +1323,7 @@ function iconMark(n, infoWin, latlngs, map, dictId) {
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/05/29/浅拷贝与深拷贝/" itemprop="url">浅拷贝与深拷贝</a></h1>
+                <a class="post-title-link" href="/2018/12/06/git/" itemprop="url">git</a></h1>
         
 
         <div class="post-meta">
@@ -1820,8 +1335,8 @@ function iconMark(n, infoWin, latlngs, map, dictId) {
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-29T16:28:47+08:00">
-                2018-05-29
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-06T10:36:08+08:00">
+                2018-12-06
               </time>
             
 
@@ -1860,75 +1375,455 @@ function iconMark(n, infoWin, latlngs, map, dictId) {
       
         
           
-            <h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><pre><code>JavaScript实现继承的时候，需要进行对象的拷贝；而为了不影响拷贝后的数据对原数据造成影响，也就是存在共享关系的时候，我们就需要进行深拷贝；
-</code></pre><h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><p>数据分为基本数据类型(String, Number, Boolean, Null, Undefined，Symbol)和对象数据类型。</p>
-<ol>
-<li>基本数据类型的特点：直接存储在栈(stack)中的数据</li>
-<li>引用数据类型的特点：存储的是该对象在栈中引用，真实的数据存放在堆内存里</li>
+            <h3 id="git第一次提交代码至远程仓库"><a href="#git第一次提交代码至远程仓库" class="headerlink" title="git第一次提交代码至远程仓库"></a>git第一次提交代码至远程仓库</h3><ol>
+<li>git init</li>
+<li>git add src（这个src意思是添加src目录下的所有文件，有些会说add .    那就是提交工程下的所有文件，在这我只拿src目录说明，这个时候如果输入 git status 就可以看到要提交的文件变成了黄色，前面还有一个new file）</li>
+<li>git commit -m “first commit”   (提交到本地仓库)</li>
+<li>git remote add origin XXX（XXX就是git地址）</li>
+<li>git pull （拉取远程分支信息）</li>
+<li>git push -u -f origin master(提交到远程仓库，这个命令中的 -f 是强制推送，因为远程仓库只有初始化的文件，所以强制推送上去就行了，不加-f 会报当前分支没有远程分支 新，强制推送可以覆盖master，这样就完成了第一次提交的步骤)<h3 id="其他常用方法"><a href="#其他常用方法" class="headerlink" title="其他常用方法"></a>其他常用方法</h3> 1.设置用户名<br> git config –global user.name ‘仓库名’<br> 2.设置用户名邮箱<br> git config –global user.email ‘xxx@163.com’<br> 3.查看设置<br> git config –list<br> 4.查看状态<br> git status</li>
 </ol>
-<h3 id="浅拷贝与深拷贝"><a href="#浅拷贝与深拷贝" class="headerlink" title="浅拷贝与深拷贝"></a>浅拷贝与深拷贝</h3><ul>
-<li>深拷贝和浅拷贝是只针对Object和Array这样的引用数据类型的</li>
-<li>浅拷贝只复制指向某个对象的指针，而不复制对象本身，新旧对象还是共享同一块内存。但深拷贝会另外创造一个一模一样的对象，新对象跟原对象不共享内存，修改新对象不会改到原对象。</li>
-</ul>
-<h3 id="赋值和浅拷贝的区别"><a href="#赋值和浅拷贝的区别" class="headerlink" title="赋值和浅拷贝的区别"></a>赋值和浅拷贝的区别</h3><ul>
-<li>当我们把一个对象赋值给一个新的变量时，赋的其实是该对象的在栈中的地址，而不是堆中的数据。也就是两个对象指向的是同一个存储空间，无论哪个对象发生改变，其实都是改变的存储空间的内容，因此，两个对象是联动的。</li>
-<li>浅拷贝是按位拷贝对象，它会创建一个新对象，这个对象有着原始对象属性值的一份精确拷贝。如果属性是基本类型，拷贝的就是基本类型的值；如果属性是内存地址（引用类型），拷贝的就是内存地址 ，因此如果其中一个对象改变了这个地址，就会影响到另一个对象。即默认拷贝构造函数只是对对象进行浅拷贝复制(逐个成员依次拷贝)，即只复制对象空间而不复制资源。</li>
-</ul>
-<h3 id="浅拷贝的实现方式"><a href="#浅拷贝的实现方式" class="headerlink" title="浅拷贝的实现方式"></a>浅拷贝的实现方式</h3><ol>
-<li><p>Object.assign()；<br>Object.assign() 方法可以把任意多个的源对象自身的可枚举属性拷贝给目标对象，然后返回目标对象。但是 Object.assign() 进行的是浅拷贝，拷贝的是对象的属性的引用，而不是对象本身。</p>
-<pre><code>var obj={a:{a:&apos;kobe&apos;,b:39}};
-var initalObj=Object.assign({},obj);
-initalObj.a.a=&apos;wade&apos;;
-console.log(obj.a.a)//wade
-注意：当object只有一层的时候，是深拷贝
-let obj={
-    username:&quot;Kobe&quot;    
-    }
-let obj2=Object.assign({},obj);
-obj2.username=&apos;wade&apos;;
-console.log(obj);//{username:&apos;kobe&apos;}
-</code></pre></li>
-</ol>
-<ul>
-<li>Array.prototype.concat()<br>  let arr=[1,3,{username:’kobe’}]<br>  let arr2=arr.concat();<br>  arr2[2].username=’wode’;<br>  console.log(arr);<br>  修改新对象会改变到原对象 arr.username//wode</li>
-<li>Array.prototype.slice()<br>  let arr=[1,3,{username:’kobe’}]<br>  let arr3=arr.slice();<br>  arr3[3].username=’wode’;<br>  console.log(arr);<br>  修改新对象会改变到原对象 arr.username//wode</li>
-</ul>
-<p>关于Array的slice和concat方法的补充说明：Array的slice和concat方法不修改原数组，只会返回一个浅复制了原数组中的元素的一个新数组。<br>原数组的元素会按照下述规则拷贝</p>
-<ul>
-<li>如果该元素是个对象引用(不是实际的对象)，slice 会拷贝这个对象引用到新的数组里。两个对象引用都引用了同一个对象。如果被引用的对象发生改变，则新的和原来的数组中的这个元素也会发生改变。</li>
-<li>对于字符串、数字及布尔值来说（不是 String、Number 或者 Boolean 对象），slice 会拷贝这些值到新的数组里。在别的数组里修改这些字符串或数字或是布尔值，将不会影响另一个数组</li>
-</ul>
-<h3 id="深拷贝的实现方式"><a href="#深拷贝的实现方式" class="headerlink" title="深拷贝的实现方式"></a>深拷贝的实现方式</h3><ul>
-<li>JSON.parse(JSON.stringify())<br>原理： 用JSON.stringify将对象转成JSON字符串，再用JSON.parse()把字符串解析成对象，一去一来，新的对象产生了，而且对象会开辟新的栈，实现深拷贝。<br>这种方法虽然可以实现数组或对象深拷贝，但不能处理函数。</li>
-<li>手写递归方法<br>递归方法实现深度克隆原理：遍历对象、数组直到里边都是基本数据类型，然后再去复制，就是深度拷贝。</li>
-<li>函数库lodash</li>
-</ul>
-<h3 id="深度拷贝对象，带数组"><a href="#深度拷贝对象，带数组" class="headerlink" title="深度拷贝对象，带数组"></a>深度拷贝对象，带数组</h3><pre><code>var data = extendCopy(node);
- function extendCopy(p) {
-     var c = {};
-     for (var key in p) {
-         if (key !== &apos;$$hashKey&apos;) {
-             if(key === &apos;files&apos;||key === &apos;filesId&apos;||key === &apos;base64Image&apos;){
-                 c[key]=[];
-             }else{
-                 if (key === &apos;configData&apos;) {
-                     if(p[key]){
-                         var newArray = [];
-                         for(var i=0;i&lt; p[key].length;i++){
-                             newArray.push(p[key][i]);
-                         }
-                         c[key]=newArray;
-                     }
 
-                 }else{
-                     c[key] = p[key];
-                 }
-             }
-         }
-     }
-     return c;
- }
-</code></pre><h3 id="文章出处"><a href="#文章出处" class="headerlink" title="文章出处"></a>文章出处</h3><p><a href="https://mp.weixin.qq.com/s?__biz=MzIzNTU2ODM4Mw==&amp;mid=2247487594&amp;idx=2&amp;sn=b95f2dad85139117c50d7117a70c70c4&amp;chksm=e8e47dfadf93f4ec2041a42059efb50c6190e6f88d5e5d52cfea5a1bb7a5893c8b97cfe993e5&amp;mpshare=1&amp;scene=23&amp;srcid=12262LzGOfFCIMNfrlaEexCO#rd" target="_blank" rel="external">https://mp.weixin.qq.com/s?__biz=MzIzNTU2ODM4Mw==&amp;mid=2247487594&amp;idx=2&amp;sn=b95f2dad85139117c50d7117a70c70c4&amp;chksm=e8e47dfadf93f4ec2041a42059efb50c6190e6f88d5e5d52cfea5a1bb7a5893c8b97cfe993e5&amp;mpshare=1&amp;scene=23&amp;srcid=12262LzGOfFCIMNfrlaEexCO#rd</a></p>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/23/mongo快速入门手册/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/23/mongo快速入门手册/" itemprop="url">'mongo快速入门手册'</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-23T10:27:49+08:00">
+                2018-11-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>#####安装MongoDB#####</p>
+<p>我选择的是windows平台的mongodb安装方式，也很简单，只需要 下载 对应操作系统版本的Mongodb即可。（建议下载ZIP的安装包）</p>
+<p>#####怎么验证我们的mongodb已经可以使用了？#####<br>1、通过命令行切换到mongodb的安装目录， 我的目录为 C:\Program Files\MongoDB\Server\3.0\bin。<br>2、在c盘中创建 C:\mongodb\data 和 C:\mongodb\logs，分别用来存储数据文件和日志文件。<br>3、命令行执行 mongod –dbpath C:\mongodb\data，用来启动 mongodb 服务器。<br>4、命令行执行 mongo 127.0.0.1:27017，启动 mongodb 客户端。</p>
+<p>#####MongoDB常规操作#####</p>
+<p>Mongodb服务启动成功后，我们就可以使用客户端工具来连接mongodb了。 这里我们使用的是mongo提供的客户端工具，在我们刚才安装的mongodb目录下bin目录底下</p>
+<p>同样的进入到我们的mongodb的bin目录，执行 mongo命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">C:\Program Files\MongoDB\Server\3.0\bin\mongo</div><div class="line">MongoDB shell version: 2.6.3</div><div class="line">connecting to: test</div><div class="line">&gt;</div></pre></td></tr></table></figure>
+<p>当然，如果你已经将 C:\Program Files\MongoDB\Server\3.0\bin 加入到环境变量中，你就可以不需要切换目录了，直接执行mongo即可看到效果。</p>
+<p>通过上面的客户端连接结果可以看到，默认情况下会连接到 test这个数据库 。 如果我们想要知道mongodb现在有多少数据库，可以通过命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt; show dbs</div><div class="line">admin     0.078GB</div><div class="line">local     0.078GB</div><div class="line">persons   0.078GB</div><div class="line">persons1  0.078GB</div><div class="line">test      0.078GB</div></pre></td></tr></table></figure></p>
+<p>如果想要知道当前是哪个数据库，使用 db 命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; db</div><div class="line">test</div></pre></td></tr></table></figure></p>
+<p>如果想要切换到其他的数据库， 使用命令 use <your-dbname><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; use admin</div><div class="line">switched to db admin</div></pre></td></tr></table></figure></your-dbname></p>
+<p>显示当前数据库有哪一些集合show collections<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&gt; show collections</div><div class="line">cinema</div><div class="line">emps</div><div class="line">parents</div><div class="line">people</div><div class="line">persons</div><div class="line">system.indexes</div><div class="line">user</div></pre></td></tr></table></figure></p>
+<p>当然，如果你第一次使用运行 show collection ，结果是空的，但是当你往集合里面插入数据后，就可以看到集合以及对应的数据库都会被创建。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&gt; use demo</div><div class="line">switched to db demo</div><div class="line">&gt; show collections</div><div class="line">&gt; db.users.insert(&#123;name:&quot;zhangsan&quot;,password:111111&#125;)</div><div class="line">WriteResult(&#123; &quot;nInserted&quot; : 1 &#125;)</div><div class="line">&gt; show collections</div><div class="line">system.indexes</div><div class="line">users</div><div class="line">&gt; db</div><div class="line">demo</div><div class="line">&gt; db.users.find()</div><div class="line">&#123; &quot;_id&quot; : ObjectId(&quot;56cc6bb710f6b32d1d3c1278&quot;), &quot;name&quot; : &quot;zhangsan&quot;, &quot;password&quot; : 111111 &#125;</div></pre></td></tr></table></figure></p>
+<p>在上面的操作中，我们切换到demo数据库，并且创建了users这个集合，还往users集合插入一条数据。</p>
+<p>#####插入数据#####<br>在mongodb中，插入数据使用命令 db.collectionName.insert({data}) 或者 db.collectionName.save({data})<br>这两个方法都可以正常工作。 对于 insert方法在上文中已经提到，这里演示save方法的使用。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; db.users.save(&#123;name:&quot;lis&quot;,password:222222&#125;)</div><div class="line">WriteResult(&#123; &quot;nInserted&quot; : 1 &#125;)</div></pre></td></tr></table></figure></p>
+<p>#####修改数据#####<br>要修改数据，也有两种方式，一个是修改整个文档，一个是修改部分。首先先介绍修改整个文档的做法， 我们先把usres这个集合的数据都查询出来，方便和修改操作后的对比<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; db.users.find();</div><div class="line">&#123; &quot;_id&quot; : ObjectId(&quot;56cc6bb710f6b32d1d3c1278&quot;), &quot;name&quot; : &quot;zhangsan&quot;, &quot;password&quot; : 111111 &#125;</div><div class="line">&#123; &quot;_id&quot; : ObjectId(&quot;56cc6d2410f6b32d1d3c1279&quot;), &quot;name&quot; : &quot;zhangsan1&quot; &#125;</div><div class="line">&#123; &quot;_id&quot; : &quot;56cc6d2410f6b32d1d3c1279&quot;, &quot;name&quot; : &quot;zhangsan1&quot;, &quot;password&quot; : 333333 &#125;</div></pre></td></tr></table></figure></p>
+<p>第一种方式： db.collectionName.update({criteria},{data}); 这个方法会替换整个文档。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt; db.users.update(&#123;name:&quot;zhangsan1&quot;&#125;,&#123;password:222222&#125;);</div><div class="line">WriteResult(&#123; &quot;nMatched&quot; : 1, &quot;nUpserted&quot; : 0, &quot;nModified&quot; : 1 &#125;)</div><div class="line">&gt; db.users.find();</div><div class="line">&#123; &quot;_id&quot; : ObjectId(&quot;56cc6bb710f6b32d1d3c1278&quot;), &quot;name&quot; : &quot;zhangsan&quot;, &quot;password&quot; : 111111 &#125;</div><div class="line">&#123; &quot;_id&quot; : ObjectId(&quot;56cc6d2410f6b32d1d3c1279&quot;), &quot;password&quot; : 222222 &#125;</div><div class="line">&#123; &quot;_id&quot; : &quot;56cc6d2410f6b32d1d3c1279&quot;, &quot;name&quot; : &quot;zhangsan1&quot;, &quot;password&quot; : 333333 &#125;</div></pre></td></tr></table></figure></p>
+<p>可以发现，当我们修改完之后，再去查找username为’linwenbin’的数据就不存在了。<br>第二种方式： db.collectionName.update({criteria},{$set:{newData}}); 现在我们对另一条数据进行set的修改操作<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; db.users.update(&#123;_id: ObjectId(&quot;56cc6bb710f6b32d1d3c1278&quot;)&#125;,&#123;$set:&#123;name:&quot;zhangsan&quot;, password:1&#125;&#125;)</div><div class="line">WriteResult(&#123; &quot;nMatched&quot; : 1, &quot;nUpserted&quot; : 0, &quot;nModified&quot; : 1 &#125;)</div></pre></td></tr></table></figure></p>
+<p>$set操作可以只修改局部的属性，如果属性存在就是更新，如果不存在，就是新增。</p>
+<p>#####删除数据#####<br>如果要删除某一个集合，可以通过 db.collectionName.drop(); 来删除。<br>如果删除某一个集合内的数据，则通过 db.collectionName.remove({criteria});</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">//删除一条记录</div><div class="line">&gt; db.users.remove(&#123;_id: ObjectId(&quot;56cc6d2410f6b32d1d3c1279&quot;)&#125;)</div><div class="line">WriteResult(&#123; &quot;nRemoved&quot; : 1 &#125;)</div><div class="line"></div><div class="line">//删除所有记录</div><div class="line">&gt; db.users.drop()</div><div class="line">true</div><div class="line">&gt; show collections</div><div class="line">system.indexes</div></pre></td></tr></table></figure>
+<p>#####查询数据#####<br>查询所有数据<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; db.persons.find().pretty()</div></pre></td></tr></table></figure></p>
+<p>pretty() 方法是对查询结果进行格式化</p>
+<p>查询条件<br>等于<br>等于操作直接使用 {key:value} 这样的文档形式即可<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; db.persons.find(&#123;age: 27&#125;).pretty()</div></pre></td></tr></table></figure></p>
+<p>大于<br>语法： {key : {$gt:value} }<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; db.persons.find(&#123;age: &#123;$gt: 25&#125;&#125;).pretty()</div></pre></td></tr></table></figure></p>
+<p>大于等于<br>语法： {key : {$gte:value} }<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; db.persons.find(&#123;age: &#123;$gte: 25&#125;&#125;).pretty()</div></pre></td></tr></table></figure></p>
+<p>小于<br>语法：　{key : {$lt:value} }<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; db.persons.find(&#123;age:&#123;$lt:25&#125;&#125;).pretty()</div></pre></td></tr></table></figure></p>
+<p>小于等于<br>语法：　{key : {$lte:value}}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; db.persons.find(&#123;age:&#123;$lte:25&#125;&#125;).pretty()</div></pre></td></tr></table></figure></p>
+<p>不等于<br>语法： {key : {$ne:value} }<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; db.persons.find(&#123;age:&#123;$ne:25&#125;&#125;).pretty()</div></pre></td></tr></table></figure></p>
+<p>且操作 AND<br>语法： {key1:value1, key2:value2, key3:value3 …}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; db.persons.find(&#123;age:25, name:&quot;jim&quot;&#125;).pretty()</div></pre></td></tr></table></figure></p>
+<p>或操作 OR<br>语法： { $or: [ {key1: value1}, {key2:value2} ] } 将or条件的所有 {key:value} 都放在 $or 的value中（数组）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; db.persons.find(&#123;$or:[&#123;age: 25&#125;,&#123;age:&#123;$lt:25&#125;&#125;]&#125;,&#123;_id:0,name:1,age:1&#125;)</div></pre></td></tr></table></figure></p>
+<p>limit, skip, sort<br>为了更好的测试分页的效果，新建一个集合，并插入30条数据<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt; for(var i=0; i&lt;30; i++)&#123;</div><div class="line">... db.pages.insert(&#123;&quot;val&quot;:i&#125;);</div><div class="line">... &#125;</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; db.pages.find().limit(5)</div></pre></td></tr></table></figure>
+<p>可以发现，如果使用 limit方法的话会显示整个集合的所有文档。 指定了 limit 之后， 显示具体的条数，上文中，limit(5) 表示， 显示5条文档。</p>
+<p>limit方法除外，还有一个 skip 方法，skip也是接受一个整型的参数，表示查询结果跳过多少个文档。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt; db.pages.find().skip(18).limit(5)</div><div class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5574ca7b192e9dda0925e391&quot;), &quot;val&quot; : 18 &#125;</div><div class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5574ca7b192e9dda0925e392&quot;), &quot;val&quot; : 19 &#125;</div><div class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5574ca7b192e9dda0925e393&quot;), &quot;val&quot; : 20 &#125;</div><div class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5574ca7b192e9dda0925e394&quot;), &quot;val&quot; : 21 &#125;</div><div class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5574ca7b192e9dda0925e395&quot;), &quot;val&quot; : 22 &#125;</div></pre></td></tr></table></figure></p>
+<p>在mongodb中，如果要对查询结果排序，那么需要使用sort方法。sort方法接收一个文档参数。也就是{key:value}的形式。其中，key表示要排序的字段，value的可取值为 1 / -1 。1表示升序asc，-1表示降序desc。话不多说，直接上例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">&gt; db.pages.find().sort(&#123;val:-1&#125;)</div><div class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5574ca7b192e9dda0925e39c&quot;), &quot;val&quot; : 29 &#125;</div><div class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5574ca7b192e9dda0925e39b&quot;), &quot;val&quot; : 28 &#125;</div><div class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5574ca7b192e9dda0925e39a&quot;), &quot;val&quot; : 27 &#125;</div><div class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5574ca7b192e9dda0925e399&quot;), &quot;val&quot; : 26 &#125;</div><div class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5574ca7b192e9dda0925e398&quot;), &quot;val&quot; : 25 &#125;</div><div class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5574ca7b192e9dda0925e397&quot;), &quot;val&quot; : 24 &#125;</div><div class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5574ca7b192e9dda0925e396&quot;), &quot;val&quot; : 23 &#125;</div><div class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5574ca7b192e9dda0925e395&quot;), &quot;val&quot; : 22 &#125;</div><div class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5574ca7b192e9dda0925e394&quot;), &quot;val&quot; : 21 &#125;</div><div class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5574ca7b192e9dda0925e393&quot;), &quot;val&quot; : 20 &#125;</div><div class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5574ca7b192e9dda0925e392&quot;), &quot;val&quot; : 19 &#125;</div><div class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5574ca7b192e9dda0925e391&quot;), &quot;val&quot; : 18 &#125;</div><div class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5574ca7b192e9dda0925e390&quot;), &quot;val&quot; : 17 &#125;</div><div class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5574ca7b192e9dda0925e38f&quot;), &quot;val&quot; : 16 &#125;</div><div class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5574ca7b192e9dda0925e38e&quot;), &quot;val&quot; : 15 &#125;</div><div class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5574ca7b192e9dda0925e38d&quot;), &quot;val&quot; : 14 &#125;</div><div class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5574ca7b192e9dda0925e38c&quot;), &quot;val&quot; : 13 &#125;</div><div class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5574ca7b192e9dda0925e38b&quot;), &quot;val&quot; : 12 &#125;</div><div class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5574ca7b192e9dda0925e38a&quot;), &quot;val&quot; : 11 &#125;</div><div class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5574ca7b192e9dda0925e389&quot;), &quot;val&quot; : 10 &#125;</div><div class="line">Type &quot;it&quot; for more</div></pre></td></tr></table></figure></p>
+<p>#####express + mongoose#####</p>
+<p>Mongoose库简而言之就是在node环境中操作MongoDB数据库的一种便捷的封装，一种对象模型工具，类似ORM，Mongoose将数据库中的数据转换为JavaScript对象以供你在应用中使用。</p>
+<p>1、准备工作<br>可以通过npm下载Mongoose依赖<br>2、在项目中创建一个数据库连接<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var mongoose = require( &apos;mongoose&apos; );</div><div class="line">var dbURI = &apos;mongodb://localhost/test&apos;;</div><div class="line">mongoose.connect(dbURI);</div><div class="line">mongoose.connection.on(&apos;connected&apos;, function () &#123;</div><div class="line">    console.log(&apos;Mongoose connected to &apos; + dbURI);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>以上操作，通过mongoose已经创建了一个数据库连接，并连接上数据库。</p>
+<p>3、mongoose 是一种对象模型工具，它将具体的数据抽象成模型，这些模型拥有属性和操作数据的方法。那么，在操作之前，我们应该首先创建数据模型。</p>
+<p>名词解释：<br>Schema: 用来描述数据的结构，里面包含数据的属性，每个属性的类型。它只是一种结构，并不具备对数据的实际操作（行为）<br>Model: 将Schema发布为数据模型，它拥有数据的属性和行为。<br>Entity: 由Model创建的数据实体，它的操作同样可以影响数据。</p>
+<p>在做具体的应用实现之前，我们都应该首先根据业务的需求，抽象出相应的数据模型，然后在通过mongoose提供的API方法，封装出业务方法，来满足实际操作的需要。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/22/Node调试工具入门/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/22/Node调试工具入门/" itemprop="url">'Node调试工具入门'</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-22T10:08:07+08:00">
+                2018-11-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="开发环境"><a href="#开发环境" class="headerlink" title="开发环境"></a>开发环境</h3><pre><code>后端：nodejs Express框架
+前端:vue-cli2
+数据库：mongo和Navicat Premium 12
+</code></pre><h3 id="Express-应用程序生成器"><a href="#Express-应用程序生成器" class="headerlink" title="Express 应用程序生成器"></a>Express 应用程序生成器</h3><pre><code>这里用的是express框架，
+通过应用生成器工具 express-generator 可以快速创建一个应用的骨架。
+express-generator 包含了 express 命令行工具。通过如下命令即可安装：
+npm install express-generator -g
+-h 参数可以列出所有可用的命令行参数：
+
+创建项目-express project
+~~~下载依赖后续自己操作。
+</code></pre><h3 id="启动开发者工具"><a href="#启动开发者工具" class="headerlink" title="启动开发者工具"></a>启动开发者工具</h3><ol>
+<li>正常的启动的方式为根据package.json执行脚本语法</li>
+<li>npm start就能启动node服务</li>
+<li>前端项目配置环境跨域访问node服务（下篇文章讲解）</li>
+<li>这样启动无法对node的代码进行断点调试。</li>
+<li><p>在node启动的-inspect的调试工具里自带热替换功能</p>
+<p> 一：第一种。我用的是webstrom也就是在编辑器内断点调试（不过感觉很不爽，毕竟前端开发人员，还是习惯在浏览器的开发工具下断点调试，而且感觉也特慢）<br> 启动run里面有个debug模式。启动就OK，就可以在webstrom里面断点</p>
+<p> 二：node –inspect bin/www<br> 上面代码中，–inspect参数是启动调试模式必需的。这时，打开浏览器访问<a href="http://127.0.0.1:3000就可以看到Welcome" target="_blank" rel="external">http://127.0.0.1:3000就可以看到Welcome</a> to Express说明node服务启动成功了<br> 接下来，就要开始调试了。一共有两种打开调试工具的方法，</p>
+<p> 1）第一种是在 Chrome 浏览器的地址栏，键入 chrome://inspect或者about:inspect，<br> 会看到Remote Target下面有个Target 点击下面就会弹出node的调试工具</p>
+<p> 2）第二种进入调试工具的方法，是在 <a href="http://127.0.0.1:3000" target="_blank" rel="external">http://127.0.0.1:3000</a> 的窗口打开”开发者工具”，顶部左上角有一个 Node 的绿色标志，点击就可以进入（也可以在你自己启动的vue项目打开开发工具也会看到node标志）</p>
+</li>
+</ol>
+<h3 id="需要跟断点的地方需要debugger"><a href="#需要跟断点的地方需要debugger" class="headerlink" title="需要跟断点的地方需要debugger;"></a>需要跟断点的地方需要debugger;</h3><h3 id="http-www-ruanyifeng-com-blog-2018-03-node-debugger-html这是阮一峰大神的文档"><a href="#http-www-ruanyifeng-com-blog-2018-03-node-debugger-html这是阮一峰大神的文档" class="headerlink" title="http://www.ruanyifeng.com/blog/2018/03/node-debugger.html这是阮一峰大神的文档"></a><a href="http://www.ruanyifeng.com/blog/2018/03/node-debugger.html这是阮一峰大神的文档" target="_blank" rel="external">http://www.ruanyifeng.com/blog/2018/03/node-debugger.html这是阮一峰大神的文档</a></h3>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/30/http知识填坑/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/30/http知识填坑/" itemprop="url">http知识填坑</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-30T15:39:29+08:00">
+                2018-10-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ol>
+<li>Chorme搜索自身的DNS缓存</li>
+<li>搜索操作系统自身的DNS缓存（浏览器没有找到缓存或缓存已经失效）</li>
+<li>读取本地的host文件</li>
+<li><p>浏览器发起一个DNS的一个系统调用（没有找到本地host文件）</p>
+<ul>
+<li>宽带运营商服务器查看本身缓存</li>
+<li>运营商服务器发起一个迭代DNS解析的请求（运营商服务器把结果返回操作系统内核同时缓存起来）</li>
+<li>操作系统内核把结果返回给浏览器</li>
+<li>最终拿到网址对应的ip地址</li>
+</ul>
+</li>
+<li><p>浏览器获取域名对应的ip地址后，发起http’三次握手’</p>
+</li>
+<li>TCP/IP链接建立起来后，浏览器就可以向服务器发起http请求了比如说，用http的get方法请求一个根域里的一个域名，协议可以采用http 1.0的一个协议</li>
+<li>服务器端接受到了这个请求，根据路径参数，经过后端d的一些处理后，把处理后的一个结果数据返回给浏览器，就会把完整的html页面代码返回给浏览器</li>
+<li>浏览器拿到了完整的html代码，在解析和渲染这个页面的时候，里面的js、css、图片静态资源，他们同样也是一个个http请求都需经过上面的主要的7个步骤。</li>
+</ol>
 
           
         
@@ -1968,7 +1863,7 @@ console.log(obj);//{username:&apos;kobe&apos;}
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2014,7 +1909,7 @@ console.log(obj);//{username:&apos;kobe&apos;}
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">77</span>
+                <span class="site-state-item-count">93</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2060,7 +1955,7 @@ console.log(obj);//{username:&apos;kobe&apos;}
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2019</span>
+  <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

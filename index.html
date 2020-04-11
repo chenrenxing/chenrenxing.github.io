@@ -263,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/10/vue路由/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/07/umi/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="CHEN.星">
@@ -282,7 +282,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/01/10/vue路由/" itemprop="url">vue路由</a></h1>
+                <a class="post-title-link" href="/2020/03/07/umi/" itemprop="url">umi</a></h1>
         
 
         <div class="post-meta">
@@ -294,8 +294,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-10T19:55:59+08:00">
-                2019-01-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-07T23:17:11+08:00">
+                2020-03-07
               </time>
             
 
@@ -334,258 +334,7 @@
       
         
           
-            <h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><pre><code>&lt;div id=&quot;itany&quot;&gt;
-    &lt;div&gt;
-        &lt;router-link to=&quot;/home&quot;&gt;主页&lt;/router-link&gt;
-        &lt;router-link to=&quot;/user&quot;&gt;用户&lt;/router-link&gt;
-    &lt;/div&gt;
-    &lt;div&gt;
-        &lt;transition enter-active-class=&quot;animated bounceInLeft&quot; leave-active-class=&quot;animated bounceOutRight&quot;&gt;
-            &lt;router-view&gt;&lt;/router-view&gt;
-        &lt;/transition&gt;
-    &lt;/div&gt;
-
-    &lt;hr&gt;
-    &lt;button @click=&quot;push&quot;&gt;添加路由&lt;/button&gt;
-    &lt;button @click=&quot;replace&quot;&gt;替换路由&lt;/button&gt;
-&lt;/div&gt;
-
-&lt;template id=&quot;user&quot;&gt;
-    &lt;div&gt;
-        &lt;h3&gt;用户信息&lt;/h3&gt;
-        &lt;ul&gt;
-            &lt;router-link to=&quot;/user/login?name=tom&amp;pwd=123&quot; tag=&quot;li&quot;&gt;用户登陆&lt;/router-link&gt;
-            &lt;router-link to=&quot;/user/regist/alice/456&quot; tag=&quot;li&quot;&gt;用户注册&lt;/router-link&gt;
-        &lt;/ul&gt;
-        &lt;router-view&gt;&lt;/router-view&gt;
-    &lt;/div&gt;
-&lt;/template&gt;
-
-&lt;script&gt;
-    var Home={
-        template:&apos;&lt;h3&gt;我是主页&lt;/h3&gt;&apos;
-    }
-    var User={
-        template:&apos;#user&apos;
-    }
-    var Login={
-        template:&apos;&lt;h4&gt;用户登陆。。。获取参数：{{$route.query}},{{$route.path}}&lt;/h4&gt;&apos;
-    }
-    var Regist={
-        template:&apos;&lt;h4&gt;用户注册。。。获取参数：{{$route.params}},{{$route.path}}&lt;/h4&gt;&apos;
-    }
-
-    const routes=[
-        {
-            path:&apos;/home&apos;,
-            component:Home
-        },
-        {
-            path:&apos;/user&apos;,
-            component:User,
-            children:[
-                {
-                    path:&apos;login&apos;,
-                    component:Login
-                },
-                {
-                    path:&apos;regist/:username/:password&apos;,
-                    component:Regist
-                }
-            ]
-        },
-        {
-            path:&apos;*&apos;,
-            redirect:&apos;/home&apos;
-        }
-    ]
-
-    const router=new VueRouter({
-        routes, //简写，相当于routes:routes
-        linkActiveClass:&apos;active&apos; //更新活动链接的class类名
-    });
-
-    new Vue({
-        el:&apos;#itany&apos;,
-        router, //注入路由
-        methods:{
-            push(){
-                router.push({path:&apos;home&apos;}); //添加路由，切换路由
-            },
-            replace(){
-                router.replace({path:&apos;user&apos;}); //替换路由，没有历史记录
-            }
-        }
-    });
-&lt;/script&gt;
-</code></pre><h3 id="路由嵌套和参数传递"><a href="#路由嵌套和参数传递" class="headerlink" title="路由嵌套和参数传递"></a>路由嵌套和参数传递</h3><pre><code>传参的两种形式：
-   a.查询字符串：login?name=tom&amp;pwd=123
-       {{$route.query}}
-   b.rest风格url：regist/alice/456
-       {{$route.params}}
-</code></pre><h3 id="路由实例的方法"><a href="#路由实例的方法" class="headerlink" title="路由实例的方法"></a>路由实例的方法</h3><pre><code>router.push()  添加路由，功能上与&lt;route-link&gt;相同
-router.replace() 替换路由，不产生历史记录 
-</code></pre><h3 id="路由拦截器"><a href="#路由拦截器" class="headerlink" title="路由拦截器"></a>路由拦截器</h3><pre><code>//使用钩子函数对路由进行权限跳转
-router.beforeEach((to, from, next) =&gt; {
-    const role = localStorage.getItem(&apos;ms_username&apos;);
-    if(!role &amp;&amp; to.path !== &apos;/login&apos;){
-        next(&apos;/login&apos;);
-    }else if(to.meta.permission){
-        // 如果是管理员权限则可进入，这里只是简单的模拟管理员权限而已
-        role === &apos;admin&apos; ? next() : next(&apos;/403&apos;);
-    }else{
-        // 简单的判断IE10及以下不进入富文本编辑器，该组件不兼容
-        if(navigator.userAgent.indexOf(&apos;MSIE&apos;) &gt; -1 &amp;&amp; to.path === &apos;/editor&apos;){
-            Vue.prototype.$alert(&apos;vue-quill-editor组件不兼容IE10及以下浏览器，请使用更高版本的浏览器查看&apos;, &apos;浏览器不兼容通知&apos;, {
-                confirmButtonText: &apos;确定&apos;
-            });
-        }else{
-            next();
-        }
-}
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/10/vue-slot内容分发/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="CHEN.星">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CHEN.星~博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/10/vue-slot内容分发/" itemprop="url">solt</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-10T19:25:48+08:00">
-                2019-01-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <pre><code>div id=&quot;itany&quot;&gt;
-    &lt;my-hello&gt;
-        &lt;ul slot=&quot;s1&quot;&gt;
-            &lt;li&gt;aaa&lt;/li&gt;
-            &lt;li&gt;bbb&lt;/li&gt;
-            &lt;li&gt;ccc&lt;/li&gt;
-        &lt;/ul&gt;
-        &lt;ol slot=&quot;s2&quot;&gt;
-            &lt;li&gt;111&lt;/li&gt;
-            &lt;li&gt;222&lt;/li&gt;
-            &lt;li&gt;333&lt;/li&gt;
-        &lt;/ol&gt;
-    &lt;/my-hello&gt;
-&lt;/div&gt;
-
-&lt;template id=&quot;hello&quot;&gt;
-    &lt;div&gt;
-        &lt;slot name=&quot;s2&quot;&gt;&lt;/slot&gt;
-        &lt;h3&gt;welcome to itany&lt;/h3&gt;
-        &lt;!-- &lt;slot&gt;如果没有原内容，则显示该内容&lt;/slot&gt; --&gt;
-        &lt;slot name=&quot;s1&quot;&gt;&lt;/slot&gt;
-    &lt;/div&gt;
-&lt;/template&gt;
-</code></pre><h3 id="可复用的插槽"><a href="#可复用的插槽" class="headerlink" title="可复用的插槽"></a>可复用的插槽</h3><p>官网例子<br>    <ul><br>      <li v-for="todo in todos" v-bind:key="todo.id"><br>        <br>      </li><br>    </ul><br>    <ul><br>      <li v-for="todo in todos" v-bind:key="todo.id"><br>        <!-- 我们为每个 todo 准备了一个插槽，--><br>        <!-- 将 `todo` 对象作为一个插槽的 prop 传入。--><br>        <slot v-bind:todo="todo"><br>          <!-- 回退的内容 --><br>          <br>        </slot><br>      </li><br>    </ul></p>
+            <p> React.SFC<omit<pageheaderwrapperprops, 'title'="">&gt;<br>type Omit<t, k="" extends="" keyof="" any=""> = Pick<t, exclude<keyof="" t,="" k="">&gt;;<br>。检查联合类型时，TypeScript 通常会单独比较每个组成类型</t,></t,></omit<pageheaderwrapperprops,></p>
 
           
         
@@ -634,7 +383,7 @@ router.beforeEach((to, from, next) =&gt; {
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/10/vue传参/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/23/code-push/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="CHEN.星">
@@ -653,7 +402,7 @@ router.beforeEach((to, from, next) =&gt; {
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/01/10/vue传参/" itemprop="url">vue传参</a></h1>
+                <a class="post-title-link" href="/2019/07/23/code-push/" itemprop="url">未命名</a></h1>
         
 
         <div class="post-meta">
@@ -665,8 +414,8 @@ router.beforeEach((to, from, next) =&gt; {
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-10T19:05:41+08:00">
-                2019-01-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-23T09:24:21+08:00">
+                2019-07-23
               </time>
             
 
@@ -705,1566 +454,1278 @@ router.beforeEach((to, from, next) =&gt; {
       
         
           
-            <h3 id="1-父子组件"><a href="#1-父子组件" class="headerlink" title="1. 父子组件"></a>1. 父子组件</h3><pre><code>在一个组件内部定义另一个组件，称为父子组件
-子组件只能在父组件内部使用
-默认情况下，子组件无法访问父组件中的数据，每个组件实例的作用域是独立的
-</code></pre><h3 id="2-组件间数据传递-（通信）"><a href="#2-组件间数据传递-（通信）" class="headerlink" title="2. 组件间数据传递 （通信）"></a>2. 组件间数据传递 （通信）</h3><h4 id="2-1-子组件访问父组件的数据"><a href="#2-1-子组件访问父组件的数据" class="headerlink" title="2.1 子组件访问父组件的数据"></a>2.1 子组件访问父组件的数据</h4><pre><code>a)在调用子组件时，绑定想要获取的父组件中的数据
-b)在子组件内部，使用props选项声明获取的数据，即接收来自父组件的数据
-总结：父组件通过props向下传递数据给子组件
-注：组件中的数据共有三种形式：data、props、computed
-data的传递方式思想就是引用对象数据，下面父组件user，传递下去的user在子组件改变的时候父组件同样会发现变法
-</code></pre><h4 id="2-2-父组件访问子组件的数据"><a href="#2-2-父组件访问子组件的数据" class="headerlink" title="2.2 父组件访问子组件的数据"></a>2.2 父组件访问子组件的数据</h4><pre><code>a)在子组件中使用vm.$emit(事件名,数据)触发一个自定义事件，事件名自定义
-b)父组件在使用子组件的地方监听子组件触发的事件，并在父组件中定义方法，用来获取数据
-总结：子组件通过events给父组件发送消息，实际上就是子组件把自己的数据发送到父组件
-</code></pre><h3 id="3-父子组件及组件间数据传递"><a href="#3-父子组件及组件间数据传递" class="headerlink" title="3. 父子组件及组件间数据传递"></a>3. 父子组件及组件间数据传递</h3><pre><code>&lt;div id=&quot;app&quot;&gt;
-    &lt;my-hello&gt;&lt;/my-hello&gt;
-&lt;/div&gt;
-&lt;template id=&quot;hello&quot;&gt;
-    &lt;div&gt;
-        &lt;h3&gt;我是hello父组件&lt;/h3&gt;
-        &lt;h3&gt;访问自己的数据：{{msg}},{{name}},{{age}},{{user.username}}&lt;/h3&gt;
-        &lt;h3&gt;访问子组件的数据：{{sex}},{{height}}&lt;/h3&gt;
-        &lt;my-world :message=&quot;msg&quot; :name=&quot;name&quot; :age=&quot;age&quot; :user=&quot;user&quot;  @e-world=&quot;getData&quot;&gt;&lt;/my-world&gt;
-    &lt;/div&gt;
-&lt;/template&gt;
-&lt;template id=&quot;world&quot;&gt;
-    &lt;div&gt;
-        &lt;h4&gt;我是world子组件&lt;/h4&gt;
-        &lt;h4&gt;访问父组件中的数据：{{message}},{{name}},{{age}}&lt;/h4&gt;
-        &lt;input type=&quot;text&quot; v-model=&quot;user.username&quot;&gt;
-        &lt;h4&gt;访问自己的数据：{{sex}},{{height}}&lt;/h4&gt;
-        &lt;button @click=&quot;send&quot;&gt;将子组件的数据向上传递给父组件&lt;/button&gt;
-    &lt;/div&gt;
-&lt;/template&gt;
-&lt;script&gt;
-    var vm=new Vue({ //根组件
-        el:&apos;#app&apos;,
-        components:{
-            &apos;my-hello&apos;:{  //父组件
-                methods:{
-                    getData(sex,height){
-                        this.sex=sex;
-                        this.height=height;
-                    }
-                },
-                data(){
-                    return {
-                        msg:&apos;hello&apos;,
-                        name:&apos;tom&apos;,
-                        age:23,
-                        user:{id:9527,username:&apos;唐伯虎&apos;},
-                        sex:&apos;&apos;,
-                        height:&apos;&apos;
-                    }
-                },
-                template:&apos;#hello&apos;,
-                components:{
-                    &apos;my-world&apos;:{ //子组件
-                        data(){
-                            return {
-                                sex:&apos;male&apos;,
-                                height:180.5
-                            }
-                        },
-                        template:&apos;#world&apos;,
-                        // props:[&apos;message&apos;,&apos;name&apos;,&apos;age&apos;,&apos;user&apos;] //简单的字符串数组
-                        props:{ //也可以是对象，允许配置高级设置，如类型判断、数据校验、设置默认值
-                            message:String,
-                            name:{
-                                type:String,
-                                required:true
-                            },
-                            age:{
-                                type:Number,
-                                default:18,
-                                validator:function(value){
-                                    return value&gt;=0;
-                                }
-                            },
-                            user:{
-                                type:Object,
-                                default:function(){ //对象或数组的默认值必须使用函数的形式来返回
-                                    return {id:3306,username:&apos;秋香&apos;};
-                                }
-                            }
-                        },
-                        methods:{
-                            send(){
-                                // console.log(this);  //此处的this表示当前子组件实例
-                                this.$emit(&apos;e-world&apos;,this.sex,this.height); //使用$emit()触发一个事件，发送数据
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    });    
-&lt;/script&gt;
-</code></pre><h3 id="单项数据流"><a href="#单项数据流" class="headerlink" title="单项数据流"></a>单项数据流</h3><p>user的传递方式思想就是引用对象数据，下面父组件user，传递下去的user在子组件改变的时候父组件同样会发现变法<br>//方式1：将数据存入另一个变量中再操作<br>/方式2：a.使用.sync，需要显式地触发一个更新事件<br>    <div id="app"><br>        <h2>父组件：</h2><br>        <input type="text" v-model="name"><br>        <h2>父组件：</h2></div></p>
-<pre><code>    &lt;hr&gt;
-    &lt;my-hello :name.sync=&quot;name&quot; :user=&quot;user&quot;&gt;&lt;/my-hello&gt;
-&lt;/div&gt;
-
-&lt;template id=&quot;hello&quot;&gt;
-    &lt;div&gt;
-        &lt;h3&gt;子组件：{{name}}&lt;/h3&gt;
-        &lt;h3&gt;子组件：{{user.age}}&lt;/h3&gt;
-        &lt;button @click=&quot;change&quot;&gt;修改数据&lt;/button&gt;
-    &lt;/div&gt;
-&lt;/template&gt;
-
-&lt;script&gt;
-    var vm=new Vue({ //父组件
-        el:&apos;#itany&apos;,
-        data:{
-            name:&apos;tom&apos;,
-            user:{
-                name:&apos;zhangsan&apos;,
-                age:24
-            }
-        },
-        components:{
-            &apos;my-hello&apos;:{ //子组件
-                template:&apos;#hello&apos;,
-                props:[&apos;name&apos;,&apos;user&apos;],
-                data(){
-                    return {
-                        username:this.name //方式1：将数据存入另一个变量中再操作
-                    }
-                },
-                methods:{
-                    change(){
-                        // this.username=&apos;alice&apos;;
-                        // this.name=&apos;alice&apos;;
-                        this.$emit(&apos;update:name&apos;,&apos;alice&apos;); //方式2：a.使用.sync，需要显式地触发一个更新事件
-                        this.user.age=18;
-
-                    }
-                }
-            }
-        }
-    });    
-</code></pre><h3 id="非父子组件的通信"><a href="#非父子组件的通信" class="headerlink" title="非父子组件的通信"></a>非父子组件的通信</h3><pre><code>//定义一个空的Vue实例（关键）
-var Event=new Vue();
-var A={
-    template:&apos;#a&apos;,
-    data(){
-        return {
-            name:&apos;tom&apos;
-        }
-    },
-    methods:{
-        send(){
-            Event.$emit(&apos;data-a&apos;,this.name);
-        }
-    }
-}
-var B={
-    template:&apos;#b&apos;,
-    data(){
-        return {
-            age:20
-        }
-    },
-    methods:{
-        send(){
-            Event.$emit(&apos;data-b&apos;,this.age);
-        }
-    }
-}
-var C={
-    template:&apos;#c&apos;,
-    data(){
-        return {
-            name:&apos;&apos;,
-            age:&apos;&apos;
-        }
-    },
-    mounted(){ //在模板编译完成后执行
-        Event.$on(&apos;data-a&apos;,name =&gt; {
-            this.name=name;
-            // console.log(this);
-        });
-
-        Event.$on(&apos;data-b&apos;,age =&gt; {
-            this.age=age;
-        });
-    }
-}
-
-var vm=new Vue({
-    el:&apos;#itany&apos;,
-    components:{
-        &apos;my-a&apos;:A,
-        &apos;my-b&apos;:B,
-        &apos;my-c&apos;:C
-    }
-});
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/10/vue组件/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="CHEN.星">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CHEN.星~博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/10/vue组件/" itemprop="url">定义组件</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-10T18:53:09+08:00">
-                2019-01-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="定义组件方式一（不推荐）"><a href="#定义组件方式一（不推荐）" class="headerlink" title="定义组件方式一（不推荐）"></a>定义组件方式一（不推荐）</h3><pre><code>/**
- * 方式1：先创建组件构造器，然后由组件构造器创建组件
- */
-//1.使用Vue.extend()创建一个组件构造器
-var MyComponent=Vue.extend({
-    template:&apos;&lt;h3&gt;Hello World&lt;/h3&gt;&apos;
-});
-//2.使用Vue.component(标签名,组件构造器)，根据组件构造器来创建组件
-Vue.component(&apos;hello&apos;,MyComponent);
-</code></pre><h3 id="定义组件方式二（推荐）"><a href="#定义组件方式二（推荐）" class="headerlink" title="定义组件方式二（推荐）"></a>定义组件方式二（推荐）</h3><p>注意全局组件和局部组件储存数据方式写法不同<br>    //全局-可以在所有vue实例中使用<br>    Vue.component(‘my-world’,{<br>        template:’</p><h1>你好，世界</h1>‘，<br>        data:function(){ //在组件中存储数据时，必须以函数形式，函数返回一个对象<br>            return {<br>                name:’alice’<br>            }<br>        }<br>    });<br>    //局部-只能在当前vue实例中使用<br>    var vm=new Vue({ //这里的vm也是一个组件，称为根组件Root<br>            el:’#itany’,<br>            data:{},<br>            components:{<br>                ‘my-hello’:{<br>                    template:’<div>hello kity</div>‘，<br>                        data(){<br>                            return {<br>                                age:25<br>                        }<br>                    }<br>                }<br>            }<br>        });    <p></p>
-<h3 id="引用模板"><a href="#引用模板" class="headerlink" title="引用模板"></a>引用模板</h3><pre><code>&lt;my-hello&gt;&lt;/my-hello&gt;
-&lt;template id=&quot;hello&quot;&gt;
-    &lt;!-- &lt;template&gt;必须有且只有一个根元素 --&gt;
-    &lt;div&gt;
-        &lt;h3&gt;{{msg}}&lt;/h3&gt;
-        &lt;ul&gt;
-            &lt;li v-for=&quot;value in arr&quot;&gt;{{value}}&lt;/li&gt;
-        &lt;/ul&gt;
-    &lt;/div&gt;
-&lt;/template&gt;
-components:{
-    &apos;my-hello&apos;:{
-        name:&apos;nameY&apos;,  //指定组件的名称，默认为标签名，可以不设置
-        template:&apos;#hello&apos;,
-        data(){
-            return {
-                msg:&apos;helle kity&apos;,
-                arr:[&apos;tom&apos;,&apos;jack&apos;,&apos;mike&apos;]
-            }
-        }
-    }
-}
-</code></pre><h3 id="动态组件"><a href="#动态组件" class="headerlink" title="动态组件"></a>动态组件</h3><pre><code>&lt;button @click=&quot;flag=&apos;my-hello&apos;&quot;&gt;显示hello组件&lt;/button&gt;
-&lt;button @click=&quot;flag=&apos;my-world&apos;&quot;&gt;显示world组件&lt;/button&gt;
-&lt;div&gt;
-    &lt;!-- 使用keep-alive组件缓存非活动组件，可以保留状态，避免重新渲染，默认每次都会销毁非活动组件并重新创建 --&gt;
-    &lt;keep-alive&gt;
-        &lt;component :is=&quot;flag&quot;&gt;&lt;/component&gt;    
-    &lt;/keep-alive&gt;
-&lt;/div&gt;
-&lt;script&gt;
-    var vm=new Vue({
-        el:&apos;#app&apos;,
-        data:{
-            flag:&apos;my-hello&apos;
-        },
-        components:{
-            &apos;my-hello&apos;:{
-                template:&apos;&lt;h3&gt;我是hello组件：{{x}}&lt;/h3&gt;&apos;,
-                data(){
-                    return {
-                        x:Math.random()
-                    }
-                }
-            },
-            &apos;my-world&apos;:{
-                template:&apos;&lt;h3&gt;我是world组件：{{y}}&lt;/h3&gt;&apos;,
-                data(){
-                    return {
-                        y:Math.random()
-                    }
-                }
-            }
-        }
-    });    
-&lt;/script&gt;
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/10/vue动画/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="CHEN.星">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CHEN.星~博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/10/vue动画/" itemprop="url">vue动画</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-10T18:30:44+08:00">
-                2019-01-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ul>
-<li>结合三方动画</li>
-<li>多元素动画</li>
-<li><p>自定义动画</p>
-<h3 id="animate-css三方动画"><a href="#animate-css三方动画" class="headerlink" title="animate.css三方动画"></a>animate.css三方动画</h3><p>  引入css/animate.css p标签CSS用下面的</p>
-<p>  <button @click="flag=!flag">点我</button><br>  <transition enter-active-class="animated fadeInLeft" leave-active-class="animated fadeOutRight"></transition></p>
-<pre><code>&lt;p v-show=&quot;flag&quot;&gt;动画&lt;/p&gt;
-</code></pre><p>  </p>
-<h3 id="多元素动画"><a href="#多元素动画" class="headerlink" title="多元素动画"></a>多元素动画</h3><p>  <transition-group> children must be keyed: <p><br>  当有相同标签名的元素切换时，需要通过 key 特性设置唯一的值来标记以让 Vue 区分它们，否则 Vue 为了效率只会替换相同标签内部的内容。即使在技术上没有必要<br>  <transition-group enter-active-class="animated bounceInLeft" leave-active-class="animated bounceOutRight"></transition-group></p>
-<pre><code>&lt;p v-for=&quot;(v,k) in arr2&quot; :key=&quot;k&quot;&gt;
-            {{v}}
-        &lt;/p&gt;
-</code></pre><p>  </p></transition-group>    </p>
-</li>
-</ul>
-<h3 id="自定义CSS动画"><a href="#自定义CSS动画" class="headerlink" title="自定义CSS动画"></a>自定义CSS动画</h3><pre><code>transition上面的name属性{{name="fade"}}挂钩css的fade-enter-active名
-需要注意的是/* .fade-enter需要放在.fade-enter-active的后面 */
-过滤的CSS类名：6个
-钩子函数8个下面就写6个
-data:{
-        flag:false
-    },
-    methods:{
-        beforeEnter(el){
-            // alert(&apos;动画进入之前&apos;);
-        },
-        enter(){
-            // alert(&apos;动画进入&apos;);
-        },
-        afterEnter(el){
-            // alert(&apos;动画进入之后&apos;);
-            el.style.background=&apos;blue&apos;;
-        },
-        beforeLeave(){
-            // alert(&apos;动画即将之前&apos;);
-        },
-        leave(){
-            // alert(&apos;动画离开&apos;);
-        },
-        afterLeave(el){
-            // alert(&apos;动画离开之后&apos;);
-            el.style.background=&apos;red&apos;;
-        }
-    }
-
-&lt;button @click=&quot;flag=!flag&quot;&gt;点我&lt;/button&gt;
-
-&lt;transition name=&quot;fade&quot; 
-    @before-enter=&quot;beforeEnter&quot;
-    @enter=&quot;enter&quot;
-    @after-enter=&quot;afterEnter&quot;
-    @before-leave=&quot;beforeLeave&quot;
-    @leave=&quot;leave&quot;
-    @after-leave=&quot;afterLeave&quot;&gt;
-    &lt;p v-show=&quot;flag&quot;&gt;动画&lt;/p&gt;
-&lt;/transition&gt;
-
-&lt;style&gt;
-    p{
-        width: 300px;
-        height: 300px;
-        background-color:red;
-    }
-    .fade-enter-active,.fade-leave-active{
-        transition:all 3s ease;
-    }
-    .fade-enter-active{
-        opacity:1;
-        width:300px;
-        height:300px;
-    }
-    .fade-leave-active{
-        opacity:0;
-        width:50px;
-        height:50px;
-    }
-    /* .fade-enter需要放在.fade-enter-active的后面 */
-    .fade-enter{
-        opacity:0;
-        width: 100px;
-        height: 100px;
-    }
-
-&lt;/style&gt;
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/10/vue自定义指令/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="CHEN.星">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CHEN.星~博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/10/vue自定义指令/" itemprop="url">vue自定义指令</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-10T18:03:31+08:00">
-                2019-01-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>分类：全局指令、局部指令</p>
-<h3 id="自定义全局指令"><a href="#自定义全局指令" class="headerlink" title="自定义全局指令"></a>自定义全局指令</h3><pre><code> &lt;h3 v-hello&gt;{{username}}&lt;/h3&gt;
-/**
- * 自定义全局指令
- * 注：使用指令时必须在指名名称前加前缀v-，即v-指令名称
- */
-Vue.directive(&apos;hello&apos;,{
-    bind(){ //常用！！
-        alert(&apos;指令第一次绑定到元素上时调用，只调用一次，可执行初始化操作&apos;);
-    },
-    inserted(){
-        alert(&apos;被绑定元素插入到DOM中时调用&apos;);
-    },
-    update(){
-        alert(&apos;被绑定元素所在模板更新时调用&apos;);
-    },
-    componentUpdated(){
-        alert(&apos;被绑定元素所在模板完成一次更新周期时调用&apos;);
-    },
-    unbind(){
-        alert(&apos;指令与元素解绑时调用，只调用一次&apos;);
-    }
-});
-</code></pre><h3 id="自定义局部指令"><a href="#自定义局部指令" class="headerlink" title="自定义局部指令"></a>自定义局部指令</h3><pre><code> &lt;h3 v-hello&gt;{{username}}&lt;/h3&gt;
-var vm=new Vue({
-        el:&apos;#itany&apos;,
-        data:{
-
-        },
-        methods:{
-
-        },
-        directives:{ //自定义局部指令
-            world: {
-                update(){
-                    alert(&apos;update&apos;);
-                },
-            },
-            wbs:{
-                update(){
-                    alert(&apos;update&apos;);
-                },
-            }
-        }
-    });
-</code></pre><h3 id="练习：自定义指令"><a href="#练习：自定义指令" class="headerlink" title="练习：自定义指令"></a>练习：自定义指令</h3><pre><code>/**CSS**/
- div{
-    width: 100px;
-    height: 100px;
-    position:absolute;
-}
- .hello{
-    background-color:red;
-    top:0;
-    left:0;
-}
- .world{
-    background-color:blue;
-    top:0;
-    right:0;
-}
-
-&lt;div class=&quot;world&quot; v-drag&gt;拖拽&lt;/div&gt;
-Vue.directive(&apos;drag&apos;,function(el){
-    el.onmousedown=function(e){
-        //获取鼠标点击处分别与div左边和上边的距离：鼠标位置-div位置
-        var disX=e.clientX-el.offsetLeft;
-        var disY=e.clientY-el.offsetTop;
-        // console.log(disX,disY);
-
-        //包含在onmousedown里面，表示点击后才移动，为防止鼠标移出div，使用document.onmousemove
-        document.onmousemove=function(e){
-            //获取移动后div的位置：鼠标位置-disX/disY
-            var l=e.clientX-disX;
-            var t=e.clientY-disY;
-            el.style.left=l+&apos;px&apos;;
-            el.style.top=t+&apos;px&apos;;
-        }
-
-        //停止移动
-        document.onmouseup=function(e){
-            document.onmousemove=null;
-            document.onmouseup=null;
-        }
-
-    }
-});
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/10/vue实例属性和方法/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="CHEN.星">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CHEN.星~博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/10/vue实例属性和方法/" itemprop="url">vue实例属性和方法</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-10T17:46:01+08:00">
-                2019-01-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1-属性"><a href="#1-属性" class="headerlink" title="1. 属性"></a>1. 属性</h3><pre><code>vm.$el  //DOM对象 vm.$el.style.color=&apos;red&apos;;
-vm.$data //vm.$data.msg
-vm.$options  //获取自定义属性 vm.$options.name  vm.$options.age  vm$options.show(); 
-vm.$refs //获取所有添加ref属性的元素 &lt;p ref=&quot;world&quot;&gt;世界&lt;/p&gt;  console.log(vm.$refs.hello);   vm.$refs.world.style.color=&apos;blue&apos;;
-var vm=new Vue({
-         el:&apos;#itany&apos;,
-        data:{
-            msg:&apos;welcome&apos;
-        },
-        name:&apos;tom&apos;,
-        age:24,
-        show:function(){
-            console.log(&apos;show&apos;);
-        }
-    });
-</code></pre><h3 id="2-方法"><a href="#2-方法" class="headerlink" title="2. 方法"></a>2. 方法</h3><ul>
-<li>vm.$mount() //挂载</li>
-<li>vm.$destroy() //销毁</li>
-<li><p>vm.$nextTick(callback)</p>
-<pre><code>//在DOM更新完成后再执行回调函数，一般在修改数据之后使用该方法，以便获取更新后的DOM。Vue实现响应式并不是数据发生改变之后DOM立即变化，需要按一定的策略进行DOM更新，需要时间！！
-vm.$nextTick(function(){
-    //DOM更新完成，更新完成后再执行此代码
-    console.log(vm.$refs.title.textContent);
-});
-</code></pre></li>
-<li>vm.$set(object,key,value) //给对象添加属性的值</li>
-<li><p>vm.$delete(object,key)    //删除对象属性</p>
-<pre><code>methods:{
-    doUpdate(){
-        this.user.name=&apos;汤姆&apos;
-    },
-    doAdd(){
-        // this.user.age=25; //通过普通方式为对象添加属性时vue无法实时监视到
-        // this.$set(this.user,&apos;age&apos;,18); //通过vue实例的$set方法为对象添加属性，可以实时监视
-        // Vue.set(this.user,&apos;age&apos;,22);//
-        if(this.user.age){
-            this.user.age++;
-        }else{
-            this.$set(this.user,&apos;age&apos;,1);
-
-        }
-        // console.log(this.user);
-    },
-    doDelete(){
-        if(this.user.age){
-            // delete this.user.age; //无效
-            this.$delete(this.user,&apos;age&apos;);
-            console.log(this.user);
-        }
-    }
-}
-</code></pre></li>
-<li><p>vm.$watch(data,callback[,options]) </p>
-<p>  //方式1：使用vue实例提供的$watch()方法<br>  vm.$watch(‘name’,function(newValue,oldValue){</p>
-<pre><code>console.log(&apos;name被修改啦，原值：&apos;+oldValue+&apos;，新值：&apos;+newValue);
-</code></pre><p>  });<br>  //方式2：使用vue实例提供的watch选项<br>  data:{</p>
-<pre><code>name:&apos;tom&apos;,
-age:23,
-user:{
-    id:1001,
-    name:&apos;alice&apos;
-}
-</code></pre><p>  },<br>  watch:{ </p>
-<pre><code>age:(newValue,oldValue) =&gt; {
-    console.log(&apos;age被修改啦，原值：&apos;+oldValue+&apos;，新值：&apos;+newValue);
-},
-user:{//对象
-    handler:(newValue,oldValue) =&gt; {
-        console.log(&apos;user被修改啦，原值：&apos;+oldValue.name+&apos;，新值：&apos;+newValue.name);
-    },
-    deep:true //深度监视，当对象中的属性发生变化时也会监视
-}
-</code></pre><p>  }</p>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/10/vue第一章/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="CHEN.星">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CHEN.星~博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/10/vue第一章/" itemprop="url">vue第一章</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-10T10:41:44+08:00">
-                2019-01-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="常用指令：v-for"><a href="#常用指令：v-for" class="headerlink" title="常用指令：v-for"></a>常用指令：v-for</h3><pre><code>new Vue({
-            el:&apos;#itany&apos;,
-            data:{
-                arr:[12,4,5,34,2,11],
-                user:{id:9527,name:&apos;唐伯虎&apos;,age:25},
-                arr2:[12,4,5,34,2,11,12],
-                users:[
-                    {id:9527,name:&apos;唐伯虎&apos;,age:25},
-                    {id:1001,name:&apos;秋香&apos;,age:22},
-                    {id:1002,name:&apos;石榴姐&apos;,age:24}
-                ]
-            }
-        });
-&lt;!-- 普通循环 --&gt;
-         &lt;li v-for=&quot;value in arr&quot;&gt;{{value}}&lt;/li&gt; 
-         &lt;li v-for=&quot;value in user&quot;&gt;{{value}}&lt;/li&gt; 
-
-        &lt;!-- 键值循环 --&gt;
-         &lt;li v-for=&quot;(v,k) in arr&quot;&gt;{{k}}={{v}}&lt;/li&gt;
-        &lt;hr&gt;
-         &lt;li v-for=&quot;(v,k) in user&quot;&gt;{{k}}={{v}}&lt;/li&gt;
-
-        &lt;!-- 可以直接循环包含重复数据的集合，可以通过指定:key属性绑定唯一key，当更新元素时可重用元素，提高效率，类似于vue1.0中track-by --&gt;
-         &lt;li v-for=&quot;(v,k) in arr2&quot; :key=&quot;k&quot;&gt;{{v}}&lt;/li&gt;
-        &lt;br&gt;
-        &lt;hr&gt;
-        &lt;li v-for=&quot;(user,index) in users&quot;&gt;
-            {{index+1}},{{user.id}},{{user.name}},{{user.age}}
-        &lt;/li&gt;
-        &lt;hr&gt;
-        &lt;p v-for=&quot;(user,index) in  users&quot;&gt;
-            {{user.name}}
-        &lt;/p&gt;
-</code></pre><h3 id="事件对象-event"><a href="#事件对象-event" class="headerlink" title="事件对象$event"></a>事件对象$event</h3><pre><code>&lt;!-- 事件修饰符 --&gt;
-&lt;button @click.once=&quot;print&quot;&gt;只触发一次&lt;/button&gt;
-&lt;button @click=&quot;print($event)&quot;&gt;Click Me&lt;/button&gt;
-print(e){
-    console.log(e);
-    console.log(e.target.innerHTML); //DOM对象
-
-}
-</code></pre><h3 id="事件冒泡和默认行为"><a href="#事件冒泡和默认行为" class="headerlink" title="事件冒泡和默认行为"></a>事件冒泡和默认行为</h3><pre><code>&lt;div @click=&quot;write&quot;&gt;
-        &lt;p @click=&quot;print&quot;&gt;
-            &lt;button @click.stop=&quot;show&quot;&gt;点我&lt;/button&gt;
-        &lt;/p&gt;
-&lt;/div&gt;
-&lt;a href=&quot;#&quot; @click.prevent=&quot;study&quot;&gt;俺是链接&lt;/a&gt;
-</code></pre><h3 id="键盘事件"><a href="#键盘事件" class="headerlink" title="键盘事件"></a>键盘事件</h3><pre><code>/**
- * 自定义键位别名
- */
-Vue.config.keyCodes={
-    a:65,
-    f1:112
-}
-用户名：&lt;input type=&quot;text&quot; @keydown=&quot;show($event)&quot;&gt;
-show(e){
-        console.log(e.keyCode);
-        if(e.keyCode==13){
-            console.log(&apos;您按了回车&apos;);
-        }
-},
-用户名：&lt;input type=&quot;text&quot; @keydown.f1=&quot;print&quot;&gt;
-</code></pre><h3 id="属性绑定和属性的简写"><a href="#属性绑定和属性的简写" class="headerlink" title="属性绑定和属性的简写"></a>属性绑定和属性的简写</h3><pre><code>&lt;p :width=&quot;w&quot; :height=&quot;h&quot; :color=&quot;r&quot;&gt;123&lt;/p&gt;
-&lt;img :src=&quot;url&quot; :width=&quot;w&quot; :height=&quot;h&quot; &gt;
-
-data:{
-    url:&apos;https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png&apos;,
-    w:&apos;200px&apos;,
-    h:&apos;100px&apos;,
-    r:&quot;red&quot;
-}
-</code></pre><h3 id="class和style属性"><a href="#class和style属性" class="headerlink" title="class和style属性"></a>class和style属性</h3><pre><code>&lt;!-- class属性--&gt;
-&lt;p :class=&quot;aa&quot;&gt;123&lt;/p&gt;   不可以，Vue的属性绑定时不能直接css样式
-&lt;!-- 方式1:变量形式 --&gt;
-&lt;p :class=&quot;bb&quot;&gt;123&lt;/p&gt; 
-&lt;!-- 方式2：数组形式，同时引用多个 --&gt;
- &lt;p :class=&quot;[bb,dd]&quot;&gt;123&lt;/p&gt;
-&lt;!-- 方式3：json形式，常用！！！ --&gt;
-&lt;p :class=&quot;{aa:true,cc:flag}&quot;&gt;123&lt;/p&gt;
-&lt;!-- 方式4：变量引用json形式 --&gt;
- &lt;p :class=&quot;hello&quot;&gt;南京网博&lt;/p&gt; 
-
-&lt;!-- style属性--&gt;
- &lt;p :style=&quot;[xx,yy]&quot;&gt;itany&lt;/p&gt;
-data:{
-        bb:&apos;aa&apos;,
-        dd:&apos;cc&apos;,
-        flag:true,
-        num:-2,
-        hello:{aa:true,cc:true},
-        xx:{color:&apos;blue&apos;,fontSize:&apos;30px&apos;},
-        yy:{backgroundColor:&apos;#ff7300&apos;}
-    }
-</code></pre><h3 id="自定义过滤器"><a href="#自定义过滤器" class="headerlink" title="自定义过滤器"></a>自定义过滤器</h3><pre><code>{{ data | filter1(参数) | filter2(参数)}}
-&lt;!-- 自定义全局过滤器--&gt;
-//时间转换
-&lt;h3&gt;{{currentTime | date}}&lt;/h3&gt;
-Vue.filter(&apos;date&apos;,data =&gt; {
-        let d=new Date(data);
-        return d.getFullYear()+&apos;-&apos;+(d.getMonth()+1)+&apos;-&apos;+d.getDate()+&apos; &apos;+d.getHours()+&apos;:&apos;+d.getMinutes()+&apos;:&apos;+d.getSeconds();
-});
-&lt;!-- 自定义局部过滤器--&gt;
-toFiexed()四舍五入的功能
-&lt;h3&gt;{{12.345678 | number(2)}}&lt;/h3&gt;    
-filters:{ //局部过滤器
-            number:(data,n) =&gt; {
-            return data.toFixed(n);
-        }
-    }
-</code></pre><h3 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h3><pre><code>beforeCreate(){
-    alert(&apos;组件实例刚刚创建，还未进行数据观测和事件配置&apos;);
-},
-created(){  //常用！！！
-    alert(&apos;实例已经创建完成，并且已经进行数据观测和事件配置&apos;);
-},
-beforeMount(){
-    alert(&apos;模板编译之前，还没挂载&apos;);
-},
-mounted(){ //常用！！！
-    alert(&apos;模板编译之后，已经挂载，此时才会渲染页面，才能看到页面上数据的展示&apos;);
-},
-beforeUpdate(){
-    alert(&apos;组件更新之前&apos;);
-},
-updated(){
-    alert(&apos;组件更新之后&apos;);
-},
-beforeDestroy(){
-    alert(&apos;组件销毁之前&apos;);
-},
-destroyed(){
-    alert(&apos;组件销毁之后&apos;);
-}
-</code></pre><h3 id="计算属性"><a href="#计算属性" class="headerlink" title="计算属性"></a>计算属性</h3><ul>
-<li>计算属性也是用来存储数据，但具有以下几个特点：-&gt;<br>a.数据可以进行逻辑处理操作<br>b.对计算属性中的数据进行监视</li>
-<li>计算属性 vs 方法-&gt;<br>将计算属性的get函数定义为一个方法也可以实现类似的功能<br>区别：<br>a.计算属性是基于它的依赖进行更新的，只有在相关依赖发生改变时才能更新变化<br>b.计算属性是缓存的，只要相关依赖没有改变，多次访问计算属性得到的值是之前缓存的计算结果，不会多次执行</li>
-<li><p>get和set-&gt;<br>计算属性由两部分组成：get和set，分别用来获取计算属性和设置计算属性<br>默认只有get，如果需要set，要自己添加</p>
-<pre><code> &lt;p&gt; {{msg.split(' ').reverse().join(' ')}} &lt;/p&gt;
- &lt;p&gt;{{reverseMsg}}&lt;/p&gt;
- &lt;!--3.get和set--&gt;
- &lt;p&gt;{{num2}}&lt;/h2&gt;
- data:{ //普通属性
-        msg:&apos;hello word&apos;,
-    },
-computed:{ //计算属性
-    msg2:function(){ //该函数必须有返回值，用来获取属性，称为get函数
-        return &apos;hello kity&apos;;
-    },
-    reverseMsg:function(){
-        //可以包含逻辑处理操作，同时reverseMsg依赖于msg
-        return this.msg.split(&apos; &apos;).reverse().join(&apos; &apos;);
-    },
-    num2:{
-        get:function(){
-            console.log(&apos;num2：&apos;+new Date());
-            return this.num1-1;
-        },
-        set:function(val){
-            console.log(&apos;修改num2值&apos;);
-            this.num2=val;
-        }
-    }
-},
-</code></pre><h3 id=""><a href="#" class="headerlink" title="#"></a>#</h3></li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/09/本地配置域名映射/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="CHEN.星">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CHEN.星~博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/09/本地配置域名映射/" itemprop="url">本地配置域名映射</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-09T19:46:20+08:00">
-                2019-01-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>C:\Windows\System32\drivers\etc 下hosts文件下追加</p>
-<p>192.168.1.47    a.cpsfz.com<br>192.168.1.221    b.cpsfz.com<br>启动ip服务，后面直接跟域名，<br>该demo为不同二级域名地址，顶级域名cookie</p>
-<p>a.cpsfz.com ID页面登陆跳转到b.cpsfz.com  cookie缓存<br>domainPath=cpsfz.com；<br>$.cookie(‘X-Auth-Token’, result.text, {expires: 7, path: ‘/‘, domain: domainPath, secure: false, raw: false});<br>登陆成功跳转到b.cpsfz.com 后，获取cookie X-Auth-Token 在b.cpsfz.com下面获取不到的时候，会直接去顶级域名获取。<br>注意点：退出最好登陆清除cookie    $cookies.remove(“X-Auth-Token”);</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/08/angujlar7指令/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="CHEN.星">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CHEN.星~博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/08/angujlar7指令/" itemprop="url">angujlar7指令</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-08T15:39:00+08:00">
-                2019-01-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>在 Angular 中有三种类型的指令：</p>
-<ol>
-<li>组件 — 拥有模板的指令</li>
-<li>结构型指令 — 通过添加和移除 DOM 元素改变 DOM 布局的指令（修改视图的结构。例如，NgFor 和 结构型指令）</li>
-<li>属性型指令 — 改变元素、组件或其它指令的外观和行为的指令。（改变一个元素的外观或行为）<h3 id="属性指令"><a href="#属性指令" class="headerlink" title="属性指令"></a>属性指令</h3></li>
-</ol>
+            <hr>
+<p>title: code_push<br>date: 2019-07-23 09:24:20<br>tags:</p>
+<h3 id="安装codePush-CLi"><a href="#安装codePush-CLi" class="headerlink" title="安装codePush CLi"></a>安装codePush CLi</h3><pre><code>管理codepush账号需要通过NodeJS-based CLi
+npm install -g code-push-cli 安装
+code-push -v 查看版本
+ps:安装nodejs先
+</code></pre><h3 id="创建一个codePush账号"><a href="#创建一个codePush账号" class="headerlink" title="创建一个codePush账号"></a>创建一个codePush账号</h3><pre><code>在终端输入code-push register 会打开注册页面让你选择选择授权账号
+授权通过之后，codepush会高速你access key，复制此key到终端即可完成注册
+be9fea6a451d037a47c8cd1dbeea882e08085909
+
+登陆成功后
+Successfully logged-in. Your session file was written to C:\Users\DELL\AppData\Local\.code-push.config. You can run the code-push logout command at any time to delete this file and terminate your session.
+</code></pre><h3 id="在codepush服务器注册app"><a href="#在codepush服务器注册app" class="headerlink" title="在codepush服务器注册app"></a>在codepush服务器注册app</h3><pre><code>为了让codepush服务器知道你的app，我们需要向它注册app：在终端输入code-push app add &lt;appName&gt; &lt;os&gt; &lt;platform&gt;即可完成注册
+注册完成之后会返回一套deployment key，key分生成环境和开发环境。 该key在后后面的步骤中会用到
+如果在应用分为android和ios版，那么在向codepush注册应用的时候需要注册两个App获取两套deployment key
+例如：code-push app add Myapp-Android android react-native
+</code></pre><p>PS:</p>
 <ul>
-<li><p>例子 </p>
-<p>  import { Directive, ElementRef, HostListener, Input } from ‘@angular/core’;</p>
-<p>  @Directive({</p>
-<pre><code>selector: &apos;[appHighlight]&apos;
-</code></pre><p>  })<br>  export class HighlightDirective {</p>
-<pre><code>constructor(private el: ElementRef) { }
+<li>code-push app add <appname> <os> <platform> 在账号里面添加一个新的app</platform></os></appname></li>
+<li>code-push app  remove 或者rm 在账号里移除一个app</li>
+<li>code-push app rename 重命名一个存在app</li>
+<li>code-push app list或者ls 列出账号下面的所有app 、</li>
+<li>code-push deployment -k ls <appname>获取 部署秘钥</appname></li>
+</ul>
+<p>提示如果在react-native link 的时候没有输入key 收入插入文件位置<br>android/app/src/main/res/values/strings.xml </p>
+<p>ios/Github_RN/Info.plist</p>
+<h3 id="集成"><a href="#集成" class="headerlink" title="集成"></a>集成</h3><ol>
+<li>第一步：在项目中安装react-native-code-push插件，终端进入你的项目根目录然后运行 npm install -s react-native-code-push</li>
+<li>第二步：在android project中安装插件。codepush提供两种方式：rnpm和manual，下面用rnmp：运行npm i -g rnpm,来安装RNPM</li>
+<li>第三步：运行rnpm link react-native-code-push。这条命令将会自动在android文件中添加好设置</li>
+</ol>
+<h3 id="发布更新"><a href="#发布更新" class="headerlink" title="发布更新"></a>发布更新</h3><p>code-push支持两种发布更新的方式。</p>
+<h4 id="第一种方式通过code-push-release-react发布更新"><a href="#第一种方式通过code-push-release-react发布更新" class="headerlink" title="第一种方式通过code-push release-react发布更新"></a>第一种方式通过code-push release-react发布更新</h4><pre><code>这种方式将打包与发布两个命令合二为一
 
-@Input(&apos;appHighlight&apos;) highlightColor: string;
-*当它出现在等号左边的方括号（[ ]）中时，该属性属于其它组件或指令，它必须带有 @Input 装饰器*
-@Input() defaultColor: string;
+命令格式：
+code-push release-react &lt;appNamen&gt; &lt;platform&gt;
 
-@HostListener(&apos;mouseenter&apos;) onMouseEnter() {
-  this.highlight(this.highlightColor ||this.defaultColor|| &apos;red&apos;);
-}
+eg:
+code-push release-react MyApp-ios ios
+code-push release-react MyApp-Android android
 
-@HostListener(&apos;mouseleave&apos;) onMouseLeave() {
-  this.highlight(null);
-}
+高级版：    
 
-private highlight(color: string) {
-  this.el.nativeElement.style.backgroundColor = color;
-}
-</code></pre><p>  }</p>
+code-push release-react MyApp-iOS ios --t 1.0.0 --dev false --d Production --des &quot;1.优化操作流程&quot; --m true
+
+起中参数-t为二进制安装包的版本(android/app/build.gradle-versionName);-dev为是否启用开发和模式(默认为false);-d是要发布更新的环境为Production与Staging(默认为Staging);-des为更新说明；-m 强制更新
+
+另外，我们可以通过code-push deployment ls &lt;appName&gt;来查看发布详情与此次更新的安装情况
+</code></pre><h4 id="第二方式：通过code-push-release发布更新生成bundle"><a href="#第二方式：通过code-push-release发布更新生成bundle" class="headerlink" title="第二方式：通过code-push release发布更新生成bundle"></a>第二方式：通过code-push release发布更新生成bundle</h4><pre><code>第一步：在工程目录里面新增bundles文件
+第二步:运行命令打包 react-native bundle --platform 平台 --entry-file 启动文件 --bundle-output 打包js输出文件 --assets-dest 资源输出目录 --dev 是否调试
+eg：    
+ios：
+react-native bundle --platform ios --entry-file index.js  --bundle-output  ./bundles/main.jsbundle --assets-dest  ./bundles --dev false
+Android:
+react-native bundle --platform android --entry-file index.js  --bundle-output  ./bundles/index.android.bundle --assets-dest  ./bundles --dev false
+</code></pre><p>打包bundle结束后，就可以通过codepush发布更新了。在终端输入</p>
+<pre><code>code-push release &lt;应用名称&gt; &lt;Bundles所有在目录&gt; &lt;对应的应用版本&gt; --deploymentName:更新环境 --description: 更新描述 --mandatory：是否强制更新
+以ios为例：
+code-push release hotcode ./bundles/main.jsbundle 1.0.5 --deploymentName Staging  --description: &apos;1.0.5描述&apos; --mandatory：true
+</code></pre><h3 id="code-push-本地"><a href="#code-push-本地" class="headerlink" title="code-push 本地"></a>code-push 本地</h3><pre><code>code-push login http://api.berrygen    
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/19/immutable-api-Map/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/06/19/immutable-api-Map/" itemprop="url">immutable_api_Map</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-19T23:03:59+08:00">
+                2019-06-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="immutable-api-Map类型"><a href="#immutable-api-Map类型" class="headerlink" title="immutable_api_Map类型"></a>immutable_api_Map类型</h3><ul>
+<li>Map对应原生js的Object结构，他是无序的</li>
+<li>Map是工厂方法，不要使用new实例化</li>
+</ul>
+<pre><code>const {map,List}=require(&apos;immutable&apos;)
+const m1=Map({x:1,y:2})
+</code></pre><ul>
+<li><p>set设定值，set(key,value)</p>
+<p>  const m2=m1.set(‘z’,666)<br>  const m3=m1.set(List([1],(username:’lisi’)))<br>-get 取值<br>  console.log(m2.get(‘z’)) </p>
 </li>
-<li><p>引用元素</p>
-  <p [apphighlight]="color">Highlight me!</p>
+<li><p>delete删除值 delete(key)</p>
 </li>
-<li><p>defaultColor</p>
-<p>  在绑定的引用元素上开始如果没有color的值 这个时候引用的就是默认defaultColor<br>  </p><p [apphighlight]="color" defaultcolor="violet"></p>
-<pre><code>Highlight me too!
-</code></pre><p>  </p><p></p>
-<h3 id="结构型指令"><a href="#结构型指令" class="headerlink" title="结构型指令"></a>结构型指令</h3><p>三个常用的内置结构型指令 —— NgIf、NgFor和模板语法</p>
-  <div *ngif="hero" class="name"></div>
+<li>deleteAll批量删除 deleteALL([key1,key2,…keyN])</li>
+<li>clear清除所有返回新的Map</li>
+<li>update更新update(key,callback)</li>
+<li>merge合成N个Map为一个Map merge(map1,map2,…mapN)</li>
+<li>concat是merge的别名</li>
+<li>mergeWith类似merge，但是指定了merge的具体规则 </li>
+</ul>
 
-<p>  <ul></ul></p>
-<pre><code>&lt;li *ngFor=&quot;let hero of heroes&quot;&gt;{{hero.name}}&lt;/li&gt;
-</code></pre><p>  </p></li></ul><br>  NgSwitch 本身不是结构型指令，而是一个属性型指令，它控制其它两个 switch 指令的行为。 这也就是为什么你要写成 [ngSwitch] 而不是 *ngSwitch 的原因<br>  <div [ngswitch]="hero?.emotion"><p></p>
-<pre><code>&lt;app-happy-hero    *ngSwitchCase=&quot;&apos;happy&apos;&quot;    [hero]=&quot;hero&quot;&gt;&lt;/app-happy-hero&gt;
-&lt;app-sad-hero      *ngSwitchCase=&quot;&apos;sad&apos;&quot;      [hero]=&quot;hero&quot;&gt;&lt;/app-sad-hero&gt;
-&lt;app-confused-hero *ngSwitchCase=&quot;&apos;app-confused&apos;&quot; [hero]=&quot;hero&quot;&gt;&lt;/app-confused-hero&gt;
-&lt;app-unknown-hero  *ngSwitchDefault           [hero]=&quot;hero&quot;&gt;&lt;/app-unknown-hero&gt;
-</code></pre><p>  &lt;/div</p>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
 
 
-</div>
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/19/immutable_api_List类型/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/06/19/immutable_api_List类型/" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-19T22:15:43+08:00">
+                2019-06-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <hr>
+<p>title: immutable_API_List类型<br>date: 2019-06-19 22:15:43<br>tags:</p>
+<h3 id="API-List类型"><a href="#API-List类型" class="headerlink" title="API_List类型"></a>API_List类型</h3><ul>
+<li><p>List.isList()判断是否是List类型</p>
+<pre><code>const list=List([1,2,3,4])
+List.isList(list)
+</code></pre></li>
+<li><p>List.of()创建新的List</p>
+<pre><code>const l=List.of(1,2,3,4)
+ List[1,2,3,4]
+</code></pre></li>
+<li><p>size获取List的长度</p>
+<pre><code>console.log(l.size)    
+</code></pre></li>
+<li><p>set方法用来设定指定下标的值set(下标，值)<br>  -1代表从后面往前面</p>
+<pre><code>L3=L.set(0,&apos;122&apos;)
+</code></pre></li>
+<li><p>delete 删除指定下标的值 delete(下标)</p>
+</li>
+<li>insert 差入值 insert(下标，值)</li>
+<li><p>updata用来更新指定下标的值</p>
+<pre><code>const  a=List([1,2,3,4])
+const  b=a.updata(1,x=&gt;x+100)
+涉及业务，对下标为1的数据 进行加100
+</code></pre></li>
+<li><p>clear 清空并返回一个长度为0的新数组</p>
+<pre><code>const c1=List([1,2,3,4])
+const c2=C1.clear();
+c1还是存在不变，c2为空了
+</code></pre></li>
+<li><p>push pop unshit shift同数组的同名方法</p>
+</li>
+<li><p>setSize 重新设定数组长度，小与原数组长度会截断，大于原数组长度会哟个underfined进行填充</p>
+<pre><code>const set1=List([1,2,3,4,5,6])
+const set2=set1.setSize(2)
+截取出来List[1,2]
+</code></pre></li>
+<li><p>setIn()用来设定嵌套结构的值([第一层下标，第二层下标，..第N层下标]，值)    同理还有deleteIn,insertIn,updateIn</p>
+<pre><code>const arr1=List([List([1,2,3,4]),
+                [List([11,22,33,444)],
+                [List([111,222,333,444])]])
+const arr2=arr1.setIn([2,1],0)会改变222为0
+</code></pre></li>
+<li><p>concat链接List concat(List1,List2,…ListN)</p>
+<pre><code>const list1=List([1,2,3,4])
+const list2=List([11,223,4])
+const list3=List([333,4444,4])
+const totalList=list1.concat(list2,list3)
+</code></pre></li>
+<li><p>merge是concat的别名</p>
+<pre><code>const list1=List([1,2,3,4])
+const list2=List([11,223,4])
+const list3=List([333,4444,4])
+const totalList=list1.merge(list2,list3)
+</code></pre></li>
+<li>map 同原生map</li>
+<li>fliter 同原生的filter</li>
+<li><p>flatten 扁平化list</p>
+<pre><code>const f1=List([List([1,2,3,4]),
+                [List([11,22,33,444)],
+                [List([111,222,333,444])]])
+const f2=f1.flatten(Blean/number);
+true:代表浅拉平第一层
+f2:List=[1,2,3,4,11,22,33,444,111,222,333,444]
+flase:代表深N层全部拉平 
+number：代表第二次2层结构拉平 
+</code></pre></li>
+<li><p>find 查找，返回第一个符合的结果</p>
+<pre><code>const names=List([&apos;藏三&apos;,&apos;里斯&apos;，&apos;张丝&apos;])
+const names2=names.finds((v,k))=&gt;v.indexOf(&apos;张&apos;）!== -1)
+console.log(name2)=&gt;藏三
+</code></pre></li>
+<li>findLast 查找，返回最后一个符合的结果 同理find</li>
+<li><p>keys 返回所有的下标</p>
+<pre><code>const names=List([&apos;藏三&apos;,&apos;里斯&apos;，&apos;张丝&apos;])
+const keys=names.keys();-&gt;迭代器
+for(const k of names){
+    console.log(k)
+    0,1,3,4
+}
+</code></pre><p>//values返回所有的值</p>
+<pre><code>const names=List([&apos;藏三&apos;,&apos;里斯&apos;，&apos;张丝&apos;])
+const values=names.values()
+for(const v of names){
+    console.log(v)
+    &apos;藏三&apos;,&apos;里斯&apos;，&apos;张丝&apos;
+}
+</code></pre><p>//entries 返回所有entry,(key，value)形式</p>
+</li>
+</ul>
+<pre><code>const names=List([&apos;藏三&apos;,&apos;里斯&apos;，&apos;张丝&apos;])
+const entrys=names.values()
+for(const entry of entrys){
+    console.log(entry)
+    [0,&apos;藏三&apos;],[0,&apos;里斯&apos;],[0,&apos;张丝&apos;]
+}
+</code></pre><p>//groupBy分组</p>
+<pre><code>男女性别分组
+const people=List([{sex:&apos;male&apos;,name:&apos;张一&apos;}
+                    {sex:&apos;male&apos;,name:&apos;张2&apos;}
+                    {sex:&apos;male&apos;,name:&apos;张三&apos;}
+                    {sex:&apos;female&apos;,name:&apos;张4&apos;}
+                    {sex:&apos;female&apos;,name:&apos;张5&apos;}
+                    {sex:&apos;female&apos;,name:&apos;张6&apos;}
+    ])
+const gp=people.groupBy(x=&gt;x.sex)
+console.log(gp)
+OrderedMap{&apos;male&apos;:List[{},{},{}],&apos;female&apos;:List[{},{},{}]}
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/03/react-route/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/06/03/react-route/" itemprop="url">react-route</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-03T19:44:31+08:00">
+                2019-06-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="history"><a href="#history" class="headerlink" title="history"></a>history</h3><pre><code>declare const router: {
+     push: (path: string | RouteData) =&gt; void;
+     replace: (path: string | RouteData) =&gt; void;
+     go: (count: number) =&gt; void;
+     goBack: () =&gt; void;
+}
+this.props.history.goBack();
+this.props.history.push(&apos;/detail&apos;);
+this.props.history.push({pathname : &apos;/cart&apos;,state:{item}});    
+</code></pre><h3 id="动态路由基本用法"><a href="#动态路由基本用法" class="headerlink" title="动态路由基本用法"></a>动态路由基本用法</h3><pre><code>import { BrowserRouter as Router, Route, NavLink} from &apos;react-router-dom&apos;;
+&lt;div className=&quot;tab-bar&quot;&gt;
+    &lt;Route path=&quot;/index&quot; exact component={Index}&gt;&lt;/Route&gt;
+    &lt;Route path=&quot;/index/news&quot; component={News}&gt;&lt;/Route&gt;
+    &lt;Route path=&quot;/index/course&quot; component={Course}&gt;&lt;/Route&gt;
+    &lt;Route path=&quot;/index/mine&quot; component={Mine}&gt;&lt;/Route&gt;
+    &lt;ul className=&quot;footer&quot;&gt;
+        &lt;li&gt;&lt;NavLink exact to=&quot;/index&quot; activeStyle={{ color: '#4dc060' }}&gt;首页列表项目 &lt;/NavLink&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;NavLink to=&quot;/index/news&quot; activeStyle={{ color: '#4dc060' }}&gt;资讯&lt;/NavLink&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;NavLink to=&quot;/index/course&quot; activeStyle={{ color: '#4dc060' }}&gt;课程&lt;/NavLink&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;NavLink to=&quot;/index/mine&quot; activeClassName=&quot;selected&quot;&gt;我的&lt;/NavLink&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/div&gt;
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/06/react/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/06/react/" itemprop="url">react</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-06T17:28:04+08:00">
+                2019-05-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="ref"><a href="#ref" class="headerlink" title="ref"></a>ref</h3><pre><code>&lt;BaiduMap id=&quot;location&quot; ref=&quot;location&quot; style={{height: 300}}
+onSelect={this.onSelect} /&gt;
+this.refs.location.search(event.target.value);
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/18/angular的rem适配/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/18/angular的rem适配/" itemprop="url">angular的rem适配</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-18T17:07:09+08:00">
+                2019-04-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <pre><code>import { Component } from &apos;@angular/core&apos;;
+
+import { Platform } from &apos;@ionic/angular&apos;;
+// import { SplashScreen } from &apos;@ionic-native/splash-screen/ngx&apos;;
+// import { StatusBar } from &apos;@ionic-native/status-bar/ngx&apos;;
+
+@Component({
+  selector: &apos;app-root&apos;,
+  templateUrl: &apos;app.component.html&apos;
+})
+export class AppComponent {
+  constructor(
+    private platform: Platform,
+    // private splashScreen: SplashScreen,
+    // private statusBar: StatusBar
+  ) {
+    window.onresize = () =&gt; {
+      const docEl = document.documentElement;
+      const width = docEl.clientWidth &gt; 768 ? 768 : docEl.clientWidth;
+      const fontsize = 20 * (width / 375) &gt; 20 ? 20 * (width / 375) : 20;
+      docEl.style.fontSize = fontsize + &apos;px&apos;;
+    };
+    this.initializeApp();
+  }
+
+  initializeApp() {
+    this.platform.ready().then(() =&gt; {
+      // console.log(this.platform.width());
+      const docEl = document.documentElement;
+      const width = docEl.clientWidth &gt; 768 ? 768 : docEl.clientWidth;
+      const fontsize = 20 * (width / 375) &gt; 20 ? 20 * (width / 375) : 20;
+      docEl.style.fontSize = fontsize + &apos;px&apos;;
+      // this.statusBar.styleDefault();
+      // this.splashScreen.hide();
+    });
+  }
+}
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/18/scale界面响应/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/18/scale界面响应/" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-18T17:00:45+08:00">
+                2019-04-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <hr>
+<p>title: ‘scale界面响应‘<br>date: 2019-04-18 17:00:45</p>
+<h2 id="tags"><a href="#tags" class="headerlink" title="tags:"></a>tags:</h2><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1.0&quot;&gt;
+    &lt;title&gt;scale&lt;/title&gt;
+
+&lt;/head&gt;
+&lt;style&gt;
+    body {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        overflow: hidden;
+        background: #ddd;
+    }
+
+    #app {
+        width: 1920px;
+        height: 1080px;
+        font-size: 30px;
+        text-align: center;
+        padding-top: 100px;
+        transform-origin: left top;
+    }
+&lt;/style&gt;
+
+&lt;body&gt;
+&lt;div id=&quot;app&quot;&gt;
+    哈哈哈哈
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;script&gt;
+    function getSize() {
+        let a = document.body.offsetWidth / 1920,
+            b = document.body.offsetHeight / 1080
+        document.getElementById(&quot;app&quot;).style.transform = `scale(${a},${b})`
+    }
+    window.onload = function () {
+        getSize();
+    }
+    window.addEventListener(&quot;resize&quot;, getSize)
+&lt;/script&gt;
+
+&lt;/html&gt;
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/04/angular随笔/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/04/angular随笔/" itemprop="url">angular随笔</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-04T13:44:16+08:00">
+                2019-04-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="window-resize"><a href="#window-resize" class="headerlink" title="window.resize"></a>window.resize</h3><pre><code>@HostListener(&apos;window:resize&apos;, [&apos;$event&apos;])
+onResize() {
+    this.scrollHeight = document.documentElement.clientHeight - 200 + &apos;px&apos; ;
+  }
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/07/react-route-dom函数跳转/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/07/react-route-dom函数跳转/" itemprop="url">react-route-dom函数跳转</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-07T15:31:32+08:00">
+                2019-03-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="方法一（Redirect）"><a href="#方法一（Redirect）" class="headerlink" title="方法一（Redirect）"></a>方法一（Redirect）</h3><pre><code>import { Redirect  }from &apos;react-router-dom&apos;
+
+handleSubmit=()=&gt;{
+       this.setState({redirect: true});
+};
+在render函数里处理改变redirect让Redirect元素放出来执行
+if (this.state.redirect) {
+        return (&lt;Redirect push to=&quot;/&quot; /&gt;) //or &lt;Redirect push to=&quot;/sample?a=xxx&amp;b=yyy&quot; /&gt; 传递更多参数
+    }
+</code></pre><h3 id="方法二（withRouter）"><a href="#方法二（withRouter）" class="headerlink" title="方法二（withRouter）"></a>方法二（withRouter）</h3><pre><code>通过withRouter绑定class类实例LoginForm，获取到this.props.history API
+import {withRouter }from &apos;react-router-dom&apos;
+ handleSubmit=()=&gt;{
+    this.props.history.push(&quot;/&quot;)
+};
+
+LoginForm = withRouter(Form.create({})(LoginForm));
+</code></pre>
           
         
       
@@ -2303,7 +1764,7 @@ private highlight(color: string) {
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2349,7 +1810,7 @@ private highlight(color: string) {
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">77</span>
+                <span class="site-state-item-count">93</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2395,7 +1856,7 @@ private highlight(color: string) {
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2019</span>
+  <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

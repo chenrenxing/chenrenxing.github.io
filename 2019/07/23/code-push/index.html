@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="title: code_pushdate: 2019-07-23 09:24:20tags: 安装codePush CLi管理codepush账号需要通过NodeJS-based CLi npm install -g code-push-cli 安装 code-push -v 查看版本 ps:安装nodejs先 创建一个codePush账号在终端输入code-push register 会打开注">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CHEN.星~博客">
+<meta property="og:url" content="http://yoursite.com/2019/07/23/code-push/index.html">
+<meta property="og:site_name" content="CHEN.星~博客">
+<meta property="og:description" content="title: code_pushdate: 2019-07-23 09:24:20tags: 安装codePush CLi管理codepush账号需要通过NodeJS-based CLi npm install -g code-push-cli 安装 code-push -v 查看版本 ps:安装nodejs先 创建一个codePush账号在终端输入code-push register 会打开注">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-10-22T09:34:53.230Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CHEN.星~博客">
+<meta name="twitter:description" content="title: code_pushdate: 2019-07-23 09:24:20tags: 安装codePush CLi管理codepush账号需要通过NodeJS-based CLi npm install -g code-push-cli 安装 code-push -v 查看版本 ps:安装nodejs先 创建一个codePush账号在终端输入code-push register 会打开注">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/07/23/code-push/"/>
+
+
+
+
+
+  <title> | CHEN.星~博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CHEN.星~博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生命在于折腾</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/23/code-push/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CHEN.星">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHEN.星~博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline"></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-23T09:24:21+08:00">
+                2019-07-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <hr>
+<p>title: code_push<br>date: 2019-07-23 09:24:20<br>tags:</p>
+<h3 id="安装codePush-CLi"><a href="#安装codePush-CLi" class="headerlink" title="安装codePush CLi"></a>安装codePush CLi</h3><pre><code>管理codepush账号需要通过NodeJS-based CLi
+npm install -g code-push-cli 安装
+code-push -v 查看版本
+ps:安装nodejs先
+</code></pre><h3 id="创建一个codePush账号"><a href="#创建一个codePush账号" class="headerlink" title="创建一个codePush账号"></a>创建一个codePush账号</h3><pre><code>在终端输入code-push register 会打开注册页面让你选择选择授权账号
+授权通过之后，codepush会高速你access key，复制此key到终端即可完成注册
+be9fea6a451d037a47c8cd1dbeea882e08085909
+
+登陆成功后
+Successfully logged-in. Your session file was written to C:\Users\DELL\AppData\Local\.code-push.config. You can run the code-push logout command at any time to delete this file and terminate your session.
+</code></pre><h3 id="在codepush服务器注册app"><a href="#在codepush服务器注册app" class="headerlink" title="在codepush服务器注册app"></a>在codepush服务器注册app</h3><pre><code>为了让codepush服务器知道你的app，我们需要向它注册app：在终端输入code-push app add &lt;appName&gt; &lt;os&gt; &lt;platform&gt;即可完成注册
+注册完成之后会返回一套deployment key，key分生成环境和开发环境。 该key在后后面的步骤中会用到
+如果在应用分为android和ios版，那么在向codepush注册应用的时候需要注册两个App获取两套deployment key
+例如：code-push app add Myapp-Android android react-native
+</code></pre><p>PS:</p>
+<ul>
+<li>code-push app add <appname> <os> <platform> 在账号里面添加一个新的app</platform></os></appname></li>
+<li>code-push app  remove 或者rm 在账号里移除一个app</li>
+<li>code-push app rename 重命名一个存在app</li>
+<li>code-push app list或者ls 列出账号下面的所有app 、</li>
+<li>code-push deployment -k ls <appname>获取 部署秘钥</appname></li>
+</ul>
+<p>提示如果在react-native link 的时候没有输入key 收入插入文件位置<br>android/app/src/main/res/values/strings.xml </p>
+<p>ios/Github_RN/Info.plist</p>
+<h3 id="集成"><a href="#集成" class="headerlink" title="集成"></a>集成</h3><ol>
+<li>第一步：在项目中安装react-native-code-push插件，终端进入你的项目根目录然后运行 npm install -s react-native-code-push</li>
+<li>第二步：在android project中安装插件。codepush提供两种方式：rnpm和manual，下面用rnmp：运行npm i -g rnpm,来安装RNPM</li>
+<li>第三步：运行rnpm link react-native-code-push。这条命令将会自动在android文件中添加好设置</li>
+</ol>
+<h3 id="发布更新"><a href="#发布更新" class="headerlink" title="发布更新"></a>发布更新</h3><p>code-push支持两种发布更新的方式。</p>
+<h4 id="第一种方式通过code-push-release-react发布更新"><a href="#第一种方式通过code-push-release-react发布更新" class="headerlink" title="第一种方式通过code-push release-react发布更新"></a>第一种方式通过code-push release-react发布更新</h4><pre><code>这种方式将打包与发布两个命令合二为一
+
+命令格式：
+code-push release-react &lt;appNamen&gt; &lt;platform&gt;
+
+eg:
+code-push release-react MyApp-ios ios
+code-push release-react MyApp-Android android
+
+高级版：    
+
+code-push release-react MyApp-iOS ios --t 1.0.0 --dev false --d Production --des &quot;1.优化操作流程&quot; --m true
+
+起中参数-t为二进制安装包的版本(android/app/build.gradle-versionName);-dev为是否启用开发和模式(默认为false);-d是要发布更新的环境为Production与Staging(默认为Staging);-des为更新说明；-m 强制更新
+
+另外，我们可以通过code-push deployment ls &lt;appName&gt;来查看发布详情与此次更新的安装情况
+</code></pre><h4 id="第二方式：通过code-push-release发布更新生成bundle"><a href="#第二方式：通过code-push-release发布更新生成bundle" class="headerlink" title="第二方式：通过code-push release发布更新生成bundle"></a>第二方式：通过code-push release发布更新生成bundle</h4><pre><code>第一步：在工程目录里面新增bundles文件
+第二步:运行命令打包 react-native bundle --platform 平台 --entry-file 启动文件 --bundle-output 打包js输出文件 --assets-dest 资源输出目录 --dev 是否调试
+eg：    
+ios：
+react-native bundle --platform ios --entry-file index.js  --bundle-output  ./bundles/main.jsbundle --assets-dest  ./bundles --dev false
+Android:
+react-native bundle --platform android --entry-file index.js  --bundle-output  ./bundles/index.android.bundle --assets-dest  ./bundles --dev false
+</code></pre><p>打包bundle结束后，就可以通过codepush发布更新了。在终端输入</p>
+<pre><code>code-push release &lt;应用名称&gt; &lt;Bundles所有在目录&gt; &lt;对应的应用版本&gt; --deploymentName:更新环境 --description: 更新描述 --mandatory：是否强制更新
+以ios为例：
+code-push release hotcode ./bundles/main.jsbundle 1.0.5 --deploymentName Staging  --description: &apos;1.0.5描述&apos; --mandatory：true
+</code></pre><h3 id="code-push-本地"><a href="#code-push-本地" class="headerlink" title="code-push 本地"></a>code-push 本地</h3><pre><code>code-push login http://api.berrygen    
+</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/19/immutable-api-Map/" rel="next" title="immutable_api_Map">
+                <i class="fa fa-chevron-left"></i> immutable_api_Map
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/03/07/umi/" rel="prev" title="umi">
+                umi <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="CHEN.星" />
+          <p class="site-author-name" itemprop="name">CHEN.星</p>
+           
+              <p class="site-description motion-element" itemprop="description">个人技术博客</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">93</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装codePush-CLi"><span class="nav-number">1.</span> <span class="nav-text">安装codePush CLi</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建一个codePush账号"><span class="nav-number">2.</span> <span class="nav-text">创建一个codePush账号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在codepush服务器注册app"><span class="nav-number">3.</span> <span class="nav-text">在codepush服务器注册app</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#集成"><span class="nav-number">4.</span> <span class="nav-text">集成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#发布更新"><span class="nav-number">5.</span> <span class="nav-text">发布更新</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#第一种方式通过code-push-release-react发布更新"><span class="nav-number">5.1.</span> <span class="nav-text">第一种方式通过code-push release-react发布更新</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第二方式：通过code-push-release发布更新生成bundle"><span class="nav-number">5.2.</span> <span class="nav-text">第二方式：通过code-push release发布更新生成bundle</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#code-push-本地"><span class="nav-number">6.</span> <span class="nav-text">code-push 本地</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CHEN.星</span>
+</div>
+
+
+<div class="powered-by">
+   个人专属
+</div>
+
+<div class="theme-info">
+  博客 -CHEN.星
+  
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

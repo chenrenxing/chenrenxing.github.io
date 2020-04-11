@@ -101,7 +101,7 @@
 <meta property="og:site_name" content="CHEN.星~博客">
 <meta property="og:description" content="在移动端安卓 键盘出来覆盖页面（页面没有上移）在ios系统中会自己响应。 if (/Android/gi.test(navigator.userAgent)) {   window.addEventListener(&amp;apos;resize&amp;apos;, function () {     if (document.activeElement.tagName == &amp;apos;INPUT&amp;apos">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-26T06:04:56.044Z">
+<meta property="og:updated_time" content="2019-02-18T01:02:49.073Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="H5移动端安卓键盘出来覆盖页面">
 <meta name="twitter:description" content="在移动端安卓 键盘出来覆盖页面（页面没有上移）在ios系统中会自己响应。 if (/Android/gi.test(navigator.userAgent)) {   window.addEventListener(&amp;apos;resize&amp;apos;, function () {     if (document.activeElement.tagName == &amp;apos;INPUT&amp;apos">
@@ -335,7 +335,7 @@ if (/Android/gi.test(navigator.userAgent)) {
     if (document.activeElement.tagName == &apos;INPUT&apos; || document.activeElement.tagName == &apos;TEXTAREA&apos;) {
       window.setTimeout(function () {
         document.activeElement.scrollIntoViewIfNeeded();
-      }, 0);
+      }, 0);//最好加个200延迟
     }
     $(&apos;#orderidNum&apos;).blur(function(){
       document.activeElement.scrollIntoViewIfNeeded();
@@ -386,6 +386,36 @@ up.addEventListener(&apos;click&apos;, function() {
 down.addEventListener(&apos;click&apos;, function() {
   test.scrollIntoView(false);
 });
+</code></pre><h3 id="方案一：-Web-API-接口-：scrollIntoView-的应用，将input输入框显示在可视区域。"><a href="#方案一：-Web-API-接口-：scrollIntoView-的应用，将input输入框显示在可视区域。" class="headerlink" title="方案一： Web API 接口 ：scrollIntoView 的应用，将input输入框显示在可视区域。"></a>方案一： Web API 接口 ：scrollIntoView 的应用，将input输入框显示在可视区域。</h3><pre><code>// 输入框获得焦点时，元素移动到可视区域
+inputOnFocus(e){
+    setTimeout(function () {
+            e.target.scrollIntoView(true);
+// true:元素的顶端将和其所在滚动区的可视区域的顶端对齐; false:底端对齐。 
+        },
+        200
+    );
+// 延时 == 键盘弹起需要时间
+}
+</code></pre><h3 id="方案二：在输入框获得焦点时，将页面滑动到最底部，避免fixed导致的页面乱飞，并且保证input在最底部。"><a href="#方案二：在输入框获得焦点时，将页面滑动到最底部，避免fixed导致的页面乱飞，并且保证input在最底部。" class="headerlink" title="方案二：在输入框获得焦点时，将页面滑动到最底部，避免fixed导致的页面乱飞，并且保证input在最底部。"></a>方案二：在输入框获得焦点时，将页面滑动到最底部，避免fixed导致的页面乱飞，并且保证input在最底部。</h3><pre><code>var timer；
+// 输入框获得焦点时，将元素设置为position:static，设置timer
+inputOnFocus(e){
+    e.target.style.className =&apos;input input-static;
+    timer =setInterval(function(){
+        document.body.scrollTop =document.body.scrollHeight
+    }, 100)}；
+// 输入框失去焦点时，将元素设置为 position:fixed，清除timer
+inputOnbulr(e){
+    e.target.parentNode.className =&apos;input input-fixed&apos;;
+    clearInterval(timer)
+};},200);
+// 延时 == 键盘弹起需要时间
+}
+</code></pre><h3 id="webkit-user-select-none-导致-input-框在-iOS-中无法输入，光标不出现，设置如下"><a href="#webkit-user-select-none-导致-input-框在-iOS-中无法输入，光标不出现，设置如下" class="headerlink" title="-webkit-user-select:none 导致 input 框在 iOS 中无法输入，光标不出现，设置如下"></a>-webkit-user-select:none 导致 input 框在 iOS 中无法输入，光标不出现，设置如下</h3><pre><code>user-select:text
+-webkit-user-select:text;
+</code></pre><h3 id="输入框获得焦点可弹出软键盘，却没有光标闪烁，也无法正常输入"><a href="#输入框获得焦点可弹出软键盘，却没有光标闪烁，也无法正常输入" class="headerlink" title="输入框获得焦点可弹出软键盘，却没有光标闪烁，也无法正常输入"></a>输入框获得焦点可弹出软键盘，却没有光标闪烁，也无法正常输入</h3><pre><code>-webkit-user-select:none 导致的，可以这样解决
+*:not(input,textarea){
+-webkit-touch-callout:none;
+-webkit-user-select:none;}
 </code></pre>
       
     </div>
@@ -499,7 +529,7 @@ down.addEventListener(&apos;click&apos;, function() {
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">77</span>
+                <span class="site-state-item-count">93</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -538,7 +568,7 @@ down.addEventListener(&apos;click&apos;, function() {
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#在移动端安卓-键盘出来覆盖页面（页面没有上移）"><span class="nav-number">1.</span> <span class="nav-text">在移动端安卓 键盘出来覆盖页面（页面没有上移）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注意事项"><span class="nav-number">2.</span> <span class="nav-text">注意事项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#scrollIntoView属性有兴趣可以看看"><span class="nav-number">3.</span> <span class="nav-text">scrollIntoView属性有兴趣可以看看</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#在移动端安卓-键盘出来覆盖页面（页面没有上移）"><span class="nav-number">1.</span> <span class="nav-text">在移动端安卓 键盘出来覆盖页面（页面没有上移）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注意事项"><span class="nav-number">2.</span> <span class="nav-text">注意事项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#scrollIntoView属性有兴趣可以看看"><span class="nav-number">3.</span> <span class="nav-text">scrollIntoView属性有兴趣可以看看</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方案一：-Web-API-接口-：scrollIntoView-的应用，将input输入框显示在可视区域。"><span class="nav-number">4.</span> <span class="nav-text">方案一： Web API 接口 ：scrollIntoView 的应用，将input输入框显示在可视区域。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方案二：在输入框获得焦点时，将页面滑动到最底部，避免fixed导致的页面乱飞，并且保证input在最底部。"><span class="nav-number">5.</span> <span class="nav-text">方案二：在输入框获得焦点时，将页面滑动到最底部，避免fixed导致的页面乱飞，并且保证input在最底部。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#webkit-user-select-none-导致-input-框在-iOS-中无法输入，光标不出现，设置如下"><span class="nav-number">6.</span> <span class="nav-text">-webkit-user-select:none 导致 input 框在 iOS 中无法输入，光标不出现，设置如下</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输入框获得焦点可弹出软键盘，却没有光标闪烁，也无法正常输入"><span class="nav-number">7.</span> <span class="nav-text">输入框获得焦点可弹出软键盘，却没有光标闪烁，也无法正常输入</span></a></li></ol></div>
             
 
           </div>
@@ -561,7 +591,7 @@ down.addEventListener(&apos;click&apos;, function() {
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2019</span>
+  <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
